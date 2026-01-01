@@ -32,5 +32,5 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   // Tüm sayfaları yakala (api, _next, statik dosyalar hariç)
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: ['/((?!api|_next|_vercel|admin|.*\\..*).*)']
 };
