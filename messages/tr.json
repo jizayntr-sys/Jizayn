@@ -1,0 +1,216 @@
+{
+  "Products": "Ürünler",
+  "nav": {
+    "home": "Ana Sayfa",
+    "products": "Ürünler",
+    "about": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "footer": {
+    "description": "El yapımı ahşap dekoratif ürünler. Evinize doğallık ve şıklık katın.",
+    "nav": {
+      "quickLinks": "Hızlı Bağlantılar",
+      "home": "Ana Sayfa",
+      "products": "Ürünler",
+      "about": "Hakkımızda",
+      "contact": "İletişim",
+      "legal": "Yasal",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Koşulları",
+      "cookies": "Çerez Politikası",
+      "kvkk": "KVKK Aydınlatma Metni"
+    },
+    "newsletter": {
+      "title": "Bültenimize Abone Olun",
+      "description": "Yeni ürünler, indirimler ve özel fırsatlardan haberdar olmak için e-posta listemize katılın.",
+      "placeholder": "E-posta adresiniz",
+      "button": "Abone Ol",
+      "success": "Bültenimize başarıyla abone oldunuz!"
+    },
+    "followUs": "Bizi Takip Edin",
+    "copyright": "© 2024 Jizayn. Tüm hakları saklıdır."
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "subtitle": "Doğallığı ve estetiği ahşapla buluşturuyoruz. Jizayn olarak el yapımı, sürdürülebilir ve özel tasarım ahşap dekorasyon ürünleri ile yaşam alanlarınıza değer katıyoruz.",
+    "content": {
+      "p1": "Jizayn, ahşap dekorasyon alanında yıllardır hizmet veriyor. Doğal ahşap ürünlerimizi el emeğiyle üretiyoruz.",
+      "p2": "Geleneksel teknikleri modern tasarımla birleştiriyoruz. Size özel, kaliteli ürünler sunuyoruz.",
+      "p3": "Ahşabın doğal güzelliğini evinize taşıyoruz. Uzun yıllar kullanabileceğiniz değerli ürünler sunuyoruz."
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Sorularınız, siparişleriniz veya özel tasarım talepleriniz için bizimle iletişime geçin. Jizayn ekibi olarak size yardımcı olmaktan mutluluk duyarız.",
+    "form": {
+      "name": "Adınız Soyadınız",
+      "email": "E-posta Adresiniz",
+      "subject": "Konu",
+      "message": "Mesajınız",
+      "submit": "Gönder",
+      "submitting": "Gönderiliyor...",
+      "success": "Mesajınız başarıyla gönderildi!",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "info": {
+      "title": "İletişim Bilgileri",
+      "addressLabel": "Adres",
+      "address": "Atölye Adresi, Istanbul, Türkiye",
+      "emailLabel": "E-posta",
+      "email": "info@jizayn.com",
+      "phoneLabel": "Telefon",
+      "phone": "+90 555 123 45 67"
+    }
+  },
+  "product": {
+    "imageAlt": "{name} - Görsel {index}",
+    "similarProducts": "Benzer Ürünler",
+    "addToCart": "Sepete Ekle",
+    "addingToCart": "Ekleniyor...",
+    "addedToCart": "Eklendi",
+    "buyWith": "ile Satın Al",
+    "buyOnShopier": "Shopier ile Satın Al",
+    "buyOnEtsy": "Etsy'de Görüntüle",
+    "buyOnAmazon": "Amazon'da Görüntüle",
+    "whatsappOrder": "WhatsApp ile Sipariş Ver",
+    "stockNotification": {
+      "title": "Stok Gelince Haber Ver",
+      "description": "Bu ürün şu anda stokta yok. E-posta adresinizi bırakın, stoklara girdiğinde size haber verelim.",
+      "emailPlaceholder": "E-posta adresiniz",
+      "submit": "Haber Ver",
+      "success": "Teşekkürler! Ürün stoklara girdiğinde size haber vereceğiz.",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "reviews": {
+      "title": "Müşteri Yorumları",
+      "noReviews": "Henüz yorum yapılmamış. İlk yorumu siz yapın!",
+      "writeReview": "Yorum Yap",
+      "form": {
+        "name": "Adınız",
+        "rating": "Puanınız",
+        "comment": "Yorumunuz",
+        "submit": "Gönder",
+        "success": "Yorumunuz için teşekkürler! Onaylandıktan sonra yayınlanacaktır."
+      },
+      "sort": {
+        "label": "Sıralama",
+        "newest": "En Yeniler",
+        "oldest": "En Eskiler",
+        "ratingHigh": "Puan: Yüksekten Düşüğe",
+        "ratingLow": "Puan: Düşükten Yükseğe"
+      },
+      "share": {
+        "title": "Bu ürünü paylaş:",
+        "copied": "Link kopyalandı!",
+        "instagram": "Instagram'da Ziyaret Et"
+      },
+      "faq": {
+        "title": "Sıkça Sorulan Sorular"
+      },
+      "price": {
+        "range": "Fiyat Aralığı"
+      },
+      "availability": {
+        "inStock": "Stokta Var",
+        "outOfStock": "Tükendi"
+      },
+      "specs": {
+        "title": "Teknik Özellikler",
+        "dimensions": "Boyutlar",
+        "materials": "Malzemeler",
+        "sku": "SKU"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Doğal Ahşap, Eşsiz Tasarım",
+      "subtitle": "Evinizin havasını değiştirecek el yapımı dekoratif ahşap ürünler. Doğal malzemelerle üretilen özel tasarım mobilya ve aksesuarları Jizayn'da keşfedin.",
+      "cta": "Ürünleri Keşfet",
+      "imageAlt": "Jizayn Ahşap Atölyesi - El Yapımı Doğal Ahşap Üretim Tezgahı"
+    },
+    "featured": {
+      "title": "Öne Çıkan Ürünler",
+      "viewAll": "Tümünü Gör"
+    },
+    "features": {
+      "title": "Neden Jizayn?",
+      "handmade": { "title": "El Yapımı", "desc": "Her ürün usta ellerde özenle şekillenir." },
+      "natural": { "title": "Doğal Malzeme", "desc": "Sadece en kaliteli doğal ahşaplar kullanılır." },
+      "design": { "title": "Özel Tasarım", "desc": "Benzersiz ve modern tasarımlar." },
+      "durability": { "title": "Dayanıklılık", "desc": "Uzun yıllar formunu ve gücünü korur." },
+      "sustainable": { "title": "Sürdürülebilir Üretim", "desc": "Doğaya saygılı, bilinçli üretim anlayışı." },
+      "details": { "title": "Detaylara Özen", "desc": "Her köşe, her yüzey titizlikle düşünülür." },
+      "functional": { "title": "Fonksiyonel Tasarım", "desc": "Estetik kadar kullanım kolaylığı da ön planda." },
+      "timeless": { "title": "Zamansız Stil", "desc": "Trendlerden bağımsız, her döneme uyumlu." },
+      "custom": { "title": "Kişiye Özel Üretim", "desc": "İhtiyaca ve mekâna göre özel çözümler." }
+    },
+    "reviews": {
+      "title": "Müşterilerimiz Ne Diyor?"
+    }
+  },
+  "notFound": {
+    "title": "Sayfa Bulunamadı",
+    "description": "Aradığınız sayfayı bulamadık. Kaldırılmış veya taşınmış olabilir.",
+    "backHome": "Ana Sayfaya Dön",
+    "featuredProducts": "Bunlar İlginizi Çekebilir",
+    "searchPlaceholder": "Ürün ara...",
+    "searchButton": "Ara"
+  },
+  "errorPage": {
+    "title": "Bir Hata Oluştu",
+    "description": "Üzgünüz, beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "retry": "Tekrar Dene",
+    "backHome": "Ana Sayfaya Dön",
+    "errorCode": "Hata Kodu"
+  },
+  "productsPage": {
+    "title": "Ürünlerimiz",
+    "filter": "Kategori",
+    "sort": "Sıralama",
+    "categories": {
+      "all": "Tümü",
+      "decor": "Dekorasyon",
+      "furniture": "Mobilya"
+    },
+    "sortOptions": {
+      "newest": "En Yeniler",
+      "priceAsc": "Fiyat: Düşükten Yükseğe",
+      "priceDesc": "Fiyat: Yüksekten Düşüğe"
+    },
+    "priceRange": {
+      "label": "Fiyat Aralığı",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Uygula"
+    }
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "description": "Gizliliğinize önem veriyoruz. Kişisel verilerinizin nasıl işlendiği hakkında bilgi alın."
+  },
+  "cookies": {
+    "title": "Çerez Politikası",
+    "description": "Çerez kullanım politikamız ve tercihlerinizi nasıl yönetebileceğiniz hakkında bilgi."
+  },
+  "kvkk": {
+    "title": "KVKK Aydınlatma Metni",
+    "description": "Kişisel Verilerin Korunması Kanunu kapsamında bilgilendirme."
+  },
+  "terms": {
+    "title": "Kullanım Koşulları",
+    "description": "Web sitemizi kullanırken uymanız gereken kural ve koşullar."
+  },
+  "thankYou": {
+    "title": "Teşekkürler!",
+    "description": "Mesajınız başarıyla alınmıştır. En kısa sürede size dönüş yapacağız.",
+    "backHome": "Ana Sayfaya Dön",
+    "nextSteps": {
+      "title": "Bundan Sonra Ne Olacak?",
+      "step1": "Mesajınız bize ulaştı",
+      "step2": "Ekibimiz inceliyor",
+      "step3": "24 saat içinde dönüş"
+    },
+    "featuredProducts": "İlginizi Çekebilir"
+  }
+}

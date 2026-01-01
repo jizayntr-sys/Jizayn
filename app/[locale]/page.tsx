@@ -1,0 +1,260 @@
+import { getTranslations, getLocale } from 'next-intl/server';
+import { Metadata } from 'next';
+import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
+import { products } from '@/data/products';
+import { formatPrice } from '@/utils/currency';
+import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, Search, Settings, Clock, UserCheck } from 'lucide-react';
+import FeaturedCarousel from '@/components/FeaturedCarousel';
+import CustomerReviewsCarousel from '@/components/CustomerReviewsCarousel';
+import FadeIn from '@/components/FadeIn';
+import Footer from '@/components/Footer';
+import SectionBackgroundController from '@/components/SectionBackgroundController';
+import { BASE_URL } from '@/lib/constants';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'home.hero' });
+
+  const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
+  const ogLocale = localeMap[locale] || 'en_US';
+  const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
+
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+      languages: {
+        'en': `${BASE_URL}/en`,
+        'tr': `${BASE_URL}/tr`,
+        'x-default': `${BASE_URL}/en`,
+      },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('subtitle'),
+      url: `${BASE_URL}/${locale}`,
+      siteName: 'Jizayn',
+      images: [
+        {
+          url: `${BASE_URL}/JizaynAtolye.webp`, // Ana sayfa için varsayılan görsel
+          width: 1200,
+          height: 630,
+        },
+      ],
+      locale: ogLocale,
+      alternateLocale: [alternateLocale],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('subtitle'),
+      images: [`${BASE_URL}/JizaynAtolye.webp`],
+    },
+  };
+}
+
+export default async function HomePage() {
+  const t = await getTranslations('home');
+  const locale = await getLocale();
+
+  // Öne çıkan ürünler (slider için)
+  const featuredProducts = products.slice(0, 8);
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Jizayn',
+    url: BASE_URL,
+    inLanguage: locale,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${BASE_URL}/${locale}/products?search={search_term_string}`,
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
+  return (
+    <main className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      {/* Arka Plan Kontrolcüsü */}
+      <SectionBackgroundController />
+
+      {/* Global Fixed Background (Tüm sayfa için sabit arka plan) */}
+      <div className="fixed inset-0 -z-20">
+           <Image
+             src="/JizaynAtolye.webp"
+             alt={t('hero.imageAlt')}
+             fill
+             className="object-cover brightness-[0.6]"
+             priority
+           />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 z-0 pointer-events-none" />
+      </div>
+
+      {/* Hero Section Content */}
+      <section id="hero" className="relative z-10 h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        {/* İçerik */}
+        <div className="relative z-10 container mx-auto px-4 text-center text-white">
+          <FadeIn>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg">
+              <span className="text-orange-400">Doğal</span>{' '}
+              <span className="text-green-400">Ahşap,</span>{' '}
+              <span className="text-blue-400">Eşsiz</span>{' '}
+              <span className="text-yellow-400">Tasarım</span>
+            </h1>
+            <p className="text-lg md:text-xl lg:text-2xl mb-10 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md">
+              {t('hero.subtitle')}
+            </p>
+            <Link
+              href="/products"
+              className="inline-block bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+            >
+              {t('hero.cta')}
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Özellikler Bölümü */}
+      <section id="features" className="relative z-10 min-h-screen flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="container mx-auto px-4 relative">
+          <FadeIn>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white">{t('features.title')}</h2>
+            </div>
+          </FadeIn>
+          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide md:grid md:grid-cols-3 md:gap-8 md:gap-y-12 md:overflow-visible">
+            <FadeIn delay={200} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-indigo-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Palette className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.handmade.title')}</h3>
+                <p className="text-gray-200">{t('features.handmade.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-green-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Leaf className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.natural.title')}</h3>
+                <p className="text-gray-200">{t('features.natural.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <CheckCircle className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.design.title')}</h3>
+                <p className="text-gray-200">{t('features.design.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={200} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <ShieldCheck className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.durability.title')}</h3>
+                <p className="text-gray-200">{t('features.durability.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-emerald-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Recycle className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.sustainable.title')}</h3>
+                <p className="text-gray-200">{t('features.sustainable.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-purple-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Search className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.details.title')}</h3>
+                <p className="text-gray-200">{t('features.details.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={200} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-cyan-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Settings className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.functional.title')}</h3>
+                <p className="text-gray-200">{t('features.functional.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-amber-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Clock className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.timeless.title')}</h3>
+                <p className="text-gray-200">{t('features.timeless.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600} className="w-72 flex-shrink-0 md:w-auto">
+              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
+                <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <UserCheck className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{t('features.custom.title')}</h3>
+                <p className="text-gray-200">{t('features.custom.desc')}</p>
+              </Link>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Öne Çıkan Ürünler */}
+      <section id="featured" className="relative z-10 min-h-screen flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+        <div className="container mx-auto px-4 relative">
+          <FadeIn>
+            <div className="flex justify-between items-end mb-12">
+              <h2 className="text-3xl font-bold text-white">{t('featured.title')}</h2>
+              <Link href="/products" className="text-white/90 font-medium hover:text-white flex items-center gap-1 transition-colors">
+                {t('featured.viewAll')} <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </FadeIn>
+          
+          <FadeIn delay={200}>
+            <FeaturedCarousel products={featuredProducts} locale={locale} />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Müşteri Yorumları Slider */}
+      <section id="reviews" className="relative z-10 min-h-screen flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="container mx-auto px-4 relative">
+          <FadeIn>
+            <div className="flex justify-between items-end mb-12">
+              <h2 className="text-3xl font-bold text-white">{t('reviews.title')}</h2>
+            </div>
+          </FadeIn>
+          <FadeIn delay={200}>
+            <CustomerReviewsCarousel />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <section id="footer" className="relative z-10">
+        <Footer />
+      </section>
+    </main>
+  );
+}
