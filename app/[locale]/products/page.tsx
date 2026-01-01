@@ -141,6 +141,9 @@ export default async function ProductsPage({
     return (parseInt(b.id) || 0) - (parseInt(a.id) || 0);
   });
 
+  // Seçilen kategori ismini al (collectionSchema'dan önce tanımlanmalı)
+  const categoryName = category !== 'all' ? t(`categories.${category}` as any) : '';
+
   const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -185,9 +188,6 @@ export default async function ProductsPage({
       ],
     },
   };
-
-  // Seçilen kategori ismini al
-  const categoryName = category !== 'all' ? t(`categories.${category}` as any) : '';
 
   return (
     <div className="container mx-auto px-4 py-12">
