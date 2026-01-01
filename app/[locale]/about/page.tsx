@@ -63,6 +63,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                alt="About Jizayn"
                fill
                className="object-cover"
+               sizes="(max-width: 768px) 100vw, 50vw"
              />
           </div>
           <div className="space-y-6 text-lg text-gray-600 leading-relaxed">

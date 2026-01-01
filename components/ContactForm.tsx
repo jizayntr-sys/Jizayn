@@ -40,12 +40,12 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="contact-form-name" className="block text-sm font-medium text-gray-700 mb-1">
           {t('name')}
         </label>
         <input
           type="text"
-          id="name"
+          id="contact-form-name"
           name="name"
           autoComplete="name"
           required
@@ -54,12 +54,12 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="contact-form-email" className="block text-sm font-medium text-gray-700 mb-1">
           {t('email')}
         </label>
         <input
           type="email"
-          id="email"
+          id="contact-form-email"
           name="email"
           autoComplete="email"
           required
@@ -68,12 +68,12 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="contact-form-subject" className="block text-sm font-medium text-gray-700 mb-1">
           {t('subject')}
         </label>
         <input
           type="text"
-          id="subject"
+          id="contact-form-subject"
           name="subject"
           autoComplete="off"
           required
@@ -82,11 +82,11 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="contact-form-message" className="block text-sm font-medium text-gray-700 mb-1">
           {t('message')}
         </label>
         <textarea
-          id="message"
+          id="contact-form-message"
           name="message"
           rows={4}
           autoComplete="off"

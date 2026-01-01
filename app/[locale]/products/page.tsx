@@ -190,17 +190,17 @@ export default async function ProductsPage({
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
       
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
           {category !== 'all' ? categoryName : t('title')}
         </h1>
-        <p className="text-gray-600 max-w-3xl">
+        <p className="text-sm sm:text-base text-gray-600 max-w-3xl">
           {category !== 'all' 
             ? `${categoryName} ${t('categoryDescription')}` 
             : t('title') + ' ' + t('description')}

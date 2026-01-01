@@ -95,8 +95,14 @@ export default function StockNotificationForm({ translations, productId }: Props
                 <p className="text-gray-600 mb-6">{translations.description}</p>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div>
+                    <label htmlFor="stock-notification-email" className="sr-only">
+                      {translations.emailPlaceholder}
+                    </label>
                     <input
                       type="email"
+                      id="stock-notification-email"
+                      name="email"
+                      autoComplete="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}

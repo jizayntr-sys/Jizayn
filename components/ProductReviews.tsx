@@ -116,6 +116,8 @@ export default function ProductReviews({ reviews, translations }: Props) {
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500 hidden sm:inline">{translations.sort.label}:</span>
             <select
+              id="product-reviews-sort"
+              name="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className="text-sm border-gray-200 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-3 pr-8 bg-gray-50 border cursor-pointer outline-none"
@@ -149,19 +151,35 @@ export default function ProductReviews({ reviews, translations }: Props) {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{translations.form.name}</label>
-                <input required type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
+                <label htmlFor="product-review-name" className="block text-sm font-medium text-gray-700 mb-1">{translations.form.name}</label>
+                <input 
+                  id="product-review-name"
+                  name="name"
+                  autoComplete="name"
+                  required 
+                  type="text" 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" 
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{translations.form.rating}</label>
-                <div className="flex items-center gap-2">
-                  <StarRating rating={newRating} onChange={setNewRating} />
-                  <span className="text-sm text-gray-500 ml-2">{newRating}/5</span>
-                </div>
+                <fieldset>
+                  <legend className="block text-sm font-medium text-gray-700 mb-1">{translations.form.rating}</legend>
+                  <div className="flex items-center gap-2">
+                    <StarRating rating={newRating} onChange={setNewRating} />
+                    <span className="text-sm text-gray-500 ml-2">{newRating}/5</span>
+                  </div>
+                </fieldset>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{translations.form.comment}</label>
-                <textarea required rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"></textarea>
+                <label htmlFor="product-review-comment" className="block text-sm font-medium text-gray-700 mb-1">{translations.form.comment}</label>
+                <textarea 
+                  id="product-review-comment"
+                  name="comment"
+                  autoComplete="off"
+                  required 
+                  rows={4} 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                ></textarea>
               </div>
               <div className="flex justify-end">
                 <button

@@ -348,9 +348,9 @@ export default async function ProductDetailPage({
         }}
       />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 sm:pb-8">
         {/* Breadcrumb Navigasyonu */}
-        <nav className="flex items-center text-sm text-gray-500 mb-8 overflow-x-auto whitespace-nowrap py-2">
+        <nav className="flex items-center text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap py-2 -mx-2 px-2" aria-label="Breadcrumb">
           <Link href="/" className="flex items-center hover:text-indigo-600 transition-colors">
             <Home className="w-4 h-4 mr-1" />
             {tNav('home')}
@@ -379,17 +379,17 @@ export default async function ProductDetailPage({
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
             {productData.name}
           </h1>
             
-            <div className="flex items-baseline gap-4 mb-8 pb-8 border-b border-gray-100">
-              <p className="text-4xl font-bold text-gray-900">
+            <div className="flex items-baseline gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100">
+              <p className="text-3xl sm:text-4xl font-bold text-gray-900">
             {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
           </p>
             </div>
 
-            <div className="prose prose-lg text-gray-600 mb-10 leading-relaxed">
+            <div className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed">
             <p>{productData.description}</p>
           </div>
           
@@ -435,6 +435,20 @@ export default async function ProductDetailPage({
                   <path d="M9.243 12.004c-.035.67.086 1.344.35 1.969.263.625.664 1.176 1.172 1.61.507.433 1.113.746 1.765.91.653.164 1.332.195 1.996.09v2.332c-1.09.21-2.207.23-3.305.055-1.097-.176-2.14-.543-3.07-1.082-.93-.54-1.742-1.25-2.39-2.09-.645-.84-1.11-1.8-1.363-2.824-.253-1.024-.316-2.09-.184-3.137.133-1.047.46-2.05.96-2.965.5-0.914 1.16-1.715 1.94-2.355.78-.64 1.68-1.11 2.64-1.38 1.92-.54 3.96-.36 5.77.51v2.36c-.66-.13-1.34-.12-2-.02-.66.1-1.28.34-1.83.71-.55.37-.99.86-1.29 1.44-.3.58-.45 1.23-.43 1.89h5.55v2.07H9.243z"/>
                 </svg>
                 {t('buyOnEtsy')}
+              </a>
+
+              {/* Amazon Linki */}
+              <a 
+                href="#" // Burayı ürün verisinden gelecek şekilde güncelleyin: product.amazonUrl
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
+              >
+                {/* Amazon Icon (Arrow from A to Z) */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 2L6 10l7.5 8v-4.5h5v-7h-5V2zm-2 10.5L9 10l2.5-2.5v5z"/>
+                </svg>
+                {t('buyOnAmazon')}
               </a>
             </div>
           )}

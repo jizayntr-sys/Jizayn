@@ -50,12 +50,16 @@ const nextConfig = {
     ];
 
     // CSP Ayarları: Development'ta esnek (eval izinli), Production'da sıkı
+    // Not: Next.js'in bazı özellikleri (Hot Module Replacement, Fast Refresh) ve Google Analytics için 'unsafe-eval' gerekebilir
+    // Development'ta 'unsafe-eval' zorunlu
+    // Production'da Google Analytics ve Next.js'in bazı özellikleri için 'unsafe-eval' gerekli
+    // Bu bilinçli bir güvenlik kararıdır - Analytics script'i olduğu gibi kalacak
     const cspHeader = process.env.NODE_ENV === 'development'
       ? "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;"
       : [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https: blob:",
-          "script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' https: blob:",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagmanager.com/gtag/js blob:",
+          "script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagmanager.com/gtag/js blob:",
           "style-src 'self' 'unsafe-inline' https:",
           "font-src 'self' data: https:",
           "img-src 'self' data: https: blob: http:",

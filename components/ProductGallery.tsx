@@ -142,7 +142,7 @@ export default function ProductGallery({ images }: { images: ProductImage[] }) {
       <div className="flex flex-col gap-4">
       {/* Ana Görsel */}
         <div 
-          className="relative h-96 md:h-[500px] w-full bg-gray-100 rounded-xl overflow-hidden border border-gray-100 cursor-zoom-in group"
+          className="relative h-64 sm:h-80 md:h-[500px] w-full bg-gray-100 rounded-xl overflow-hidden border border-gray-100 cursor-zoom-in group"
           onClick={() => setIsModalOpen(true)}
         >
         <Image

@@ -85,7 +85,7 @@ export default function Header() {
           {/* Right Side: Language & Mobile Menu Button */}
           <div className="flex items-center gap-4">
             <div className="hidden md:block">
-              <LanguageSwitcher />
+              <LanguageSwitcher id="language-switcher-desktop" />
             </div>
 
             {/* Mobile Menu Button */}
@@ -128,7 +128,7 @@ export default function Header() {
             ))}
             <div className="pt-4 border-t border-gray-100">
               <div className="px-4">
-                <LanguageSwitcher />
+                <LanguageSwitcher id="language-switcher-mobile" />
               </div>
             </div>
           </div>

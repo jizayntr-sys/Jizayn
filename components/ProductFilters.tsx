@@ -63,21 +63,24 @@ export default function ProductFilters() {
   };
 
   return (
-    <div className="mb-8 p-4 bg-white rounded-lg shadow-sm border border-gray-100 space-y-4 relative">
+    <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-white rounded-lg shadow-sm border border-gray-100 space-y-4 relative">
       {isPending && (
         <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center rounded-lg">
           <Loader2 className="w-6 h-6 animate-spin text-indigo-600" />
         </div>
       )}
       {/* Categories */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-        <span className="font-medium text-gray-700 whitespace-nowrap">{t('filter')}:</span>
-        <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+        <span className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('filter')}:</span>
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {['all', 'decor', 'furniture'].map((cat) => (
             <button
               key={cat}
+              id={`filter-category-${cat}`}
+              name="category"
+              type="button"
               onClick={() => handleCategoryChange(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
                 currentCategory === cat
                   ? 'bg-indigo-700 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -91,38 +94,53 @@ export default function ProductFilters() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Price Range */}
-        <div className="flex items-center gap-2">
-          <label className="font-medium text-gray-700 whitespace-nowrap">{t('priceRange.label')}:</label>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2">
+          <label htmlFor="filter-min-price" className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('priceRange.label')}:</label>
+          <div className="flex items-center gap-2 flex-1">
           <input
             type="number"
+            id="filter-min-price"
+            name="minPrice"
+            autoComplete="off"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
             placeholder={t('priceRange.min')}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
             aria-label={t('priceRange.min')}
           />
-          <span className="text-gray-500">-</span>
+          <span className="text-gray-500 text-sm">-</span>
           <input
             type="number"
+            id="filter-max-price"
+            name="maxPrice"
+            autoComplete="off"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
             placeholder={t('priceRange.max')}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
             aria-label={t('priceRange.max')}
           />
-          <button onClick={handlePriceFilter} className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 whitespace-nowrap">
+          <button 
+            id="filter-apply-button"
+            name="applyFilter"
+            type="button"
+            onClick={handlePriceFilter} 
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-indigo-700 whitespace-nowrap flex-shrink-0"
+          >
             {t('priceRange.apply')}
           </button>
+          </div>
         </div>
 
         {/* Sort */}
         <div className="flex items-center gap-2 justify-start md:justify-end">
-          <label htmlFor="sort" className="font-medium text-gray-700 whitespace-nowrap">{t('sort')}:</label>
+          <label htmlFor="sort" className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('sort')}:</label>
           <select
             id="sort"
+            name="sort"
             value={currentSort}
             onChange={handleSortChange}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white w-full md:w-auto"
+            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white w-full md:w-auto"
           >
             <option value="newest">{t('sortOptions.newest')}</option>
             <option value="priceAsc">{t('sortOptions.priceAsc')}</option>

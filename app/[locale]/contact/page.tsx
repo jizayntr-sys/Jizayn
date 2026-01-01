@@ -100,16 +100,37 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100">
             <form className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('form.name')}</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all" />
+                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">{t('form.name')}</label>
+                <input 
+                  type="text" 
+                  id="contact-name"
+                  name="name"
+                  autoComplete="name"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all" 
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('form.email')}</label>
-                <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all" />
+                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">{t('form.email')}</label>
+                <input 
+                  type="email" 
+                  id="contact-email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all" 
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('form.message')}</label>
-                <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"></textarea>
+                <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">{t('form.message')}</label>
+                <textarea 
+                  id="contact-message"
+                  name="message"
+                  autoComplete="off"
+                  rows={4} 
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all resize-none"
+                ></textarea>
               </div>
               <button type="submit" className="w-full bg-indigo-600 text-white py-4 rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 {t('form.submit')}

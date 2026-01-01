@@ -108,6 +108,7 @@ export default function Footer({ hideOnHome = false }: Props) {
                     placeholder={t('newsletter.placeholder')}
                     id="newsletter-email"
                     name="email"
+                    autoComplete="email"
                     disabled={status === 'loading'}
                     className={`px-5 py-3 rounded-full bg-gray-800/50 border text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full transition-all ${
                       status === 'error' ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'

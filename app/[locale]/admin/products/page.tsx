@@ -206,6 +206,7 @@ export default function ProductsAdminPage() {
                         alt={product.locales.tr.name}
                         fill
                         className="object-cover"
+                        sizes="48px"
                       />
                     </div>
                     <div>
@@ -267,9 +268,12 @@ export default function ProductsAdminPage() {
             
             <form onSubmit={handleSaveEdit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Ürün Adı (TR)</label>
+                <label htmlFor="edit-product-name" className="block text-sm font-medium text-gray-700 mb-1">Ürün Adı (TR)</label>
                 <input 
                   type="text" 
+                  id="edit-product-name"
+                  name="name"
+                  autoComplete="off"
                   value={editForm.name}
                   onChange={(e) => setEditForm({...editForm, name: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
@@ -277,9 +281,12 @@ export default function ProductsAdminPage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Fiyat (TRY)</label>
+                <label htmlFor="edit-product-price" className="block text-sm font-medium text-gray-700 mb-1">Fiyat (TRY)</label>
                 <input 
                   type="number" 
+                  id="edit-product-price"
+                  name="price"
+                  autoComplete="off"
                   value={editForm.price}
                   onChange={(e) => setEditForm({...editForm, price: Number(e.target.value)})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
@@ -287,8 +294,10 @@ export default function ProductsAdminPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Stok Durumu</label>
+                <label htmlFor="edit-product-stock" className="block text-sm font-medium text-gray-700 mb-1">Stok Durumu</label>
                 <select 
+                  id="edit-product-stock"
+                  name="stock"
                   value={editForm.stock}
                   onChange={(e) => setEditForm({...editForm, stock: e.target.value as any})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white"
@@ -323,9 +332,12 @@ export default function ProductsAdminPage() {
             
             <form onSubmit={handleSaveAdd} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Ürün Adı (TR)</label>
+                <label htmlFor="add-product-name" className="block text-sm font-medium text-gray-700 mb-1">Ürün Adı (TR)</label>
                 <input 
                   type="text" 
+                  id="add-product-name"
+                  name="name"
+                  autoComplete="off"
                   value={addForm.name}
                   onChange={(e) => setAddForm({...addForm, name: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
@@ -334,9 +346,12 @@ export default function ProductsAdminPage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Fiyat (TRY)</label>
+                <label htmlFor="add-product-price" className="block text-sm font-medium text-gray-700 mb-1">Fiyat (TRY)</label>
                 <input 
                   type="number" 
+                  id="add-product-price"
+                  name="price"
+                  autoComplete="off"
                   value={addForm.price}
                   onChange={(e) => setAddForm({...addForm, price: Number(e.target.value)})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
@@ -345,8 +360,10 @@ export default function ProductsAdminPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Stok Durumu</label>
+                <label htmlFor="add-product-stock" className="block text-sm font-medium text-gray-700 mb-1">Stok Durumu</label>
                 <select 
+                  id="add-product-stock"
+                  name="stock"
                   value={addForm.stock}
                   onChange={(e) => setAddForm({...addForm, stock: e.target.value as any})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white"

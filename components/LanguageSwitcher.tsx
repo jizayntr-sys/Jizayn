@@ -20,7 +20,11 @@ const languageNames: Record<string, string> = {
   nl: 'NL',
 };
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  id?: string;
+}
+
+export default function LanguageSwitcher({ id = 'language-switcher' }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
   const currentLocale = useLocale();
@@ -96,11 +100,11 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative">
-      <label htmlFor="language-switcher" className="sr-only">
+      <label htmlFor={id} className="sr-only">
         Dil Seçimi
       </label>
       <select
-        id="language-switcher"
+        id={id}
         value={currentLocale}
         onChange={handleLanguageChange}
         disabled={isPending}

@@ -109,6 +109,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             type="text"
             id="review-name"
             name="name"
+            autoComplete="name"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
           />
@@ -123,6 +124,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             id="review-comment"
             name="comment"
             rows={4}
+            autoComplete="off"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all resize-none"
           />
