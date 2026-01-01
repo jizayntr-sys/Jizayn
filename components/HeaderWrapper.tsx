@@ -1,16 +1,11 @@
 'use client';
 
-import { usePathname } from '@/i18n/navigation';
 import { ReactNode } from 'react';
 
 export default function HeaderWrapper({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  
-  // next-intl'den gelen usePathname, locale olmadan yolu verir.
-  const isHomePage = pathname === '/';
-
+  // Desktop'ta tüm sayfalarda fixed, mobile'da da fixed
   return (
-    <div className={isHomePage ? "fixed top-0 left-0 w-full z-50" : "relative"}>
+    <div className="fixed md:fixed top-0 left-0 w-full z-50">
       {children}
     </div>
   );

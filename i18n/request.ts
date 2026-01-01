@@ -14,6 +14,30 @@ export default getRequestConfig(async ({requestLocale}) => {
 
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default
+    messages: (await import(`../messages/${locale}.json`)).default,
+    // Eksik çeviri anahtarları için hata verme, sadece uyarı ver
+    onError(error) {
+      if (error.code === 'MISSING_MESSAGE') {
+        // Development'ta console'a yaz, production'da sessizce geç
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`⚠️ Missing translation key: ${error.originalMessage}`);
+        }
+        // Hata fırlatma, getMessageFallback devreye girecek
+        return;
+      }
+      // Diğer hatalar için console'a yaz ama fırlatma (varsayılan davranış)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Intl error:', error);
+      }
+    },
+    // Eksik çeviriler için fallback değer
+    getMessageFallback({namespace, key, error}) {
+      const path = [namespace, key].filter((part) => part != null).join('.');
+      if (error.code === 'MISSING_MESSAGE') {
+        // Eksik çeviri için anahtar adını döndür (geliştirme için)
+        return process.env.NODE_ENV === 'development' ? `[${path}]` : key;
+      }
+      return `Error: ${path}`;
+    },
   };
 });

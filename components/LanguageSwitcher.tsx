@@ -2,8 +2,10 @@
 
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
+import { pathnames } from '@/i18n/pathnames';
 import { useLocale } from 'next-intl';
 import { ChangeEvent, useTransition } from 'react';
+import { products } from '@/data/products';
 
 const languageNames: Record<string, string> = {
   tr: 'TR',
@@ -26,7 +28,68 @@ export default function LanguageSwitcher() {
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
+    
     startTransition(() => {
+      // Ürün detay sayfası kontrolü
+      // usePathname() next-intl'den canonical pathname döndürür: /products/[slug] formatında
+      // Ama gerçek URL'de locale'e göre farklı olabilir (/tr/urunler/slug veya /en/products/slug)
+      // Bu yüzden hem canonical pathname'i hem de gerçek URL'i kontrol ediyoruz
+      const isProductDetailPage = 
+        (pathname.startsWith('/products/') && pathname !== '/products') ||
+        (typeof window !== 'undefined' && (
+          window.location.pathname.includes('/products/') || 
+          window.location.pathname.includes('/urunler/')
+        ));
+      
+      if (isProductDetailPage) {
+        // Slug'ı bul: önce gerçek URL'den, yoksa canonical pathname'den
+        let currentSlug: string | undefined;
+        
+        if (typeof window !== 'undefined') {
+          const pathParts = window.location.pathname.split('/');
+          // URL formatı: /[locale]/products/[slug] veya /[locale]/urunler/[slug]
+          const productsIndex = pathParts.findIndex(p => p === 'products' || p === 'urunler');
+          if (productsIndex !== -1 && pathParts[productsIndex + 1]) {
+            currentSlug = pathParts[productsIndex + 1];
+          }
+        }
+        
+        // Eğer gerçek URL'den bulamadıysak, canonical pathname'den al
+        if (!currentSlug) {
+          currentSlug = pathname.split('/').pop();
+        }
+        
+        if (currentSlug) {
+          // Mevcut slug'a göre ürünü bul (tüm locale'lerde ara)
+          const product = products.find((p) => {
+            // Önce mevcut locale'de ara
+            const localeData = p.locales[currentLocale as keyof typeof p.locales];
+            if (localeData?.slug === currentSlug) return true;
+            
+            // Bulamazsa diğer locale'lerde de ara (slug'lar farklı olabilir)
+            return Object.values(p.locales).some(localeData => localeData?.slug === currentSlug);
+          });
+
+          if (product) {
+            // Yeni locale'deki slug'ı bul
+            const newLocaleData = product.locales[newLocale as keyof typeof product.locales];
+            if (newLocaleData?.slug) {
+              // Yeni locale için products path'ini al
+              const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
+              // Tam URL'i oluştur ve window.location.href ile yönlendir
+              // Bu, next-intl'in router API'sinin dinamik route'lardaki sınırlamalarını aşar
+              // setTimeout ile asenkron hale getir (render sırasında çalışmaz)
+              const newUrl = `/${newLocale}${productsPath}/${newLocaleData.slug}`;
+              setTimeout(() => {
+                window.location.href = newUrl;
+              }, 0);
+              return;
+            }
+          }
+        }
+      }
+      
+      // Diğer sayfalar için normal yönlendirme
       router.replace(pathname as any, { locale: newLocale });
     });
   };

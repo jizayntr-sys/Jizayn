@@ -46,7 +46,7 @@ export default async function LocaleLayout({
           <GoogleAnalytics gaId="G-XXXXXXXXXX" />
           <JsonLdBreadcrumb />
           <HeaderWrapper>
-            <Header />
+          <Header />
           </HeaderWrapper>
           <main className="flex-grow">
             {children}

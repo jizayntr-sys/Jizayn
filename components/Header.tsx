@@ -31,7 +31,7 @@ export default function Header() {
     : 'bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100 text-gray-900';
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${headerClasses}`}>
+    <header className={`w-full transition-all duration-300 ${headerClasses}`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}

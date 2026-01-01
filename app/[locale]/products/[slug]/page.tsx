@@ -44,10 +44,13 @@ export async function generateMetadata({
     return acc;
   }, {} as Record<string, string>);
 
-  // x-default ekle (İngilizce varsayılan)
-  const defaultProductData = product.locales['en'];
-  if (defaultProductData?.slug) {
-    languages['x-default'] = `${BASE_URL}/en/products/${defaultProductData.slug}`;
+  // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
+  // Bu, Google'ın "multiple entries" uyarısını önler
+  if (locale === 'en') {
+    const defaultProductData = product.locales['en'];
+    if (defaultProductData?.slug) {
+      languages['x-default'] = `${BASE_URL}/en/products/${defaultProductData.slug}`;
+    }
   }
 
   const currentProductsPath = pathnames['/products'][locale as keyof typeof pathnames['/products']];
@@ -59,34 +62,71 @@ export async function generateMetadata({
   const ogLocale = localeMap[locale] || 'en_US';
   const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
 
+  // Meta keywords oluştur (ürün adı, kategori, malzemeler)
+  const metaKeywords = [
+    productData.name,
+    product.category,
+    ...(productData.materials ? productData.materials.split(',').map(m => m.trim()) : []),
+    ...(productData.metaKeywords || []),
+    'handmade',
+    'wood',
+    'decorative',
+    locale === 'tr' ? 'ahşap' : 'wooden',
+    locale === 'tr' ? 'el yapımı' : 'handcrafted',
+    locale === 'tr' ? 'doğal ahşap' : 'natural wood',
+    'Jizayn',
+  ].filter(Boolean).join(', ');
+
+  // Enhanced description with price and key features
+  const enhancedDescription = locale === 'tr'
+    ? `${productData.name}. ${productData.description?.substring(0, 120)}... El yapımı, doğal malzemelerden üretilmiş. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`
+    : `${productData.name}. ${productData.description?.substring(0, 120)}... Handmade, made from natural materials. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`;
+
   return {
     title: productData?.name, // Layout otomatik olarak "| Jizayn" ekleyecektir
-    description: productData?.description?.substring(0, 160), // Meta açıklama için ideal uzunluk
+    description: enhancedDescription.substring(0, 160), // Meta açıklama için ideal uzunluk
+    keywords: metaKeywords,
     alternates: {
       canonical: canonicalUrl,
       languages,
     },
     openGraph: {
       title: productData?.name,
-      description: productData?.description,
+      description: enhancedDescription.substring(0, 200),
       url: canonicalUrl,
-      images: [
-        {
-          url: ogImage,
-          width: 800,
-          height: 600,
-          alt: productData?.name,
-        },
-      ],
+      siteName: 'Jizayn',
+      images: productData.images.map((img, index) => ({
+        url: img.url,
+        width: index === 0 ? 1200 : 800,
+        height: index === 0 ? 630 : 600,
+        alt: img.alt || productData.name,
+        type: 'image/jpeg',
+      })),
       type: 'website',
       locale: ogLocale,
       alternateLocale: [alternateLocale],
+      ...(productData.priceRange && {
+        'product:price:amount': productData.priceRange.min.toString(),
+        'product:price:currency': productData.priceRange.currency,
+      }),
+      ...(productData.availability && {
+        'product:availability': productData.availability === 'InStock' ? 'in stock' : 'out of stock',
+      }),
     },
     twitter: {
       card: 'summary_large_image',
       title: productData?.name,
-      description: productData?.description,
+      description: enhancedDescription.substring(0, 200),
       images: [ogImage],
+      creator: '@jizayn',
+      site: '@jizayn',
+    },
+    other: {
+      'product:price:amount': productData.priceRange.min.toString(),
+      'product:price:currency': productData.priceRange.currency,
+      'product:availability': productData.availability === 'InStock' ? 'in stock' : 'out of stock',
+      'product:condition': 'new',
+      'product:brand': product.brand.name,
     },
   };
 }
@@ -99,6 +139,7 @@ export default async function ProductDetailPage({
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: 'product' });
   const tNav = await getTranslations({ locale, namespace: 'nav' });
+  const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
 
   const product = products.find((p) => {
     const localeData = p.locales[locale as keyof typeof p.locales];
@@ -121,34 +162,109 @@ export default async function ProductDetailPage({
     'PreOrder': 'https://schema.org/PreOrder',
   };
 
+  // Category mapping
+  const categoryMap: Record<string, string> = {
+    'decor': 'Home & Garden > Decor',
+    'furniture': 'Home & Garden > Furniture',
+  };
+
+  // Additional properties for schema
+  const additionalProperties = [];
+  if (productData.dimensions) {
+    additionalProperties.push({
+      '@type': 'PropertyValue',
+      name: 'Dimensions',
+      value: productData.dimensions,
+    });
+  }
+  if (productData.materials) {
+    additionalProperties.push({
+      '@type': 'PropertyValue',
+      name: 'Materials',
+      value: productData.materials,
+    });
+  }
+  if (productData.specifications && productData.specifications.length > 0) {
+    productData.specifications.forEach((spec) => {
+      additionalProperties.push({
+        '@type': 'PropertyValue',
+        name: 'Feature',
+        value: spec,
+      });
+    });
+  }
+
+  // Dimensions parsing (e.g., "20cm x 15cm x 10cm")
+  let depth, height, width;
+  if (productData.dimensions) {
+    const dims = productData.dimensions.match(/(\d+(?:\.\d+)?)\s*cm/g);
+    if (dims && dims.length >= 3) {
+      width = `${dims[0].replace('cm', '').trim()} cm`;
+      height = `${dims[1].replace('cm', '').trim()} cm`;
+      depth = `${dims[2].replace('cm', '').trim()} cm`;
+    }
+  }
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: productData.name,
-    inLanguage: locale,
     description: productData.description,
     image: productData.images.map((img) => img.url),
     sku: productData.sku || product.id,
+    mpn: productData.sku || product.id, // Manufacturer Part Number
+    category: categoryMap[product.category] || product.category,
     brand: {
       '@type': 'Brand',
       name: product.brand.name,
       logo: product.brand.logo,
+      url: product.brand.url,
     },
+    manufacturer: {
+      '@type': 'Organization',
+      name: product.brand.name,
+      url: product.brand.url,
+    },
+    ...(depth && height && width && {
+      depth,
+      height,
+      width,
+    }),
+    ...(productData.materials && {
+      material: productData.materials.split(',').map(m => m.trim()).join(', '),
+    }),
     offers: {
       '@type': 'Offer',
       price: productData.priceRange.min,
       priceCurrency: productData.priceRange.currency,
+      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 1 yıl sonrası
       availability: availabilityMap[productData.availability as keyof typeof availabilityMap] || 'https://schema.org/InStock',
       url: productUrl,
       itemCondition: 'https://schema.org/NewCondition',
+      seller: {
+        '@type': 'Organization',
+        name: 'Jizayn',
+        url: BASE_URL,
+      },
+      ...(productData.priceRange.max && productData.priceRange.max !== productData.priceRange.min && {
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: productData.priceRange.min,
+          maxPrice: productData.priceRange.max,
+          priceCurrency: productData.priceRange.currency,
+        },
+      }),
     },
+    ...(additionalProperties.length > 0 && {
+      additionalProperty: additionalProperties,
+    }),
     ...(productData.reviews && productData.reviews.length > 0 && {
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: (productData.reviews.reduce((acc, r) => acc + r.reviewRating, 0) / productData.reviews.length).toFixed(1),
         reviewCount: productData.reviews.length,
         bestRating: '5',
-        worstRating: '1'
+        worstRating: '1',
       },
       review: productData.reviews.map((review) => ({
         '@type': 'Review',
@@ -162,11 +278,14 @@ export default async function ProductDetailPage({
           '@type': 'Rating',
           ratingValue: review.reviewRating,
           bestRating: '5',
-          worstRating: '1'
+          worstRating: '1',
         },
       })),
     }),
   };
+
+  // Category name for breadcrumb
+  const categoryName = tProducts(`categories.${product.category}` as any);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -187,11 +306,31 @@ export default async function ProductDetailPage({
       {
         '@type': 'ListItem',
         position: 3,
+        name: categoryName,
+        item: `${BASE_URL}/${locale}${currentProductsPath}?category=${product.category}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
         name: productData.name,
         item: productUrl,
       },
     ],
   };
+
+  // FAQ Schema (eğer FAQ varsa)
+  const faqSchema = productData.faq && productData.faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: productData.faq.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  } : null;
 
   // Benzer ürünleri bul (Aynı kategorideki diğer ürünler, mevcut ürün hariç)
   const similarProducts = products
@@ -202,7 +341,11 @@ export default async function ProductDetailPage({
     <div className="bg-white pb-20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([productSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ 
+          __html: JSON.stringify(
+            [productSchema, breadcrumbSchema, faqSchema].filter(Boolean)
+          ) 
+        }}
       />
 
       <div className="container mx-auto px-4 py-8">
@@ -414,7 +557,7 @@ export default async function ProductDetailPage({
                       <span className="text-lg font-bold text-gray-900">
                         {formatPrice(simProductData.priceRange.min, simProductData.priceRange.currency, locale)}
                       </span>
-                      <span className="text-sm text-indigo-700 font-medium group-hover:underline">İncele &rarr;</span>
+                      <span className="text-sm text-indigo-700 font-medium group-hover:underline">{tProducts('viewProduct')} &rarr;</span>
                     </div>
                   </div>
                 </Link>

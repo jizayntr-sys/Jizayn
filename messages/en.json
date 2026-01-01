@@ -65,6 +65,13 @@
   "product": {
     "imageAlt": "{name} - Image {index}",
     "similarProducts": "Similar Products",
+    "addToCart": "Add to Cart",
+    "addingToCart": "Adding...",
+    "addedToCart": "Added",
+    "buyWith": "Buy with",
+    "buyOnShopier": "Buy on Shopier",
+    "buyOnEtsy": "View on Etsy",
+    "buyOnAmazon": "View on Amazon",
     "whatsappOrder": "Order via WhatsApp",
     "stockNotification": {
       "title": "Notify When Back in Stock",
@@ -97,6 +104,7 @@
         "copied": "Link copied!",
         "instagram": "Visit on Instagram"
       },
+      "loadMore": "Load More",
       "faq": {
         "title": "Frequently Asked Questions"
       },
@@ -119,7 +127,8 @@
     "hero": {
       "title": "Natural Wood, Unique Design",
       "subtitle": "Handmade decorative products that will change the atmosphere of your home.",
-      "cta": "Discover Products"
+      "cta": "Discover Products",
+      "imageAlt": "Jizayn Wood Workshop - Handmade Natural Wood Production Bench"
     },
     "featured": {
       "title": "Featured Products",
@@ -136,6 +145,9 @@
       "functional": { "title": "Functional Design", "desc": "Ease of use is as important as aesthetics." },
       "timeless": { "title": "Timeless Style", "desc": "Independent of trends, compatible with every era." },
       "custom": { "title": "Custom Production", "desc": "Special solutions according to needs and space." }
+    },
+    "reviews": {
+      "title": "What Our Customers Say"
     }
   },
   "notFound": {
@@ -155,6 +167,11 @@
   },
   "productsPage": {
     "title": "Our Products",
+    "description": "Find the most special pieces for your home in our collection.",
+    "categoryDescription": "Browse our special design handmade products in the category. Natural materials and unique craftsmanship.",
+    "noProducts": "No products found in this category.",
+    "noProductsDescription": "Try different filters or view all products.",
+    "viewProduct": "View",
     "filter": "Category",
     "sort": "Sort By",
     "categories": {

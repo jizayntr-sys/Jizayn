@@ -26,11 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         return acc;
       }, {} as Record<string, string>);
 
-      // x-default ekle (varsayılan dil 'en' olarak ayarlandı)
-      const defaultProductData = product.locales['en'];
-      if (defaultProductData?.slug) {
-        const defaultProductsPath = pathnames['/products'].en;
-        languages['x-default'] = `${BASE_URL}/en${defaultProductsPath}/${defaultProductData.slug}`;
+      // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
+      // Bu, Google'ın "multiple entries" uyarısını önler
+      if (locale === 'en') {
+        const defaultProductData = product.locales['en'];
+        if (defaultProductData?.slug) {
+          const defaultProductsPath = pathnames['/products'].en;
+          languages['x-default'] = `${BASE_URL}/en${defaultProductsPath}/${defaultProductData.slug}`;
+        }
       }
 
       return {
@@ -57,9 +60,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/kvkk': { priority: 0.3, changeFrequency: 'yearly' as const },
   };
 
+  // Her dil için ayrı entry oluştur
   const staticEntries = Object.entries(pathnames)
     .filter(([path]) => !path.includes('[')) // Dinamik rotaları hariç tut
-    .map(([canonicalPath, pathConfig]) => {
+    .flatMap(([canonicalPath, pathConfig]) => {
       const routeConfig = staticRoutesConfig[canonicalPath as keyof typeof staticRoutesConfig] || {
         priority: 0.5,
         changeFrequency: 'monthly' as const,
@@ -72,19 +76,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
         return acc;
       }, {} as Record<string, string>);
 
-      // x-default ekle (varsayılan dil 'en' olarak ayarlandı)
-      const defaultPath = typeof pathConfig === 'string' ? pathConfig : pathConfig.en;
-      languages['x-default'] = `${BASE_URL}/en${defaultPath}`;
+      // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
+      // Bu, Google'ın "multiple entries" uyarısını önler
+      // languages objesi tüm diller için oluşturuldu, x-default'u sadece EN entry'sine ekleyeceğiz
 
-      return {
-        url: languages['en'], // Varsayılan dilin URL'sini ana URL olarak kullan
-        lastModified: new Date(),
-        changeFrequency: routeConfig.changeFrequency,
-        priority: routeConfig.priority,
-        alternates: {
-          languages,
-        },
-      };
+      // Her dil için ayrı entry oluştur
+      return routing.locales.map((locale) => {
+        const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[locale];
+        
+        // x-default sadece EN entry'sine ekle
+        const entryLanguages = { ...languages };
+        if (locale === 'en') {
+          const defaultPath = typeof pathConfig === 'string' ? pathConfig : pathConfig.en;
+          entryLanguages['x-default'] = `${BASE_URL}/en${defaultPath}`;
+        }
+        
+        return {
+          url: `${BASE_URL}/${locale}${localizedPath}`,
+          lastModified: new Date(),
+          changeFrequency: routeConfig.changeFrequency,
+          priority: routeConfig.priority,
+          alternates: {
+            languages: entryLanguages,
+          },
+        };
+      });
     });
 
   return [...staticEntries, ...productEntries];

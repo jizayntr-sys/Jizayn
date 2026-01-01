@@ -54,16 +54,19 @@ export function generateHreflangAlternates(
     }
   }
 
-  // x-default ekle (varsayılan dil için - genellikle EN)
-  const defaultLocalizedPath = getLocalizedPath
-    ? getLocalizedPath(defaultLocale)
-    : null;
-  const defaultPath = defaultLocalizedPath !== null 
-    ? defaultLocalizedPath 
-    : getLocalizedPathname(basePath, defaultLocale);
-  
-  if (defaultPath) {
-    alternates['x-default'] = `${baseUrl}/${defaultLocale}${defaultPath}`;
+  // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
+  // Bu, Google'ın "multiple entries" uyarısını önler
+  if (locale === defaultLocale) {
+    const defaultLocalizedPath = getLocalizedPath
+      ? getLocalizedPath(defaultLocale)
+      : null;
+    const defaultPath = defaultLocalizedPath !== null 
+      ? defaultLocalizedPath 
+      : getLocalizedPathname(basePath, defaultLocale);
+    
+    if (defaultPath) {
+      alternates['x-default'] = `${baseUrl}/${defaultLocale}${defaultPath}`;
+    }
   }
 
   return alternates;

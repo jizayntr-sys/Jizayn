@@ -14,32 +14,50 @@ import { BASE_URL } from '@/lib/constants';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home.hero' });
+  const tHome = await getTranslations({ locale, namespace: 'home' });
 
   const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
   const ogLocale = localeMap[locale] || 'en_US';
   const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
 
+  // SEO Keywords
+  const keywords = locale === 'tr' 
+    ? 'el yapımı ahşap, ahşap dekorasyon, ahşap mobilya, el yapımı mobilya, doğal ahşap ürünler, dekoratif ahşap, ahşap kutu, ahşap duvar saati, ahşap masa, ahşap sandalye, Jizayn, handmade wood, wooden decoration'
+    : 'handmade wood, wooden decoration, wooden furniture, handmade furniture, natural wood products, decorative wood, wooden box, wooden wall clock, wooden table, wooden chair, Jizayn, el yapımı ahşap';
+
+  // Enhanced description
+  const description = locale === 'tr'
+    ? `${t('subtitle')} El yapımı ahşap dekorasyon ve mobilya ürünleri. Doğal malzemelerden üretilmiş, özenle tasarlanmış ahşap ürünler. Jizayn ile evinize doğallık katın.`
+    : `${t('subtitle')} Handmade wooden decoration and furniture products. Carefully designed wooden products made from natural materials. Add naturalness to your home with Jizayn.`;
+
   return {
     title: t('title'),
-    description: t('subtitle'),
+    description,
+    keywords,
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        'en': `${BASE_URL}/en`,
-        'tr': `${BASE_URL}/tr`,
-        'x-default': `${BASE_URL}/en`,
-      },
+      languages: locale === 'en' 
+        ? {
+            'en': `${BASE_URL}/en`,
+            'tr': `${BASE_URL}/tr`,
+            'x-default': `${BASE_URL}/en`,
+          }
+        : {
+            'en': `${BASE_URL}/en`,
+            'tr': `${BASE_URL}/tr`,
+          },
     },
     openGraph: {
       title: t('title'),
-      description: t('subtitle'),
+      description,
       url: `${BASE_URL}/${locale}`,
       siteName: 'Jizayn',
       images: [
         {
-          url: `${BASE_URL}/JizaynAtolye.webp`, // Ana sayfa için varsayılan görsel
+          url: `${BASE_URL}/JizaynAtolye.webp`,
           width: 1200,
           height: 630,
+          alt: locale === 'tr' ? 'Jizayn El Yapımı Ahşap Ürünler Atölyesi' : 'Jizayn Handmade Wood Products Workshop',
         },
       ],
       locale: ogLocale,
@@ -49,8 +67,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
-      description: t('subtitle'),
+      description,
       images: [`${BASE_URL}/JizaynAtolye.webp`],
+      creator: '@jizayn',
+      site: '@jizayn',
     },
   };
 }
@@ -68,6 +88,9 @@ export default async function HomePage() {
     name: 'Jizayn',
     url: BASE_URL,
     inLanguage: locale,
+    description: locale === 'tr' 
+      ? 'El yapımı ahşap dekorasyon ve mobilya ürünleri. Doğal malzemelerden üretilmiş, özenle tasarlanmış ahşap ürünler.'
+      : 'Handmade wooden decoration and furniture products. Carefully designed wooden products made from natural materials.',
     potentialAction: {
       '@type': 'SearchAction',
       target: `${BASE_URL}/${locale}/products?search={search_term_string}`,
@@ -103,10 +126,24 @@ export default async function HomePage() {
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <FadeIn>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg">
-              <span className="text-orange-400">Doğal</span>{' '}
-              <span className="text-green-400">Ahşap,</span>{' '}
-              <span className="text-blue-400">Eşsiz</span>{' '}
-              <span className="text-yellow-400">Tasarım</span>
+              {(() => {
+                const title = t('hero.title');
+                // Virgül ve noktalama işaretlerini koruyarak kelimelere ayır
+                const words = title.split(/(\s+)/).filter(w => w.trim().length > 0);
+                const colors = ['text-orange-400', 'text-green-400', 'text-blue-400', 'text-yellow-400'];
+                let colorIndex = 0;
+                return words.map((word, index) => {
+                  const trimmed = word.trim();
+                  if (trimmed.length === 0) return <span key={index}>{word}</span>;
+                  const color = colors[colorIndex % colors.length];
+                  colorIndex++;
+                  return (
+                    <span key={index} className={color}>
+                      {word}
+                    </span>
+                  );
+                });
+              })()}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl mb-10 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md">
               {t('hero.subtitle')}
@@ -207,7 +244,7 @@ export default async function HomePage() {
               <Link href="/products" className="block bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
                 <div className="w-16 h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
                   <UserCheck className="w-8 h-8" />
-                </div>
+              </div>
                 <h3 className="text-xl font-bold text-white mb-3">{t('features.custom.title')}</h3>
                 <p className="text-gray-200">{t('features.custom.desc')}</p>
               </Link>

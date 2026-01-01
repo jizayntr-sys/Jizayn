@@ -99,6 +99,7 @@
         "ratingHigh": "Puan: Yüksekten Düşüğe",
         "ratingLow": "Puan: Düşükten Yükseğe"
       },
+      "loadMore": "Daha Fazla Göster",
       "share": {
         "title": "Bu ürünü paylaş:",
         "copied": "Link kopyalandı!",
@@ -166,6 +167,11 @@
   },
   "productsPage": {
     "title": "Ürünlerimiz",
+    "description": "koleksiyonumuzda eviniz için en özel parçaları bulabilirsiniz.",
+    "categoryDescription": "kategorisindeki özel tasarım el yapımı ürünlerimizi inceleyin. Doğal malzemeler ve eşsiz işçilik.",
+    "noProducts": "Bu kategoride ürün bulunamadı.",
+    "noProductsDescription": "Farklı filtreler deneyebilir veya tüm ürünleri görüntüleyebilirsiniz.",
+    "viewProduct": "İncele",
     "filter": "Kategori",
     "sort": "Sıralama",
     "categories": {
