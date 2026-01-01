@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { products } from '@/data/products';
-import { formatPrice } from '@/utils/currency';
 import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, Search, Settings, Clock, UserCheck } from 'lucide-react';
 import FeaturedCarousel from '@/components/FeaturedCarousel';
 import CustomerReviewsCarousel from '@/components/CustomerReviewsCarousel';

@@ -26,7 +26,7 @@ export default function LoginPage() {
       // Not: Gerçek uygulamada HttpOnly cookie kullanılmalıdır
       document.cookie = "admin_session=true; path=/; max-age=86400"; // 1 gün
       
-      router.push('/admin/dashboard');
+      window.location.href = '/admin/dashboard';
       router.refresh();
     } else {
       setError('Kullanıcı adı veya şifre hatalı!');

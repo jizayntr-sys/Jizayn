@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Plus, Edit, Trash2, Search, X, Save, AlertTriangle } from 'lucide-react';
 import { products as initialProducts } from '@/data/products';
 import Image from 'next/image';
-import { Product } from '@/types/product';
+import { Product, Availability } from '@/types/product';
 
 export default function ProductsAdminPage() {
   const [products, setProducts] = useState(initialProducts);
@@ -19,14 +19,14 @@ export default function ProductsAdminPage() {
   const [addForm, setAddForm] = useState({
     name: '',
     price: 0,
-    stock: 'InStock' as 'InStock' | 'OutOfStock' | 'PreOrder'
+    stock: 'InStock' as Availability
   });
   
   // Düzenleme formu için geçici state'ler
   const [editForm, setEditForm] = useState({
     name: '',
     price: 0,
-    stock: 'InStock' as 'InStock' | 'OutOfStock' | 'PreOrder'
+    stock: 'InStock' as Availability
   });
 
   // Arama filtresi

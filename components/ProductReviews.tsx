@@ -8,7 +8,7 @@ type Review = {
   datePublished: string;
   reviewBody: string;
   reviewRating: number;
-  reviewSource: string;
+  reviewSource?: string;
 };
 
 type Props = {

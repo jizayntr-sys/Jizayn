@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return {
         url,
-        lastModified: product.updatedAt || new Date(), // Ürün verisinden gelen tarihi kullan, yoksa şimdiki zamanı kullan
+        lastModified: new Date(), // Ürün verisinden gelen tarihi kullan, yoksa şimdiki zamanı kullan
         changeFrequency: 'weekly' as const,
         priority: 0.8,
         alternates: {

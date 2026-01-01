@@ -8,7 +8,7 @@ export interface LocaleConfig {
   etsyLocale?: string;
 }
 
-export const localeConfigs: Record<Locale, LocaleConfig> = {
+export const localeConfigs: Record<string, LocaleConfig> = {
   tr: {
     currency: 'TRY',
     amazonDomain: 'amazon.com.tr',

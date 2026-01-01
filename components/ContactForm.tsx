@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import toast from 'react-hot-toast';
 import { Loader2 } from 'lucide-react';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/i18n/navigation';
 
 export default function ContactForm() {
   const t = useTranslations('contact.form');
@@ -33,7 +33,7 @@ export default function ContactForm() {
       toast.success(t('success'));
       setStatus('success');
       form.reset();
-      router.push('/thank-you');
+      window.location.href = '/thank-you';
     }, 1000);
   };
 

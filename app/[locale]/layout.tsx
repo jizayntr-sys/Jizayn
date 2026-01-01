@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
@@ -25,6 +25,9 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
+
+  // Request locale'i ayarla (getMessages için gerekli)
+  setRequestLocale(locale);
 
   // Mesajları sunucudan al (locale parametresi ile)
   const messages = await getMessages({ locale });

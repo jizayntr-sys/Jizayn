@@ -20,6 +20,13 @@
       "cookies": "Cookie Policy",
       "kvkk": "Data Protection"
     },
+    "newsletter": {
+      "title": "Subscribe to Our Newsletter",
+      "description": "Join our email list to stay informed about new products, discounts, and special offers.",
+      "placeholder": "Your email address",
+      "button": "Subscribe",
+      "success": "You have successfully subscribed to our newsletter!"
+    },
     "followUs": "Follow Us",
     "copyright": "© 2024 Jizayn. All rights reserved."
   },
@@ -169,19 +176,107 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "description": "We value your privacy. Learn how your personal data is processed."
+    "description": "We value your privacy. Learn how your personal data is processed.",
+    "lastUpdated": "Last Updated: 2024",
+    "section1": {
+      "title": "Our Privacy Commitment",
+      "content": "As Jizayn, we take all necessary technical and administrative measures to protect the privacy and security of your personal data. Your personal data is processed only in accordance with the stated purposes."
+    },
+    "section2": {
+      "title": "Information Collected",
+      "content": "When you use our website, place an order, or contact us, personal information such as name, surname, email address, phone number, address information, and order details are collected."
+    },
+    "section3": {
+      "title": "Use of Information",
+      "content": "The personal information collected is used to process your orders, provide customer service, improve our products and services, fulfill our legal obligations, and offer you special offers."
+    },
+    "section4": {
+      "title": "Information Security",
+      "content": "We take measures such as SSL encryption, secure payment systems, and regular security audits to ensure the security of your personal data."
+    },
+    "section5": {
+      "title": "Cookies",
+      "content": "Cookies are used on our website to improve user experience and analyze website traffic. For detailed information, you can review our Cookie Policy."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "For questions about our privacy policy, you can send an email to info@jizayn.com or contact us."
+    }
   },
   "cookies": {
     "title": "Cookie Policy",
-    "description": "Information about our cookie policy and how to manage your preferences."
+    "description": "Information about our cookie policy and how to manage your preferences.",
+    "lastUpdated": "Last Updated: 2024",
+    "section1": {
+      "title": "What are Cookies?",
+      "content": "Cookies are small text files that are saved to your device when you visit websites. Cookies ensure that our website functions properly and improve the user experience."
+    },
+    "section2": {
+      "title": "Types of Cookies",
+      "content": "Our website uses necessary cookies, performance cookies, and analytical cookies. Necessary cookies are required for the website to function, while other cookies are used to improve user experience."
+    },
+    "section3": {
+      "title": "Cookie Management",
+      "content": "You can manage, delete, or block cookies through your browser settings. However, disabling some cookies may cause some features of the website to not work."
+    },
+    "section4": {
+      "title": "Third-Party Cookies",
+      "content": "Our website uses cookies from third-party services such as Google Analytics. These cookies are used to analyze website traffic and understand user behavior."
+    }
   },
   "kvkk": {
     "title": "Data Protection",
-    "description": "Information within the scope of the Personal Data Protection Law."
+    "description": "Information within the scope of the Personal Data Protection Law.",
+    "lastUpdated": "Last Updated: 2024",
+    "section1": {
+      "title": "Data Controller",
+      "content": "In accordance with Law No. 6698 on the Protection of Personal Data (\"KVKK\"), your personal data is processed by Jizayn as the data controller. This Information Notice has been prepared to inform you about the processing of your personal data."
+    },
+    "section2": {
+      "title": "Processed Personal Data",
+      "content": "When you visit our website, place an order, or contact us, your personal data (name, surname, email, phone, address, etc.) is collected and processed."
+    },
+    "section3": {
+      "title": "Purposes of Processing Personal Data",
+      "content": "Your personal data is processed for the purposes of providing our products and services, processing your orders, providing customer service, fulfilling our legal obligations, and conducting marketing activities."
+    },
+    "section4": {
+      "title": "Transfer of Personal Data",
+      "content": "Your personal data may be transferred to authorized public institutions and organizations when necessary to fulfill our legal obligations in line with the purposes stated above."
+    },
+    "section5": {
+      "title": "Rights of the Data Subject",
+      "content": "In accordance with Article 11 of the KVKK, you have the right to learn whether your personal data is being processed, to request information if processed, to learn the purpose of processing and whether it is used in accordance with its purpose, to know the third parties to whom it is transferred domestically or abroad, and to request correction if incomplete or incorrectly processed, or deletion or destruction."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "To exercise your rights under the KVKK, you can send an email to info@jizayn.com or submit a written application."
+    }
   },
   "terms": {
     "title": "Terms of Use",
-    "description": "Rules and conditions you must follow while using our website."
+    "description": "Rules and conditions you must follow while using our website.",
+    "lastUpdated": "Last Updated: 2024",
+    "section1": {
+      "title": "General Provisions",
+      "content": "These terms of use apply when using the Jizayn website. By using the site, you are deemed to have accepted these terms. If you do not accept the terms, please leave the site."
+    },
+    "section2": {
+      "title": "Services and Products",
+      "content": "Jizayn offers handmade wooden decorative products. Product images and descriptions are for informational purposes. Actual products may show minor differences from images."
+    },
+    "section3": {
+      "title": "Orders and Payment",
+      "content": "Your orders are processed after confirmation. Payment information is processed securely. Prices may vary and orders may be cancelled based on stock availability."
+    },
+    "section4": {
+      "title": "Delivery and Returns",
+      "content": "Delivery times may vary depending on product and location. If products arrive damaged or incomplete, please contact us within 7 days of the delivery date."
+    },
+    "section5": {
+      "title": "Intellectual Property",
+      "content": "All content, design, logos, and trademarks on the website belong to Jizayn and are protected by copyright. Unauthorized use is prohibited."
+    }
   },
   "thankYou": {
     "title": "Thank You!",

@@ -1,5 +1,5 @@
-import { routing, locales } from '@/i18n/routing';
-import { pathnames } from '@/i18n/pathnames';
+import { routing } from '@/i18n/routing';
+import { pathnames, locales } from '@/i18n/pathnames';
 
 const defaultLocale = 'en'; // x-default için varsayılan dil
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -56,7 +56,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
                 {item.label}
               </span>
             ) : (
-              <Link href={item.href} className="hover:text-indigo-600 transition-colors whitespace-nowrap">
+              <Link href={item.href as any} className="hover:text-indigo-600 transition-colors whitespace-nowrap">
                 {item.label}
               </Link>
             )}

@@ -46,7 +46,7 @@ export default async function NotFound() {
               return (
                 <Link 
                   key={product.id} 
-                  href={`/products/${productData.slug}`}
+                  href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
                   className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
                 >
                   <div className="relative h-48 w-full bg-gray-100 overflow-hidden">

@@ -2,26 +2,27 @@
 
 import { useState } from 'react';
 import { Play, X } from 'lucide-react';
-import { ProductVideo as ProductVideoType } from '@/types/product';
 import Image from 'next/image';
 
 interface ProductVideoProps {
-  video: ProductVideoType;
+  video: string;
 }
 
 export default function ProductVideo({ video }: ProductVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const getEmbedUrl = () => {
-    if (video.type === 'youtube') {
-      const videoId = video.url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)?.[1];
-      return videoId ? `https://www.youtube.com/embed/${videoId}` : video.url;
+    // YouTube URL kontrolü
+    const youtubeMatch = video.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    if (youtubeMatch) {
+      return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
     }
-    if (video.type === 'vimeo') {
-      const videoId = video.url.match(/vimeo\.com\/(\d+)/)?.[1];
-      return videoId ? `https://player.vimeo.com/video/${videoId}` : video.url;
+    // Vimeo URL kontrolü
+    const vimeoMatch = video.match(/(?:vimeo\.com\/)([^"&?\/\s]+)/);
+    if (vimeoMatch) {
+      return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
     }
-    return video.url;
+    return video;
   };
 
   if (isPlaying) {
@@ -47,24 +48,14 @@ export default function ProductVideo({ video }: ProductVideoProps) {
 
   return (
     <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden group cursor-pointer">
-      {video.thumbnail && (
-        <Image
-          src={video.thumbnail}
-          alt="Video thumbnail"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      )}
       <div
         className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors"
         onClick={() => setIsPlaying(true)}
       >
         <div className="bg-white/90 rounded-full p-4 group-hover:scale-110 transition-transform">
-          <Play className="w-12 h-12 text-wood-600 fill-wood-600" />
+          <Play className="w-12 h-12 text-indigo-600 fill-indigo-600" />
         </div>
       </div>
     </div>
   );
 }
-

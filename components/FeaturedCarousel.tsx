@@ -60,7 +60,7 @@ export default function FeaturedCarousel({ products, locale }: Props) {
           return (
             <Link 
               key={product.id} 
-              href={`/products/${productData.slug}`}
+              href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
               className="min-w-[280px] md:min-w-[350px] snap-start group/card block bg-white/10 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:shadow-xl hover:bg-white/20 transition-all duration-300 flex-shrink-0"
             >
               <div className="relative h-64 w-full bg-black/20 overflow-hidden">

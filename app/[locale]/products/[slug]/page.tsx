@@ -394,7 +394,7 @@ export default async function ProductDetailPage({
               return (
                 <Link
                   key={simProduct.id}
-                  href={`/products/${simProductData.slug}`}
+                  href={{ pathname: '/products/[slug]', params: { slug: simProductData.slug } } as any}
                   className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
                 >
                   <div className="relative h-64 w-full bg-gray-100 overflow-hidden">

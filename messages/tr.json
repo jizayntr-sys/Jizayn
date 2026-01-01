@@ -187,19 +187,107 @@
   },
   "privacy": {
     "title": "Gizlilik Politikası",
-    "description": "Gizliliğinize önem veriyoruz. Kişisel verilerinizin nasıl işlendiği hakkında bilgi alın."
+    "description": "Gizliliğinize önem veriyoruz. Kişisel verilerinizin nasıl işlendiği hakkında bilgi alın.",
+    "lastUpdated": "Son Güncelleme: 2024",
+    "section1": {
+      "title": "Gizlilik Taahhüdümüz",
+      "content": "Jizayn olarak, kişisel verilerinizin gizliliğini korumak ve güvenliğini sağlamak için gerekli tüm teknik ve idari önlemleri almaktayız. Kişisel verileriniz yalnızca belirtilen amaçlar doğrultusunda işlenmektedir."
+    },
+    "section2": {
+      "title": "Toplanan Bilgiler",
+      "content": "Web sitemizi kullanırken, sipariş verirken veya bizimle iletişime geçtiğinizde ad, soyad, e-posta adresi, telefon numarası, adres bilgileri ve sipariş detayları gibi kişisel bilgiler toplanmaktadır."
+    },
+    "section3": {
+      "title": "Bilgilerin Kullanımı",
+      "content": "Toplanan kişisel bilgileriniz, siparişlerinizi işlemek, müşteri hizmetleri sunmak, ürün ve hizmetlerimizi geliştirmek, yasal yükümlülüklerimizi yerine getirmek ve size özel teklifler sunmak amacıyla kullanılmaktadır."
+    },
+    "section4": {
+      "title": "Bilgi Güvenliği",
+      "content": "Kişisel verilerinizin güvenliğini sağlamak için SSL şifreleme, güvenli ödeme sistemleri ve düzenli güvenlik denetimleri gibi önlemler almaktayız."
+    },
+    "section5": {
+      "title": "Çerezler",
+      "content": "Web sitemizde kullanıcı deneyimini iyileştirmek ve web sitesi trafiğini analiz etmek için çerezler kullanılmaktadır. Detaylı bilgi için Çerez Politikamızı inceleyebilirsiniz."
+    },
+    "contact": {
+      "title": "İletişim",
+      "content": "Gizlilik politikamız hakkında sorularınız için info@jizayn.com adresine e-posta gönderebilir veya bizimle iletişime geçebilirsiniz."
+    }
   },
   "cookies": {
     "title": "Çerez Politikası",
-    "description": "Çerez kullanım politikamız ve tercihlerinizi nasıl yönetebileceğiniz hakkında bilgi."
+    "description": "Çerez kullanım politikamız ve tercihlerinizi nasıl yönetebileceğiniz hakkında bilgi.",
+    "lastUpdated": "Son Güncelleme: 2024",
+    "section1": {
+      "title": "Çerez Nedir?",
+      "content": "Çerezler, web sitelerini ziyaret ettiğinizde cihazınıza kaydedilen küçük metin dosyalarıdır. Çerezler, web sitemizin düzgün çalışmasını sağlar ve kullanıcı deneyimini iyileştirir."
+    },
+    "section2": {
+      "title": "Çerez Türleri",
+      "content": "Web sitemizde zorunlu çerezler, performans çerezleri ve analitik çerezler kullanılmaktadır. Zorunlu çerezler web sitesinin çalışması için gereklidir, diğer çerezler ise kullanıcı deneyimini iyileştirmek için kullanılır."
+    },
+    "section3": {
+      "title": "Çerez Yönetimi",
+      "content": "Tarayıcı ayarlarınızdan çerezleri yönetebilir, silebilir veya engelleyebilirsiniz. Ancak bazı çerezlerin devre dışı bırakılması web sitesinin bazı özelliklerinin çalışmamasına neden olabilir."
+    },
+    "section4": {
+      "title": "Üçüncü Taraf Çerezler",
+      "content": "Web sitemizde Google Analytics gibi üçüncü taraf hizmetlerin çerezleri kullanılmaktadır. Bu çerezler, web sitesi trafiğini analiz etmek ve kullanıcı davranışlarını anlamak için kullanılır."
+    }
   },
   "kvkk": {
     "title": "KVKK Aydınlatma Metni",
-    "description": "Kişisel Verilerin Korunması Kanunu kapsamında bilgilendirme."
+    "description": "Kişisel Verilerin Korunması Kanunu kapsamında bilgilendirme.",
+    "lastUpdated": "Son Güncelleme: 2024",
+    "section1": {
+      "title": "Veri Sorumlusu",
+      "content": "6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") uyarınca, kişisel verileriniz Jizayn tarafından veri sorumlusu sıfatıyla işlenmektedir. İşbu Aydınlatma Metni, kişisel verilerinizin işlenmesine ilişkin bilgilendirme amacıyla hazırlanmıştır."
+    },
+    "section2": {
+      "title": "İşlenen Kişisel Veriler",
+      "content": "Web sitemizi ziyaret ettiğinizde, sipariş verdiğinizde veya bizimle iletişime geçtiğinizde toplanan kişisel verileriniz (ad, soyad, e-posta, telefon, adres vb.) işlenmektedir."
+    },
+    "section3": {
+      "title": "Kişisel Verilerin İşlenme Amaçları",
+      "content": "Kişisel verileriniz, ürün ve hizmetlerimizi sunmak, siparişlerinizi işlemek, müşteri hizmetleri sağlamak, yasal yükümlülüklerimizi yerine getirmek ve pazarlama faaliyetleri yürütmek amacıyla işlenmektedir."
+    },
+    "section4": {
+      "title": "Kişisel Verilerin Aktarılması",
+      "content": "Kişisel verileriniz, yukarıda belirtilen amaçlar doğrultusunda, yasal yükümlülüklerimizi yerine getirmek için gerekli olan durumlarda yetkili kamu kurum ve kuruluşlarına aktarılabilir."
+    },
+    "section5": {
+      "title": "Kişisel Veri Sahibinin Hakları",
+      "content": "KVKK'nın 11. maddesi uyarınca, kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini isteme, silinmesini veya yok edilmesini isteme haklarına sahipsiniz."
+    },
+    "contact": {
+      "title": "İletişim",
+      "content": "KVKK kapsamındaki haklarınızı kullanmak için info@jizayn.com adresine e-posta gönderebilir veya yazılı olarak başvuruda bulunabilirsiniz."
+    }
   },
   "terms": {
     "title": "Kullanım Koşulları",
-    "description": "Web sitemizi kullanırken uymanız gereken kural ve koşullar."
+    "description": "Web sitemizi kullanırken uymanız gereken kural ve koşullar.",
+    "lastUpdated": "Son Güncelleme: 2024",
+    "section1": {
+      "title": "Genel Hükümler",
+      "content": "Bu kullanım koşulları, Jizayn web sitesini kullanırken geçerlidir. Siteyi kullanarak bu koşulları kabul etmiş sayılırsınız. Koşulları kabul etmiyorsanız, lütfen siteden ayrılın."
+    },
+    "section2": {
+      "title": "Hizmetler ve Ürünler",
+      "content": "Jizayn, el yapımı ahşap dekoratif ürünler sunmaktadır. Ürün görselleri ve açıklamaları bilgilendirme amaçlıdır. Gerçek ürünler görsellerden küçük farklılıklar gösterebilir."
+    },
+    "section3": {
+      "title": "Sipariş ve Ödeme",
+      "content": "Siparişleriniz onaylandıktan sonra işleme alınır. Ödeme bilgileriniz güvenli şekilde işlenir. Fiyatlar değişiklik gösterebilir ve stok durumuna göre siparişler iptal edilebilir."
+    },
+    "section4": {
+      "title": "Teslimat ve İade",
+      "content": "Teslimat süreleri ürün ve konuma göre değişiklik gösterebilir. Ürünlerin hasarlı veya eksik gelmesi durumunda, teslimat tarihinden itibaren 7 gün içinde bizimle iletişime geçin."
+    },
+    "section5": {
+      "title": "Fikri Mülkiyet",
+      "content": "Web sitesindeki tüm içerik, tasarım, logo ve markalar Jizayn'a aittir ve telif hakkı ile korunmaktadır. İzinsiz kullanım yasaktır."
+    }
   },
   "thankYou": {
     "title": "Teşekkürler!",

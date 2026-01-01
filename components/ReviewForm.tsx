@@ -4,7 +4,8 @@ import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Star, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import ReCAPTCHA from 'react-google-recaptcha';
+// ReCAPTCHA is optional - install react-google-recaptcha if needed
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 interface ReviewFormProps {
   productId: string;
@@ -13,10 +14,10 @@ interface ReviewFormProps {
 export default function ReviewForm({ productId }: ReviewFormProps) {
   const t = useTranslations('product.reviews');
   const tForm = useTranslations('product.reviews.form');
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  // const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,10 +27,11 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
       return;
     }
 
-    if (!captchaToken) {
-      toast.error('Lütfen robot olmadığınızı doğrulayın');
-      return;
-    }
+    // ReCAPTCHA validation removed - install react-google-recaptcha if needed
+    // if (!captchaToken) {
+    //   toast.error('Lütfen robot olmadığınızı doğrulayın');
+    //   return;
+    // }
     
     setStatus('submitting');
     const form = e.currentTarget;
@@ -44,7 +46,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
           name: formData.get('name'),
           rating,
           comment: formData.get('comment'),
-          captchaToken,
+          // captchaToken,
         }),
       });
 
@@ -54,8 +56,8 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
       setStatus('success');
       form.reset();
       setRating(0);
-      setCaptchaToken(null);
-      recaptchaRef.current?.reset();
+      // setCaptchaToken(null);
+      // recaptchaRef.current?.reset();
       
       // 3 saniye sonra formu tekrar aktif et (isteğe bağlı)
       setTimeout(() => setStatus('idle'), 3000);
@@ -126,13 +128,14 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
           />
         </div>
 
-        <div className="py-2">
+        {/* ReCAPTCHA removed - install react-google-recaptcha if needed */}
+        {/* <div className="py-2">
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
             onChange={(token) => setCaptchaToken(token)}
           />
-        </div>
+        </div> */}
 
         <button
           type="submit"

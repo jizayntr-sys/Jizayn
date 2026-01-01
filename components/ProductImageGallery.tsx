@@ -209,8 +209,8 @@ export default function ProductImageGallery({
                   index: selectedIndex + 1,
                 })
               }
-              width={currentImage.width || 1920}
-              height={currentImage.height || 1080}
+              width={1920}
+              height={1080}
               className="max-w-full max-h-[90vh] object-contain"
               priority
               onError={() => handleImageError(selectedIndex)}

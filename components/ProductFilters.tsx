@@ -32,7 +32,7 @@ export default function ProductFilters() {
       params.set('category', category);
     }
     startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.push(`${pathname}?${params.toString()}` as any, { scroll: false });
     });
   };
 
@@ -41,7 +41,7 @@ export default function ProductFilters() {
     const params = new URLSearchParams(searchParams.toString());
     params.set('sort', sort);
     startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.push(`${pathname}?${params.toString()}` as any, { scroll: false });
     });
   };
 
@@ -58,7 +58,7 @@ export default function ProductFilters() {
       params.delete('maxPrice');
     }
     startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.push(`${pathname}?${params.toString()}` as any, { scroll: false });
     });
   };
 

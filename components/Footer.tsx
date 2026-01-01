@@ -180,7 +180,7 @@ export default function Footer({ hideOnHome = false }: Props) {
               {socialLinks.map(link => (
                 <a 
                   key={link.label} 
-                  href={link.href} 
+                  href={link.href as any} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   aria-label={link.label} 

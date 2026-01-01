@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { products } from '@/data/products';
 import { formatPrice } from '@/utils/currency';
@@ -44,7 +44,7 @@ export default async function SimilarProducts({ category, currentProductId, loca
             return (
               <Link 
                 key={product.id} 
-                href={`/products/${productData.slug}`}
+                href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
                 className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="relative h-72 w-full bg-gray-200 overflow-hidden">

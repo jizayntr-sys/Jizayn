@@ -176,7 +176,7 @@ export default async function ProductsPage({
             return (
               <Link 
                 key={product.id} 
-                href={`/products/${productData.slug}`}
+                href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
                 className="group block border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white"
               >
                 <div className="relative h-64 w-full bg-gray-100 overflow-hidden">

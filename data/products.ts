@@ -3,7 +3,6 @@ import { Product } from '../types/product';
 export const products: Product[] = [
   {
     id: '1',
-    updatedAt: new Date('2023-11-15'), // SEO için sabit tarih eklendi
     category: 'decor',
     tags: ['ahşap', 'kutu', 'dekoratif', 'wood', 'box', 'handmade'],
     brand: {
@@ -155,7 +154,6 @@ export const products: Product[] = [
   },
   {
     id: '2',
-    updatedAt: new Date('2023-12-01'),
     category: 'decor',
     tags: ['ahşap', 'duvar sanatı', 'geometrik', 'wood', 'wall art', 'geometric'],
     brand: {
@@ -198,7 +196,6 @@ export const products: Product[] = [
   },
   {
     id: '3',
-    updatedAt: new Date('2024-01-10'),
     category: 'furniture',
     tags: ['sehpa', 'yan sehpa', 'masif ahşap', 'coffee table', 'side table', 'solid wood'],
     brand: {
@@ -241,7 +238,6 @@ export const products: Product[] = [
   },
   {
     id: '4',
-    updatedAt: new Date('2024-01-15'),
     category: 'decor',
     tags: ['saat', 'duvar saati', 'ahşap', 'modern', 'clock', 'wall clock', 'wood'],
     brand: {
@@ -254,7 +250,7 @@ export const products: Product[] = [
         slug: 'modern-ahsap-duvar-saati',
         name: 'Modern Ahşap Duvar Saati',
         description: 'Minimalist tasarımıyla evinizin veya ofisinizin havasını değiştirecek, sessiz mekanizmalı ahşap duvar saati.',
-        images: [ { url: 'https://images.unsplash.com/photo-1563861826100-9cb868c06c74?q=80&w=1000&auto=format&fit=crop', alt: 'Modern Ahşap Duvar Saati' } ],
+        images: [ { url: 'https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?q=80&w=1000&auto=format&fit=crop', alt: 'Modern Ahşap Duvar Saati' } ],
         dimensions: '30cm çap',
         materials: 'Meşe Kaplama, Sessiz Mekanizma',
         specifications: ['Sessiz akar saniye', 'Kolay montaj', 'Pil dahil değildir'],
@@ -269,7 +265,7 @@ export const products: Product[] = [
         slug: 'modern-wooden-wall-clock',
         name: 'Modern Wooden Wall Clock',
         description: 'Wooden wall clock with silent mechanism that will change the atmosphere of your home or office with its minimalist design.',
-        images: [ { url: 'https://images.unsplash.com/photo-1563861826100-9cb868c06c74?q=80&w=1000&auto=format&fit=crop', alt: 'Modern Wooden Wall Clock' } ],
+        images: [ { url: 'https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?q=80&w=1000&auto=format&fit=crop', alt: 'Modern Wooden Wall Clock' } ],
         dimensions: '30cm diameter',
         materials: 'Oak Veneer, Silent Mechanism',
         specifications: ['Silent sweep second', 'Easy installation', 'Battery not included'],
@@ -284,7 +280,6 @@ export const products: Product[] = [
   },
   {
     id: '5',
-    updatedAt: new Date('2024-02-01'),
     category: 'decor',
     tags: ['ofis', 'düzenleyici', 'kalemlik', 'office', 'organizer', 'pen holder'],
     brand: {
@@ -327,7 +322,6 @@ export const products: Product[] = [
   },
   {
     id: '6',
-    updatedAt: new Date('2024-02-10'),
     category: 'decor',
     tags: ['bardak altlığı', 'mutfak', 'sunum', 'coaster', 'kitchen', 'serving'],
     brand: {
@@ -370,7 +364,6 @@ export const products: Product[] = [
   },
   {
     id: '7',
-    updatedAt: new Date('2024-02-20'),
     category: 'furniture',
     tags: ['laptop standı', 'ergonomik', 'ofis', 'laptop stand', 'ergonomic', 'office'],
     brand: {
@@ -413,7 +406,6 @@ export const products: Product[] = [
   },
   {
     id: '8',
-    updatedAt: new Date('2024-03-01'),
     category: 'decor',
     tags: ['çiçeklik', 'saksı standı', 'bitki', 'plant stand', 'flower pot', 'plant'],
     brand: {
