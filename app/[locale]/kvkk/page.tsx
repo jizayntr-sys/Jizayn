@@ -2,6 +2,9 @@ import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
+// Force dynamic rendering to avoid database calls during build
+export const dynamic = 'force-dynamic';
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
