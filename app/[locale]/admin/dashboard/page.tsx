@@ -1,29 +1,23 @@
 import { prisma } from '@/lib/prisma';
 import { approveReview, deleteReview, deleteProduct } from '../actions';
 import Link from 'next/link';
-import { Prisma } from '@prisma/client';
+import type { ProductReview, ProductLocale, Product, Brand } from '@prisma/client';
 
 // Sayfanın her istekte sunucuda yeniden derlenmesini sağlar (Dinamik veri için)
 export const dynamic = 'force-dynamic';
 
-type ReviewWithProduct = Prisma.ProductReviewGetPayload<{
-  include: {
-    productLocale: {
-      select: {
-        name: true;
-        locale: true;
-        slug: true;
-      };
-    };
+type ReviewWithProduct = ProductReview & {
+  productLocale: {
+    name: string;
+    locale: string;
+    slug: string;
   };
-}>;
+};
 
-type ProductWithRelations = Prisma.ProductGetPayload<{
-  include: {
-    brand: true;
-    locales: true;
-  };
-}>;
+type ProductWithRelations = Product & {
+  brand: Brand | null;
+  locales: ProductLocale[];
+};
 
 export default async function AdminDashboard() {
   // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
