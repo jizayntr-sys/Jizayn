@@ -80,7 +80,7 @@ export default async function HomePage() {
   const locale = await getLocale();
 
   // Öne çıkan ürünler (slider için)
-  let featuredProducts = [];
+  let featuredProducts: Awaited<ReturnType<typeof getAllProducts>> = [];
   try {
     const allProducts = await getAllProducts();
     featuredProducts = allProducts.slice(0, 8);

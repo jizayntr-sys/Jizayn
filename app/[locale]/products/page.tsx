@@ -107,7 +107,7 @@ export default async function ProductsPage({
   const maxPrice = Number(resolvedSearchParams.maxPrice) || Infinity;
 
   // Tüm ürünleri getir
-  let allProducts = [];
+  let allProducts: Awaited<ReturnType<typeof getAllProducts>> = [];
   try {
     allProducts = await getAllProducts(locale);
   } catch (error) {
