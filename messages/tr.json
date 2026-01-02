@@ -31,16 +31,19 @@
     "copyright": "© 2024 Jizayn. Tüm hakları saklıdır."
   },
   "about": {
-    "title": "Hakkımızda",
+    "title": "Hakkımızda - El Yapımı Ahşap Dekorasyon Atölyesi",
     "subtitle": "Doğallığı ve estetiği ahşapla buluşturuyoruz. Jizayn olarak el yapımı, sürdürülebilir ve özel tasarım ahşap dekorasyon ürünleri ile yaşam alanlarınıza değer katıyoruz.",
     "content": {
+      "section1Title": "Gelenekten Geleceğe Ahşap Sanatı",
       "p1": "Jizayn, ahşap dekorasyon alanında yıllardır hizmet veriyor. Doğal ahşap ürünlerimizi el emeğiyle üretiyoruz.",
+      "section2Title": "Tasarım ve Kalite Anlayışımız",
       "p2": "Geleneksel teknikleri modern tasarımla birleştiriyoruz. Size özel, kaliteli ürünler sunuyoruz.",
+      "section3Title": "Doğal Güzelliği Evinize Taşıyoruz",
       "p3": "Ahşabın doğal güzelliğini evinize taşıyoruz. Uzun yıllar kullanabileceğiniz değerli ürünler sunuyoruz."
     }
   },
   "contact": {
-    "title": "İletişim",
+    "title": "İletişim - El Yapımı Ahşap Ürünler İçin Bize Ulaşın",
     "subtitle": "Sorularınız, siparişleriniz veya özel tasarım talepleriniz için bizimle iletişime geçin. Jizayn ekibi olarak size yardımcı olmaktan mutluluk duyarız.",
     "form": {
       "name": "Adınız Soyadınız",
@@ -167,7 +170,7 @@
     "errorCode": "Hata Kodu"
   },
   "productsPage": {
-    "title": "Ürünlerimiz",
+    "title": "El Yapımı Ahşap Ürünler - Dekorasyon ve Mobilya",
     "description": "koleksiyonumuzda eviniz için en özel parçaları bulabilirsiniz.",
     "categoryDescription": "kategorisindeki özel tasarım el yapımı ürünlerimizi inceleyin. Doğal malzemeler ve eşsiz işçilik.",
     "noProducts": "Bu kategoride ürün bulunamadı.",
@@ -193,7 +196,7 @@
     }
   },
   "privacy": {
-    "title": "Gizlilik Politikası",
+    "title": "Gizlilik Politikası - Kişisel Verilerinizin Korunması",
     "description": "Gizliliğinize önem veriyoruz. Kişisel verilerinizin nasıl işlendiği hakkında bilgi alın.",
     "lastUpdated": "Son Güncelleme: 2024",
     "section1": {
@@ -222,7 +225,7 @@
     }
   },
   "cookies": {
-    "title": "Çerez Politikası",
+    "title": "Çerez Politikası - Gizlilik ve Veri Toplama",
     "description": "Çerez kullanım politikamız ve tercihlerinizi nasıl yönetebileceğiniz hakkında bilgi.",
     "lastUpdated": "Son Güncelleme: 2024",
     "section1": {
@@ -243,7 +246,7 @@
     }
   },
   "kvkk": {
-    "title": "KVKK Aydınlatma Metni",
+    "title": "KVKK Aydınlatma Metni - Kişisel Verilerin Korunması",
     "description": "Kişisel Verilerin Korunması Kanunu kapsamında bilgilendirme.",
     "lastUpdated": "Son Güncelleme: 2024",
     "section1": {
@@ -272,7 +275,7 @@
     }
   },
   "terms": {
-    "title": "Kullanım Koşulları",
+    "title": "Kullanım Koşulları - Satış ve Hizmet Kuralları",
     "description": "Web sitemizi kullanırken uymanız gereken kural ve koşullar.",
     "lastUpdated": "Son Güncelleme: 2024",
     "section1": {

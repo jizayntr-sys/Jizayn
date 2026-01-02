@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next';
-import { products } from '@/data/products';
+import { getAllProducts } from '@/data/products';
 import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
 import { BASE_URL } from '@/lib/constants';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Ürün sayfaları için sitemap girişleri
+  const products = await getAllProducts();
   const productEntries = products.flatMap((product) => {
     return routing.locales.map((locale) => {
       const productData = product.locales[locale as keyof typeof product.locales];

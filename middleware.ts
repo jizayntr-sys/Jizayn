@@ -7,30 +7,26 @@ const intlMiddleware = createMiddleware(routing);
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // --- Admin Rotası Koruması ---
-  // URL'de 'admin' kelimesi geçiyorsa bu bir admin rotasıdır.
-  const isAdminPath = pathname.split('/').includes('admin');
-
-  if (isAdminPath) {
+  // Admin rotası kontrolü (locale prefix OLMADAN /admin/... şeklinde)
+  if (pathname.startsWith('/admin')) {
     const hasSession = request.cookies.has('admin_session');
     
-    if (!hasSession) {
-      // Kullanıcı giriş yapmamışsa, login sayfasına yönlendir.
-      // Yönlendirme URL'i için doğru dil kodunu bul.
-      const locale = routing.locales.find(l => pathname.startsWith(`/${l}/`)) || routing.defaultLocale;
-      
+    if (!hasSession && !pathname.startsWith('/admin/login')) {
+      // Kullanıcı giriş yapmamışsa, admin login sayfasına yönlendir
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/login`;
+      url.pathname = '/admin/login';
       return NextResponse.redirect(url);
     }
+
+    // Admin sayfaları için next-intl middleware'ini çalıştırma (locale prefix gerekmez)
+    return NextResponse.next();
   }
 
-  // Diğer tüm istekler için next-intl middleware'ini çalıştır.
-  // Bu, dil tespiti ve yerelleştirilmiş URL yönlendirmelerini yönetir.
+  // Admin olmayan sayfalar için next-intl middleware'ini çalıştır (locale prefix ekler)
   return intlMiddleware(request);
 }
 
 export const config = {
   // Tüm sayfaları yakala (api, _next, statik dosyalar hariç)
-  matcher: ['/((?!api|_next|_vercel|admin|.*\\..*).*)']
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

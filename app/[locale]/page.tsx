@@ -2,7 +2,7 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { products } from '@/data/products';
+import { getAllProducts } from '@/data/products';
 import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, Search, Settings, Clock, UserCheck } from 'lucide-react';
 import FeaturedCarousel from '@/components/FeaturedCarousel';
 import CustomerReviewsCarousel from '@/components/CustomerReviewsCarousel';
@@ -80,7 +80,8 @@ export default async function HomePage() {
   const locale = await getLocale();
 
   // Öne çıkan ürünler (slider için)
-  const featuredProducts = products.slice(0, 8);
+  const allProducts = await getAllProducts();
+  const featuredProducts = allProducts.slice(0, 8);
 
   const websiteSchema = {
     '@context': 'https://schema.org',

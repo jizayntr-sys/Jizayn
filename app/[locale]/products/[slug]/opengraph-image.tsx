@@ -1,8 +1,8 @@
 import { ImageResponse } from 'next/og';
-import { products } from '@/data/products';
+import { getProductBySlug } from '@/data/products';
 
-// Edge runtime kullanarak görselin çok hızlı oluşturulmasını sağlıyoruz
-export const runtime = 'edge';
+// Note: Edge runtime removed due to Prisma/PostgreSQL dependency
+// Node.js runtime is required for database access
 
 export const alt = 'Jizayn Ürün Detayı';
 export const size = {
@@ -12,15 +12,11 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default async function Image({ params }: { params: { slug: string; locale: string } }) {
-  const { slug, locale } = params;
+export default async function Image({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+  const { slug, locale } = await params;
 
   // Slug ve locale bilgisine göre ürünü buluyoruz
-  const product = products.find((p) => {
-    const pData = p.locales[locale as keyof typeof p.locales];
-    return pData && pData.slug === slug;
-  });
-
+  const product = await getProductBySlug(slug, locale);
   const productData = product?.locales[locale as keyof typeof product.locales];
 
   // Eğer ürün bulunamazsa varsayılan bir görsel döndür

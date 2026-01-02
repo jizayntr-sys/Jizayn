@@ -31,16 +31,19 @@
     "copyright": "© 2024 Jizayn. All rights reserved."
   },
   "about": {
-    "title": "About Us",
+    "title": "About - Handmade Wooden Decoration Workshop",
     "subtitle": "Bringing nature and aesthetics together with wood.",
     "content": {
+      "section1Title": "Wooden Craftsmanship from Tradition to Future",
       "p1": "As Jizayn, we have been serving in wooden decorative products for many years. Our handmade products are carefully produced from natural wooden materials.",
+      "section2Title": "Our Design and Quality Philosophy",
       "p2": "Each of our products combines traditional handicraft techniques with modern design understanding, offering our customers special and high-quality products.",
+      "section3Title": "Bringing Natural Beauty to Your Home",
       "p3": "Our mission is to bring the natural beauty of wood to your homes and offer you valuable products that you can use for many years."
     }
   },
   "contact": {
-    "title": "Contact Us",
+    "title": "Contact - Handmade Wooden Products & Custom Orders",
     "subtitle": "Get in touch with us for your questions.",
     "form": {
       "name": "Full Name",
@@ -167,7 +170,7 @@
     "errorCode": "Error Code"
   },
   "productsPage": {
-    "title": "Our Products",
+    "title": "Handmade Wooden Products - Decoration & Furniture",
     "description": "Find the most special pieces for your home in our collection.",
     "categoryDescription": "Browse our special design handmade products in the category. Natural materials and unique craftsmanship.",
     "noProducts": "No products found in this category.",
@@ -193,7 +196,7 @@
     }
   },
   "privacy": {
-    "title": "Privacy Policy",
+    "title": "Privacy Policy - Personal Data Protection & Security",
     "description": "We value your privacy. Learn how your personal data is processed.",
     "lastUpdated": "Last Updated: 2024",
     "section1": {
@@ -222,7 +225,7 @@
     }
   },
   "cookies": {
-    "title": "Cookie Policy",
+    "title": "Cookie Policy - Privacy & Data Collection Information",
     "description": "Information about our cookie policy and how to manage your preferences.",
     "lastUpdated": "Last Updated: 2024",
     "section1": {
@@ -243,7 +246,7 @@
     }
   },
   "kvkk": {
-    "title": "Data Protection",
+    "title": "Data Protection - GDPR & Personal Data Rights",
     "description": "Information within the scope of the Personal Data Protection Law.",
     "lastUpdated": "Last Updated: 2024",
     "section1": {
@@ -272,7 +275,7 @@
     }
   },
   "terms": {
-    "title": "Terms of Use",
+    "title": "Terms of Use - Sales & Service Conditions",
     "description": "Rules and conditions you must follow while using our website.",
     "lastUpdated": "Last Updated: 2024",
     "section1": {

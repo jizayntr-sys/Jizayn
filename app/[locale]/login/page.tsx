@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from '@/i18n/navigation';
+import { useLocale } from 'next-intl';
 import { Lock, User, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const locale = useLocale();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,8 +28,7 @@ export default function LoginPage() {
       // Not: Gerçek uygulamada HttpOnly cookie kullanılmalıdır
       document.cookie = "admin_session=true; path=/; max-age=86400"; // 1 gün
       
-      window.location.href = '/admin/dashboard';
-      router.refresh();
+      window.location.href = `/${locale}/admin/dashboard`;
     } else {
       setError('Kullanıcı adı veya şifre hatalı!');
       setIsLoading(false);

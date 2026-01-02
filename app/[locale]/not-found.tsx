@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { products } from '@/data/products';
+import { getAllProducts } from '@/data/products';
 import Image from 'next/image';
 import { formatPrice } from '@/utils/currency';
 
@@ -16,7 +16,8 @@ export default async function NotFound() {
   const locale = await getLocale();
 
   // 3 adet rastgele ürün seç
-  const randomProducts = getRandomItems(products, 3);
+  const allProducts = await getAllProducts(locale);
+  const randomProducts = getRandomItems(allProducts, 3);
 
   return (
     <div className="container mx-auto px-4 py-24 flex flex-col items-center justify-center text-center">

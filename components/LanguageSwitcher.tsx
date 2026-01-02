@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
 import { useLocale } from 'next-intl';
 import { ChangeEvent, useTransition } from 'react';
-import { products } from '@/data/products';
+// Note: products import removed - LanguageSwitcher uses pathname-based slug detection
 
 const languageNames: Record<string, string> = {
   tr: 'TR',
@@ -64,32 +64,15 @@ export default function LanguageSwitcher({ id = 'language-switcher' }: LanguageS
         }
         
         if (currentSlug) {
-          // Mevcut slug'a göre ürünü bul (tüm locale'lerde ara)
-          const product = products.find((p) => {
-            // Önce mevcut locale'de ara
-            const localeData = p.locales[currentLocale as keyof typeof p.locales];
-            if (localeData?.slug === currentSlug) return true;
-            
-            // Bulamazsa diğer locale'lerde de ara (slug'lar farklı olabilir)
-            return Object.values(p.locales).some(localeData => localeData?.slug === currentSlug);
-          });
-
-          if (product) {
-            // Yeni locale'deki slug'ı bul
-            const newLocaleData = product.locales[newLocale as keyof typeof product.locales];
-            if (newLocaleData?.slug) {
-              // Yeni locale için products path'ini al
-              const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
-              // Tam URL'i oluştur ve window.location.href ile yönlendir
-              // Bu, next-intl'in router API'sinin dinamik route'lardaki sınırlamalarını aşar
-              // setTimeout ile asenkron hale getir (render sırasında çalışmaz)
-              const newUrl = `/${newLocale}${productsPath}/${newLocaleData.slug}`;
-              setTimeout(() => {
-                window.location.href = newUrl;
-              }, 0);
-              return;
-            }
-          }
+          // Slug-based language switching removed - using pathname-based approach
+          // For products, we'll redirect to the products page in the new locale
+          // The user can navigate to the specific product from there
+          const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
+          const newUrl = `/${newLocale}${productsPath}`;
+          setTimeout(() => {
+            window.location.href = newUrl;
+          }, 0);
+          return;
         }
       }
       

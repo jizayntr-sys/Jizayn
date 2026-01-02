@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { products } from '@/data/products';
+import { getAllProducts } from '@/data/products';
 import { formatPrice } from '@/utils/currency';
 import { getTranslations } from 'next-intl/server';
 import ProductFilters from '@/components/ProductFilters';
@@ -106,8 +106,11 @@ export default async function ProductsPage({
   const minPrice = Number(resolvedSearchParams.minPrice) || 0;
   const maxPrice = Number(resolvedSearchParams.maxPrice) || Infinity;
 
+  // Tüm ürünleri getir
+  const allProducts = await getAllProducts(locale);
+
   // Filtreleme
-  let filteredProducts = products.filter((product) => {
+  let filteredProducts = allProducts.filter((product) => {
     // Mevcut dil için ürün verisi var mı kontrol et
     const productData = product.locales[locale as keyof typeof product.locales];
     if (!productData) return false;
@@ -238,15 +241,21 @@ export default async function ProductsPage({
                 className="group block border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white"
               >
                 <div className="relative h-64 w-full bg-gray-100 overflow-hidden">
-                  <Image
-                    src={productData.images[0].url}
-                    alt={productData.images[0].alt}
-                    width={600}
-                    height={400}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={index < 6}
-                  />
+                  {productData.images && productData.images.length > 0 ? (
+                    <Image
+                      src={productData.images[0].url}
+                      alt={productData.images[0].alt}
+                      width={600}
+                      height={400}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 6}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200">
+                      <span className="text-gray-400 text-sm">Görsel Yok</span>
+                    </div>
+                  )}
                 </div>
                 
                 <div className="p-5">

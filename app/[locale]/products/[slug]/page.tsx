@@ -6,7 +6,7 @@ import { ChevronRight, Home } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
-import { products } from '@/data/products';
+import { getProductBySlug, getAllProducts } from '@/data/products';
 import { formatPrice } from '@/utils/currency';
 import StockNotificationForm from '@/components/StockNotificationForm';
 import ProductGallery from '@/components/ProductGallery';
@@ -22,10 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  const product = products.find((p) => {
-    const localeData = p.locales[locale as keyof typeof p.locales];
-    return localeData?.slug === slug;
-  });
+  const product = await getProductBySlug(slug, locale);
 
   if (!product) {
     return {};
@@ -141,10 +138,7 @@ export default async function ProductDetailPage({
   const tNav = await getTranslations({ locale, namespace: 'nav' });
   const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
 
-  const product = products.find((p) => {
-    const localeData = p.locales[locale as keyof typeof p.locales];
-    return localeData?.slug === slug;
-  });
+  const product = await getProductBySlug(slug, locale);
 
   if (!product) {
     notFound();
@@ -333,7 +327,8 @@ export default async function ProductDetailPage({
   } : null;
 
   // Benzer ürünleri bul (Aynı kategorideki diğer ürünler, mevcut ürün hariç)
-  const similarProducts = products
+  const allProducts = await getAllProducts(locale);
+  const similarProducts = allProducts
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
@@ -555,13 +550,19 @@ export default async function ProductDetailPage({
                   className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
                 >
                   <div className="relative h-64 w-full bg-gray-100 overflow-hidden">
-                    <Image
-                      src={simProductData.images[0].url}
-                      alt={simProductData.images[0].alt}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px"
-                    />
+                    {simProductData.images && simProductData.images.length > 0 ? (
+                      <Image
+                        src={simProductData.images[0].url}
+                        alt={simProductData.images[0].alt}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                        <span className="text-gray-400 text-sm">Görsel Yok</span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-700 transition-colors line-clamp-1">

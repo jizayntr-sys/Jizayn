@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Brand {
+  id        String    @id
+  name      String
+  url       String
+  logo      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  products  Product[]
+}
+
+model Product {
+  id            String          @id
+  category      String
+  tags          String[]
+  brandId       String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  isFeatured    Boolean         @default(false)
+  brand         Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  locales       ProductLocale[]
+
+  @@index([brandId])
+  @@index([category])
+}
+
+model ProductFaq {
+  id              String        @id
+  productLocaleId String
+  question        String
+  answer          String
+  order           Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  ProductLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, order])
+}
+
+model ProductImage {
+  id                   String        @id
+  productLocaleId      String
+  url                  String
+  alt                  String
+  pinterestDescription String?
+  order                Int           @default(0)
+  createdAt            DateTime      @default(now())
+  productLocale        ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, order])
+}
+
+model ProductLocale {
+  id              String          @id
+  productId       String
+  locale          String
+  slug            String
+  name            String          @db.VarChar(500)
+  description     String
+  dimensions      String
+  materials       String
+  specifications  String[]
+  sku             String
+  gtin            String?
+  availability    String
+  priceMin        Decimal         @db.Decimal(10, 2)
+  priceMax        Decimal         @db.Decimal(10, 2)
+  priceCurrency   String
+  amazonUrl       String?
+  etsyUrl         String?
+  video           String?
+  metaTitle       String          @db.VarChar(500)
+  metaDescription String
+  metaKeywords    String[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime
+  faqs            ProductFaq[]
+  images          ProductImage[]
+  product         Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  offers          ProductOffer[]
+  rating          ProductRating?
+  reviews         ProductReview[]
+
+  @@unique([locale, slug])
+  @@unique([productId, locale])
+  @@index([locale])
+  @@index([productId])
+  @@index([slug])
+}
+
+model ProductOffer {
+  id              String        @id
+  productLocaleId String
+  platform        String
+  url             String
+  availability    String
+  price           Decimal       @db.Decimal(10, 2)
+  priceCurrency   String
+  sku             String?
+  gtin            String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@unique([productLocaleId, platform])
+  @@index([productLocaleId])
+}
+
+model ProductRating {
+  id              String        @id
+  productLocaleId String        @unique
+  ratingValue     Decimal       @db.Decimal(3, 2)
+  reviewCount     Int
+  bestRating      Int           @default(5)
+  worstRating     Int           @default(1)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+}
+
+model ProductReview {
+  id              String        @id
+  productLocaleId String
+  author          String
+  datePublished   DateTime
+  reviewBody      String
+  reviewRating    Int
+  reviewSource    String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  isApproved      Boolean       @default(false)
+  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, reviewRating])
+}

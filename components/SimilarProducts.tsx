@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { products } from '@/data/products';
+import { getAllProducts } from '@/data/products';
 import { formatPrice } from '@/utils/currency';
 import { getTranslations } from 'next-intl/server';
 import { ArrowRight } from 'lucide-react';
@@ -17,7 +17,8 @@ export default async function SimilarProducts({ category, currentProductId, loca
   // 1. Aynı kategorideki ürünleri bul
   // 2. Şu an görüntülenen ürünü (currentProductId) hariç tut
   // 3. İlk 3 tanesini al
-  const similarProducts = products
+  const allProducts = await getAllProducts(locale);
+  const similarProducts = allProducts
     .filter((p) => p.category === category && p.id !== currentProductId)
     .slice(0, 3);
 

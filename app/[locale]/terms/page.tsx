@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { generateHreflangAlternates, getLocalizedPathname } from '@/utils/hreflang';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -14,15 +13,27 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'terms' });
-  const localizedPath = getLocalizedPathname('/terms', locale);
   const baseUrl = 'https://www.jizayn.com';
+  
+  const pathTr = '/kullanim-kosullari';
+  const pathEn = '/terms-of-use';
+  const localizedPath = locale === 'tr' ? pathTr : pathEn;
 
   return {
     title: t('title'),
     description: t('description'),
     alternates: {
       canonical: `${baseUrl}/${locale}${localizedPath}`,
-      languages: generateHreflangAlternates('/terms', locale),
+      languages: locale === 'en'
+        ? {
+            'en': `${baseUrl}/en${pathEn}`,
+            'tr': `${baseUrl}/tr${pathTr}`,
+            'x-default': `${baseUrl}/en${pathEn}`,
+          }
+        : {
+            'en': `${baseUrl}/en${pathEn}`,
+            'tr': `${baseUrl}/tr${pathTr}`,
+          },
     },
     openGraph: {
       title: t('title'),

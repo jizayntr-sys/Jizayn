@@ -1,11 +1,15 @@
-import { products } from '../data/products';
+// Note: This script needs to be updated to use Prisma
+import 'dotenv/config';
+import { getAllProducts } from '../data/products';
 
-console.log('🔍 Ürün görselleri ve alt etiketleri kontrol ediliyor...\n');
+async function main() {
+  console.log('🔍 Ürün görselleri ve alt etiketleri kontrol ediliyor...\n');
 
-let missingAltCount = 0;
-let totalImages = 0;
+  const products = await getAllProducts();
+  let missingAltCount = 0;
+  let totalImages = 0;
 
-products.forEach((product) => {
+  products.forEach((product) => {
   if (!product.locales) return;
 
   // Her dil için kontrol et
@@ -28,11 +32,17 @@ products.forEach((product) => {
   });
 });
 
-console.log('--------------------------------------------------');
-console.log(`📊 Toplam Görsel: ${totalImages}`);
-if (missingAltCount === 0) {
-  console.log('✅ Harika! Tüm görsellerin alt etiketleri dolu.');
-} else {
-  console.log(`⚠️  Toplam ${missingAltCount} görselde alt etiketi eksik.`);
-  process.exit(1);
+  console.log('--------------------------------------------------');
+  console.log(`📊 Toplam Görsel: ${totalImages}`);
+  if (missingAltCount === 0) {
+    console.log('✅ Harika! Tüm görsellerin alt etiketleri dolu.');
+  } else {
+    console.log(`⚠️  Toplam ${missingAltCount} görselde alt etiketi eksik.`);
+    process.exit(1);
+  }
 }
+
+main().catch((error) => {
+  console.error('❌ Script hatası:', error);
+  process.exit(1);
+});

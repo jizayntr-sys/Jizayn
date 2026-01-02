@@ -53,7 +53,7 @@ function getGoogleProductCategory(category: string): string {
  * Generate Google Shopping Feed XML
  */
 export async function GET() {
-  const products = getAllProducts('en'); // Feed is generated using English data
+  const products = await getAllProducts('en'); // Feed is generated using English data
 
   const items = products
     .map((product) => {

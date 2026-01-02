@@ -25,7 +25,16 @@ export default function ProductGallery({ images }: { images: ProductImage[] }) {
   // Minimum kaydırma mesafesi (piksel)
   const minSwipeDistance = 50;
 
-  const selectedImage = images[selectedIndex];
+  const selectedImage = images[selectedIndex] || null;
+
+  // Eğer görsel yoksa placeholder göster
+  if (!images || images.length === 0) {
+    return (
+      <div className="relative h-64 sm:h-80 md:h-[500px] w-full bg-gray-200 rounded-xl flex items-center justify-center">
+        <span className="text-gray-400 text-lg">Görsel Yok</span>
+      </div>
+    );
+  }
 
   // Klavye olaylarını dinle (Sağ/Sol Ok ve Escape)
   useEffect(() => {
@@ -145,14 +154,16 @@ export default function ProductGallery({ images }: { images: ProductImage[] }) {
           className="relative h-64 sm:h-80 md:h-[500px] w-full bg-gray-100 rounded-xl overflow-hidden border border-gray-100 cursor-zoom-in group"
           onClick={() => setIsModalOpen(true)}
         >
-        <Image
-          src={selectedImage.url}
-          alt={selectedImage.alt}
-          fill
-          className="object-cover"
-          priority
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+        {selectedImage && (
+          <Image
+            src={selectedImage.url}
+            alt={selectedImage.alt}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        )}
       </div>
 
       {/* Küçük Resimler (Thumbnails) */}
