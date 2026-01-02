@@ -208,7 +208,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4 text-gray-800">Mevcut Görseller</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {trLocale.images.map((img, index) => (
+                {trLocale.images.map((img: any, index: number) => (
                   <div key={img.id} className="space-y-2">
                     <div className="relative aspect-square">
                       <Image
