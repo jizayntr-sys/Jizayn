@@ -1,27 +1,13 @@
 import { prisma } from '@/lib/prisma';
 import { approveReview, deleteReview, deleteProduct } from '../actions';
 import Link from 'next/link';
-import type { ProductReview, ProductLocale, Product, Brand } from '@prisma/client';
 
 // Sayfanın her istekte sunucuda yeniden derlenmesini sağlar (Dinamik veri için)
 export const dynamic = 'force-dynamic';
 
-type ReviewWithProduct = ProductReview & {
-  productLocale: {
-    name: string;
-    locale: string;
-    slug: string;
-  };
-};
-
-type ProductWithRelations = Product & {
-  brand: Brand | null;
-  locales: ProductLocale[];
-};
-
 export default async function AdminDashboard() {
   // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
-  const pendingReviews: ReviewWithProduct[] = await prisma.productReview.findMany({
+  const pendingReviews = await prisma.productReview.findMany({
     where: { isApproved: false },
     include: {
       productLocale: {
@@ -36,7 +22,7 @@ export default async function AdminDashboard() {
   });
 
   // 2. Tüm ürünleri çek (Marka ve İsim bilgileriyle beraber)
-  const products: ProductWithRelations[] = await prisma.product.findMany({
+  const products = await prisma.product.findMany({
     include: {
       brand: true,
       locales: true, // Ürün ismini bulmak için gerekli
@@ -71,7 +57,7 @@ export default async function AdminDashboard() {
           <p className="text-gray-500 italic">Şu an onay bekleyen yeni yorum yok.</p>
         ) : (
           <div className="grid gap-4">
-            {pendingReviews.map((review) => (
+            {pendingReviews.map((review: any) => (
               <div key={review.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div className="flex-1">
@@ -128,7 +114,7 @@ export default async function AdminDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {products.map((product) => {
+              {products.map((product: any) => {
                 // Türkçe ismi bulmaya çalış, yoksa ilk bulduğunu al, o da yoksa ID göster
                 const displayName = product.locales.find(l => l.locale === 'tr')?.name || product.locales[0]?.name || 'İsimsiz Ürün';
                 
