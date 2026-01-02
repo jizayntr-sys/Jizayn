@@ -9,8 +9,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Ürün sayfaları için sitemap girişleri
-  const products = await getAllProducts();
+  try {
+    // Ürün sayfaları için sitemap girişleri
+    const products = await getAllProducts();
   const productEntries = products.flatMap((product) => {
     return routing.locales.map((locale) => {
       const productData = product.locales[locale as keyof typeof product.locales];

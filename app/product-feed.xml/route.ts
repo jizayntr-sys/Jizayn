@@ -57,9 +57,10 @@ function getGoogleProductCategory(category: string): string {
  * Generate Google Shopping Feed XML
  */
 export async function GET() {
-  const products = await getAllProducts('en'); // Feed is generated using English data
+  try {
+    const products = await getAllProducts('en'); // Feed is generated using English data
 
-  const items = products
+    const items = products
     .map((product) => {
       const productData = product.locales.en;
       if (!productData) return null;
@@ -135,10 +136,31 @@ ${items}
   </channel>
 </rss>`;
 
-  return new NextResponse(xml, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
-    },
-  });
+    return new NextResponse(xml, {
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    });
+  } catch (error) {
+    console.error('Error generating product feed:', error);
+    
+    // Return empty feed during build if database is unavailable
+    const emptyXml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Jizayn - Handcrafted Wooden Decorative Products</title>
+    <link>${baseUrl}</link>
+    <description>Handcrafted wooden decorative products from Jizayn</description>
+    <language>en</language>
+  </channel>
+</rss>`;
+
+    return new NextResponse(emptyXml, {
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+      },
+    });
+  }
 }
