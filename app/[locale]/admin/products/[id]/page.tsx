@@ -27,8 +27,8 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     notFound();
   }
 
-  const trLocale = product.locales.find(l => l.locale === 'tr');
-  const enLocale = product.locales.find(l => l.locale === 'en');
+  const trLocale = product.locales.find((l: any) => l.locale === 'tr');
+  const enLocale = product.locales.find((l: any) => l.locale === 'en');
 
   return (
     <div className="pt-24 p-8 max-w-7xl mx-auto bg-gray-50 min-h-screen">
