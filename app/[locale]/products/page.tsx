@@ -107,7 +107,13 @@ export default async function ProductsPage({
   const maxPrice = Number(resolvedSearchParams.maxPrice) || Infinity;
 
   // Tüm ürünleri getir
-  const allProducts = await getAllProducts(locale);
+  let allProducts = [];
+  try {
+    allProducts = await getAllProducts(locale);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    // Continue with empty products array
+  }
 
   // Filtreleme
   let filteredProducts = allProducts.filter((product) => {

@@ -80,8 +80,14 @@ export default async function HomePage() {
   const locale = await getLocale();
 
   // Öne çıkan ürünler (slider için)
-  const allProducts = await getAllProducts();
-  const featuredProducts = allProducts.slice(0, 8);
+  let featuredProducts = [];
+  try {
+    const allProducts = await getAllProducts();
+    featuredProducts = allProducts.slice(0, 8);
+  } catch (error) {
+    console.error('Error fetching products for homepage:', error);
+    // Continue with empty products array
+  }
 
   const websiteSchema = {
     '@context': 'https://schema.org',
