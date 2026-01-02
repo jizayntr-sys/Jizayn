@@ -46,7 +46,7 @@ export default async function NewProductPage() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-2"
                   required
                 >
-                  {brands.map(brand => (
+                  {brands.map((brand: any) => (
                     <option key={brand.id} value={brand.id}>{brand.name}</option>
                   ))}
                 </select>
