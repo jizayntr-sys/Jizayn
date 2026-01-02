@@ -24,11 +24,6 @@ export async function generateMetadata({
     acc[l] = `${BASE_URL}${l === 'tr' ? '/tr/urunler' : '/en/products'}`;
     return acc;
   }, {} as Record<string, string>);
-  
-  // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
-  if (locale === 'en') {
-    languages['x-default'] = `${BASE_URL}/en/products`;
-  }
 
   const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
   const ogLocale = localeMap[locale] || 'en_US';
@@ -59,7 +54,10 @@ export async function generateMetadata({
     keywords,
     alternates: {
       canonical: languages[locale],
-      languages,
+      languages: {
+        'x-default': `${BASE_URL}/en/products`,
+        ...languages,
+      },
     },
     openGraph: {
       title: pageTitle,
@@ -218,6 +216,14 @@ export default async function ProductsPage({
       
       <ProductFilters />
 
+      {filteredProducts.length > 0 && (
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mt-8 mb-6">
+          {category !== 'all' 
+            ? t('categoryProductsHeading', { category: categoryName, count: filteredProducts.length })
+            : t('allProductsHeading', { count: filteredProducts.length })}
+        </h2>
+      )}
+
       {filteredProducts.length === 0 ? (
         <div className="text-center py-16">
           <div className="max-w-md mx-auto">
@@ -265,9 +271,9 @@ export default async function ProductsPage({
                 </div>
                 
                 <div className="p-5">
-                  <h2 className="text-xl font-semibold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
                     {productData.name}
-                  </h2>
+                  </h3>
                   <p className="text-gray-600 text-sm line-clamp-2 mb-4">
                     {productData.description}
                   </p>

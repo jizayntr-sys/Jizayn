@@ -27,16 +27,11 @@ export async function generateMetadata({
     description: t('description'),
     alternates: {
       canonical: `${baseUrl}/${locale}${localizedPath}`,
-      languages: locale === 'en'
-        ? {
-            'en': `${baseUrl}/en${pathEn}`,
-            'tr': `${baseUrl}/tr${pathTr}`,
-            'x-default': `${baseUrl}/en${pathEn}`,
-          }
-        : {
-            'en': `${baseUrl}/en${pathEn}`,
-            'tr': `${baseUrl}/tr${pathTr}`,
-          },
+      languages: {
+        'en': `${baseUrl}/en${pathEn}`,
+        'tr': `${baseUrl}/tr${pathTr}`,
+        'x-default': `${baseUrl}/en${pathEn}`,
+      },
     },
     openGraph: {
       title: t('title'),

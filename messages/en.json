@@ -173,6 +173,8 @@
     "title": "Handmade Wooden Products - Decoration & Furniture",
     "description": "Find the most special pieces for your home in our collection.",
     "categoryDescription": "Browse our special design handmade products in the category. Natural materials and unique craftsmanship.",
+    "categoryProductsHeading": "Our {category} Products ({count} items)",
+    "allProductsHeading": "All Our Products ({count} items)",
     "noProducts": "No products found in this category.",
     "noProductsDescription": "Try different filters or view all products.",
     "viewProduct": "View",

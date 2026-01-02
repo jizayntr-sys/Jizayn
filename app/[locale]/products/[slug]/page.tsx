@@ -41,15 +41,6 @@ export async function generateMetadata({
     return acc;
   }, {} as Record<string, string>);
 
-  // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
-  // Bu, Google'ın "multiple entries" uyarısını önler
-  if (locale === 'en') {
-    const defaultProductData = product.locales['en'];
-    if (defaultProductData?.slug) {
-      languages['x-default'] = `${BASE_URL}/en/products/${defaultProductData.slug}`;
-    }
-  }
-
   const currentProductsPath = pathnames['/products'][locale as keyof typeof pathnames['/products']];
   const canonicalUrl = `${BASE_URL}/${locale}${currentProductsPath}/${slug}`;
 
@@ -85,7 +76,10 @@ export async function generateMetadata({
     keywords: metaKeywords,
     alternates: {
       canonical: canonicalUrl,
-      languages,
+      languages: {
+        'x-default': languages['en'] || `${BASE_URL}/en/products/${productData.slug}`,
+        ...languages,
+      },
     },
     openGraph: {
       title: productData?.name,

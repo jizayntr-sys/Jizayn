@@ -36,16 +36,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords,
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
-      languages: locale === 'en' 
-        ? {
-            'en': `${BASE_URL}/en`,
-            'tr': `${BASE_URL}/tr`,
-            'x-default': `${BASE_URL}/en`,
-          }
-        : {
-            'en': `${BASE_URL}/en`,
-            'tr': `${BASE_URL}/tr`,
-          },
+      languages: {
+        'en': `${BASE_URL}/en`,
+        'tr': `${BASE_URL}/tr`,
+        'x-default': `${BASE_URL}/en`,
+      },
     },
     openGraph: {
       title: t('title'),

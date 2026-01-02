@@ -17,16 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t('subtitle'),
     alternates: {
       canonical: `${BASE_URL}/${locale}${pathnames['/contact'][locale as 'tr' | 'en']}`,
-      languages: locale === 'en'
-        ? {
-            'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
-            'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
-            'x-default': `${BASE_URL}/en${pathnames['/contact'].en}`,
-          }
-        : {
-            'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
-            'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
-          },
+      languages: {
+        'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
+        'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
+        'x-default': `${BASE_URL}/en${pathnames['/contact'].en}`,
+      },
     },
     openGraph: {
       title: t('title'),

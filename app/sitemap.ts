@@ -32,23 +32,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         return acc;
       }, {} as Record<string, string>);
 
-      // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
-      // Bu, Google'ın "multiple entries" uyarısını önler
-      if (locale === 'en') {
-        const defaultProductData = product.locales['en'];
-        if (defaultProductData?.slug) {
-          const defaultProductsPath = pathnames['/products'].en;
-          languages['x-default'] = `${BASE_URL}/en${defaultProductsPath}/${defaultProductData.slug}`;
-        }
-      }
-
       return {
         url,
         lastModified: new Date(), // Ürün verisinden gelen tarihi kullan, yoksa şimdiki zamanı kullan
         changeFrequency: 'weekly' as const,
         priority: 0.8,
         alternates: {
-          languages,
+          languages: {
+            'x-default': languages['en'] || url,
+            ...languages,
+          },
         },
       };
     });
@@ -82,20 +75,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         return acc;
       }, {} as Record<string, string>);
 
-      // x-default sadece EN sayfasında eklenmeli (TR sayfasında eklenmemeli)
-      // Bu, Google'ın "multiple entries" uyarısını önler
-      // languages objesi tüm diller için oluşturuldu, x-default'u sadece EN entry'sine ekleyeceğiz
-
       // Her dil için ayrı entry oluştur
       return routing.locales.map((locale) => {
         const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[locale];
-        
-        // x-default sadece EN entry'sine ekle
-        const entryLanguages = { ...languages };
-        if (locale === 'en') {
-          const defaultPath = typeof pathConfig === 'string' ? pathConfig : pathConfig.en;
-          entryLanguages['x-default'] = `${BASE_URL}/en${defaultPath}`;
-        }
         
         return {
           url: `${BASE_URL}/${locale}${localizedPath}`,
@@ -103,7 +85,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           changeFrequency: routeConfig.changeFrequency,
           priority: routeConfig.priority,
           alternates: {
-            languages: entryLanguages,
+            languages: {
+              'x-default': languages['en'] || `${BASE_URL}/en`,
+              ...languages,
+            },
           },
         };
       });

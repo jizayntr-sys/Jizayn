@@ -173,6 +173,8 @@
     "title": "El Yapımı Ahşap Ürünler - Dekorasyon ve Mobilya",
     "description": "koleksiyonumuzda eviniz için en özel parçaları bulabilirsiniz.",
     "categoryDescription": "kategorisindeki özel tasarım el yapımı ürünlerimizi inceleyin. Doğal malzemeler ve eşsiz işçilik.",
+    "categoryProductsHeading": "{category} Ürünlerimiz ({count} ürün)",
+    "allProductsHeading": "Tüm Ürünlerimiz ({count} ürün)",
     "noProducts": "Bu kategoride ürün bulunamadı.",
     "noProductsDescription": "Farklı filtreler deneyebilir veya tüm ürünleri görüntüleyebilirsiniz.",
     "viewProduct": "İncele",
