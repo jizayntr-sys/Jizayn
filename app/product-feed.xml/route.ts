@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import { getAllProducts } from '@/data/products';
 import { routing } from '@/i18n/routing';
 
+// Force dynamic rendering - don't try to prerender at build time
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
+
 const baseUrl = 'https://www.jizayn.com';
 
 // Helper function to escape XML special characters

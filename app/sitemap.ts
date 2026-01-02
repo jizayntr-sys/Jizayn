@@ -4,6 +4,10 @@ import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
 import { BASE_URL } from '@/lib/constants';
 
+// Force dynamic rendering - don't try to prerender at build time
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Ürün sayfaları için sitemap girişleri
   const products = await getAllProducts();
