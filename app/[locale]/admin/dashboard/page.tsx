@@ -1,13 +1,33 @@
 import { prisma } from '@/lib/prisma';
 import { approveReview, deleteReview, deleteProduct } from '../actions';
 import Link from 'next/link';
+import { Prisma } from '@prisma/client';
 
 // Sayfanın her istekte sunucuda yeniden derlenmesini sağlar (Dinamik veri için)
 export const dynamic = 'force-dynamic';
 
+type ReviewWithProduct = Prisma.ProductReviewGetPayload<{
+  include: {
+    productLocale: {
+      select: {
+        name: true;
+        locale: true;
+        slug: true;
+      };
+    };
+  };
+}>;
+
+type ProductWithRelations = Prisma.ProductGetPayload<{
+  include: {
+    brand: true;
+    locales: true;
+  };
+}>;
+
 export default async function AdminDashboard() {
   // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
-  const pendingReviews = await prisma.productReview.findMany({
+  const pendingReviews: ReviewWithProduct[] = await prisma.productReview.findMany({
     where: { isApproved: false },
     include: {
       productLocale: {
@@ -22,7 +42,7 @@ export default async function AdminDashboard() {
   });
 
   // 2. Tüm ürünleri çek (Marka ve İsim bilgileriyle beraber)
-  const products = await prisma.product.findMany({
+  const products: ProductWithRelations[] = await prisma.product.findMany({
     include: {
       brand: true,
       locales: true, // Ürün ismini bulmak için gerekli
