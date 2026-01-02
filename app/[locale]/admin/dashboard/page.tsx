@@ -116,7 +116,7 @@ export default async function AdminDashboard() {
             <tbody className="divide-y divide-gray-200">
               {products.map((product: any) => {
                 // Türkçe ismi bulmaya çalış, yoksa ilk bulduğunu al, o da yoksa ID göster
-                const displayName = product.locales.find(l => l.locale === 'tr')?.name || product.locales[0]?.name || 'İsimsiz Ürün';
+                const displayName = product.locales.find((l: any) => l.locale === 'tr')?.name || product.locales[0]?.name || 'İsimsiz Ürün';
                 
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition">
