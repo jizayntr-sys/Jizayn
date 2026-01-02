@@ -109,5 +109,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  return [...staticEntries, ...productEntries];
+    return [...staticEntries, ...productEntries];
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    
+    // Return empty sitemap if database is unavailable during build
+    return [];
+  }
 }
