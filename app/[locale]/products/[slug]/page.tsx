@@ -70,16 +70,19 @@ export async function generateMetadata({
     ? `${productData.name}. ${productData.description?.substring(0, 120)}... El yapımı, doğal malzemelerden üretilmiş. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`
     : `${productData.name}. ${productData.description?.substring(0, 120)}... Handmade, made from natural materials. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`;
 
+  // Only add x-default for EN pages to avoid duplicate hreflang entries
+  const alternateLanguages: Record<string, string> = { ...languages };
+  if (locale === 'en' && languages['en']) {
+    alternateLanguages['x-default'] = languages['en'];
+  }
+
   return {
     title: productData?.name, // Layout otomatik olarak "| Jizayn" ekleyecektir
     description: enhancedDescription.substring(0, 160), // Meta açıklama için ideal uzunluk
     keywords: metaKeywords,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'x-default': languages['en'] || `${BASE_URL}/en/products/${productData.slug}`,
-        ...languages,
-      },
+      languages: alternateLanguages,
     },
     openGraph: {
       title: productData?.name,

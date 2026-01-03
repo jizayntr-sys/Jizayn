@@ -12,16 +12,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const ogLocale = localeMap[locale] || 'en_US';
   const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
 
+  const languages: Record<string, string> = {
+    'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
+    'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
+  };
+  
+  // Only add x-default for EN pages to avoid duplicate hreflang entries
+  if (locale === 'en') {
+    languages['x-default'] = `${BASE_URL}/en${pathnames['/contact'].en}`;
+  }
+
   return {
     title: t('title'),
     description: t('subtitle'),
     alternates: {
       canonical: `${BASE_URL}/${locale}${pathnames['/contact'][locale as 'tr' | 'en']}`,
-      languages: {
-        'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
-        'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
-        'x-default': `${BASE_URL}/en${pathnames['/contact'].en}`,
-      },
+      languages,
     },
     openGraph: {
       title: t('title'),

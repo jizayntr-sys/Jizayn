@@ -6,29 +6,43 @@ import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
-  // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
-  const pendingReviews = await prisma.productReview.findMany({
-    where: { isApproved: false },
-    include: {
-      productLocale: {
-        select: {
-          name: true,
-          locale: true,
-          slug: true
-        }
-      }
-    },
-    orderBy: { createdAt: 'desc' },
-  });
+  let pendingReviews: any[] = [];
+  let products: any[] = [];
+  let error: string | null = null;
 
-  // 2. Tüm ürünleri çek (Marka ve İsim bilgileriyle beraber)
-  const products = await prisma.product.findMany({
-    include: {
-      brand: true,
-      locales: true, // Ürün ismini bulmak için gerekli
-    },
-    orderBy: { createdAt: 'desc' },
-  });
+  try {
+    // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
+    pendingReviews = await prisma.productReview.findMany({
+      where: { isApproved: false },
+      include: {
+        productLocale: {
+          select: {
+            name: true,
+            locale: true,
+            slug: true
+          }
+        }
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('Pending reviews fetch error:', err);
+    error = 'Yorumlar yüklenirken hata oluştu';
+  }
+
+  try {
+    // 2. Tüm ürünleri çek (Marka ve İsim bilgileriyle beraber)
+    products = await prisma.product.findMany({
+      include: {
+        brand: true,
+        locales: true, // Ürün ismini bulmak için gerekli
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('Products fetch error:', err);
+    if (!error) error = 'Ürünler yüklenirken hata oluştu';
+  }
 
   return (
     <div className="pt-24 p-8 max-w-7xl mx-auto bg-gray-50 min-h-screen font-sans">
@@ -41,6 +55,13 @@ export default async function AdminDashboard() {
           + Yeni Ürün Ekle
         </Link>
       </div>
+
+      {error && (
+        <div className="mb-6 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+          <p className="font-semibold">⚠️ Hata:</p>
+          <p>{error}</p>
+        </div>
+      )}
 
       {/* --- YORUM ONAY BÖLÜMÜ --- */}
       <section className="mb-12 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -57,7 +78,12 @@ export default async function AdminDashboard() {
           <p className="text-gray-500 italic">Şu an onay bekleyen yeni yorum yok.</p>
         ) : (
           <div className="grid gap-4">
-            {pendingReviews.map((review: any) => (
+            {pendingReviews.map((review: any) => {
+              // Güvenli null kontrolü
+              const productName = review.productLocale?.name || 'Ürün Bilgisi Yok';
+              const productLocale = review.productLocale?.locale || 'N/A';
+              
+              return (
               <div key={review.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div className="flex-1">
@@ -68,7 +94,7 @@ export default async function AdminDashboard() {
                     </div>
                     <p className="text-gray-800 mb-2 bg-gray-50 p-2 rounded">{review.reviewBody}</p>
                     <p className="text-xs text-gray-500">
-                      Ürün: <span className="font-medium text-blue-600">{review.productLocale.name}</span> ({review.productLocale.locale})
+                      Ürün: <span className="font-medium text-blue-600">{productName}</span> ({productLocale})
                     </p>
                   </div>
                   
@@ -92,7 +118,8 @@ export default async function AdminDashboard() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </section>

@@ -48,16 +48,20 @@ export async function generateMetadata({
     ? 'el yapımı ahşap ürünler, ahşap dekorasyon, ahşap mobilya, doğal ahşap, dekoratif ahşap, Jizayn ürünleri, handmade wood products, wooden decoration'
     : 'handmade wood products, wooden decoration, wooden furniture, natural wood, decorative wood, Jizayn products, el yapımı ahşap';
 
+  const alternateLanguages: Record<string, string> = { ...languages };
+  
+  // Only add x-default for EN pages to avoid duplicate hreflang entries
+  if (locale === 'en') {
+    alternateLanguages['x-default'] = `${BASE_URL}/en/products`;
+  }
+
   return {
     title: pageTitle,
     description: pageDescription,
     keywords,
     alternates: {
       canonical: languages[locale],
-      languages: {
-        'x-default': `${BASE_URL}/en/products`,
-        ...languages,
-      },
+      languages: alternateLanguages,
     },
     openGraph: {
       title: pageTitle,

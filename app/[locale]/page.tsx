@@ -30,17 +30,23 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ? `${t('subtitle')} El yapımı ahşap dekorasyon ve mobilya ürünleri. Doğal malzemelerden üretilmiş, özenle tasarlanmış ahşap ürünler. Jizayn ile evinize doğallık katın.`
     : `${t('subtitle')} Handmade wooden decoration and furniture products. Carefully designed wooden products made from natural materials. Add naturalness to your home with Jizayn.`;
 
+  const languages: Record<string, string> = {
+    'en': `${BASE_URL}/en`,
+    'tr': `${BASE_URL}/tr`,
+  };
+  
+  // Only add x-default for EN pages to avoid duplicate hreflang entries
+  if (locale === 'en') {
+    languages['x-default'] = `${BASE_URL}/en`;
+  }
+
   return {
     title: t('title'),
     description,
     keywords,
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        'en': `${BASE_URL}/en`,
-        'tr': `${BASE_URL}/tr`,
-        'x-default': `${BASE_URL}/en`,
-      },
+      languages,
     },
     openGraph: {
       title: t('title'),

@@ -22,16 +22,22 @@ export async function generateMetadata({
   const pathEn = '/cookie-policy';
   const localizedPath = locale === 'tr' ? pathTr : pathEn;
 
+  const languages: Record<string, string> = {
+    'en': `${baseUrl}/en${pathEn}`,
+    'tr': `${baseUrl}/tr${pathTr}`,
+  };
+  
+  // Only add x-default for EN pages to avoid duplicate hreflang entries
+  if (locale === 'en') {
+    languages['x-default'] = `${baseUrl}/en${pathEn}`;
+  }
+
   return {
     title: t('title'),
     description: t('description'),
     alternates: {
       canonical: `${baseUrl}/${locale}${localizedPath}`,
-      languages: {
-        'en': `${baseUrl}/en${pathEn}`,
-        'tr': `${baseUrl}/tr${pathTr}`,
-        'x-default': `${baseUrl}/en${pathEn}`,
-      },
+      languages,
     },
     openGraph: {
       title: t('title'),
