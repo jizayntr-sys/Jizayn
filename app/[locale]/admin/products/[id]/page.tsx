@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { updateProduct } from '../../actions';
+import ImageUploadInput from '@/components/ImageUploadInput';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,7 +41,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <form action={updateProduct} className="space-y-6">
+        <form action={updateProduct} className="space-y-6" encType="multipart/form-data">
           <input type="hidden" name="productId" value={product.id} />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -273,19 +274,12 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
             <h3 className="text-lg font-semibold mb-4 text-gray-800">Yeni Görseller Ekle</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                <div key={num}>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Yeni Görsel {num}
-                  </label>
-                  <input
-                    type="text"
-                    name={`newImage_${num}`}
-                    placeholder="Görsel URL"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2"
-                  />
-                </div>
+                <ImageUploadInput key={num} num={num} />
               ))}
             </div>
+            <p className="mt-4 text-sm text-gray-600">
+              💡 <strong>İpucu:</strong> URL girebilir veya dosya yükleyebilirsiniz. Dosya yükleme otomatik olarak WebP formatına dönüştürülür ve optimize edilir.
+            </p>
           </div>
 
           {/* Butonlar */}

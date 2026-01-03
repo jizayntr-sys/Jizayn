@@ -46,9 +46,17 @@ export async function POST(request: NextRequest) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      // Görseli WebP formatına dönüştür ve kaydet
-      await sharp(buffer)
-        .webp({ quality: 85 }) // %85 kalite (iyi kalite/dosya boyutu dengesi)
+      // Görseli 600x600'e resize et (en-boy oranını koru) ve WebP formatına dönüştür
+      const image = sharp(buffer);
+      const metadata = await image.metadata();
+      
+      // Resmi 600x600 içine sığdır (en-boy oranını koruyarak)
+      await image
+        .resize(600, 600, {
+          fit: 'inside', // En-boy oranını koruyarak sığdır, arka plan ekleme
+          withoutEnlargement: true // Küçük resimleri büyütme
+        })
+        .webp({ quality: 85 }) // %85 kalite
         .toFile(filePath);
       
       // Public URL oluştur

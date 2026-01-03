@@ -63,13 +63,13 @@ export default function FeaturedCarousel({ products, locale }: Props) {
               href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
               className="min-w-[280px] md:min-w-[350px] snap-start group/card block bg-white/10 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:shadow-xl hover:bg-white/20 transition-all duration-300 flex-shrink-0"
             >
-              <div className="relative h-64 w-full bg-black/20 overflow-hidden">
+              <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
                 {productData.images && productData.images.length > 0 ? (
                   <Image
                     src={productData.images[0].url}
                     alt={productData.images[0].alt}
                     fill
-                    className="object-cover group-hover/card:scale-105 transition-transform duration-500"
+                    className="object-contain group-hover/card:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (

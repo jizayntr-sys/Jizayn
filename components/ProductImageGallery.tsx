@@ -73,7 +73,7 @@ export default function ProductImageGallery({
     <>
       {/* Ana Görsel */}
       <div 
-        className="relative aspect-square mb-4 bg-gray-100 rounded-lg overflow-hidden group cursor-zoom-in"
+        className="relative aspect-square mb-4 bg-gray-100 rounded-lg overflow-hidden group cursor-zoom-in flex items-center justify-center"
         onMouseEnter={() => setIsZooming(true)}
         onMouseLeave={() => setIsZooming(false)}
         onMouseMove={handleMouseMove}
@@ -89,7 +89,7 @@ export default function ProductImageGallery({
             })
           }
           fill
-          className="object-cover"
+          className="object-contain"
           sizes="(max-width: 768px) 100vw, 50vw"
           priority={selectedIndex === 0}
           loading={selectedIndex === 0 ? 'eager' : 'lazy'}
@@ -155,7 +155,7 @@ export default function ProductImageGallery({
             <button
               key={index}
               onClick={() => setSelectedIndex(index)}
-              className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+              className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all bg-gray-100 flex items-center justify-center ${
                 selectedIndex === index
                   ? 'border-wood-600 ring-2 ring-wood-200'
                   : 'border-transparent hover:border-gray-300'
@@ -171,7 +171,7 @@ export default function ProductImageGallery({
                   })
                 }
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 16vw, 8vw"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 onError={() => handleImageError(index)}

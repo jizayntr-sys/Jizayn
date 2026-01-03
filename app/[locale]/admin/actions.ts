@@ -177,7 +177,37 @@ export async function updateProduct(formData: FormData) {
     // Yeni görseller ekle
     for (let i = 1; i <= 8; i++) {
       const newImageUrl = formData.get(`newImage_${i}`) as string;
-      if (newImageUrl && newImageUrl.trim()) {
+      const newImageAlt = formData.get(`newImage_${i}_alt`) as string;
+      const newImageOrder = formData.get(`newImage_${i}_order`) as string;
+      const newImageFile = formData.get(`newImageFile_${i}`) as File;
+      
+      let finalUrl = '';
+      
+      // Dosya yükleme varsa
+      if (newImageFile && newImageFile.size > 0) {
+        try {
+          const uploadFormData = new FormData();
+          uploadFormData.append('files', newImageFile);
+          
+          const uploadResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/upload`, {
+            method: 'POST',
+            body: uploadFormData,
+          });
+          
+          if (uploadResponse.ok) {
+            const uploadResult = await uploadResponse.json();
+            finalUrl = uploadResult.urls?.[0] || '';
+          }
+        } catch (uploadError) {
+          console.error('Dosya yükleme hatası:', uploadError);
+        }
+      } 
+      // URL girişi varsa
+      else if (newImageUrl && newImageUrl.trim() && !newImageUrl.startsWith('Yükleniyor:')) {
+        finalUrl = newImageUrl.trim();
+      }
+      
+      if (finalUrl) {
         // Mevcut görsel sayısını öğren
         const existingImagesCount = await prisma.productImage.count({
           where: { productLocaleId: trLocale.id },
@@ -186,10 +216,10 @@ export async function updateProduct(formData: FormData) {
         await prisma.productImage.create({
           data: {
             productLocaleId: trLocale.id,
-            url: newImageUrl.trim(),
-            alt: `${nameTr} - Görsel ${existingImagesCount + 1}`,
+            url: finalUrl,
+            alt: newImageAlt?.trim() || `${nameTr} - Görsel ${existingImagesCount + 1}`,
             pinterestDescription: nameTr,
-            order: existingImagesCount,
+            order: newImageOrder ? parseInt(newImageOrder) : existingImagesCount,
           },
         });
       }

@@ -254,7 +254,7 @@ export default async function ProductsPage({
                 href={{ pathname: '/products/[slug]', params: { slug: productData.slug } } as any}
                 className="group block border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white"
               >
-                <div className="relative h-64 w-full bg-white overflow-hidden flex items-center justify-center">
+                <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
                   {productData.images && productData.images.length > 0 ? (
                     <Image
                       src={productData.images[0].url}

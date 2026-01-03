@@ -148,10 +148,10 @@ export default function ProductGallery({ images }: { images: ProductImage[] }) {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-2xl mx-auto">
       {/* Ana Görsel */}
         <div 
-          className="relative h-64 sm:h-80 md:h-[500px] w-full bg-gray-100 rounded-xl overflow-hidden border border-gray-100 cursor-zoom-in group"
+          className="relative aspect-square w-full bg-gray-100 rounded-xl overflow-hidden border border-gray-100 cursor-zoom-in group"
           onClick={() => setIsModalOpen(true)}
         >
         {selectedImage && (
