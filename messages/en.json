@@ -123,8 +123,52 @@
         "title": "Technical Specifications",
         "dimensions": "Dimensions",
         "materials": "Materials",
-        "sku": "SKU"
-      }
+        "sku": "SKU"      },
+      "usage": {
+        "title": "Usage and Care Instructions",
+        "care": "Regular care is important for the longevity of your products. Wipe with a soft, dry cloth. Do not use chemical cleaners. Keep away from direct sunlight. Avoid excessive moisture exposure.",
+        "cleaning": "Use only a damp cloth for cleaning. Hard brushes can damage the wood surface. Address stains immediately. Nourish with natural oil once a year.",
+        "placement": "Place the product on a level surface. Keep at least 1 meter away from heat sources (radiators, stoves). Wood is sensitive to temperature changes. Humidity between 40-60% is ideal."
+      },
+      "features": {
+        "title": "Product Features",
+        "handmade": "Handmade, carefully crafted",
+        "natural": "100% natural wood material",
+        "unique": "Each piece has unique natural grain",
+        "durable": "Long-lasting and durable construction",
+        "ecofriendly": "Eco-friendly production",
+        "quality": "First-class workmanship quality"
+      },
+      "shipping": {
+        "title": "Shipping and Delivery",
+        "info": "All orders are carefully packaged and shipped within 2-5 business days. Free shipping on orders over 1000 TRY. Your product arrives undamaged with special packaging."
+      },
+      "commonFaqs": {
+        "title": "Frequently Asked Questions",
+        "q1": {
+          "question": "Are the products really handmade?",
+          "answer": "Yes, all our products are handmade by master carpenters in our workshop. Each product is carefully crafted and quality controlled."
+        },
+        "q2": {
+          "question": "What types of wood are used?",
+          "answer": "We use quality wood types such as oak, walnut, beech and pine in our products. Each wood has its own unique texture and color."
+        },
+        "q3": {
+          "question": "Can I order custom sizes?",
+          "answer": "Yes, we produce custom-sized and designed products. You can contact us through our contact page."
+        },
+        "q4": {
+          "question": "Are the products waterproof?",
+          "answer": "Our products are treated with natural oils but are not waterproof. Avoid contact with water and do not use in humid environments."
+        },
+        "q5": {
+          "question": "How long does shipping take?",
+          "answer": "Products in stock are shipped within 2-5 business days. Delivery time for custom orders is 2-4 weeks."
+        },
+        "q6": {
+          "question": "Can I return or exchange?",
+          "answer": "You can return/exchange within 14 days after receiving the product if it is unused and in its original packaging. Please review the terms of use for details."
+        }      }
     }
   },
   "home": {

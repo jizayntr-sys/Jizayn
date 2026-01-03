@@ -497,6 +497,117 @@ export default async function ProductDetailPage({
       </div>
       </div>
 
+      {/* Kullanım ve Bakım Bölümü */}
+      <div className="container mx-auto px-4 mt-16">
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-8 md:p-12 border border-amber-100">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+            <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            {t('reviews.usage.title')}
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-2xl">🧼</span>
+                Temizlik
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('reviews.usage.cleaning')}
+              </p>
+            </div>
+            
+            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-2xl">🛡️</span>
+                Bakım
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('reviews.usage.care')}
+              </p>
+            </div>
+            
+            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-2xl">📍</span>
+                Yerleştirme
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('reviews.usage.placement')}
+              </p>
+            </div>
+          </div>
+
+          {/* Ürün Özellikleri */}
+          <div className="mt-10 pt-8 border-t border-amber-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">{t('reviews.features.title')}</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.handmade')}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.natural')}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.unique')}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.durable')}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.ecofriendly')}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <span className="text-green-600 text-xl">✓</span>
+                <span className="text-sm">{t('reviews.features.quality')}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Kargo Bilgisi */}
+          <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-xl">
+            <h3 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
+              <span className="text-xl">🚚</span>
+              {t('reviews.shipping.title')}
+            </h3>
+            <p className="text-blue-800 text-sm leading-relaxed">
+              {t('reviews.shipping.info')}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Bölümü */}
+      <div className="container mx-auto px-4 mt-16">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            {t('reviews.commonFaqs.title')}
+          </h2>
+          
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <details key={num} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-indigo-200 transition-all">
+                <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>{t(`reviews.commonFaqs.q${num}.question`)}</span>
+                  <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                  {t(`reviews.commonFaqs.q${num}.answer`)}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Müşteri Yorumları Bölümü */}
       <div className="container mx-auto px-4 mt-24 pt-12 border-t border-gray-100">
         <ProductReviews 

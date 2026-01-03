@@ -123,6 +123,52 @@
         "dimensions": "Boyutlar",
         "materials": "Malzemeler",
         "sku": "SKU"
+      },
+      "usage": {
+        "title": "Kullanım ve Bakım Önerileri",
+        "care": "Ürünlerinizin uzun ömürlü olması için düzenli bakım önemlidir. Yumuşak ve kuru bir bez ile silin. Kimyasal temizleyiciler kullanmayın. Direkt güneş ışığından uzak tutun. Aşırı neme maruz bırakmayın.",
+        "cleaning": "Temizlik için sadece nemli bez kullanın. Sert fırçalar ahşap yüzeye zarar verebilir. Leke için hemen müdahale edin. Yılda bir kez doğal yağla besleyin.",
+        "placement": "Ürünü dengeli bir yüzeye yerleştirin. Isı kaynaklarından (kalorifer, soba) en az 1 metre uzakta tutun. Ahşap, sıcaklık değişimlerine duyarlıdır. Nem oranı %40-60 arası ideal ortamdır."
+      },
+      "features": {
+        "title": "Ürün Özellikleri",
+        "handmade": "El yapımı, özenle işlenmiş",
+        "natural": "100% doğal ahşap malzeme",
+        "unique": "Her ürün benzersiz doğal desenlidir",
+        "durable": "Uzun ömürlü ve dayanıklı yapı",
+        "ecofriendly": "Çevre dostu üretim",
+        "quality": "Birinci sınıf işçilik kalitesi"
+      },
+      "shipping": {
+        "title": "Kargo ve Teslimat",
+        "info": "Tüm siparişler özenle paketlenir ve 2-5 iş günü içinde kargoya verilir. Ücretsiz kargo 1000 TL üzeri siparişlerde geçerlidir. Özel paketleme ile ürününüz hasarsız ulaşır."
+      },
+      "commonFaqs": {
+        "title": "Sıkça Sorulan Sorular",
+        "q1": {
+          "question": "Ürünler gerçekten el yapımı mı?",
+          "answer": "Evet, tüm ürünlerimiz atölyemizde usta marangozlar tarafından el yapımıdır. Her ürün özenle işlenir ve kalite kontrolünden geçer."
+        },
+        "q2": {
+          "question": "Hangi ahşap türleri kullanılıyor?",
+          "answer": "Ürünlerimizde meşe, ceviz, kayın ve çam gibi kaliteli ahşap türleri kullanılır. Her ahşabın kendine özgü dokusu ve rengi vardır."
+        },
+        "q3": {
+          "question": "Özel ölçülerde sipariş verebilir miyim?",
+          "answer": "Evet, kişiye özel ölçülerde ve tasarımlarda ürün üretimi yapıyoruz. İletişim sayfamızdan bize ulaşabilirsiniz."
+        },
+        "q4": {
+          "question": "Ürünler su geçirmez mi?",
+          "answer": "Ürünlerimiz doğal yağlar ile emprenye edilir ancak su geçirmez değildir. Su ile temas ettirmekten kaçının, nemli ortamlarda kullanmayın."
+        },
+        "q5": {
+          "question": "Kargo süresi ne kadar?",
+          "answer": "Stokta bulunan ürünler 2-5 iş günü içinde kargoya verilir. Özel siparişler için teslimat süresi 2-4 hafta arasındadır."
+        },
+        "q6": {
+          "question": "İade ve değişim yapabilir miyim?",
+          "answer": "Ürün teslim aldıktan sonra 14 gün içinde, kullanılmamış ve orijinal ambalajında ise iade/değişim yapabilirsiniz. Detaylar için kullanım koşullarını inceleyin."
+        }
       }
     }
   },
