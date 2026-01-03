@@ -207,9 +207,12 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           {trLocale && trLocale.images.length > 0 && (
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4 text-gray-800">Mevcut Görseller</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                💡 <strong>Order değeri en küçük olan resim</strong> ürün listesinde önizleme olarak gösterilir. (0 = İlk resim, 1 = İkinci resim, vs.)
+              </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {trLocale.images.map((img: any, index: number) => (
-                  <div key={img.id} className="space-y-2">
+                  <div key={img.id} className="space-y-2 border border-gray-200 rounded-lg p-3 bg-white">
                     <div className="relative aspect-square">
                       <Image
                         src={img.url}
@@ -217,12 +220,34 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
                         fill
                         className="object-cover rounded-lg"
                       />
+                      {img.order === 0 && (
+                        <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                          Önizleme
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Order (Sıra)</label>
+                      <input
+                        type="number"
+                        name={`existingImage_${index}_order`}
+                        defaultValue={img.order}
+                        min="0"
+                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm font-semibold text-center"
+                      />
                     </div>
                     <input
                       type="text"
                       name={`existingImage_${index}_url`}
                       defaultValue={img.url}
                       placeholder="Görsel URL"
+                      className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
+                    />
+                    <input
+                      type="text"
+                      name={`existingImage_${index}_alt`}
+                      defaultValue={img.alt}
+                      placeholder="Alt Text"
                       className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
                     />
                     <div className="flex items-center gap-2">

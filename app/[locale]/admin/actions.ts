@@ -151,6 +151,8 @@ export async function updateProduct(formData: FormData) {
     while (formData.has(`existingImage_${index}_id`)) {
       const imageId = formData.get(`existingImage_${index}_id`) as string;
       const imageUrl = formData.get(`existingImage_${index}_url`) as string;
+      const imageAlt = formData.get(`existingImage_${index}_alt`) as string;
+      const imageOrder = formData.get(`existingImage_${index}_order`) as string;
       const shouldDelete = formData.get(`existingImage_${index}_delete`) === 'on';
       
       if (shouldDelete) {
@@ -159,12 +161,13 @@ export async function updateProduct(formData: FormData) {
           where: { id: imageId },
         });
       } else if (imageUrl && imageUrl.trim()) {
-        // Görseli güncelle
+        // Görseli güncelle (url, alt ve order)
         await prisma.productImage.update({
           where: { id: imageId },
           data: {
             url: imageUrl.trim(),
-            alt: `${nameTr} - Görsel ${index + 1}`,
+            alt: imageAlt?.trim() || `${nameTr} - Görsel ${index + 1}`,
+            order: imageOrder ? parseInt(imageOrder) : index,
           },
         });
       }
