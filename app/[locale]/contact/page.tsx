@@ -44,7 +44,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   return (
     <div className="bg-white">
       {/* Header Section */}
-      <div className="bg-gray-900 py-20 text-center text-white">
+      <div className="bg-gray-900 pt-28 pb-20 text-center text-white">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">{t('subtitle')}</p>
