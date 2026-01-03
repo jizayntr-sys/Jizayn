@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-// GET /api/products/slug/[locale]/[slug] - Locale ve slug ile ürün getir
+// GET /api/products/slug/[locale]/[slug] - Locale ve slug ile ürün getir + tüm dillerdeki slug'ları döndür
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ locale: string; slug: string }> }
@@ -20,6 +20,12 @@ export async function GET(
         product: {
           include: {
             brand: true,
+            locales: {
+              select: {
+                locale: true,
+                slug: true,
+              },
+            },
           },
         },
         images: {
@@ -43,7 +49,16 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({ productLocale }, { status: 200 });
+    // Tüm dillerdeki slug'ları bir map olarak hazırla
+    const slugs = productLocale.product.locales.reduce((acc, locale) => {
+      acc[locale.locale] = locale.slug;
+      return acc;
+    }, {} as Record<string, string>);
+
+    return NextResponse.json({ 
+      productLocale,
+      slugs, // { tr: 'slug-tr', en: 'slug-en', ... }
+    }, { status: 200 });
   } catch (error) {
     console.error('Product by slug GET error:', error);
     return NextResponse.json(

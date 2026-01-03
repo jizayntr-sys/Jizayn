@@ -54,14 +54,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg">
-             <Image
-               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-               alt="About Jizayn"
-               fill
-               className="object-cover"
-               sizes="(max-width: 768px) 100vw, 50vw"
-             />
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
+             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+               <span className="text-6xl">🏗️</span>
+             </div>
           </div>
           <div className="space-y-8">
             <div>
@@ -78,26 +74,18 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <p className="text-lg text-gray-600 leading-relaxed">{t('content.p2')}</p>
             </div>
           </div>
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2">
-             <Image
-               src="https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=2070&auto=format&fit=crop"
-               alt="Wooden Workshop"
-               fill
-               className="object-cover"
-               sizes="(max-width: 768px) 100vw, 50vw"
-             />
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-amber-100 to-orange-100">
+             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+               <span className="text-6xl">🪵</span>
+             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg">
-             <Image
-               src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=2070&auto=format&fit=crop"
-               alt="Natural Wood Products"
-               fill
-               className="object-cover"
-               sizes="(max-width: 768px) 100vw, 50vw"
-             />
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
+             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+               <span className="text-6xl">🌳</span>
+             </div>
           </div>
           <div className="space-y-8">
             <div>

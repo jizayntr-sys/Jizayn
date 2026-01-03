@@ -5,7 +5,6 @@ import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
 import { useLocale } from 'next-intl';
 import { ChangeEvent, useTransition } from 'react';
-// Note: products import removed - LanguageSwitcher uses pathname-based slug detection
 
 const languageNames: Record<string, string> = {
   tr: 'TR',
@@ -30,53 +29,52 @@ export default function LanguageSwitcher({ id = 'language-switcher' }: LanguageS
   const currentLocale = useLocale();
   const [isPending, startTransition] = useTransition();
 
-  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleLanguageChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
     
-    startTransition(() => {
-      // Ürün detay sayfası kontrolü
-      // usePathname() next-intl'den canonical pathname döndürür: /products/[slug] formatında
-      // Ama gerçek URL'de locale'e göre farklı olabilir (/tr/urunler/slug veya /en/products/slug)
-      // Bu yüzden hem canonical pathname'i hem de gerçek URL'i kontrol ediyoruz
-      const isProductDetailPage = 
-        (pathname.startsWith('/products/') && pathname !== '/products') ||
-        (typeof window !== 'undefined' && (
-          window.location.pathname.includes('/products/') || 
-          window.location.pathname.includes('/urunler/')
-        ));
+    // Ürün detay sayfası kontrolü
+    const isProductDetailPage = 
+      (pathname.startsWith('/products/') && pathname !== '/products') ||
+      (typeof window !== 'undefined' && (
+        window.location.pathname.includes('/products/') || 
+        window.location.pathname.includes('/urunler/')
+      ));
+    
+    if (isProductDetailPage && typeof window !== 'undefined') {
+      // Mevcut slug'ı bul
+      const pathParts = window.location.pathname.split('/');
+      const productsIndex = pathParts.findIndex(p => p === 'products' || p === 'urunler');
       
-      if (isProductDetailPage) {
-        // Slug'ı bul: önce gerçek URL'den, yoksa canonical pathname'den
-        let currentSlug: string | undefined;
+      if (productsIndex !== -1 && pathParts[productsIndex + 1]) {
+        const currentSlug = pathParts[productsIndex + 1];
         
-        if (typeof window !== 'undefined') {
-          const pathParts = window.location.pathname.split('/');
-          // URL formatı: /[locale]/products/[slug] veya /[locale]/urunler/[slug]
-          const productsIndex = pathParts.findIndex(p => p === 'products' || p === 'urunler');
-          if (productsIndex !== -1 && pathParts[productsIndex + 1]) {
-            currentSlug = pathParts[productsIndex + 1];
+        try {
+          // API'den ürünün tüm dillerdeki slug'larını al
+          const response = await fetch(`/api/products/slug/${currentLocale}/${currentSlug}`);
+          if (response.ok) {
+            const data = await response.json();
+            const newSlug = data.slugs?.[newLocale];
+            
+            if (newSlug) {
+              // Yeni locale için ürün detay sayfasına yönlendir
+              const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
+              window.location.href = `/${newLocale}${productsPath}/${newSlug}`;
+              return;
+            }
           }
+        } catch (error) {
+          console.error('Failed to load product slugs:', error);
         }
         
-        // Eğer gerçek URL'den bulamadıysak, canonical pathname'den al
-        if (!currentSlug) {
-          currentSlug = pathname.split('/').pop();
-        }
-        
-        if (currentSlug) {
-          // Slug-based language switching removed - using pathname-based approach
-          // For products, we'll redirect to the products page in the new locale
-          // The user can navigate to the specific product from there
-          const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
-          const newUrl = `/${newLocale}${productsPath}`;
-          setTimeout(() => {
-            window.location.href = newUrl;
-          }, 0);
-          return;
-        }
+        // Slug bulunamadıysa veya hata olursa, ürünler sayfasına yönlendir
+        const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
+        window.location.href = `/${newLocale}${productsPath}`;
+        return;
       }
-      
-      // Diğer sayfalar için normal yönlendirme
+    }
+    
+    // Diğer sayfalar için normal yönlendirme
+    startTransition(() => {
       router.replace(pathname as any, { locale: newLocale });
     });
   };

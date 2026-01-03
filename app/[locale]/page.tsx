@@ -127,10 +127,11 @@ export default async function HomePage() {
 
       {/* Hero Section Content */}
       <section id="hero" className="relative z-10 h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        <h1 className="sr-only">{t('hero.title')}</h1>
         {/* İçerik */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center text-white">
           <FadeIn>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight drop-shadow-lg px-2">
+            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight drop-shadow-lg px-2" role="heading" aria-level={1}>
               {(() => {
                 const title = t('hero.title');
                 // Kelimelere ayır, boşlukları ve noktalama işaretlerini koru
@@ -152,7 +153,7 @@ export default async function HomePage() {
                   );
                 });
               })()}
-            </h1>
+            </div>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-10 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md px-2">
               {t('hero.subtitle')}
             </p>

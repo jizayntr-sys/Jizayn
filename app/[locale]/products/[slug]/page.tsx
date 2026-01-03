@@ -76,8 +76,21 @@ export async function generateMetadata({
     'x-default': languages['en'] || `${BASE_URL}/en/products/${slug}`,
   };
 
+  // Enhanced title with category and key details for better SEO
+  const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
+  const categoryTranslationKey = `categories.${product.category}` as any;
+  const categoryName = tProducts(categoryTranslationKey);
+  
+  // Extract first material for title enhancement
+  const firstMaterial = productData.materials ? productData.materials.split(',')[0].trim() : '';
+  
+  // Build an SEO-optimized title with category and material info
+  const seoTitle = locale === 'tr'
+    ? `${productData.name} - ${categoryName}${firstMaterial ? ` | ${firstMaterial}` : ' | El Yapımı Ahşap'}`
+    : `${productData.name} - ${categoryName}${firstMaterial ? ` | ${firstMaterial}` : ' | Handmade Wood'}`;
+
   return {
-    title: productData?.name, // Layout otomatik olarak "| Jizayn" ekleyecektir
+    title: seoTitle.length > 60 ? productData?.name : seoTitle, // Layout otomatik olarak "| Jizayn" ekleyecektir
     description: enhancedDescription.substring(0, 160), // Meta açıklama için ideal uzunluk
     keywords: metaKeywords,
     alternates: {
@@ -511,7 +524,7 @@ export default async function ProductDetailPage({
             <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="text-2xl">🧼</span>
-                Temizlik
+                {t('reviews.usage.cleaningTitle')}
               </h3>
               <p className="text-gray-700 leading-relaxed text-sm">
                 {t('reviews.usage.cleaning')}
@@ -521,7 +534,7 @@ export default async function ProductDetailPage({
             <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="text-2xl">🛡️</span>
-                Bakım
+                {t('reviews.usage.careTitle')}
               </h3>
               <p className="text-gray-700 leading-relaxed text-sm">
                 {t('reviews.usage.care')}
@@ -531,7 +544,7 @@ export default async function ProductDetailPage({
             <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="text-2xl">📍</span>
-                Yerleştirme
+                {t('reviews.usage.placementTitle')}
               </h3>
               <p className="text-gray-700 leading-relaxed text-sm">
                 {t('reviews.usage.placement')}

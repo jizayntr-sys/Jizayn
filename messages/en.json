@@ -126,6 +126,9 @@
         "sku": "SKU"      },
       "usage": {
         "title": "Usage and Care Instructions",
+        "cleaningTitle": "Cleaning",
+        "careTitle": "Care",
+        "placementTitle": "Placement",
         "care": "Regular care is important for the longevity of your products. Wipe with a soft, dry cloth. Do not use chemical cleaners. Keep away from direct sunlight. Avoid excessive moisture exposure.",
         "cleaning": "Use only a damp cloth for cleaning. Hard brushes can damage the wood surface. Address stains immediately. Nourish with natural oil once a year.",
         "placement": "Place the product on a level surface. Keep at least 1 meter away from heat sources (radiators, stoves). Wood is sensitive to temperature changes. Humidity between 40-60% is ideal."

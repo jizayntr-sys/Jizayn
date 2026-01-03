@@ -126,6 +126,9 @@
       },
       "usage": {
         "title": "Kullanım ve Bakım Önerileri",
+        "cleaningTitle": "Temizlik",
+        "careTitle": "Bakım",
+        "placementTitle": "Yerleştirme",
         "care": "Ürünlerinizin uzun ömürlü olması için düzenli bakım önemlidir. Yumuşak ve kuru bir bez ile silin. Kimyasal temizleyiciler kullanmayın. Direkt güneş ışığından uzak tutun. Aşırı neme maruz bırakmayın.",
         "cleaning": "Temizlik için sadece nemli bez kullanın. Sert fırçalar ahşap yüzeye zarar verebilir. Leke için hemen müdahale edin. Yılda bir kez doğal yağla besleyin.",
         "placement": "Ürünü dengeli bir yüzeye yerleştirin. Isı kaynaklarından (kalorifer, soba) en az 1 metre uzakta tutun. Ahşap, sıcaklık değişimlerine duyarlıdır. Nem oranı %40-60 arası ideal ortamdır."
