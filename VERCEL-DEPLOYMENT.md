@@ -45,7 +45,34 @@ Vercel dashboard'da şu environment variable'ları ayarlayın:
 - DATABASE_URL ekleyin
 - Redeploy yapın
 
+### Dashboard Shows "Server Component Error"
+1. **Vercel Logs'u kontrol edin**:
+   - Vercel Dashboard > Deployments > Latest > Function Logs
+   - Error detaylarını görün
+
+2. **DATABASE_URL format kontrolü**:
+   ```
+   # Doğru format (Supabase pooler)
+   postgresql://postgres:[password]@[host]:6543/postgres?pgbouncer=true&connection_limit=1
+   
+   # YANLIŞ (Direct connection - production'da çalışmaz)
+   postgresql://postgres:[password]@[host]:5432/postgres
+   ```
+
+3. **Prisma Client Generation**:
+   - Vercel build logs'da "✔ Generated Prisma Client" mesajını görmelisiniz
+   - Görmüyorsanız, `vercel.json` buildCommand'i kontrol edin
+
+4. **Function Timeout**:
+   - `vercel.json`'da maxDuration artırıldı (30 saniye)
+   - Pro plan gerektirebilir
+
 ### IPv6 Connection Issues
 - Supabase connection pooling kullanın (pgbouncer=true)
 - Direct connection yerine pooled connection kullanın
 - Connection limit ekleyin
+
+### "Cannot find module for page" Error
+- Tüm dosyaların commit edildiğinden emin olun
+- `git push origin main` ile son değişiklikleri gönderin
+- Vercel'de yeniden deploy edin
