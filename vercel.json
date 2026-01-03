@@ -1,16 +1,5 @@
 {
-  "buildCommand": "prisma generate && next build",
-  "installCommand": "npm install",
-  "framework": "nextjs",
   "regions": ["fra1"],
-  "functions": {
-    "app/[locale]/admin/dashboard/page.tsx": {
-      "maxDuration": 30
-    },
-    "app/api/**/*.ts": {
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",

@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 // Sayfanın her istekte sunucuda yeniden derlenmesini sağlar (Dinamik veri için)
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30; // Vercel serverless function timeout (saniye)
 
 export default async function AdminDashboard() {
   let pendingReviews: any[] = [];
