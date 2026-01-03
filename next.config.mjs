@@ -82,39 +82,73 @@ const nextConfig = {
         source: '/:path*',
         headers: securityHeaders,
       },
+      // Next.js static assets (JS, CSS) - 1 yıl cache
       {
         source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600, must-revalidate',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
+      // Resimler - 1 ay cache
       {
         source: '/images/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600, must-revalidate',
+            value: 'public, max-age=2592000, immutable',
           },
         ],
       },
+      // Public klasöründeki statik dosyalar - 1 ay cache
+      {
+        source: '/uploads/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, immutable',
+          },
+        ],
+      },
+      // Logo - 1 ay cache
       {
         source: '/JizaynLogo.svg',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=86400, must-revalidate',
+            value: 'public, max-age=2592000, immutable',
           },
         ],
       },
+      // Favicon ve manifest - 1 hafta cache
+      {
+        source: '/:path*.(ico|png|webmanifest)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
+          },
+        ],
+      },
+      // Font dosyaları - 1 yıl cache (değişmezler)
       {
         source: '/:path*.(woff|woff2|ttf|eot)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // HTML sayfalar - 5 dakika cache, CDN'de 1 saat stale-while-revalidate
+      {
+        source: '/:locale/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
           },
         ],
       },
