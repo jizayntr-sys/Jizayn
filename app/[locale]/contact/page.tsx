@@ -15,12 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const languages: Record<string, string> = {
     'en': `${BASE_URL}/en${pathnames['/contact'].en}`,
     'tr': `${BASE_URL}/tr${pathnames['/contact'].tr}`,
+    'x-default': `${BASE_URL}/en${pathnames['/contact'].en}`,
   };
-  
-  // Only add x-default for EN pages to avoid duplicate hreflang entries
-  if (locale === 'en') {
-    languages['x-default'] = `${BASE_URL}/en${pathnames['/contact'].en}`;
-  }
 
   return {
     title: t('title'),

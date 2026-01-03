@@ -70,11 +70,11 @@ export async function generateMetadata({
     ? `${productData.name}. ${productData.description?.substring(0, 120)}... El yapımı, doğal malzemelerden üretilmiş. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`
     : `${productData.name}. ${productData.description?.substring(0, 120)}... Handmade, made from natural materials. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`;
 
-  // Only add x-default for EN pages to avoid duplicate hreflang entries
-  const alternateLanguages: Record<string, string> = { ...languages };
-  if (locale === 'en' && languages['en']) {
-    alternateLanguages['x-default'] = languages['en'];
-  }
+  // x-default her zaman EN versiyonunu göstermeli
+  const alternateLanguages: Record<string, string> = { 
+    ...languages,
+    'x-default': languages['en'] || `${BASE_URL}/en/products/${slug}`,
+  };
 
   return {
     title: productData?.name, // Layout otomatik olarak "| Jizayn" ekleyecektir
