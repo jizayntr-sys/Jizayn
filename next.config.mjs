@@ -1,11 +1,27 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import bundleAnalyzer from '@next/bundle-analyzer';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  
+  // Optimize production bundles
+  productionBrowserSourceMaps: false,
+  
+  // Enable SWC minification
+  swcMinify: true,
+  
+  // Optimize chunks
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
   
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -156,4 +172,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default withBundleAnalyzer(withNextIntl(nextConfig));
