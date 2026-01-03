@@ -2,14 +2,16 @@ import { prisma } from '@/lib/prisma';
 import { approveReview, deleteReview, deleteProduct } from '../actions';
 import Link from 'next/link';
 
-// Sayfanın her istekte sunucuda yeniden derlenmesini sağlar (Dinamik veri için)
+// Route Segment Config - Vercel Serverless için
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-export const maxDuration = 30; // Vercel serverless function timeout (saniye)
+export const maxDuration = 30;
 
 export default async function AdminDashboard() {
   let pendingReviews: any[] = [];
   let products: any[] = [];
   let error: string | null = null;
+  let errorDetails: string | null = null;
 
   try {
     // 1. Onay bekleyen yorumları çek (İlişkili ürün bilgisiyle beraber)
@@ -27,8 +29,11 @@ export default async function AdminDashboard() {
       orderBy: { createdAt: 'desc' },
     });
   } catch (err) {
-    console.error('Pending reviews fetch error:', err);
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Pending reviews fetch error:', errorMessage);
+    console.error('Full error:', err);
     error = 'Yorumlar yüklenirken hata oluştu';
+    errorDetails = errorMessage;
   }
 
   try {
@@ -41,8 +46,13 @@ export default async function AdminDashboard() {
       orderBy: { createdAt: 'desc' },
     });
   } catch (err) {
-    console.error('Products fetch error:', err);
-    if (!error) error = 'Ürünler yüklenirken hata oluştu';
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Products fetch error:', errorMessage);
+    console.error('Full error:', err);
+    if (!error) {
+      error = 'Ürünler yüklenirken hata oluştu';
+      errorDetails = errorMessage;
+    }
   }
 
   return (
@@ -61,6 +71,14 @@ export default async function AdminDashboard() {
         <div className="mb-6 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">
           <p className="font-semibold">⚠️ Hata:</p>
           <p>{error}</p>
+          {errorDetails && (
+            <details className="mt-2">
+              <summary className="cursor-pointer text-sm">Detaylar</summary>
+              <pre className="mt-2 text-xs bg-red-50 p-2 rounded overflow-auto">
+                {errorDetails}
+              </pre>
+            </details>
+          )}
         </div>
       )}
 
