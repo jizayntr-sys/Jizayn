@@ -22,8 +22,16 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Admin olmayan sayfalar için next-intl middleware'ini çalıştır (locale prefix ekler)
-  return intlMiddleware(request);
+  // Admin olmayan sayfalar için next-intl middleware'ini çalıştır
+  const response = intlMiddleware(request);
+  
+  // HTTP Link header'larını kaldır (duplicate hreflang önleme)
+  // HTML'de zaten <link rel="alternate" hreflang> var
+  if (response.headers.has('Link')) {
+    response.headers.delete('Link');
+  }
+  
+  return response;
 }
 
 export const config = {
