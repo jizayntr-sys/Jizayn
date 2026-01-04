@@ -327,8 +327,10 @@ export async function createProduct(formData: FormData) {
         isFeatured,
         sortOrder,
         tags: [],
+        updatedAt: new Date(), // <--- Bu satırın olduğundan %100 emin olun
       },
     });
+
 
     // TR Locale oluştur
     const nameTr = formData.get('name_tr') as string;
@@ -339,6 +341,7 @@ export async function createProduct(formData: FormData) {
 
     const trLocale = await prisma.productLocale.create({
       data: {
+        id: crypto.randomUUID(),
         productId: product.id,
         locale: 'tr',
         slug: sanitizedSlugTr,
@@ -359,6 +362,8 @@ export async function createProduct(formData: FormData) {
         metaTitle: nameTr,
         metaDescription: descriptionTr.substring(0, 160),
         metaKeywords: [],
+        createdAt: now,
+        updatedAt: now,
       },
     });
 
@@ -400,6 +405,7 @@ export async function createProduct(formData: FormData) {
 
     const enLocale = await prisma.productLocale.create({
       data: {
+        id: crypto.randomUUID(),
         productId: product.id,
         locale: 'en',
         slug: sanitizedSlugEn,
@@ -420,6 +426,8 @@ export async function createProduct(formData: FormData) {
         metaTitle: nameEn,
         metaDescription: descriptionEn.substring(0, 160),
         metaKeywords: [],
+        createdAt: now,
+        updatedAt: now,
       },
     });
 
