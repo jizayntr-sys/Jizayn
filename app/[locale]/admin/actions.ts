@@ -362,10 +362,11 @@ export async function createProduct(formData: FormData) {
         metaTitle: nameTr,
         metaDescription: descriptionTr.substring(0, 160),
         metaKeywords: [],
-        createdAt: now,
-        updatedAt: now,
+        createdAt: new Date(), // 'now' yerine bunu kullanın
+        updatedAt: new Date(), // 'now' yerine bunu kullanın
       },
     });
+
 
     // Görselleri ekle (8 adete kadar)
     for (let i = 1; i <= 8; i++) {
