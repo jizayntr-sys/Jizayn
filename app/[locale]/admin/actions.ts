@@ -3,6 +3,66 @@
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { translateText, getLanguageCode } from '@/lib/translate';
+
+// TR'deki resimleri diğer tüm locale'lere kopyala (alt text'leri çevirerek)
+async function copyImagesToAllLocales(productId: string) {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: {
+      locales: {
+        include: {
+          images: { orderBy: { order: 'asc' } }
+        }
+      }
+    }
+  });
+
+  if (!product) return;
+
+  const trLocale = product.locales.find(l => l.locale === 'tr');
+  if (!trLocale || !trLocale.images || trLocale.images.length === 0) return;
+
+  const otherLocales = product.locales.filter(l => l.locale !== 'tr');
+
+  for (const locale of otherLocales) {
+    // Mevcut resimleri sil
+    await prisma.productImage.deleteMany({
+      where: { productLocaleId: locale.id }
+    });
+
+    // TR'deki resimleri kopyala ve alt text'leri çevir
+    for (const image of trLocale.images) {
+      const targetLang = getLanguageCode(locale.locale);
+      
+      // Alt text'i çevir
+      const translatedAlt = await translateText({
+        text: image.alt,
+        from: 'tr',
+        to: targetLang
+      });
+
+      // Pinterest description'ı çevir (varsa)
+      const translatedPinterest = image.pinterestDescription 
+        ? await translateText({
+            text: image.pinterestDescription,
+            from: 'tr',
+            to: targetLang
+          })
+        : null;
+
+      await prisma.productImage.create({
+        data: {
+          productLocaleId: locale.id,
+          url: image.url,
+          alt: translatedAlt,
+          pinterestDescription: translatedPinterest,
+          order: image.order
+        }
+      });
+    }
+  }
+}
 
 // Yorum Onaylama
 export async function approveReview(reviewId: string) {
@@ -229,6 +289,14 @@ export async function updateProduct(formData: FormData) {
     throw new Error('Ürün güncellenemedi.');
   }
 
+  // TR'deki resimleri diğer tüm dillere otomatik kopyala
+  try {
+    await copyImagesToAllLocales(productId);
+  } catch (copyError) {
+    console.error('Resimler kopyalanırken hata:', copyError);
+    // Resim kopyalama hatası ürün güncellemeyi etkilemesin
+  }
+
   revalidatePath('/[locale]/admin/dashboard', 'page');
   redirect('/tr/admin/dashboard');
 }
@@ -328,6 +396,9 @@ export async function createProduct(formData: FormData) {
         },
       });
     }
+
+    // TR'deki resimleri diğer tüm dillere otomatik kopyala
+    await copyImagesToAllLocales(product.id);
 
   } catch (error) {
     console.error('Ürün oluşturulurken hata:', error);

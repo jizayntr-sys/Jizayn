@@ -33,7 +33,10 @@ export async function getAllProducts(locale?: string): Promise<Product[]> {
         },
       },
     },
-    orderBy: { createdAt: 'desc' },
+    orderBy: [
+      { sortOrder: 'asc' },  // Önce sıra numarasına göre
+      { createdAt: 'desc' }, // Sonra en yeniler
+    ],
   });
 
   return products.map(transformProduct);

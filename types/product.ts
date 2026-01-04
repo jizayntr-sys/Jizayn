@@ -74,4 +74,8 @@ export interface Product {
   locales: {
     [key: string]: ProductLocaleData;
   };
+  isFeatured?: boolean;
+  sortOrder?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }

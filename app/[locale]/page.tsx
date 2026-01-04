@@ -167,101 +167,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Özellikler Bölümü */}
-      <section id="features" className="relative z-10 min-h-screen flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-        <div className="container mx-auto px-4 relative">
-          <FadeIn>
-            <div className="text-center mb-8 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white px-2">{t('features.title')}</h2>
-            </div>
-          </FadeIn>
-          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory px-2 sm:px-0 md:grid md:grid-cols-3 md:gap-8 md:gap-y-12 md:overflow-visible">
-            <FadeIn delay={200} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-indigo-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Palette className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.handmade.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.handmade.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-green-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Leaf className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.natural.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.natural.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.design.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.design.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={200} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.durability.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.durability.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-emerald-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Recycle className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.sustainable.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.sustainable.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-purple-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Search className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.details.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.details.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={200} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-cyan-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Settings className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.functional.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.functional.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-amber-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Clock className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.timeless.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.timeless.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600} className="w-[280px] sm:w-72 flex-shrink-0 md:w-auto snap-start">
-              <Link href="/products" className="block bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 text-center hover:bg-white/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <UserCheck className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.custom.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.custom.desc')}</p>
-              </Link>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
       {/* Öne Çıkan Ürünler */}
       <section id="featured" className="relative z-10 min-h-screen flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
@@ -278,6 +183,101 @@ export default async function HomePage() {
           <FadeIn delay={200}>
             <FeaturedCarousel products={featuredProducts} locale={locale} />
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Özellikler Bölümü (Neden Jizayn) */}
+      <section id="features" className="relative z-10 min-h-screen flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="container mx-auto px-4 relative">
+          <FadeIn>
+            <div className="text-center mb-8 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white px-2">{t('features.title')}</h2>
+            </div>
+          </FadeIn>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <FadeIn delay={200}>
+              <Link href="/products" className="block bg-indigo-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-indigo-300/20 text-center hover:bg-indigo-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-indigo-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Palette className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.handmade.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.handmade.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400}>
+              <Link href="/products" className="block bg-green-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-green-300/20 text-center hover:bg-green-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-green-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Leaf className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.natural.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.natural.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600}>
+              <Link href="/products" className="block bg-orange-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-orange-300/20 text-center hover:bg-orange-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.design.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.design.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={200}>
+              <Link href="/products" className="block bg-blue-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-blue-300/20 text-center hover:bg-blue-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.durability.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.durability.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400}>
+              <Link href="/products" className="block bg-emerald-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-300/20 text-center hover:bg-emerald-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-emerald-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Recycle className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.sustainable.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.sustainable.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600}>
+              <Link href="/products" className="block bg-purple-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-purple-300/20 text-center hover:bg-purple-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-purple-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Search className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.details.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.details.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={200}>
+              <Link href="/products" className="block bg-cyan-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-cyan-300/20 text-center hover:bg-cyan-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-cyan-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Settings className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.functional.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.functional.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={400}>
+              <Link href="/products" className="block bg-amber-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-amber-300/20 text-center hover:bg-amber-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-amber-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <Clock className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.timeless.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.timeless.desc')}</p>
+              </Link>
+            </FadeIn>
+            <FadeIn delay={600}>
+              <Link href="/products" className="block bg-rose-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-rose-300/20 text-center hover:bg-rose-500/20 transition-all h-full group">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  <UserCheck className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.custom.title')}</h3>
+                <p className="text-sm sm:text-base text-gray-200">{t('features.custom.desc')}</p>
+              </Link>
+            </FadeIn>
+          </div>
         </div>
       </section>
 

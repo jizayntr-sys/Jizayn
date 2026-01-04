@@ -146,8 +146,10 @@ export default async function ProductsPage({
     } else if (sort === 'priceDesc') {
       return priceB - priceA;
     }
-    // Varsayılan: En yeniler (ID'ye göre ters sıralama - basit mantık)
-    return (parseInt(b.id) || 0) - (parseInt(a.id) || 0);
+    
+    // Varsayılan sıralama: sortOrder'a göre (sizin belirlediğiniz sıra)
+    // sortOrder değeri veritabanından zaten sıralı geliyor, bu sadece frontend filtreleme sonrası için
+    return (a.sortOrder || 0) - (b.sortOrder || 0);
   });
 
   // Seçilen kategori ismini al (collectionSchema'dan önce tanımlanmalı)
@@ -199,52 +201,61 @@ export default async function ProductsPage({
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-12">
+    <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8 sm:pb-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
       
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-          {category !== 'all' ? categoryName : t('title')}
-        </h1>
-        <p className="text-sm sm:text-base text-gray-600 max-w-3xl">
-          {category !== 'all' 
-            ? `${categoryName} ${t('categoryDescription')}` 
-            : t('title') + ' ' + t('description')}
-        </p>
-      </div>
-      
-      <ProductFilters />
-
-      {filteredProducts.length > 0 && (
-        <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mt-8 mb-6">
-          {category !== 'all' 
-            ? t('categoryProductsHeading', { category: categoryName, count: filteredProducts.length })
-            : t('allProductsHeading', { count: filteredProducts.length })}
-        </h2>
-      )}
-
-      {filteredProducts.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="max-w-md mx-auto">
-            <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-            </svg>
-            <p className="text-lg font-medium text-gray-900 mb-2">{t('noProducts')}</p>
-            <p className="text-gray-500 text-sm mb-6">{t('noProductsDescription')}</p>
-            <Link 
-              href="/products" 
-              className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
-            >
-              {t('categories.all')}
-            </Link>
-          </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">
+            {category !== 'all' ? (
+              <span className="text-gray-900">{categoryName}</span>
+            ) : (
+              <>
+                <span className="text-indigo-700">El Yapımı Ahşap Ürünler</span>
+                <span className="text-gray-900"> - </span>
+                <span className="text-amber-600">Dekorasyon ve Mobilya</span>
+              </>
+            )}
+          </h1>
+          <p className="text-sm sm:text-base text-gray-600">
+            {category !== 'all' 
+              ? `${categoryName} ${t('categoryDescription')}` 
+              : t('title') + ' ' + t('description')}
+          </p>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product, index) => {
+        
+        <ProductFilters />
+
+        {filteredProducts.length > 0 && (
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mt-8 mb-6">
+            {category !== 'all' 
+              ? t('categoryProductsHeading', { category: categoryName, count: filteredProducts.length })
+              : t('allProductsHeading', { count: filteredProducts.length })}
+          </h2>
+        )}
+
+        {filteredProducts.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+              </svg>
+              <p className="text-lg font-medium text-gray-900 mb-2">{t('noProducts')}</p>
+              <p className="text-gray-500 text-sm mb-6">{t('noProductsDescription')}</p>
+              <Link 
+                href="/products" 
+                className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                {t('categories.all')}
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product, index) => {
             const productData = product.locales[locale as keyof typeof product.locales];
             if (!productData) return null;
 
@@ -277,7 +288,7 @@ export default async function ProductsPage({
                     {productData.name}
                   </h3>
                   <p className="text-gray-600 text-sm line-clamp-2 mb-4">
-                    {productData.description}
+                    {productData.description.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()}
                   </p>
                   <div className="flex items-center justify-between mt-auto">
                     <span className="text-lg font-bold text-gray-900">
@@ -290,7 +301,8 @@ export default async function ProductsPage({
             );
           })}
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

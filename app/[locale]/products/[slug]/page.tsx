@@ -157,6 +157,11 @@ export default async function ProductDetailPage({
   const productData = product.locales[locale as keyof typeof product.locales];
   if (!productData) return null;
 
+  // Resimler için fallback: Eğer mevcut locale'de resim yoksa, TR locale'den al
+  const images = productData.images && productData.images.length > 0 
+    ? productData.images 
+    : (product.locales.tr?.images || []);
+
   const currentProductsPath = pathnames['/products'][locale as keyof typeof pathnames['/products']];
   const productUrl = `${BASE_URL}/${locale}${currentProductsPath}/${productData.slug}`;
 
@@ -214,7 +219,7 @@ export default async function ProductDetailPage({
     '@type': 'Product',
     name: productData.name,
     description: productData.description,
-    image: productData.images.map((img) => img.url),
+    image: images.map((img) => img.url),
     sku: productData.sku || product.id,
     mpn: productData.sku || product.id, // Manufacturer Part Number
     category: categoryMap[product.category] || product.category,
@@ -368,14 +373,14 @@ export default async function ProductDetailPage({
           <span className="text-gray-900 font-medium truncate">{productData.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-        {/* Sol Kolon: Görsel Galerisi */}
-          <div>
-            <ProductGallery images={productData.images} />
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
+          {/* 1. Galeri - Mobilde 1. sırada, Desktop'ta sol üst */}
+          <div className="order-1 lg:order-none">
+            <ProductGallery images={images} />
           </div>
 
-          {/* Sağ Kolon: Ürün Bilgileri (Sticky) */}
-          <div className="lg:sticky lg:top-24 h-fit">
+          {/* 2. Ürün Bilgileri - Mobilde 2. sırada, Desktop'ta sağ kolon */}
+          <div className="order-2 lg:order-none lg:row-span-2">
             <div className="flex items-center justify-between mb-6">
               <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${
                 productData.availability === 'InStock' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
@@ -385,213 +390,221 @@ export default async function ProductDetailPage({
             </div>
 
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-            {productData.name}
-          </h1>
+              {productData.name}
+            </h1>
             
             <div className="flex items-baseline gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100">
               <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-            {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
-          </p>
+                {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+              </p>
             </div>
 
-            <div className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed">
-            <p>{productData.description}</p>
-          </div>
-          
-          {productData.availability === 'OutOfStock' ? (
-            <StockNotificationForm 
-              productId={product.id}
-              translations={{
-                title: t('stockNotification.title'),
-                description: t('stockNotification.description'),
-                emailPlaceholder: t('stockNotification.emailPlaceholder'),
-                submit: t('stockNotification.submit'),
-                success: t('stockNotification.success'),
-                error: t('stockNotification.error'),
-              }}
+            {/* Açıklama */}
+            <div 
+              className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed max-w-none"
+              dangerouslySetInnerHTML={{ __html: productData.description }}
             />
-          ) : (
-            <div className="flex flex-col gap-4">
-              {/* Shopier Linki */}
-              <a 
-                href="#" // Burayı ürün verisinden gelecek şekilde güncelleyin: product.shopierUrl
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-              >
-                {/* Shopier Icon (Shopping Bag) */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                {t('buyOnShopier')}
-              </a>
 
-              {/* Etsy Linki */}
-              <a 
-                href="#" // Burayı ürün verisinden gelecek şekilde güncelleyin: product.etsyUrl
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-              >
-                {/* Etsy Icon (Brand E) */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M9.243 12.004c-.035.67.086 1.344.35 1.969.263.625.664 1.176 1.172 1.61.507.433 1.113.746 1.765.91.653.164 1.332.195 1.996.09v2.332c-1.09.21-2.207.23-3.305.055-1.097-.176-2.14-.543-3.07-1.082-.93-.54-1.742-1.25-2.39-2.09-.645-.84-1.11-1.8-1.363-2.824-.253-1.024-.316-2.09-.184-3.137.133-1.047.46-2.05.96-2.965.5-0.914 1.16-1.715 1.94-2.355.78-.64 1.68-1.11 2.64-1.38 1.92-.54 3.96-.36 5.77.51v2.36c-.66-.13-1.34-.12-2-.02-.66.1-1.28.34-1.83.71-.55.37-.99.86-1.29 1.44-.3.58-.45 1.23-.43 1.89h5.55v2.07H9.243z"/>
-                </svg>
-                {t('buyOnEtsy')}
-              </a>
+            {/* Satın Alma Butonları */}
+            {productData.availability === 'OutOfStock' ? (
+              <StockNotificationForm 
+                productId={product.id}
+                translations={{
+                  title: t('stockNotification.title'),
+                  description: t('stockNotification.description'),
+                  emailPlaceholder: t('stockNotification.emailPlaceholder'),
+                  submit: t('stockNotification.submit'),
+                  success: t('stockNotification.success'),
+                  error: t('stockNotification.error'),
+                }}
+              />
+            ) : (
+              <div className="flex flex-col gap-4 mb-8">
+                <a 
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                  {t('buyOnShopier')}
+                </a>
 
-              {/* Amazon Linki */}
-              <a 
-                href="#" // Burayı ürün verisinden gelecek şekilde güncelleyin: product.amazonUrl
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-              >
-                {/* Amazon Icon (Arrow from A to Z) */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M13.5 2L6 10l7.5 8v-4.5h5v-7h-5V2zm-2 10.5L9 10l2.5-2.5v5z"/>
-                </svg>
-                {t('buyOnAmazon')}
-              </a>
-            </div>
-          )}
+                <a 
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full md:w-auto bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9.243 12.004c-.035.67.086 1.344.35 1.969.263.625.664 1.176 1.172 1.61.507.433 1.113.746 1.765.91.653.164 1.332.195 1.996.09v2.332c-1.09.21-2.207.23-3.305.055-1.097-.176-2.14-.543-3.07-1.082-.93-.54-1.742-1.25-2.39-2.09-.645-.84-1.11-1.8-1.363-2.824-.253-1.024-.316-2.09-.184-3.137.133-1.047.46-2.05.96-2.965.5-0.914 1.16-1.715 1.94-2.355.78-.64 1.68-1.11 2.64-1.38 1.92-.54 3.96-.36 5.77.51v2.36c-.66-.13-1.34-.12-2-.02-.66.1-1.28.34-1.83.71-.55.37-.99.86-1.29 1.44-.3.58-.45 1.23-.43 1.89h5.55v2.07H9.243z"/>
+                  </svg>
+                  {t('buyOnEtsy')}
+                </a>
 
-          {/* Paylaşım Butonları */}
-            <div className="mb-10">
-          <ShareButtons 
-            url={productUrl} 
-            title={productData.name}
-            translations={{
-              title: t('reviews.share.title'),
-              copied: t('reviews.share.copied'),
-              instagram: t('reviews.share.instagram')
-            }}
-          />
-            </div>
-
-          {/* Teknik Özellikler Bölümü */}
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-              <h3 className="text-lg font-bold text-gray-900 mb-6">{t('reviews.specs.title')}</h3>
-              <div className="grid grid-cols-1 gap-y-4 text-sm">
-              {productData.dimensions && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                  <span className="text-gray-500 font-medium">{t('reviews.specs.dimensions')}</span>
-                    <span className="text-gray-900 font-semibold">{productData.dimensions}</span>
-                </div>
-              )}
-              {productData.materials && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                  <span className="text-gray-500 font-medium">{t('reviews.specs.materials')}</span>
-                    <span className="text-gray-900 font-semibold">{productData.materials}</span>
-                </div>
-              )}
-              {productData.sku && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                  <span className="text-gray-500 font-medium">{t('reviews.specs.sku')}</span>
-                    <span className="text-gray-900 font-mono font-semibold">{productData.sku}</span>
-                </div>
-              )}
-            </div>
-
-            {productData.specifications && (
-                <ul className="mt-6 space-y-3 pt-4 border-t border-gray-200">
-                {productData.specifications.map((spec, i) => (
-                  <li key={i} className="flex items-start text-gray-600 text-sm">
-                      <span className="mr-3 text-indigo-500 font-bold">•</span>
-                    {spec}
-                  </li>
-                ))}
-              </ul>
+                <a 
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full md:w-auto bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.5 2L6 10l7.5 8v-4.5h5v-7h-5V2zm-2 10.5L9 10l2.5-2.5v5z"/>
+                  </svg>
+                  {t('buyOnAmazon')}
+                </a>
+              </div>
             )}
-          </div>
-        </div>
-      </div>
-      </div>
 
-      {/* Kullanım ve Bakım Bölümü */}
-      <div className="container mx-auto px-4 mt-16">
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-8 md:p-12 border border-amber-100">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-            <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            {t('reviews.usage.title')}
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-2xl">🧼</span>
-                {t('reviews.usage.cleaningTitle')}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-sm">
-                {t('reviews.usage.cleaning')}
-              </p>
-            </div>
-            
-            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-2xl">🛡️</span>
-                {t('reviews.usage.careTitle')}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-sm">
-                {t('reviews.usage.care')}
-              </p>
-            </div>
-            
-            <div className="bg-white/60 backdrop-blur rounded-xl p-6 border border-amber-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-2xl">📍</span>
-                {t('reviews.usage.placementTitle')}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-sm">
-                {t('reviews.usage.placement')}
-              </p>
+            {/* Paylaşım Butonları */}
+            <div className="pt-6 border-t border-gray-100">
+              <ShareButtons 
+                url={productUrl} 
+                title={productData.name}
+                translations={{
+                  title: t('reviews.share.title'),
+                  copied: t('reviews.share.copied'),
+                  instagram: t('reviews.share.instagram')
+                }}
+              />
             </div>
           </div>
 
-          {/* Ürün Özellikleri */}
-          <div className="mt-10 pt-8 border-t border-amber-200">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">{t('reviews.features.title')}</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.handmade')}</span>
+          {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
+          <div className="order-3 lg:order-none space-y-8">
+            {/* Teknik Özellikler */}
+            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                {t('reviews.specs.title')}
+              </h3>
+              <div className="grid grid-cols-1 gap-y-4 text-sm">
+                {productData.dimensions && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.dimensions')}</span>
+                    <span className="text-gray-900 font-semibold">{productData.dimensions}</span>
+                  </div>
+                )}
+                {productData.materials && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.materials')}</span>
+                    <span className="text-gray-900 font-semibold">{productData.materials}</span>
+                  </div>
+                )}
+                {productData.sku && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.sku')}</span>
+                    <span className="text-gray-900 font-mono font-semibold">{productData.sku}</span>
+                  </div>
+                )}
               </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.natural')}</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.unique')}</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.durable')}</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.ecofriendly')}</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <span className="text-green-600 text-xl">✓</span>
-                <span className="text-sm">{t('reviews.features.quality')}</span>
+
+              {productData.specifications && (
+                <ul className="mt-6 space-y-3 pt-4 border-t border-gray-200">
+                  {productData.specifications.map((spec, i) => (
+                    <li key={i} className="flex items-start text-gray-600 text-sm">
+                      <span className="mr-3 text-indigo-500 font-bold">•</span>
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {/* Kullanım ve Bakım Önerileri */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border border-amber-100">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                {t('reviews.usage.title')}
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
+                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
+                    <span className="text-xl">🧼</span>
+                    {t('reviews.usage.cleaningTitle')}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {t('reviews.usage.cleaning')}
+                  </p>
+                </div>
+                
+                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
+                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
+                    <span className="text-xl">🛡️</span>
+                    {t('reviews.usage.careTitle')}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {t('reviews.usage.care')}
+                  </p>
+                </div>
+                
+                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
+                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
+                    <span className="text-xl">📍</span>
+                    {t('reviews.usage.placementTitle')}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {t('reviews.usage.placement')}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Kargo Bilgisi */}
-          <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-xl">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
-              <span className="text-xl">🚚</span>
-              {t('reviews.shipping.title')}
-            </h3>
-            <p className="text-blue-800 text-sm leading-relaxed">
-              {t('reviews.shipping.info')}
-            </p>
+            {/* Ürün Özellikleri */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border border-green-100">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {t('reviews.features.title')}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.handmade')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.natural')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.unique')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.durable')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.ecofriendly')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.quality')}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Kargo ve Teslimat */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border border-blue-100">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span className="text-2xl">🚚</span>
+                {t('reviews.shipping.title')}
+              </h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {t('reviews.shipping.info')}
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -26,11 +26,13 @@ model Product {
   brand       Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
   locales     ProductLocale[]
   isFeatured  Boolean         @default(false)
+  sortOrder   Int             @default(0)  // Manuel sıralama için
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
   @@index([category])
   @@index([brandId])
+  @@index([sortOrder])
 }
 
 // Ürün Lokalizasyon Tablosu (Her dil için ürün verisi)

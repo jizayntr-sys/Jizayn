@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { createProduct } from '../../actions';
+import RichTextEditor from '@/components/RichTextEditor';
 
 export const dynamic = 'force-dynamic';
 
@@ -94,11 +95,9 @@ export default async function NewProductPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Açıklama (TR) *</label>
-                <textarea
+                <RichTextEditor
                   name="description_tr"
-                  rows={4}
                   placeholder="Ürün detaylı açıklaması..."
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2"
                   required
                 />
               </div>
@@ -222,11 +221,9 @@ export default async function NewProductPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Açıklama (EN)</label>
-                <textarea
+                <RichTextEditor
                   name="description_en"
-                  rows={4}
                   placeholder="Product description..."
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2"
                 />
               </div>
             </div>
