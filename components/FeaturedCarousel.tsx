@@ -82,11 +82,10 @@ export default function FeaturedCarousel({ products, locale }: Props) {
                 <h3 className="text-lg font-bold text-white mb-2 group-hover/card:text-indigo-300 transition-colors line-clamp-1">
                   {productData.name}
                 </h3>
-                <div className="flex items-center justify-between mt-4">
+                <div className="mt-4">
                   <span className="text-lg font-bold text-white">
                     {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
                   </span>
-                  <span className="text-sm text-indigo-300 font-medium group-hover/card:underline">İncele &rarr;</span>
                 </div>
               </div>
             </Link>
