@@ -4,15 +4,16 @@ import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { translateText, getLanguageCode } from '@/lib/translate';
+import { generateSlug } from '@/utils/slug';
 
 // TR'deki resimleri diğer tüm locale'lere kopyala (alt text'leri çevirerek)
 async function copyImagesToAllLocales(productId: string) {
   const product = await prisma.product.findUnique({
     where: { id: productId },
     include: {
-      locales: {
+      ProductLocale: {
         include: {
-          images: { orderBy: { order: 'asc' } }
+          ProductImage: { orderBy: { order: 'asc' } }
         }
       }
     }
@@ -20,10 +21,10 @@ async function copyImagesToAllLocales(productId: string) {
 
   if (!product) return;
 
-  const trLocale = product.locales.find(l => l.locale === 'tr');
-  if (!trLocale || !trLocale.images || trLocale.images.length === 0) return;
+  const trLocale = product.ProductLocale.find(l => l.locale === 'tr');
+  if (!trLocale || !trLocale.ProductImage || trLocale.ProductImage.length === 0) return;
 
-  const otherLocales = product.locales.filter(l => l.locale !== 'tr');
+  const otherLocales = product.ProductLocale.filter(l => l.locale !== 'tr');
 
   for (const locale of otherLocales) {
     // Mevcut resimleri sil
@@ -32,7 +33,7 @@ async function copyImagesToAllLocales(productId: string) {
     });
 
     // TR'deki resimleri kopyala ve alt text'leri çevir
-    for (const image of trLocale.images) {
+    for (const image of trLocale.ProductImage) {
       const targetLang = getLanguageCode(locale.locale);
       
       // Alt text'i çevir
@@ -53,6 +54,7 @@ async function copyImagesToAllLocales(productId: string) {
 
       await prisma.productImage.create({
         data: {
+          id: crypto.randomUUID(),
           productLocaleId: locale.id,
           url: image.url,
           alt: translatedAlt,
@@ -172,6 +174,9 @@ export async function updateProduct(formData: FormData) {
     // TR Locale güncelle
     const nameTr = formData.get('name_tr') as string;
     if (nameTr) {
+      const slugTr = formData.get('slug_tr') as string;
+      const sanitizedSlugTr = slugTr ? generateSlug(slugTr, 'tr') : generateSlug(nameTr, 'tr');
+      
       await prisma.productLocale.updateMany({
         where: {
           productId,
@@ -179,7 +184,7 @@ export async function updateProduct(formData: FormData) {
         },
         data: {
           name: nameTr,
-          slug: formData.get('slug_tr') as string,
+          slug: sanitizedSlugTr,
           description: formData.get('description_tr') as string,
           sku: formData.get('sku_tr') as string,
           availability: formData.get('availability_tr') as string,
@@ -192,6 +197,9 @@ export async function updateProduct(formData: FormData) {
     // EN Locale güncelle
     const nameEn = formData.get('name_en') as string;
     if (nameEn) {
+      const slugEn = formData.get('slug_en') as string;
+      const sanitizedSlugEn = slugEn ? generateSlug(slugEn, 'en') : generateSlug(nameEn, 'en');
+      
       await prisma.productLocale.updateMany({
         where: {
           productId,
@@ -199,7 +207,7 @@ export async function updateProduct(formData: FormData) {
         },
         data: {
           name: nameEn,
-          slug: formData.get('slug_en') as string,
+          slug: sanitizedSlugEn,
           description: formData.get('description_en') as string,
           sku: formData.get('sku_en') as string,
         },
@@ -275,6 +283,7 @@ export async function updateProduct(formData: FormData) {
 
         await prisma.productImage.create({
           data: {
+            id: crypto.randomUUID(),
             productLocaleId: trLocale.id,
             url: finalUrl,
             alt: newImageAlt?.trim() || `${nameTr} - Görsel ${existingImagesCount + 1}`,
@@ -306,14 +315,17 @@ export async function createProduct(formData: FormData) {
   const category = formData.get('category') as string;
   const brandId = formData.get('brandId') as string;
   const isFeatured = formData.get('isFeatured') === 'on';
+  const sortOrder = parseInt(formData.get('sortOrder') as string || '0');
 
   try {
     // Ürünü oluştur
     const product = await prisma.product.create({
       data: {
+        id: crypto.randomUUID(),
         category,
         brandId,
         isFeatured,
+        sortOrder,
         tags: [],
       },
     });
@@ -321,6 +333,7 @@ export async function createProduct(formData: FormData) {
     // TR Locale oluştur
     const nameTr = formData.get('name_tr') as string;
     const slugTr = formData.get('slug_tr') as string;
+    const sanitizedSlugTr = slugTr ? generateSlug(slugTr, 'tr') : generateSlug(nameTr, 'tr');
     const descriptionTr = formData.get('description_tr') as string;
     const imageUrlTr = formData.get('imageUrl_tr') as string;
 
@@ -328,7 +341,7 @@ export async function createProduct(formData: FormData) {
       data: {
         productId: product.id,
         locale: 'tr',
-        slug: slugTr,
+        slug: sanitizedSlugTr,
         name: nameTr,
         description: descriptionTr,
         dimensions: formData.get('dimensions_tr') as string || '',
@@ -352,12 +365,15 @@ export async function createProduct(formData: FormData) {
     // Görselleri ekle (8 adete kadar)
     for (let i = 1; i <= 8; i++) {
       const imageUrl = formData.get(`imageUrl_${i}`) as string;
+      const imageAlt = formData.get(`imageAlt_${i}`) as string;
+      
       if (imageUrl && imageUrl.trim()) {
         await prisma.productImage.create({
           data: {
+            id: crypto.randomUUID(),
             productLocaleId: trLocale.id,
             url: imageUrl.trim(),
-            alt: `${nameTr} - Görsel ${i}`,
+            alt: imageAlt && imageAlt.trim() ? imageAlt.trim() : `${nameTr} - Görsel ${i}`,
             pinterestDescription: nameTr,
             order: i - 1,
           },
@@ -365,40 +381,71 @@ export async function createProduct(formData: FormData) {
       }
     }
 
-    // EN Locale oluştur (eğer verilmişse)
-    const nameEn = formData.get('name_en') as string;
-    if (nameEn) {
-      const slugEn = formData.get('slug_en') as string;
-      const descriptionEn = formData.get('description_en') as string;
-
-      const enLocale = await prisma.productLocale.create({
-        data: {
-          productId: product.id,
-          locale: 'en',
-          slug: slugEn || slugTr,
-          name: nameEn,
-          description: descriptionEn || descriptionTr,
-          dimensions: formData.get('dimensions_tr') as string || '',
-          materials: formData.get('materials_tr') as string || '',
-          specifications: [],
-          sku: formData.get('sku_tr') as string || '',
-          gtin: null,
-          availability: 'InStock',
-          priceMin: parseFloat(formData.get('priceMin_tr') as string || '0'),
-          priceMax: parseFloat(formData.get('priceMax_tr') as string || '0'),
-          priceCurrency: 'USD',
-          amazonUrl: null,
-          etsyUrl: null,
-          video: null,
-          metaTitle: nameEn,
-          metaDescription: (descriptionEn || descriptionTr).substring(0, 160),
-          metaKeywords: [],
-        },
-      });
+    // EN Locale oluştur (sadece TR ve EN - diğer diller lazy loading)
+    let nameEn = formData.get('name_en') as string;
+    let descriptionEn = formData.get('description_en') as string;
+    
+    // İngilizce içerik yoksa Türkçe'den çevir
+    if (!nameEn || !nameEn.trim()) {
+      nameEn = await translateText({ text: nameTr, from: 'tr', to: 'en' });
+    }
+    if (!descriptionEn || !descriptionEn.trim()) {
+      descriptionEn = await translateText({ text: descriptionTr, from: 'tr', to: 'en' });
     }
 
-    // TR'deki resimleri diğer tüm dillere otomatik kopyala
-    await copyImagesToAllLocales(product.id);
+    const slugEnInput = formData.get('slug_en') as string;
+    const sanitizedSlugEn = slugEnInput && slugEnInput.trim() 
+      ? generateSlug(slugEnInput, 'en') 
+      : generateSlug(nameEn, 'en');
+
+    const enLocale = await prisma.productLocale.create({
+      data: {
+        productId: product.id,
+        locale: 'en',
+        slug: sanitizedSlugEn,
+        name: nameEn,
+        description: descriptionEn,
+        dimensions: formData.get('dimensions_tr') as string || '',
+        materials: formData.get('materials_tr') as string || '',
+        specifications: [],
+        sku: formData.get('sku_tr') as string || '',
+        gtin: null,
+        availability: 'InStock',
+        priceMin: parseFloat(formData.get('priceMin_tr') as string || '0'),
+        priceMax: parseFloat(formData.get('priceMax_tr') as string || '0'),
+        priceCurrency: 'USD',
+        amazonUrl: null,
+        etsyUrl: null,
+        video: null,
+        metaTitle: nameEn,
+        metaDescription: descriptionEn.substring(0, 160),
+        metaKeywords: [],
+      },
+    });
+
+    // TR'deki resimleri EN locale'e kopyala (alt text'leri çevirerek)
+    const trImages = await prisma.productImage.findMany({
+      where: { productLocaleId: trLocale.id },
+      orderBy: { order: 'asc' }
+    });
+
+    for (const image of trImages) {
+      const altEn = await translateText({ text: image.alt, from: 'tr', to: 'en' });
+      const pinterestEn = image.pinterestDescription
+        ? await translateText({ text: image.pinterestDescription, from: 'tr', to: 'en' })
+        : null;
+
+      await prisma.productImage.create({
+        data: {
+          id: crypto.randomUUID(),
+          productLocaleId: enLocale.id,
+          url: image.url,
+          alt: altEn,
+          pinterestDescription: pinterestEn,
+          order: image.order
+        }
+      });
+    }
 
   } catch (error) {
     console.error('Ürün oluşturulurken hata:', error);

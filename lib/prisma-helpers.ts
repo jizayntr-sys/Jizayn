@@ -13,7 +13,7 @@ export function transformProductLocale(prismaLocale: any): ProductLocaleData {
     slug: prismaLocale.slug,
     name: prismaLocale.name,
     description: prismaLocale.description,
-    images: prismaLocale.images.map((img: any) => ({
+    images: prismaLocale.ProductImage.map((img: any) => ({
       url: img.url,
       alt: img.alt,
       pinterestDescription: img.pinterestDescription || undefined,
@@ -31,37 +31,37 @@ export function transformProductLocale(prismaLocale: any): ProductLocaleData {
       currency: prismaLocale.priceCurrency,
     },
     amazonUrl: prismaLocale.amazonUrl || undefined,
-    amazonOffer: prismaLocale.offers.find((o: any) => o.platform === 'amazon') ? {
-      url: prismaLocale.offers.find((o: any) => o.platform === 'amazon').url,
-      availability: prismaLocale.offers.find((o: any) => o.platform === 'amazon').availability,
-      price: Number(prismaLocale.offers.find((o: any) => o.platform === 'amazon').price),
-      priceCurrency: prismaLocale.offers.find((o: any) => o.platform === 'amazon').priceCurrency,
-      sku: prismaLocale.offers.find((o: any) => o.platform === 'amazon').sku || undefined,
-      gtin: prismaLocale.offers.find((o: any) => o.platform === 'amazon').gtin || undefined,
+    amazonOffer: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon') ? {
+      url: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').url,
+      availability: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').availability,
+      price: Number(prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').price),
+      priceCurrency: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').priceCurrency,
+      sku: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').sku || undefined,
+      gtin: prismaLocale.ProductOffer.find((o: any) => o.platform === 'amazon').gtin || undefined,
     } as ProductOffer : undefined,
     etsyUrl: prismaLocale.etsyUrl || undefined,
-    etsyOffer: prismaLocale.offers.find((o: any) => o.platform === 'etsy') ? {
-      url: prismaLocale.offers.find((o: any) => o.platform === 'etsy').url,
-      availability: prismaLocale.offers.find((o: any) => o.platform === 'etsy').availability,
-      price: Number(prismaLocale.offers.find((o: any) => o.platform === 'etsy').price),
-      priceCurrency: prismaLocale.offers.find((o: any) => o.platform === 'etsy').priceCurrency,
-      sku: prismaLocale.offers.find((o: any) => o.platform === 'etsy').sku || undefined,
-      gtin: prismaLocale.offers.find((o: any) => o.platform === 'etsy').gtin || undefined,
+    etsyOffer: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy') ? {
+      url: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').url,
+      availability: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').availability,
+      price: Number(prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').price),
+      priceCurrency: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').priceCurrency,
+      sku: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').sku || undefined,
+      gtin: prismaLocale.ProductOffer.find((o: any) => o.platform === 'etsy').gtin || undefined,
     } as ProductOffer : undefined,
-    aggregateRating: prismaLocale.rating ? {
-      ratingValue: Number(prismaLocale.rating.ratingValue),
-      reviewCount: prismaLocale.rating.reviewCount,
-      bestRating: prismaLocale.rating.bestRating,
-      worstRating: prismaLocale.rating.worstRating,
+    aggregateRating: prismaLocale.ProductRating ? {
+      ratingValue: Number(prismaLocale.ProductRating.ratingValue),
+      reviewCount: prismaLocale.ProductRating.reviewCount,
+      bestRating: prismaLocale.ProductRating.bestRating,
+      worstRating: prismaLocale.ProductRating.worstRating,
     } : undefined,
-    reviews: prismaLocale.reviews?.map((r: any) => ({
+    reviews: prismaLocale.ProductReview?.map((r: any) => ({
       author: r.author,
       datePublished: r.datePublished.toISOString().split('T')[0],
       reviewBody: r.reviewBody,
       reviewRating: r.reviewRating,
       reviewSource: r.reviewSource as 'Amazon' | 'Etsy' | 'Website' | undefined,
     } as ProductReview)) || [],
-    faq: prismaLocale.faqs?.map((f: any) => ({
+    faq: prismaLocale.ProductFaq?.map((f: any) => ({
       question: f.question,
       answer: f.answer,
     } as FaqItem)) || [],
@@ -77,7 +77,7 @@ export function transformProductLocale(prismaLocale: any): ProductLocaleData {
 export function transformProduct(prismaProduct: any): Product {
   const locales: Record<string, ProductLocaleData> = {};
   
-  for (const locale of prismaProduct.locales) {
+  for (const locale of prismaProduct.ProductLocale) {
     locales[locale.locale] = transformProductLocale(locale);
   }
 
@@ -86,9 +86,9 @@ export function transformProduct(prismaProduct: any): Product {
     category: prismaProduct.category,
     tags: prismaProduct.tags || [],
     brand: {
-      name: prismaProduct.brand.name,
-      url: prismaProduct.brand.url,
-      logo: prismaProduct.brand.logo,
+      name: prismaProduct.Brand.name,
+      url: prismaProduct.Brand.url,
+      logo: prismaProduct.Brand.logo,
     },
     locales,
   };

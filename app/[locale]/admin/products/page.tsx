@@ -29,6 +29,8 @@ export default function ProductsAdminPage() {
     materials: '',
     images: [] as File[],
     imagePreviews: [] as string[],
+    altText: '',
+    sortOrder: 0,
     metaTitle: '',
     metaDescription: ''
   });
@@ -48,9 +50,33 @@ export default function ProductsAdminPage() {
     existingImages: [] as { url: string; alt: string }[],
     newImages: [] as File[],
     newImagePreviews: [] as string[],
+    altText: '',
+    sortOrder: 0,
     metaTitle: '',
     metaDescription: ''
   });
+
+  // Ürünleri yükle
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const data = await res.json();
+          setProducts(data.products || []);
+        } else {
+          console.error('Failed to fetch products');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Arama filtresi
   const filteredProducts = products.filter(p => 
@@ -96,6 +122,8 @@ export default function ProductsAdminPage() {
       materials: '',
       images: [],
       imagePreviews: [],
+      altText: '',
+      sortOrder: 0,
       metaTitle: '',
       metaDescription: ''
     });
@@ -173,13 +201,14 @@ export default function ProductsAdminPage() {
       // Görsel objelerini oluştur
       const imageObjects = urls.map((url: string, index: number) => ({
         url,
-        alt: addForm.name + (index > 0 ? ` ${index + 1}` : ''),
+        alt: addForm.altText || addForm.name + (index > 0 ? ` ${index + 1}` : ''),
       }));
       
       // Yeni ürün objesi oluştur
       const newProduct = {
         category: addForm.category,
         tags: [],
+        sortOrder: addForm.sortOrder,
         brand: {
           name: 'Jizayn',
           url: 'https://www.jizayn.com',
@@ -277,6 +306,8 @@ export default function ProductsAdminPage() {
       existingImages: productData.images,
       newImages: [],
       newImagePreviews: [],
+      altText: productData.images[0]?.alt || '',
+      sortOrder: product.sortOrder || 0,
       metaTitle: productData.metaTitle,
       metaDescription: productData.metaDescription
     });
@@ -316,24 +347,91 @@ export default function ProductsAdminPage() {
     });
   };
 
-  const handleSaveEdit = (e: React.FormEvent) => {
+  const handleSaveEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProduct) return;
 
-    setProducts(products.map(p => {
-      if (p.id === editingProduct.id) {
-        return {
-          ...p,
-          locales: {
-            ...p.locales,
-            tr: { ...p.locales.tr, name: editForm.name, priceRange: { ...p.locales.tr.priceRange, min: editForm.price }, availability: editForm.stock }
-          }
-        };
+    try {
+      // Yeni görseller varsa yükle
+      let newImageUrls: string[] = [];
+      if (editForm.newImages.length > 0) {
+        const uploadFormData = new FormData();
+        editForm.newImages.forEach(file => {
+          uploadFormData.append('files', file);
+        });
+
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadFormData,
+        });
+
+        if (!uploadRes.ok) {
+          alert('Görseller yüklenirken bir hata oluştu.');
+          return;
+        }
+
+        const { urls } = await uploadRes.json();
+        newImageUrls = urls;
       }
-      return p;
-    }));
-    setIsEditModalOpen(false);
-    setEditingProduct(null);
+
+      // Tüm görselleri birleştir (mevcut + yeni)
+      const allImages = [
+        ...editForm.existingImages,
+        ...newImageUrls.map((url: string, index: number) => ({
+          url,
+          alt: editForm.altText || editForm.name + ` ${editForm.existingImages.length + index + 1}`,
+        }))
+      ];
+
+      // Boyutları birleştir
+      const dimensions = [
+        editForm.dimensionLength,
+        editForm.dimensionWidth,
+        editForm.dimensionHeight
+      ].filter(Boolean).join(' × ') || '-';
+
+      // Güncelleme objesi
+      const updateData = {
+        category: editForm.category,
+        sortOrder: editForm.sortOrder,
+        locales: {
+          tr: {
+            name: editForm.name,
+            description: editForm.description,
+            sku: editForm.sku,
+            dimensions,
+            materials: editForm.materials,
+            images: allImages,
+            availability: editForm.stock,
+            priceRange: {
+              min: editForm.price,
+              max: editForm.price,
+              currency: 'TRY',
+            },
+            metaTitle: editForm.metaTitle,
+            metaDescription: editForm.metaDescription,
+          },
+        },
+      };
+
+      const res = await fetch(`/api/products/${editingProduct.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateData),
+      });
+
+      if (res.ok) {
+        window.location.reload();
+        editForm.newImagePreviews.forEach(url => URL.revokeObjectURL(url));
+        setIsEditModalOpen(false);
+        setEditingProduct(null);
+      } else {
+        alert('Ürün güncellenirken bir hata oluştu.');
+      }
+    } catch (error) {
+      console.error('Edit error:', error);
+      alert('Ürün güncellenirken bir hata oluştu.');
+    }
   };
 
   return (
@@ -363,9 +461,15 @@ export default function ProductsAdminPage() {
 
       {/* Ürün Tablosu */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        {isLoading ? (
+          <div className="p-12 text-center text-gray-500">Yükleniyor...</div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="p-12 text-center text-gray-500">Henüz ürün eklenmemiş.</div>
+        ) : (
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
+              <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Sıra</th>
               <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Ürün</th>
               <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kategori</th>
               <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Fiyat (TR)</th>
@@ -380,6 +484,9 @@ export default function ProductsAdminPage() {
               
               return (
               <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-6 py-4">
+                  <span className="text-sm font-semibold text-gray-700">{product.sortOrder || 0}</span>
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-4">
                     <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
@@ -438,6 +545,7 @@ export default function ProductsAdminPage() {
             })}
           </tbody>
         </table>
+        )}
       </div>
 
       {/* Düzenleme Modalı */}
@@ -597,6 +705,37 @@ export default function ProductsAdminPage() {
                       placeholder="Örn: Ahşap, Metal"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                     />
+                  </div>
+
+                  <div>
+                    <label htmlFor="edit-product-alt-text" className="block text-sm font-medium text-gray-700 mb-1">Alt Text (SEO)</label>
+                    <input 
+                      type="text" 
+                      id="edit-product-alt-text"
+                      name="altText"
+                      autoComplete="off"
+                      value={editForm.altText}
+                      onChange={(e) => setEditForm({...editForm, altText: e.target.value})}
+                      placeholder="Görseller için açıklayıcı metin"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">Boş bırakılırsa ürün adı kullanılır</p>
+                  </div>
+
+                  <div>
+                    <label htmlFor="edit-product-sort-order" className="block text-sm font-medium text-gray-700 mb-1">Sıralama</label>
+                    <input 
+                      type="number" 
+                      id="edit-product-sort-order"
+                      name="sortOrder"
+                      autoComplete="off"
+                      min="0"
+                      value={editForm.sortOrder}
+                      onChange={(e) => setEditForm({...editForm, sortOrder: Number(e.target.value)})}
+                      placeholder="0"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">Küçük numara önce gösterilir</p>
                   </div>
                 </div>
 
@@ -901,6 +1040,37 @@ export default function ProductsAdminPage() {
                       placeholder="Örn: Ahşap, Metal"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                     />
+                  </div>
+
+                  <div>
+                    <label htmlFor="add-product-alt-text" className="block text-sm font-medium text-gray-700 mb-1">Alt Text (SEO)</label>
+                    <input 
+                      type="text" 
+                      id="add-product-alt-text"
+                      name="altText"
+                      autoComplete="off"
+                      value={addForm.altText}
+                      onChange={(e) => setAddForm({...addForm, altText: e.target.value})}
+                      placeholder="Görseller için açıklayıcı metin"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">Boş bırakılırsa ürün adı kullanılır</p>
+                  </div>
+
+                  <div>
+                    <label htmlFor="add-product-sort-order" className="block text-sm font-medium text-gray-700 mb-1">Sıralama</label>
+                    <input 
+                      type="number" 
+                      id="add-product-sort-order"
+                      name="sortOrder"
+                      autoComplete="off"
+                      min="0"
+                      value={addForm.sortOrder}
+                      onChange={(e) => setAddForm({...addForm, sortOrder: Number(e.target.value)})}
+                      placeholder="0"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">Küçük numara önce gösterilir</p>
                   </div>
                 </div>
 

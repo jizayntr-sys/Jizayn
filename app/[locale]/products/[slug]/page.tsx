@@ -13,6 +13,7 @@ import ProductGallery from '@/components/ProductGallery';
 import ProductReviews from '@/components/ProductReviews';
 import FAQ from '@/components/FAQ';
 import ShareButtons from '@/components/ShareButtons';
+import AddToCartButton from '@/components/AddToCartButton';
 import { BASE_URL } from '@/lib/constants';
 
 export async function generateMetadata({
@@ -377,6 +378,43 @@ export default async function ProductDetailPage({
           {/* 1. Galeri - Mobilde 1. sırada, Desktop'ta sol üst */}
           <div className="order-1 lg:order-none">
             <ProductGallery images={images} />
+            
+            {/* Satın Alma Butonları */}
+            {productData.availability === 'OutOfStock' ? (
+              <div className="mt-6">
+                <StockNotificationForm 
+                  productId={product.id}
+                  translations={{
+                    title: t('stockNotification.title'),
+                    description: t('stockNotification.description'),
+                    emailPlaceholder: t('stockNotification.emailPlaceholder'),
+                    submit: t('stockNotification.submit'),
+                    success: t('stockNotification.success'),
+                    error: t('stockNotification.error'),
+                  }}
+                />
+              </div>
+            ) : (
+              <div>
+                <div className="p-4 border-2 border-gray-300 rounded-lg shadow-md bg-white flex flex-row gap-2 mt-6 flex-wrap">
+                  <AddToCartButton url="#" platform="Shopier" />
+                  <AddToCartButton url="#" platform="Etsy" />
+                  <AddToCartButton url="#" platform="Amazon" />
+                </div>
+                {/* Paylaşım Butonları */}
+                <div className="mt-4">
+                  <ShareButtons 
+                    url={productUrl} 
+                    title={productData.name}
+                    translations={{
+                      title: t('reviews.share.title'),
+                      copied: t('reviews.share.copied'),
+                      instagram: t('reviews.share.instagram')
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* 2. Ürün Bilgileri - Mobilde 2. sırada, Desktop'ta sağ kolon */}
@@ -389,8 +427,17 @@ export default async function ProductDetailPage({
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-              {productData.name}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              {(() => {
+                const name = productData.name;
+                const words = name.split(' ');
+                const colors = ['text-blue-900', 'text-black', 'text-green-900', 'text-purple-900'];
+                return words.map((word, index) => (
+                  <span key={index} className={colors[index % colors.length]}>
+                    {word}{index < words.length - 1 ? ' ' : ''}
+                  </span>
+                ));
+              })()}
             </h1>
             
             <div className="flex items-baseline gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100">
@@ -404,80 +451,12 @@ export default async function ProductDetailPage({
               className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed max-w-none"
               dangerouslySetInnerHTML={{ __html: productData.description }}
             />
-
-            {/* Satın Alma Butonları */}
-            {productData.availability === 'OutOfStock' ? (
-              <StockNotificationForm 
-                productId={product.id}
-                translations={{
-                  title: t('stockNotification.title'),
-                  description: t('stockNotification.description'),
-                  emailPlaceholder: t('stockNotification.emailPlaceholder'),
-                  submit: t('stockNotification.submit'),
-                  success: t('stockNotification.success'),
-                  error: t('stockNotification.error'),
-                }}
-              />
-            ) : (
-              <div className="flex flex-col gap-4 mb-8">
-                <a 
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                  </svg>
-                  {t('buyOnShopier')}
-                </a>
-
-                <a 
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full md:w-auto bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9.243 12.004c-.035.67.086 1.344.35 1.969.263.625.664 1.176 1.172 1.61.507.433 1.113.746 1.765.91.653.164 1.332.195 1.996.09v2.332c-1.09.21-2.207.23-3.305.055-1.097-.176-2.14-.543-3.07-1.082-.93-.54-1.742-1.25-2.39-2.09-.645-.84-1.11-1.8-1.363-2.824-.253-1.024-.316-2.09-.184-3.137.133-1.047.46-2.05.96-2.965.5-0.914 1.16-1.715 1.94-2.355.78-.64 1.68-1.11 2.64-1.38 1.92-.54 3.96-.36 5.77.51v2.36c-.66-.13-1.34-.12-2-.02-.66.1-1.28.34-1.83.71-.55.37-.99.86-1.29 1.44-.3.58-.45 1.23-.43 1.89h5.55v2.07H9.243z"/>
-                  </svg>
-                  {t('buyOnEtsy')}
-                </a>
-
-                <a 
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full md:w-auto bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors font-medium text-center shadow-sm flex items-center justify-center gap-2"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M13.5 2L6 10l7.5 8v-4.5h5v-7h-5V2zm-2 10.5L9 10l2.5-2.5v5z"/>
-                  </svg>
-                  {t('buyOnAmazon')}
-                </a>
-              </div>
-            )}
-
-            {/* Paylaşım Butonları */}
-            <div className="pt-6 border-t border-gray-100">
-              <ShareButtons 
-                url={productUrl} 
-                title={productData.name}
-                translations={{
-                  title: t('reviews.share.title'),
-                  copied: t('reviews.share.copied'),
-                  instagram: t('reviews.share.instagram')
-                }}
-              />
-            </div>
           </div>
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
           <div className="order-3 lg:order-none space-y-8">
             {/* Teknik Özellikler */}
-            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100">
+            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -518,7 +497,7 @@ export default async function ProductDetailPage({
             </div>
 
             {/* Kullanım ve Bakım Önerileri */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border border-amber-100">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -560,7 +539,7 @@ export default async function ProductDetailPage({
             </div>
 
             {/* Ürün Özellikleri */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border border-green-100">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -596,7 +575,7 @@ export default async function ProductDetailPage({
             </div>
 
             {/* Kargo ve Teslimat */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border border-blue-100">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="text-2xl">🚚</span>
                 {t('reviews.shipping.title')}

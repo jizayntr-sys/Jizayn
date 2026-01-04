@@ -49,7 +49,7 @@ export default function ContactForm() {
           name="name"
           autoComplete="name"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300"
         />
       </div>
 
@@ -63,7 +63,7 @@ export default function ContactForm() {
           name="email"
           autoComplete="email"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300"
         />
       </div>
 
@@ -77,7 +77,7 @@ export default function ContactForm() {
           name="subject"
           autoComplete="off"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300"
         />
       </div>
 
@@ -91,22 +91,23 @@ export default function ContactForm() {
           rows={4}
           autoComplete="off"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all resize-none"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300 resize-none"
         ></textarea>
       </div>
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)] hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden group
+          before:absolute before:inset-0 before:bg-white/20 before:translate-y-full before:transition-transform before:duration-500 hover:before:translate-y-0"
       >
         {status === 'submitting' ? (
           <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            {t('submitting')}
+            <Loader2 className="w-5 h-5 animate-spin relative z-10" />
+            <span className="relative z-10">{t('submitting')}</span>
           </>
         ) : (
-          t('submit')
+          <span className="relative z-10">{t('submit')}</span>
         )}
       </button>
     </form>

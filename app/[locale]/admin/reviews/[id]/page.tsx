@@ -11,7 +11,7 @@ export default async function EditReviewPage({ params }: { params: Promise<{ id:
   const review = await prisma.productReview.findUnique({
     where: { id },
     include: {
-      productLocale: {
+      ProductLocale: {
         select: {
           name: true,
           locale: true,
@@ -40,7 +40,7 @@ export default async function EditReviewPage({ params }: { params: Promise<{ id:
           {/* Ürün Bilgisi */}
           <div className="bg-gray-50 p-4 rounded-lg">
             <p className="text-sm text-gray-600">
-              <span className="font-semibold">Ürün:</span> {review.productLocale.name} ({review.productLocale.locale})
+              <span className="font-semibold">Ürün:</span> {review.ProductLocale.name} ({review.ProductLocale.locale})
             </p>
           </div>
 

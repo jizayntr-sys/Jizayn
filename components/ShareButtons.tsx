@@ -47,8 +47,8 @@ export default function ShareButtons({ url, title, translations }: Props) {
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
 
   return (
-    <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
-      <span className="text-sm font-medium text-gray-500">{translations.title}</span>
+    <div className="flex items-center gap-4 p-4 border-2 border-gray-300 rounded-lg shadow-md bg-white">
+      <span className="text-sm font-medium text-gray-700">{translations.title}</span>
       
       <div className="flex gap-2">
         {/* Yerel Paylaşım / Link Kopyala */}

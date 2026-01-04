@@ -10,23 +10,26 @@ export async function GET(request: NextRequest) {
 
     const products = await prisma.product.findMany({
       include: {
-        brand: true,
-        locales: {
+        Brand: true,
+        ProductLocale: {
           include: {
-            images: {
+            ProductImage: {
               orderBy: { order: 'asc' },
             },
-            reviews: true,
-            faqs: {
+            ProductReview: true,
+            ProductFaq: {
               orderBy: { order: 'asc' },
             },
-            offers: true,
-            rating: true,
+            ProductOffer: true,
+            ProductRating: true,
           },
           ...(locale ? { where: { locale } } : {}),
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: [
+        { sortOrder: 'asc' },
+        { createdAt: 'desc' }
+      ],
     });
 
     // Prisma sonuçlarını Product type formatına dönüştür
@@ -52,6 +55,7 @@ export async function POST(request: NextRequest) {
       brand,
       brandId,
       locales,
+      sortOrder,
     } = body;
 
     // Brand'i bul veya oluştur
@@ -101,6 +105,7 @@ export async function POST(request: NextRequest) {
       data: {
         category,
         tags: tags || [],
+        sortOrder: sortOrder !== undefined ? sortOrder : 0,
         brandId: existingBrand.id,
         locales: {
           create: localesArray.map((localeData: any) => ({
@@ -181,14 +186,14 @@ export async function POST(request: NextRequest) {
         },
       },
       include: {
-        brand: true,
-        locales: {
+        Brand: true,
+        ProductLocale: {
           include: {
-            images: { orderBy: { order: 'asc' } },
-            reviews: true,
-            faqs: { orderBy: { order: 'asc' } },
-            offers: true,
-            rating: true,
+            ProductImage: { orderBy: { order: 'asc' } },
+            ProductReview: true,
+            ProductFaq: { orderBy: { order: 'asc' } },
+            ProductOffer: true,
+            ProductRating: true,
           },
         },
       },

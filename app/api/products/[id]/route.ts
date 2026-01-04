@@ -15,27 +15,27 @@ export async function GET(
     const product = await prisma.product.findUnique({
       where: { id },
       include: {
-        brand: true,
-        locales: {
+        Brand: true,
+        ProductLocale: {
           where: { locale },
           include: {
-            images: {
+            ProductImage: {
               orderBy: { order: 'asc' },
             },
-            reviews: {
+            ProductReview: {
               orderBy: { datePublished: 'desc' },
             },
-            faqs: {
+            ProductFaq: {
               orderBy: { order: 'asc' },
             },
-            offers: true,
-            rating: true,
+            ProductOffer: true,
+            ProductRating: true,
           },
         },
       },
     });
 
-    if (!product || product.locales.length === 0) {
+    if (!product || product.ProductLocale.length === 0) {
       return NextResponse.json(
         { error: 'Ürün bulunamadı.' },
         { status: 404 }
@@ -66,6 +66,7 @@ export async function PUT(
       brand,
       brandId,
       locales,
+      sortOrder,
     } = body;
 
     // Ürünün var olup olmadığını kontrol et
@@ -111,6 +112,7 @@ export async function PUT(
       data: {
         ...(category && { category }),
         ...(tags && { tags }),
+        ...(sortOrder !== undefined && { sortOrder }),
         ...(targetBrandId && { brandId: targetBrandId }),
         ...(localesArray && Array.isArray(localesArray) && {
           locales: {
@@ -184,14 +186,14 @@ export async function PUT(
         }),
       },
       include: {
-        brand: true,
-        locales: {
+        Brand: true,
+        ProductLocale: {
           include: {
-            images: { orderBy: { order: 'asc' } },
-            reviews: true,
-            faqs: { orderBy: { order: 'asc' } },
-            offers: true,
-            rating: true,
+            ProductImage: { orderBy: { order: 'asc' } },
+            ProductReview: true,
+            ProductFaq: { orderBy: { order: 'asc' } },
+            ProductOffer: true,
+            ProductRating: true,
           },
         },
       },

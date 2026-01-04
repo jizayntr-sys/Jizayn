@@ -6,152 +6,144 @@ datasource db {
   provider = "postgresql"
 }
 
-// Marka Tablosu
 model Brand {
-  id        String   @id @default(uuid())
+  id        String    @id
   name      String
   url       String
   logo      String
-  products  Product[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  Product   Product[]
 }
 
-// Ana Ürün Tablosu
 model Product {
-  id          String          @id @default(uuid())
-  category    String
-  tags        String[]        // PostgreSQL array
-  brandId     String
-  brand       Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  locales     ProductLocale[]
-  isFeatured  Boolean         @default(false)
-  sortOrder   Int             @default(0)  // Manuel sıralama için
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id            String          @id
+  category      String
+  tags          String[]
+  brandId       String
+  isFeatured    Boolean         @default(false)
+  sortOrder     Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  Brand         Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  ProductLocale ProductLocale[]
 
-  @@index([category])
   @@index([brandId])
+  @@index([category])
   @@index([sortOrder])
 }
 
-// Ürün Lokalizasyon Tablosu (Her dil için ürün verisi)
+model ProductFaq {
+  id              String        @id
+  productLocaleId String
+  question        String
+  answer          String
+  order           Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  ProductLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, order])
+}
+
+model ProductImage {
+  id                   String        @id
+  productLocaleId      String
+  url                  String
+  alt                  String
+  pinterestDescription String?
+  order                Int           @default(0)
+  createdAt            DateTime      @default(now())
+  ProductLocale        ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, order])
+}
+
 model ProductLocale {
-  id              String          @id @default(uuid())
+  id              String          @id
   productId       String
-  product         Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  locale          String          // 'tr', 'en', 'fr', etc.
+  locale          String
   slug            String
   name            String          @db.VarChar(500)
-  description     String          @db.Text
+  description     String
   dimensions      String
   materials       String
-  specifications  String[]        // PostgreSQL array
+  specifications  String[]
   sku             String
   gtin            String?
-  availability    String          // 'InStock', 'OutOfStock', 'PreOrder', 'BackOrder'
+  availability    String
   priceMin        Decimal         @db.Decimal(10, 2)
   priceMax        Decimal         @db.Decimal(10, 2)
-  priceCurrency   String          // 'TRY', 'USD', 'EUR', etc.
+  priceCurrency   String
   amazonUrl       String?
   etsyUrl         String?
   video           String?
   metaTitle       String          @db.VarChar(500)
-  metaDescription String          @db.Text
-  metaKeywords    String[]        // PostgreSQL array
-  images          ProductImage[]
-  reviews         ProductReview[]
-  faqs            ProductFaq[]
-  offers          ProductOffer[]
-  rating          ProductRating?
+  metaDescription String
+  metaKeywords    String[]
   createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+  updatedAt       DateTime
+  ProductFaq      ProductFaq[]
+  ProductImage    ProductImage[]
+  Product         Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  ProductOffer    ProductOffer[]
+  ProductRating   ProductRating?
+  ProductReview   ProductReview[]
 
-  @@unique([productId, locale])
   @@unique([locale, slug])
-  @@index([productId])
+  @@unique([productId, locale])
   @@index([locale])
+  @@index([productId])
   @@index([slug])
 }
 
-// Ürün Görselleri Tablosu
-model ProductImage {
-  id                  String        @id @default(uuid())
-  productLocaleId     String
-  productLocale       ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
-  url                 String
-  alt                 String
-  pinterestDescription String?
-  order               Int           @default(0)
-  createdAt           DateTime      @default(now())
-
-  @@index([productLocaleId])
-  @@index([productLocaleId, order])
-}
-
-// Ürün Yorumları Tablosu
-model ProductReview {
-  id              String        @id @default(uuid())
-  productLocaleId String
-  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
-  author          String
-  datePublished   DateTime
-  reviewBody      String        @db.Text
-  reviewRating    Int           // 1-5
-  reviewSource    String?       // 'Amazon', 'Etsy', 'Website'
-  isApproved      Boolean       @default(false)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-
-  @@index([productLocaleId])
-  @@index([productLocaleId, reviewRating])
-}
-
-// Ürün FAQ Tablosu
-model ProductFaq {
-  id              String        @id @default(uuid())
-  productLocaleId String
-  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
-  question        String        @db.Text
-  answer          String        @db.Text
-  order           Int           @default(0)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-
-  @@index([productLocaleId])
-  @@index([productLocaleId, order])
-}
-
-// Ürün Offer Tablosu (Amazon/Etsy)
 model ProductOffer {
-  id              String        @id @default(uuid())
+  id              String        @id
   productLocaleId String
-  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
-  platform        String        // 'amazon' or 'etsy'
+  platform        String
   url             String
-  availability    String        // 'InStock', 'OutOfStock', 'PreOrder', 'BackOrder'
+  availability    String
   price           Decimal       @db.Decimal(10, 2)
   priceCurrency   String
   sku             String?
   gtin            String?
   createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  updatedAt       DateTime
+  ProductLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
 
   @@unique([productLocaleId, platform])
   @@index([productLocaleId])
 }
 
-// Ürün Rating Tablosu (Aggregate Rating)
 model ProductRating {
-  id              String        @id @default(uuid())
+  id              String        @id
   productLocaleId String        @unique
-  productLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
-  ratingValue     Decimal       @db.Decimal(3, 2) // 0.00 - 5.00
+  ratingValue     Decimal       @db.Decimal(3, 2)
   reviewCount     Int
   bestRating      Int           @default(5)
   worstRating     Int           @default(1)
   createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  updatedAt       DateTime
+  ProductLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
 
   @@index([productLocaleId])
+}
+
+model ProductReview {
+  id              String        @id
+  productLocaleId String
+  author          String
+  datePublished   DateTime
+  reviewBody      String
+  reviewRating    Int
+  reviewSource    String?
+  isApproved      Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  ProductLocale   ProductLocale @relation(fields: [productLocaleId], references: [id], onDelete: Cascade)
+
+  @@index([productLocaleId])
+  @@index([productLocaleId, reviewRating])
 }

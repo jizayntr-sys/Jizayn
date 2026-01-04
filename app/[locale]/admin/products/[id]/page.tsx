@@ -14,10 +14,10 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
   const product = await prisma.product.findUnique({
     where: { id },
     include: {
-      brand: true,
-      locales: {
+      Brand: true,
+      ProductLocale: {
         include: {
-          images: {
+          ProductImage: {
             orderBy: { order: 'asc' },
           },
         },
@@ -29,8 +29,8 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     notFound();
   }
 
-  const trLocale = product.locales.find((l: any) => l.locale === 'tr');
-  const enLocale = product.locales.find((l: any) => l.locale === 'en');
+  const trLocale = product.ProductLocale.find((l: any) => l.locale === 'tr');
+  const enLocale = product.ProductLocale.find((l: any) => l.locale === 'en');
 
   return (
     <div className="pt-24 p-8 max-w-7xl mx-auto bg-gray-50 min-h-screen">
@@ -202,14 +202,14 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           </div>
 
           {/* Mevcut Görseller */}
-          {trLocale && trLocale.images.length > 0 && (
+          {trLocale && trLocale.ProductImage && trLocale.ProductImage.length > 0 && (
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4 text-gray-800">Mevcut Görseller</h3>
               <p className="text-sm text-gray-600 mb-4">
                 💡 <strong>Order değeri en küçük olan resim</strong> ürün listesinde önizleme olarak gösterilir. (0 = İlk resim, 1 = İkinci resim, vs.)
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {trLocale.images.map((img: any, index: number) => (
+                {trLocale.ProductImage.map((img: any, index: number) => (
                   <div key={img.id} className="space-y-2 border border-gray-200 rounded-lg p-3 bg-white">
                     <div className="relative aspect-square">
                       <Image

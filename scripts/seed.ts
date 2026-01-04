@@ -29,7 +29,7 @@ const sampleProducts = [
         metaDescription: 'Modern ve şık ahşap duvar saati. El yapımı, doğal malzeme.',
         metaKeywords: ['ahşap saat', 'duvar saati', 'el yapımı'],
         images: [
-          { url: '/images/products/clock-1.jpg', alt: 'Ahşap Duvar Saati', pinterestDescription: 'El yapımı ahşap duvar saati' },
+          { url: '/images/products/Woody/robot-desk-organizer-1.webp', alt: 'Ahşap Duvar Saati', pinterestDescription: 'El yapımı ahşap duvar saati' },
         ],
         reviews: [],
         faqs: [],
@@ -49,7 +49,7 @@ const sampleProducts = [
         metaDescription: 'Modern and elegant wooden wall clock. Handmade, natural materials.',
         metaKeywords: ['wooden clock', 'wall clock', 'handmade'],
         images: [
-          { url: '/images/products/clock-1.jpg', alt: 'Wooden Wall Clock', pinterestDescription: 'Handmade wooden wall clock' },
+          { url: '/images/products/Woody/robot-desk-organizer-1.webp', alt: 'Wooden Wall Clock', pinterestDescription: 'Handmade wooden wall clock' },
         ],
         reviews: [],
         faqs: [],
@@ -88,12 +88,14 @@ async function main() {
       update: {
         category: productData.category,
         tags: productData.tags,
+        updatedAt: new Date(),
       },
       create: {
         id: productData.id,
         category: productData.category,
         tags: productData.tags,
         brandId: brand.id,
+        updatedAt: new Date(),
       },
     });
 
@@ -170,6 +172,7 @@ async function main() {
       for (let i = 0; i < localeData.images.length; i++) {
         await prisma.productImage.create({
           data: {
+            id: crypto.randomUUID(),
             productLocaleId: productLocale.id,
             url: localeData.images[i].url,
             alt: localeData.images[i].alt,

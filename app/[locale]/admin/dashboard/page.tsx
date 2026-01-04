@@ -18,7 +18,7 @@ export default async function AdminDashboard() {
     pendingReviews = await prisma.productReview.findMany({
       where: { isApproved: false },
       include: {
-        productLocale: {
+        ProductLocale: {
           select: {
             name: true,
             locale: true,
@@ -40,8 +40,8 @@ export default async function AdminDashboard() {
     // 2. Tüm ürünleri çek (Marka ve İsim bilgileriyle beraber)
     products = await prisma.product.findMany({
       include: {
-        brand: true,
-        locales: true, // Ürün ismini bulmak için gerekli
+        Brand: true,
+        ProductLocale: true, // Ürün ismini bulmak için gerekli
       },
       orderBy: { createdAt: 'desc' },
     });
@@ -120,8 +120,8 @@ export default async function AdminDashboard() {
           <div className="grid gap-4">
             {pendingReviews.map((review: any) => {
               // Güvenli null kontrolü
-              const productName = review.productLocale?.name || 'Ürün Bilgisi Yok';
-              const productLocale = review.productLocale?.locale || 'N/A';
+              const productName = review.ProductLocale?.name || 'Ürün Bilgisi Yok';
+              const productLocale = review.ProductLocale?.locale || 'N/A';
               
               return (
               <div key={review.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
@@ -183,7 +183,7 @@ export default async function AdminDashboard() {
             <tbody className="divide-y divide-gray-200">
               {products.map((product: any) => {
                 // Türkçe ismi bulmaya çalış, yoksa ilk bulduğunu al, o da yoksa ID göster
-                const displayName = product.locales.find((l: any) => l.locale === 'tr')?.name || product.locales[0]?.name || 'İsimsiz Ürün';
+                const displayName = product.ProductLocale.find((l: any) => l.locale === 'tr')?.name || product.ProductLocale[0]?.name || 'İsimsiz Ürün';
                 
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition">
@@ -192,7 +192,7 @@ export default async function AdminDashboard() {
                       {product.isFeatured && <span className="ml-2 text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Öne Çıkan</span>}
                     </td>
                     <td className="px-6 py-4">{product.category}</td>
-                    <td className="px-6 py-4">{product.brand?.name || '-'}</td>
+                    <td className="px-6 py-4">{product.Brand?.name || '-'}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex gap-2 justify-end">
                         <Link

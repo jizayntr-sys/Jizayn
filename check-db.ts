@@ -29,16 +29,16 @@ async function checkDatabase() {
     console.log('📦 ÜRÜNLER:');
     const products = await prisma.product.findMany({
       include: {
-        brand: true,
-        locales: true
+        Brand: true,
+        ProductLocale: true,
       }
     });
     products.forEach(p => {
       console.log(`\nID: ${p.id}`);
       console.log(`Kategori: ${p.category}`);
-      console.log(`Marka: ${p.brand.name}`);
-      console.log(`Locale sayısı: ${p.locales.length}`);
-      p.locales.forEach(l => {
+      console.log(`Marka: ${p.Brand.name}`);
+      console.log(`Locale sayısı: ${p.ProductLocale.length}`);
+      p.ProductLocale.forEach(l => {
         console.log(`  - ${l.locale}: ${l.name} (${l.slug})`);
       });
     });
@@ -49,7 +49,7 @@ async function checkDatabase() {
     console.log('\n💬 YORUMLAR:');
     const reviews = await prisma.productReview.findMany({
       include: {
-        productLocale: {
+        ProductLocale: {
           select: { name: true, locale: true }
         }
       }
@@ -59,7 +59,7 @@ async function checkDatabase() {
       console.log(`Yazar: ${r.author}`);
       console.log(`Puan: ${r.reviewRating}/5`);
       console.log(`Onaylı: ${r.isApproved}`);
-      console.log(`Ürün: ${r.productLocale.name}`);
+      console.log(`Ürün: ${r.ProductLocale.name}`);
     });
   }
   

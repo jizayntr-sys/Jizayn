@@ -53,10 +53,11 @@ export default function StockNotificationForm({ translations, productId }: Props
       {/* Tetikleyici Buton */}
       <button
         onClick={() => setIsOpen(true)}
-        className="w-full md:w-auto bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center justify-center gap-2 shadow-sm"
+        className="w-full md:w-auto bg-gradient-to-r from-gray-900 to-gray-800 text-white px-8 py-3 rounded-lg hover:from-gray-800 hover:to-gray-900 transition-all duration-500 font-medium flex items-center justify-center gap-2 shadow-lg hover:shadow-[0_8px_30px_rgba(17,24,39,0.4)] hover:scale-105 hover:-translate-y-1 group relative overflow-hidden
+          before:absolute before:inset-0 before:bg-white/10 before:translate-y-full before:transition-transform before:duration-500 hover:before:translate-y-0"
       >
-        <Bell className="w-5 h-5" />
-        {translations.title}
+        <Bell className="w-5 h-5 relative z-10 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+        <span className="relative z-10">{translations.title}</span>
       </button>
 
       {/* Modal */}
@@ -107,18 +108,19 @@ export default function StockNotificationForm({ translations, productId }: Props
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={translations.emailPlaceholder}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-500 font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center shadow-lg hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)] hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden group
+                      before:absolute before:inset-0 before:bg-white/20 before:translate-y-full before:transition-transform before:duration-500 hover:before:translate-y-0"
                   >
                     {status === 'loading' ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin relative z-10" />
                     ) : (
-                      translations.submit
+                      <span className="relative z-10">{translations.submit}</span>
                     )}
                   </button>
                   {status === 'error' && (

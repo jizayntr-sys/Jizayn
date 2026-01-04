@@ -17,10 +17,10 @@ export async function GET(
         },
       },
       include: {
-        product: {
+        Product: {
           include: {
-            brand: true,
-            locales: {
+            Brand: true,
+            ProductLocale: {
               select: {
                 locale: true,
                 slug: true,
@@ -28,17 +28,17 @@ export async function GET(
             },
           },
         },
-        images: {
+        ProductImage: {
           orderBy: { order: 'asc' },
         },
-        reviews: {
+        ProductReview: {
           orderBy: { datePublished: 'desc' },
         },
-        faqs: {
+        ProductFaq: {
           orderBy: { order: 'asc' },
         },
-        offers: true,
-        rating: true,
+        ProductOffer: true,
+        ProductRating: true,
       },
     });
 
@@ -50,7 +50,7 @@ export async function GET(
     }
 
     // Tüm dillerdeki slug'ları bir map olarak hazırla
-    const slugs = productLocale.product.locales.reduce((acc, locale) => {
+    const slugs = productLocale.Product.ProductLocale.reduce((acc, locale) => {
       acc[locale.locale] = locale.slug;
       return acc;
     }, {} as Record<string, string>);

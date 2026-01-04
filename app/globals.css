@@ -46,6 +46,20 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Şık Input Focus Efektleri */
+  input:focus, textarea:focus {
+    @apply ring-2 ring-indigo-500 border-indigo-500 shadow-lg shadow-indigo-100;
+  }
+  
+  /* Premium Button Glow Effect */
+  .btn-glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  }
 }
 
 /* Rich Text Editor Styles */

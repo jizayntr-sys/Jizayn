@@ -136,7 +136,7 @@ export default async function HomePage() {
                 const title = t('hero.title');
                 // Kelimelere ayır, boşlukları ve noktalama işaretlerini koru
                 const parts = title.split(/(\s+|,|\.)/);
-                const colors = ['text-orange-400', 'text-green-400', 'text-blue-400', 'text-yellow-400'];
+                const colors = ['text-blue-400', 'text-gray-100', 'text-green-400', 'text-purple-400'];
                 let wordIndex = 0;
                 return parts.map((part, index) => {
                   // Boşluk veya noktalama işareti ise olduğu gibi döndür

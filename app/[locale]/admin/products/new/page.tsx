@@ -62,6 +62,19 @@ export default async function NewProductPage() {
                 />
                 <label htmlFor="isFeatured" className="text-sm font-medium text-gray-700">Öne Çıkan Ürün</label>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Sıralama</label>
+                <input
+                  type="number"
+                  name="sortOrder"
+                  defaultValue="0"
+                  min="0"
+                  placeholder="0"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                />
+                <p className="text-xs text-gray-500 mt-1">Küçük numara önce gösterilir</p>
+              </div>
             </div>
           </div>
 
@@ -175,20 +188,11 @@ export default async function NewProductPage() {
                   Ürün Görselleri (En az 1, En fazla 8)
                 </label>
                 <p className="text-xs text-gray-500 mb-3">
-                  Görselleri public/images/products klasörüne yükleyin ve yolunu girin
+                  URL girebilir veya dosya yükleyebilirsiniz. İlk görsel (Görsel 1) zorunludur.
                 </p>
                 
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                  <div key={num}>
-                    <label className="block text-xs text-gray-600 mb-1">Görsel {num} {num === 1 && '*'}</label>
-                    <input
-                      type="text"
-                      name={`imageUrl_${num}`}
-                      placeholder={`Örn: /images/products/urun-${num}.jpg`}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm"
-                      required={num === 1}
-                    />
-                  </div>
+                  <ImageUploadInput key={num} num={num} />
                 ))}
               </div>
             </div>
@@ -196,7 +200,12 @@ export default async function NewProductPage() {
 
           {/* İngilizce İçerik */}
           <div className="border-b pb-6">
-            <h3 className="text-lg font-semibold mb-4 text-gray-800">İngilizce İçerik (Opsiyonel)</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-800">
+              İngilizce İçerik 
+              <span className="text-sm font-normal text-gray-600 ml-2">
+                (Otomatik çevrilir - ancak manuel doldurmanız önerilir)
+              </span>
+            </h3>
             
             <div className="space-y-4">
               <div>

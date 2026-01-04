@@ -85,14 +85,14 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
                 onClick={() => setRating(star)}
                 onMouseEnter={() => setHoverRating(star)}
                 onMouseLeave={() => setHoverRating(0)}
-                className="focus:outline-none transition-transform hover:scale-110"
+                className="focus:outline-none transition-all duration-300 hover:scale-125 active:scale-95"
                 aria-label={`${star} Yıldız`}
               >
                 <Star
-                  className={`w-8 h-8 transition-colors ${
+                  className={`w-8 h-8 transition-all duration-300 ${
                     star <= (hoverRating || rating)
-                      ? 'fill-yellow-400 text-yellow-400'
-                      : 'text-gray-300'
+                      ? 'fill-yellow-400 text-yellow-400 drop-shadow-[0_2px_8px_rgba(250,204,21,0.6)]'
+                      : 'text-gray-300 hover:text-gray-400'
                   }`}
                 />
               </button>
@@ -111,7 +111,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             name="name"
             autoComplete="name"
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300"
           />
         </div>
 
@@ -126,7 +126,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             rows={4}
             autoComplete="off"
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all resize-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-100 outline-none transition-all duration-300 resize-none"
           />
         </div>
 
@@ -142,15 +142,16 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-500 disabled:opacity-50 flex items-center gap-2 shadow-lg hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)] hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden group
+            before:absolute before:inset-0 before:bg-white/20 before:translate-y-full before:transition-transform before:duration-500 hover:before:translate-y-0"
         >
           {status === 'submitting' ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Gönderiliyor...
+              <Loader2 className="w-4 h-4 animate-spin relative z-10" />
+              <span className="relative z-10">Gönderiliyor...</span>
             </>
           ) : (
-            tForm('submit')
+            <span className="relative z-10">{tForm('submit')}</span>
           )}
         </button>
       </form>

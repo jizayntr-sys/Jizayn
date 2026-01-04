@@ -15,21 +15,21 @@ import { transformProduct } from '@/lib/prisma-helpers';
 export async function getAllProducts(locale?: string): Promise<Product[]> {
   const products = await prisma.product.findMany({
     include: {
-      brand: true,
-      locales: {
+      Brand: true,
+      ProductLocale: {
         where: locale ? { locale } : undefined,
         include: {
-          images: {
+          ProductImage: {
             orderBy: { order: 'asc' },
           },
-          reviews: {
+          ProductReview: {
             orderBy: { datePublished: 'desc' },
           },
-          faqs: {
+          ProductFaq: {
             orderBy: { order: 'asc' },
           },
-          offers: true,
-          rating: true,
+          ProductOffer: true,
+          ProductRating: true,
         },
       },
     },
@@ -43,13 +43,15 @@ export async function getAllProducts(locale?: string): Promise<Product[]> {
 }
 
 /**
- * Slug ile ürün getirir
+ * Slug ile ürün getirir (Fallback destekli)
+ * Eğer istenen locale yoksa, önce EN sonra TR'ye fallback yapar
  * @param slug - Ürün slug'ı
  * @param locale - Locale kodu (tr, en, vs.)
  * @returns Product veya null
  */
 export async function getProductBySlug(slug: string, locale: string): Promise<Product | null> {
-  const productLocale = await prisma.productLocale.findUnique({
+  // Önce istenen locale'de ara
+  let productLocale = await prisma.productLocale.findUnique({
     where: {
       locale_slug: {
         locale,
@@ -57,22 +59,22 @@ export async function getProductBySlug(slug: string, locale: string): Promise<Pr
       },
     },
     include: {
-      product: {
+      Product: {
         include: {
-          brand: true,
-          locales: {
+          Brand: true,
+          ProductLocale: {
             include: {
-              images: {
+              ProductImage: {
                 orderBy: { order: 'asc' },
               },
-              reviews: {
+              ProductReview: {
                 orderBy: { datePublished: 'desc' },
               },
-              faqs: {
+              ProductFaq: {
                 orderBy: { order: 'asc' },
               },
-              offers: true,
-              rating: true,
+              ProductOffer: true,
+              ProductRating: true,
             },
           },
         },
@@ -80,11 +82,70 @@ export async function getProductBySlug(slug: string, locale: string): Promise<Pr
     },
   });
 
+  // İstenen locale'de bulunamadı, fallback deneyelim
+  if (!productLocale && locale !== 'en' && locale !== 'tr') {
+    console.log(`${locale} locale bulunamadı, fallback yapılıyor...`);
+    
+    // Önce EN'de ara
+    productLocale = await prisma.productLocale.findUnique({
+      where: {
+        locale_slug: {
+          locale: 'en',
+          slug,
+        },
+      },
+      include: {
+        Product: {
+          include: {
+            Brand: true,
+            ProductLocale: {
+              include: {
+                ProductImage: { orderBy: { order: 'asc' } },
+                ProductReview: { orderBy: { datePublished: 'desc' } },
+                ProductFaq: { orderBy: { order: 'asc' } },
+                ProductOffer: true,
+                ProductRating: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // EN'de de yok, TR'de ara
+    if (!productLocale) {
+      productLocale = await prisma.productLocale.findUnique({
+        where: {
+          locale_slug: {
+            locale: 'tr',
+            slug,
+          },
+        },
+        include: {
+          Product: {
+            include: {
+              Brand: true,
+              ProductLocale: {
+                include: {
+                  ProductImage: { orderBy: { order: 'asc' } },
+                  ProductReview: { orderBy: { datePublished: 'desc' } },
+                  ProductFaq: { orderBy: { order: 'asc' } },
+                  ProductOffer: true,
+                  ProductRating: true,
+                },
+              },
+            },
+          },
+        },
+      });
+    }
+  }
+
   if (!productLocale) {
     return null;
   }
 
-  return transformProduct(productLocale.product);
+  return transformProduct(productLocale.Product);
 }
 
 /**
@@ -96,20 +157,20 @@ export async function getProductById(id: string): Promise<Product | null> {
   const product = await prisma.product.findUnique({
     where: { id },
     include: {
-      brand: true,
-      locales: {
+      Brand: true,
+      ProductLocale: {
         include: {
-          images: {
+          ProductImage: {
             orderBy: { order: 'asc' },
           },
-          reviews: {
+          ProductReview: {
             orderBy: { datePublished: 'desc' },
           },
-          faqs: {
+          ProductFaq: {
             orderBy: { order: 'asc' },
           },
-          offers: true,
-          rating: true,
+          ProductOffer: true,
+          ProductRating: true,
         },
       },
     },
