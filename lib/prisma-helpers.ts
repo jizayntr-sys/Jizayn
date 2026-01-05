@@ -77,7 +77,7 @@ export function transformProductLocale(prismaLocale: any): ProductLocaleData {
 export function transformProduct(prismaProduct: any): Product {
   const locales: Record<string, ProductLocaleData> = {};
   
-  for (const locale of prismaProduct.ProductLocale) {
+  for (const locale of prismaProduct.locales) {
     locales[locale.locale] = transformProductLocale(locale);
   }
 

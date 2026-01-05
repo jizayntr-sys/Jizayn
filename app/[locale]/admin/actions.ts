@@ -11,7 +11,7 @@ async function copyImagesToAllLocales(productId: string) {
   const product = await prisma.product.findUnique({
     where: { id: productId },
     include: {
-      ProductLocale: {
+      locales: {
         include: {
           ProductImage: { orderBy: { order: 'asc' } }
         }
@@ -21,10 +21,10 @@ async function copyImagesToAllLocales(productId: string) {
 
   if (!product) return;
 
-  const trLocale = product.ProductLocale.find(l => l.locale === 'tr');
+  const trLocale = product.locales.find(l => l.locale === 'tr');
   if (!trLocale || !trLocale.ProductImage || trLocale.ProductImage.length === 0) return;
 
-  const otherLocales = product.ProductLocale.filter(l => l.locale !== 'tr');
+  const otherLocales = product.locales.filter(l => l.locale !== 'tr');
 
   for (const locale of otherLocales) {
     // Mevcut resimleri sil

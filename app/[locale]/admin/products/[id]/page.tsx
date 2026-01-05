@@ -15,7 +15,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     where: { id },
     include: {
       Brand: true,
-      ProductLocale: {
+      locales: {
         include: {
           ProductImage: {
             orderBy: { order: 'asc' },
@@ -29,8 +29,8 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     notFound();
   }
 
-  const trLocale = product.ProductLocale.find((l: any) => l.locale === 'tr');
-  const enLocale = product.ProductLocale.find((l: any) => l.locale === 'en');
+  const trLocale = product.locales.find((l: any) => l.locale === 'tr');
+  const enLocale = product.locales.find((l: any) => l.locale === 'en');
 
   return (
     <div className="pt-24 p-8 max-w-7xl mx-auto bg-gray-50 min-h-screen">

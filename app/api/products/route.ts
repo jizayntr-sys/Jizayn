@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const products = await prisma.product.findMany({
       include: {
         Brand: true,
-        ProductLocale: {
+        locales: {
           include: {
             ProductImage: {
               orderBy: { order: 'asc' },
@@ -187,7 +187,7 @@ export async function POST(request: NextRequest) {
       },
       include: {
         Brand: true,
-        ProductLocale: {
+        locales: {
           include: {
             ProductImage: { orderBy: { order: 'asc' } },
             ProductReview: true,

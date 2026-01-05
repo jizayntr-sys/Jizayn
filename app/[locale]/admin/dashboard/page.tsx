@@ -41,7 +41,7 @@ export default async function AdminDashboard() {
     products = await prisma.product.findMany({
       include: {
         Brand: true,
-        ProductLocale: true, // Ürün ismini bulmak için gerekli
+        locales: true, // Ürün ismini bulmak için gerekli
       },
       orderBy: { createdAt: 'desc' },
     });
@@ -183,7 +183,7 @@ export default async function AdminDashboard() {
             <tbody className="divide-y divide-gray-200">
               {products.map((product: any) => {
                 // Türkçe ismi bulmaya çalış, yoksa ilk bulduğunu al, o da yoksa ID göster
-                const displayName = product.ProductLocale.find((l: any) => l.locale === 'tr')?.name || product.ProductLocale[0]?.name || 'İsimsiz Ürün';
+                const displayName = product.locales.find((l: any) => l.locale === 'tr')?.name || product.locales[0]?.name || 'İsimsiz Ürün';
                 
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition">

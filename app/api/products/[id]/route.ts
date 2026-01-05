@@ -16,7 +16,7 @@ export async function GET(
       where: { id },
       include: {
         Brand: true,
-        ProductLocale: {
+        locales: {
           where: { locale },
           include: {
             ProductImage: {
@@ -35,7 +35,7 @@ export async function GET(
       },
     });
 
-    if (!product || product.ProductLocale.length === 0) {
+    if (!product || product.locales.length === 0) {
       return NextResponse.json(
         { error: 'Ürün bulunamadı.' },
         { status: 404 }
@@ -187,7 +187,7 @@ export async function PUT(
       },
       include: {
         Brand: true,
-        ProductLocale: {
+        locales: {
           include: {
             ProductImage: { orderBy: { order: 'asc' } },
             ProductReview: true,
