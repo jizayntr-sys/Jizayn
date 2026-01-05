@@ -427,8 +427,8 @@ export async function createProduct(formData: FormData) {
         metaTitle: nameEn,
         metaDescription: descriptionEn.substring(0, 160),
         metaKeywords: [],
-        createdAt: now,
-        updatedAt: now,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
 
