@@ -51,6 +51,7 @@ export async function POST() {
     for (const image of trLocale.ProductImage) {
       await prisma.productImage.create({
         data: {
+          id: crypto.randomUUID(),
           productLocaleId: enLocale.id,
           url: image.url,
           alt: image.alt,

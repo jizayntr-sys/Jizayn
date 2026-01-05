@@ -97,6 +97,7 @@ export async function POST() {
 
       return prisma.productImage.create({
         data: {
+          id: crypto.randomUUID(),
           productLocaleId: enLocale.id,
           url: image.url,
           alt: altEn,

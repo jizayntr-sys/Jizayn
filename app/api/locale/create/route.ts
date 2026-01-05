@@ -159,6 +159,7 @@ export async function GET(request: NextRequest) {
 
       return prisma.productImage.create({
         data: {
+          id: crypto.randomUUID(),
           productLocaleId: newLocale.id,
           url: image.url,
           alt,
