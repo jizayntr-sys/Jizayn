@@ -12,7 +12,7 @@ export async function POST() {
       include: {
         locales: {
           include: {
-            images: true
+            ProductImage: true
           }
         }
       }
@@ -25,7 +25,7 @@ export async function POST() {
       // TR locale'i bul
       const trLocale = product.locales.find(l => l.locale === 'tr');
       
-      if (!trLocale || !trLocale.images || trLocale.images.length === 0) {
+      if (!trLocale || !trLocale.ProductImage || trLocale.ProductImage.length === 0) {
         continue;
       }
 
@@ -34,7 +34,7 @@ export async function POST() {
 
       for (const locale of otherLocales) {
         // Bu locale'deki mevcut resimleri sil (üzerine yazma modu)
-        if (locale.images && locale.images.length > 0) {
+        if (locale.ProductImage && locale.ProductImage.length > 0) {
           await prisma.productImage.deleteMany({
             where: {
               productLocaleId: locale.id
@@ -43,7 +43,7 @@ export async function POST() {
         }
 
         // TR'deki resimleri bu locale'e kopyala ve alt text'leri çevir
-        for (const image of trLocale.images) {
+        for (const image of trLocale.ProductImage) {
           const targetLang = getLanguageCode(locale.locale);
           
           // Alt text'i çevir
@@ -77,7 +77,7 @@ export async function POST() {
         results.push({
           productId: product.id,
           locale: locale.locale,
-          imagesCopied: trLocale.images.length
+          imagesCopied: trLocale.ProductImage.length
         });
       }
     }

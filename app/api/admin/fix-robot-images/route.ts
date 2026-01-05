@@ -30,7 +30,7 @@ export async function POST() {
         }
       },
       include: {
-        images: {
+        ProductImage: {
           orderBy: { order: 'asc' }
         }
       }
@@ -48,7 +48,7 @@ export async function POST() {
     });
 
     // TR'deki resimleri EN'e kopyala
-    for (const image of trLocale.images) {
+    for (const image of trLocale.ProductImage) {
       await prisma.productImage.create({
         data: {
           productLocaleId: enLocale.id,
@@ -62,7 +62,7 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `${trLocale.images.length} resim kopyalandı`
+      message: `${trLocale.ProductImage.length} resim kopyalandı`
     });
   } catch (error) {
     console.error('Error copying robot images:', error);

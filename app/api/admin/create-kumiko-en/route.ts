@@ -19,7 +19,7 @@ export async function POST() {
       },
       include: {
         product: true,
-        images: { orderBy: { order: 'asc' } }
+        ProductImage: { orderBy: { order: 'asc' } }
       }
     });
 
@@ -89,7 +89,7 @@ export async function POST() {
 
     // TR'deki resimleri EN locale'e kopyala (alt text'leri çevirerek)
     console.log('Resimler kopyalanıyor...');
-    const imagePromises = trLocale.images.map(async (image) => {
+    const imagePromises = trLocale.ProductImage.map(async (image) => {
       const altEn = await translateText({ text: image.alt, from: 'tr', to: 'en' });
       const pinterestEn = image.pinterestDescription
         ? await translateText({ text: image.pinterestDescription, from: 'tr', to: 'en' })
@@ -108,7 +108,7 @@ export async function POST() {
 
     await Promise.all(imagePromises);
 
-    console.log(`✓ ${trLocale.images.length} resim kopyalandı`);
+    console.log(`✓ ${trLocale.ProductImage.length} resim kopyalandı`);
 
     return NextResponse.json({
       success: true,

@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
         locale: { in: ['en', 'tr'] }
       },
       include: {
-        images: { orderBy: { order: 'asc' } }
+        ProductImage: { orderBy: { order: 'asc' } }
       },
       orderBy: {
         // EN varsa önce onu al, yoksa TR
@@ -142,7 +142,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Görselleri kopyala (alt text'leri çevirerek)
-    const imagePromises = sourceLocale.images.map(async (image) => {
+    const imagePromises = sourceLocale.ProductImage.map(async (image) => {
       const alt = await translateText({
         text: image.alt,
         from: sourceLocale.locale,
@@ -177,7 +177,7 @@ export async function GET(request: NextRequest) {
       message: `${targetLocale.toUpperCase()} locale başarıyla oluşturuldu`,
       locale: newLocale,
       slug,
-      imageCount: sourceLocale.images.length
+      imageCount: sourceLocale.ProductImage.length
     }, { status: 201 });
 
   } catch (error) {

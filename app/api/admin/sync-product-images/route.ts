@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       include: {
         locales: {
           include: {
-            images: true
+            ProductImage: true
           }
         }
       }
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     // TR locale'i bul
     const trLocale = product.locales.find(l => l.locale === 'tr');
     
-    if (!trLocale || !trLocale.images || trLocale.images.length === 0) {
+    if (!trLocale || !trLocale.ProductImage || trLocale.ProductImage.length === 0) {
       return NextResponse.json(
         { error: 'TR locale veya resimleri bulunamadı' },
         { status: 404 }
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       });
 
       // TR'deki resimleri kopyala
-      for (const image of trLocale.images) {
+      for (const image of trLocale.ProductImage) {
         await prisma.productImage.create({
           data: {
             productLocaleId: locale.id,
