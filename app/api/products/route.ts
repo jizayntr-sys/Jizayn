@@ -112,6 +112,7 @@ export async function POST(request: NextRequest) {
         brandId: existingBrand.id,
         locales: {
           create: localesArray.map((localeData: any) => ({
+            id: crypto.randomUUID(),
             locale: localeData.locale,
             slug: localeData.slug,
             name: localeData.name,
@@ -131,33 +132,45 @@ export async function POST(request: NextRequest) {
             metaTitle: localeData.metaTitle || localeData.name,
             metaDescription: localeData.metaDescription || localeData.description.substring(0, 160),
             metaKeywords: localeData.metaKeywords || [],
-            images: {
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            ProductImage: {
               create: (localeData.images || []).map((img: any, index: number) => ({
+                id: crypto.randomUUID(),
                 url: img.url,
                 alt: img.alt,
                 pinterestDescription: img.pinterestDescription,
                 order: index,
+                createdAt: new Date(),
               })),
             },
-            reviews: {
+            ProductReview: {
               create: (localeData.reviews || []).map((review: any) => ({
+                id: crypto.randomUUID(),
                 author: review.author,
                 datePublished: new Date(review.datePublished),
                 reviewBody: review.reviewBody,
                 reviewRating: review.reviewRating,
                 reviewSource: review.reviewSource,
+                isApproved: false,
+                createdAt: new Date(),
+                updatedAt: new Date(),
               })),
             },
-            faqs: {
+            ProductFaq: {
               create: (localeData.faq || []).map((faq: any, index: number) => ({
+                id: crypto.randomUUID(),
                 question: faq.question,
                 answer: faq.answer,
                 order: index,
+                createdAt: new Date(),
+                updatedAt: new Date(),
               })),
             },
-            offers: {
+            ProductOffer: {
               create: [
                 localeData.amazonOffer && {
+                  id: crypto.randomUUID(),
                   platform: 'amazon',
                   url: localeData.amazonOffer.url,
                   availability: localeData.amazonOffer.availability,
@@ -165,8 +178,11 @@ export async function POST(request: NextRequest) {
                   priceCurrency: localeData.amazonOffer.priceCurrency,
                   sku: localeData.amazonOffer.sku,
                   gtin: localeData.amazonOffer.gtin,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
                 },
                 localeData.etsyOffer && {
+                  id: crypto.randomUUID(),
                   platform: 'etsy',
                   url: localeData.etsyOffer.url,
                   availability: localeData.etsyOffer.availability,
@@ -174,15 +190,20 @@ export async function POST(request: NextRequest) {
                   priceCurrency: localeData.etsyOffer.priceCurrency,
                   sku: localeData.etsyOffer.sku,
                   gtin: localeData.etsyOffer.gtin,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
                 },
               ].filter(Boolean) as any[],
             },
-            rating: localeData.aggregateRating ? {
+            ProductRating: localeData.aggregateRating ? {
               create: {
+                id: crypto.randomUUID(),
                 ratingValue: localeData.aggregateRating.ratingValue,
                 reviewCount: localeData.aggregateRating.reviewCount,
                 bestRating: localeData.aggregateRating.bestRating || 5,
                 worstRating: localeData.aggregateRating.worstRating || 1,
+                createdAt: new Date(),
+                updatedAt: new Date(),
               },
             } : undefined,
           })),
