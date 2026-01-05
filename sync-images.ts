@@ -6,7 +6,7 @@ async function syncAllProductImages() {
 
   const products = await prisma.product.findMany({
     include: {
-      ProductLocale: {
+      locales: {
         include: {
           ProductImage: { orderBy: { order: 'asc' } }
         }
@@ -17,7 +17,7 @@ async function syncAllProductImages() {
   for (const product of products) {
     console.log(`📦 Ürün: ${product.id}`);
     
-    const trLocale = product.ProductLocale.find(l => l.locale === 'tr');
+    const trLocale = product.locales.find(l => l.locale === 'tr');
     if (!trLocale) {
       console.log('  ⚠️ TR locale bulunamadı, atlanıyor...\n');
       continue;
@@ -30,7 +30,7 @@ async function syncAllProductImages() {
 
     console.log(`  ✅ TR'de ${trLocale.ProductImage.length} resim bulundu`);
 
-    const otherLocales = product.ProductLocale.filter(l => l.locale !== 'tr');
+    const otherLocales = product.locales.filter(l => l.locale !== 'tr');
 
     for (const locale of otherLocales) {
       console.log(`    → ${locale.locale.toUpperCase()} diline kopyalanıyor...`);

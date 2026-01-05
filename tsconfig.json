@@ -23,6 +23,6 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "scripts", "check-*.ts", "fix-*.ts", "get-*.ts"]
+  "exclude": ["node_modules", "scripts", "check-*.ts", "fix-*.ts", "get-*.ts", "create-*.ts", "sync-*.ts", "test-*.ts"]
 }
 

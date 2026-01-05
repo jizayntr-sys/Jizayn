@@ -13,8 +13,8 @@ async function createEnglishLocaleForKumiko() {
         locale: 'tr'
       },
       include: {
-        product: true,
-        images: { orderBy: { order: 'asc' } }
+        Product: true,
+        ProductImage: { orderBy: { order: 'asc' } }
       }
     });
 
@@ -56,6 +56,7 @@ async function createEnglishLocaleForKumiko() {
     // EN locale oluştur
     const enLocale = await prisma.productLocale.create({
       data: {
+        id: crypto.randomUUID(),
         productId: trLocale.productId,
         locale: 'en',
         slug: slugEn,
@@ -76,6 +77,8 @@ async function createEnglishLocaleForKumiko() {
         metaTitle: metaTitleEn,
         metaDescription: metaDescriptionEn,
         metaKeywords: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     });
 
@@ -83,7 +86,7 @@ async function createEnglishLocaleForKumiko() {
 
     // TR'deki resimleri EN locale'e kopyala (alt text'leri çevirerek)
     console.log('Resimler kopyalanıyor...');
-    for (const image of trLocale.images) {
+    for (const image of trLocale.ProductImage) {
       const altEn = await translateText({ text: image.alt, from: 'tr', to: 'en' });
       const pinterestEn = image.pinterestDescription
         ? await translateText({ text: image.pinterestDescription, from: 'tr', to: 'en' })
@@ -91,6 +94,7 @@ async function createEnglishLocaleForKumiko() {
 
       await prisma.productImage.create({
         data: {
+          id: crypto.randomUUID(),
           productLocaleId: enLocale.id,
           url: image.url,
           alt: altEn,
@@ -100,7 +104,7 @@ async function createEnglishLocaleForKumiko() {
       });
     }
 
-    console.log(`✓ ${trLocale.images.length} resim kopyalandı`);
+    console.log(`✓ ${trLocale.ProductImage.length} resim kopyalandı`);
     console.log('\n✅ Başarılı! Kumiko ürünü artık İngilizce olarak erişilebilir.');
     console.log(`TR: /tr/urunler/${trLocale.slug}`);
     console.log(`EN: /en/products/${slugEn}`);

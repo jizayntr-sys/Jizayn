@@ -6,7 +6,7 @@ async function checkKumiko() {
       slug: 'el-yapimi-kumiko-ahsap-masa-lambasi'
     },
     include: {
-      product: {
+      Product: {
         include: {
           locales: {
             select: {
@@ -27,7 +27,7 @@ async function checkKumiko() {
   if (locales.length > 0) {
     console.log('\n\nTüm Dil Versiyonları:');
     console.log('=====================');
-    locales[0].product.locales.forEach((locale: any) => {
+    locales[0].Product.locales.forEach((locale: any) => {
       console.log(`${locale.locale}: ${locale.slug} - ${locale.name}`);
     });
   }

@@ -69,9 +69,12 @@ async function main() {
   if (!brand) {
     brand = await prisma.brand.create({
       data: {
+        id: crypto.randomUUID(),
         name: 'Jizayn',
         url: 'https://www.jizayn.com',
         logo: 'https://www.jizayn.com/JizaynLogo.svg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
   }
@@ -141,6 +144,7 @@ async function main() {
           })
         : await prisma.productLocale.create({
             data: {
+              id: crypto.randomUUID(),
               productId: product.id,
               locale,
               slug: localeData.slug,
@@ -161,6 +165,8 @@ async function main() {
               metaTitle: localeData.metaTitle,
               metaDescription: localeData.metaDescription,
               metaKeywords: localeData.metaKeywords,
+              createdAt: new Date(),
+              updatedAt: new Date(),
             },
           });
 
@@ -192,12 +198,16 @@ async function main() {
         for (const review of localeData.reviews) {
           await prisma.productReview.create({
             data: {
+              id: crypto.randomUUID(),
               productLocaleId: productLocale.id,
               author: review.author,
               datePublished: new Date(review.datePublished),
               reviewBody: review.reviewBody,
               reviewRating: review.reviewRating,
               reviewSource: review.reviewSource,
+              isApproved: false,
+              createdAt: new Date(),
+              updatedAt: new Date(),
             },
           });
         }
@@ -213,10 +223,13 @@ async function main() {
         for (let i = 0; i < localeData.faq.length; i++) {
           await prisma.productFaq.create({
             data: {
+              id: crypto.randomUUID(),
               productLocaleId: productLocale.id,
               question: localeData.faq[i].question,
               answer: localeData.faq[i].answer,
               order: i,
+              createdAt: new Date(),
+              updatedAt: new Date(),
             },
           });
         }
@@ -231,6 +244,7 @@ async function main() {
       if (localeData.amazonOffer) {
         await prisma.productOffer.create({
           data: {
+            id: crypto.randomUUID(),
             productLocaleId: productLocale.id,
             platform: 'amazon',
             url: localeData.amazonOffer.url,
@@ -239,6 +253,8 @@ async function main() {
             priceCurrency: localeData.amazonOffer.priceCurrency,
             sku: localeData.amazonOffer.sku,
             gtin: localeData.amazonOffer.gtin,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           },
         });
         console.log(`    ✅ Amazon offer eklendi`);
@@ -247,6 +263,7 @@ async function main() {
       if (localeData.etsyOffer) {
         await prisma.productOffer.create({
           data: {
+            id: crypto.randomUUID(),
             productLocaleId: productLocale.id,
             platform: 'etsy',
             url: localeData.etsyOffer.url,
@@ -255,6 +272,8 @@ async function main() {
             priceCurrency: localeData.etsyOffer.priceCurrency,
             sku: localeData.etsyOffer.sku,
             gtin: localeData.etsyOffer.gtin,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           },
         });
         console.log(`    ✅ Etsy offer eklendi`);
@@ -271,11 +290,14 @@ async function main() {
             worstRating: localeData.aggregateRating.worstRating,
           },
           create: {
+            id: crypto.randomUUID(),
             productLocaleId: productLocale.id,
             ratingValue: localeData.aggregateRating.ratingValue,
             reviewCount: localeData.aggregateRating.reviewCount,
             bestRating: localeData.aggregateRating.bestRating,
             worstRating: localeData.aggregateRating.worstRating,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           },
         });
         console.log(`    ✅ Rating eklendi`);

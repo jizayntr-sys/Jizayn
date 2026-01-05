@@ -16,7 +16,7 @@ export async function getAllProducts(locale?: string): Promise<Product[]> {
   const products = await prisma.product.findMany({
     include: {
       Brand: true,
-      ProductLocale: {
+      locales: {
         where: locale ? { locale } : undefined,
         include: {
           ProductImage: {
@@ -62,7 +62,7 @@ export async function getProductBySlug(slug: string, locale: string): Promise<Pr
       Product: {
         include: {
           Brand: true,
-          ProductLocale: {
+          locales: {
             include: {
               ProductImage: {
                 orderBy: { order: 'asc' },
@@ -98,7 +98,7 @@ export async function getProductBySlug(slug: string, locale: string): Promise<Pr
         Product: {
           include: {
             Brand: true,
-            ProductLocale: {
+            locales: {
               include: {
                 ProductImage: { orderBy: { order: 'asc' } },
                 ProductReview: { orderBy: { datePublished: 'desc' } },
@@ -125,7 +125,7 @@ export async function getProductBySlug(slug: string, locale: string): Promise<Pr
           Product: {
             include: {
               Brand: true,
-              ProductLocale: {
+              locales: {
                 include: {
                   ProductImage: { orderBy: { order: 'asc' } },
                   ProductReview: { orderBy: { datePublished: 'desc' } },
@@ -158,7 +158,7 @@ export async function getProductById(id: string): Promise<Product | null> {
     where: { id },
     include: {
       Brand: true,
-      ProductLocale: {
+      locales: {
         include: {
           ProductImage: {
             orderBy: { order: 'asc' },

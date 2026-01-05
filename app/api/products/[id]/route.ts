@@ -145,9 +145,11 @@ export async function PUT(
                 metaTitle: localeData.metaTitle || localeData.name,
                 metaDescription: localeData.metaDescription || '',
                 metaKeywords: localeData.metaKeywords || [],
-                images: {
+                updatedAt: new Date(),
+                ProductImage: {
                   deleteMany: {}, // Mevcut görselleri sil
                   create: (localeData.images || []).map((img: any, index: number) => ({
+                    id: crypto.randomUUID(),
                     url: img.url,
                     alt: img.alt,
                     pinterestDescription: img.pinterestDescription,
@@ -156,6 +158,7 @@ export async function PUT(
                 },
               },
               create: {
+                id: crypto.randomUUID(),
                 locale: localeData.locale,
                 slug: localeData.slug,
                 name: localeData.name,
@@ -175,8 +178,11 @@ export async function PUT(
                 metaTitle: localeData.metaTitle || localeData.name,
                 metaDescription: localeData.metaDescription || '',
                 metaKeywords: localeData.metaKeywords || [],
-                images: {
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                ProductImage: {
                   create: (localeData.images || []).map((img: any, index: number) => ({
+                    id: crypto.randomUUID(),
                     url: img.url,
                     alt: img.alt,
                     pinterestDescription: img.pinterestDescription,
