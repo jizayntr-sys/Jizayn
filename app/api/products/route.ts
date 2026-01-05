@@ -106,10 +106,13 @@ export async function POST(request: NextRequest) {
     // Ürünü oluştur
     const product = await prisma.product.create({
       data: {
+        id: crypto.randomUUID(),
         category,
         tags: tags || [],
         sortOrder: sortOrder !== undefined ? sortOrder : 0,
         brandId: existingBrand.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         locales: {
           create: localesArray.map((localeData: any) => ({
             id: crypto.randomUUID(),
