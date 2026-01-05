@@ -13,7 +13,7 @@ export async function POST() {
     const enLocale = await prisma.productLocale.findFirst({
       where: {
         locale: 'en',
-        product: {
+        Product: {
           locales: {
             some: {
               locale: 'tr',
