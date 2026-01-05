@@ -15,7 +15,7 @@ export async function GET() {
         locale: true,
         slug: true,
         name: true,
-        images: {
+        ProductImage: {
           select: { url: true, alt: true, order: true }
         }
       }
@@ -33,7 +33,7 @@ export async function GET() {
         locale: true,
         slug: true,
         name: true,
-        images: {
+        ProductImage: {
           select: { url: true, alt: true, order: true }
         }
       }
