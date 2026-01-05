@@ -18,7 +18,7 @@ export async function POST() {
         locale: 'tr'
       },
       include: {
-        product: true,
+        Product: true,
         ProductImage: { orderBy: { order: 'asc' } }
       }
     });
