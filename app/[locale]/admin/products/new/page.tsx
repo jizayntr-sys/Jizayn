@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { createProduct } from '../../actions';
 import RichTextEditor from '@/components/RichTextEditor';
+import ImageUploadInput from '@/components/ImageUploadInput';
 
 export const dynamic = 'force-dynamic';
 
