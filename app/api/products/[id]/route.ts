@@ -88,9 +88,12 @@ export async function PUT(
       if (!existingBrand) {
         existingBrand = await prisma.brand.create({
           data: {
+            id: crypto.randomUUID(),
             name: brand.name,
             url: brand.url,
             logo: brand.logo,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           },
         });
       }

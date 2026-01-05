@@ -64,13 +64,16 @@ export async function POST(request: NextRequest) {
       // Önce name ile ara (unique field)
       existingBrand = await prisma.brand.findFirst({ where: { name: brand.name } });
       if (!existingBrand) {
-        existingBrand = await prisma.brand.create({
-          data: {
-            name: brand.name,
-            url: brand.url,
-            logo: brand.logo,
-          },
-        });
+      existingBrand = await prisma.brand.create({
+        data: {
+          id: crypto.randomUUID(),
+          name: brand.name,
+          url: brand.url,
+          logo: brand.logo,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      });
       }
     } else if (brandId) {
       existingBrand = await prisma.brand.findUnique({ where: { id: brandId } });
