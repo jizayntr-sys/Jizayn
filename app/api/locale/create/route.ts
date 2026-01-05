@@ -118,6 +118,7 @@ export async function GET(request: NextRequest) {
     // Yeni locale oluştur
     const newLocale = await prisma.productLocale.create({
       data: {
+        id: crypto.randomUUID(),
         productId,
         locale: targetLocale,
         slug,
@@ -138,6 +139,8 @@ export async function GET(request: NextRequest) {
         metaTitle,
         metaDescription,
         metaKeywords: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     });
 

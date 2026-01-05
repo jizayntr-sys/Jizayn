@@ -62,6 +62,7 @@ export async function POST() {
     // EN locale oluştur
     const enLocale = await prisma.productLocale.create({
       data: {
+        id: crypto.randomUUID(),
         productId: trLocale.productId,
         locale: 'en',
         slug: slugEn,
@@ -82,6 +83,8 @@ export async function POST() {
         metaTitle: metaTitleEn,
         metaDescription: metaDescriptionEn,
         metaKeywords: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     });
 
