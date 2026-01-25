@@ -496,6 +496,53 @@ export default async function ProductDetailPage({
                 </ul>
               )}
             </div>
+
+            {/* Ürün Özellikleri */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md mb-8">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {t('reviews.features.title')}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.handmade')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.natural')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.unique')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.durable')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.ecofriendly')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
+                  <span className="text-green-600 text-lg">✓</span>
+                  <span className="text-sm font-medium">{t('reviews.features.quality')}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Kargo ve Teslimat */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md mb-8">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span className="text-2xl">🚚</span>
+                {t('reviews.shipping.title')}
+              </h2>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {t('reviews.shipping.info')}
+              </p>
+            </div>
           </div>
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
@@ -667,52 +714,6 @@ export default async function ProductDetailPage({
               </div>
             </div>
 
-            {/* Ürün Özellikleri */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {t('reviews.features.title')}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.handmade')}</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.natural')}</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.unique')}</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.durable')}</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.ecofriendly')}</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-medium">{t('reviews.features.quality')}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Kargo ve Teslimat */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="text-2xl">🚚</span>
-                {t('reviews.shipping.title')}
-              </h2>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {t('reviews.shipping.info')}
-              </p>
-            </div>
           </div>
         </div>
       </div>
