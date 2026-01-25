@@ -44,9 +44,12 @@ export default function SmoothScroll() {
 
       if (!currentSection) return;
 
+      // TypeScript için tip garantisi
+      const currentSectionElement: HTMLElement = currentSection;
+
       // Aşağı scroll
       if (e.deltaY > 0) {
-        const nextSection = currentSection.nextElementSibling;
+        const nextSection = currentSectionElement.nextElementSibling;
         if (nextSection && nextSection.tagName === 'SECTION') {
           isScrolling = true;
           (nextSection as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -55,7 +58,7 @@ export default function SmoothScroll() {
       } 
       // Yukarı scroll
       else {
-        const prevSection = currentSection.previousElementSibling;
+        const prevSection = currentSectionElement.previousElementSibling;
         if (prevSection && prevSection.tagName === 'SECTION') {
           isScrolling = true;
           (prevSection as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
