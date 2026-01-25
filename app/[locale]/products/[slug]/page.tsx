@@ -455,6 +455,47 @@ export default async function ProductDetailPage({
               className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed max-w-none"
               dangerouslySetInnerHTML={{ __html: productData.description }}
             />
+
+            {/* Teknik Özellikler */}
+            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md mb-8">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                {t('reviews.specs.title')}
+              </h2>
+              <div className="grid grid-cols-1 gap-y-4 text-sm">
+                {productData.dimensions && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.dimensions')}</span>
+                    <span className="text-gray-900 font-semibold">{productData.dimensions}</span>
+                  </div>
+                )}
+                {productData.materials && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.materials')}</span>
+                    <span className="text-gray-900 font-semibold">{productData.materials}</span>
+                  </div>
+                )}
+                {productData.sku && (
+                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-500 font-medium">{t('reviews.specs.sku')}</span>
+                    <span className="text-gray-900 font-mono font-semibold">{productData.sku}</span>
+                  </div>
+                )}
+              </div>
+
+              {productData.specifications && (
+                <ul className="mt-6 space-y-3 pt-4 border-t border-gray-200">
+                  {productData.specifications.map((spec, i) => (
+                    <li key={i} className="flex items-start text-gray-600 text-sm">
+                      <span className="mr-3 text-indigo-500 font-bold">•</span>
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
@@ -582,47 +623,6 @@ export default async function ProductDetailPage({
                   </div>
                 </li>
               </ul>
-            </div>
-
-            {/* Teknik Özellikler */}
-            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                {t('reviews.specs.title')}
-              </h2>
-              <div className="grid grid-cols-1 gap-y-4 text-sm">
-                {productData.dimensions && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                    <span className="text-gray-500 font-medium">{t('reviews.specs.dimensions')}</span>
-                    <span className="text-gray-900 font-semibold">{productData.dimensions}</span>
-                  </div>
-                )}
-                {productData.materials && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                    <span className="text-gray-500 font-medium">{t('reviews.specs.materials')}</span>
-                    <span className="text-gray-900 font-semibold">{productData.materials}</span>
-                  </div>
-                )}
-                {productData.sku && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
-                    <span className="text-gray-500 font-medium">{t('reviews.specs.sku')}</span>
-                    <span className="text-gray-900 font-mono font-semibold">{productData.sku}</span>
-                  </div>
-                )}
-              </div>
-
-              {productData.specifications && (
-                <ul className="mt-6 space-y-3 pt-4 border-t border-gray-200">
-                  {productData.specifications.map((spec, i) => (
-                    <li key={i} className="flex items-start text-gray-600 text-sm">
-                      <span className="mr-3 text-indigo-500 font-bold">•</span>
-                      {spec}
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
 
             {/* Kullanım ve Bakım Önerileri */}
