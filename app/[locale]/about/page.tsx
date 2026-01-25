@@ -53,13 +53,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16">
+        {/* Section 1: Jizayn'ın Hikayesi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
           <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
              <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                <span className="text-6xl">🏗️</span>
              </div>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section1Title')}</h2>
               <p className="text-lg text-gray-600 leading-relaxed">{t('content.p1')}</p>
@@ -67,32 +68,61 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </div>
         </div>
 
+        {/* Section 2: Tasarım Felsefesi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="space-y-8 order-2 md:order-1">
+          <div className="space-y-6 order-2 md:order-1">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section2Title')}</h2>
               <p className="text-lg text-gray-600 leading-relaxed">{t('content.p2')}</p>
             </div>
           </div>
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-amber-100 to-orange-100">
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-indigo-100 to-blue-100">
              <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-               <span className="text-6xl">🪵</span>
+               <span className="text-6xl">🎨</span>
              </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
+        {/* Section 3: Sürdürülebilirlik */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-green-100 to-emerald-100">
              <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                <span className="text-6xl">🌳</span>
              </div>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section3Title')}</h2>
               <p className="text-lg text-gray-600 leading-relaxed">{t('content.p3')}</p>
             </div>
           </div>
+        </div>
+
+        {/* Section 4: Misyon & Vizyon */}
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 md:p-12 mb-16 shadow-lg">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">{t('content.section4Title')}</h2>
+          <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto text-center">{t('content.p4')}</p>
+        </div>
+
+        {/* Section 5: Değerlerimiz */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="space-y-6 order-2 md:order-1">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section5Title')}</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">{t('content.p5')}</p>
+            </div>
+          </div>
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-rose-100 to-pink-100">
+             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+               <span className="text-6xl">⭐</span>
+             </div>
+          </div>
+        </div>
+
+        {/* Section 6: Neden Jizayn */}
+        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+          <h2 className="text-3xl font-bold mb-6 text-center">{t('content.section6Title')}</h2>
+          <p className="text-lg leading-relaxed max-w-4xl mx-auto text-center opacity-95">{t('content.p6')}</p>
         </div>
       </div>
     </div>

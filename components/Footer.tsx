@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { Facebook, Instagram, Send, Loader2, Youtube, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Linkedin } from 'lucide-react';
 import { Link, usePathname } from '@/i18n/navigation';
-import toast from 'react-hot-toast';
 
 type Props = {
   hideOnHome?: boolean;
@@ -15,35 +13,8 @@ export default function Footer({ hideOnHome = false }: Props) {
   const t = useTranslations('footer');
   const pathname = usePathname();
   const isHomePage = /^\/[a-z]{2}$/.test(pathname) || pathname === '/';
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   if (hideOnHome && isHomePage) return null;
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) throw new Error('Abonelik başarısız');
-
-      toast.success(t('newsletter.success'));
-      setStatus('success');
-      setEmail('');
-      setTimeout(() => setStatus('idle'), 3000);
-    } catch (error) {
-      console.error(error);
-      toast.error('Bir hata oluştu. Lütfen tekrar deneyin.');
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000);
-    }
-  };
 
   const socialLinks = [
     { 
@@ -65,7 +36,7 @@ export default function Footer({ hideOnHome = false }: Props) {
       color: "hover:bg-[#FF0000]"
     },
     { 
-      href: "https://www.linkedin.com/company/jizayn", 
+      href: "https://www.linkedin.com/in/jizayn-woodart-7948873a8/", 
       label: "LinkedIn", 
       icon: <Linkedin className="w-5 h-5" />,
       color: "hover:bg-[#0A66C2]"
@@ -84,56 +55,6 @@ export default function Footer({ hideOnHome = false }: Props) {
 
   return (
     <footer className="bg-gray-900 text-gray-300 mt-auto" role="contentinfo">
-      {/* Newsletter Section */}
-      <div className="relative overflow-hidden border-b border-gray-800">
-        <div className="absolute inset-0 bg-indigo-900/20 backdrop-blur-3xl"></div>
-        <div className="container mx-auto px-4 lg:px-8 py-8 md:py-12 relative z-10">
-          <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-2">{t('newsletter.title')}</h3>
-              <p className="text-gray-400 text-sm">{t('newsletter.description')}</p>
-            </div>
-            
-            <div className="w-full max-w-md">
-              
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <label htmlFor="newsletter-email" className="sr-only">
-                    {t('newsletter.placeholder')}
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t('newsletter.placeholder')}
-                    id="newsletter-email"
-                    name="email"
-                    autoComplete="email"
-                    disabled={status === 'loading'}
-                    className={`px-5 py-3 rounded-full bg-gray-800/50 border text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full transition-all ${
-                      status === 'error' ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
-                    }`}
-                  />
-                  <button 
-                    type="submit" 
-                    disabled={status === 'loading'}
-                    className="p-3 rounded-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800 disabled:cursor-not-allowed text-white font-semibold transition-all flex items-center justify-center group"
-                  >
-                    {status === 'loading' ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <>
-                        <span className="sr-only">{t('newsletter.button')}</span>
-                        <Send className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-                </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 py-12 lg:py-16">
           {/* Logo and Description */}
@@ -196,7 +117,7 @@ export default function Footer({ hideOnHome = false }: Props) {
 
         {/* Copyright Bar */}
         <div className="border-t border-gray-800 py-6 flex flex-col sm:flex-row items-center justify-between">
-          <p className="text-sm text-gray-500 text-center sm:text-left">{t('copyright')}</p>
+          <p className="text-sm text-amber-400 text-center sm:text-left">{t('copyright')}</p>
         </div>
       </div>
     </footer>

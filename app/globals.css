@@ -31,14 +31,41 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 80px; /* Header yüksekliği için */
+    scroll-behavior: smooth;
   }
   
   body {
     @apply bg-background text-textPrimary antialiased;
+    overscroll-behavior-y: none; /* Bounce efektini engelle */
   }
   
   [dir="rtl"] {
     direction: rtl;
+  }
+  
+  /* Ana sayfa için optional scroll-snap (isteğe bağlı, mobilde daha iyi UX) */
+  @media (min-width: 1024px) {
+    .scroll-snap-container {
+      scroll-snap-type: y proximity;
+    }
+    
+    .scroll-snap-section {
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
+    }
+  }
+  
+  /* Smooth scroll için ek ayarlar */
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  /* Touch cihazlar için optimize edilmiş scroll */
+  @media (hover: none) and (pointer: coarse) {
+    html {
+      -webkit-overflow-scrolling: touch;
+    }
   }
 }
 

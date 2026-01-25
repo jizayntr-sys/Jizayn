@@ -34,12 +34,18 @@
     "title": "About - Handmade Wooden Decoration Workshop",
     "subtitle": "Handmade wooden decoration and furniture crafted from natural materials. Traditional craftsmanship meets contemporary design.",
     "content": {
-      "section1Title": "Wooden Craftsmanship from Tradition to Future",
-      "p1": "As Jizayn, we have been serving in wooden decorative products for many years. Our handmade products are carefully produced from natural wooden materials.",
-      "section2Title": "Our Design and Quality Philosophy",
-      "p2": "Each of our products combines traditional handicraft techniques with modern design understanding, offering our customers special and high-quality products.",
-      "section3Title": "Bringing Natural Beauty to Your Home",
-      "p3": "Our mission is to bring the natural beauty of wood to your homes and offer you valuable products that you can use for many years."
+      "section1Title": "Jizayn's Story: Wooden Artistry from Tradition to Future",
+      "p1": "Jizayn is a workshop that started with a passion for woodworking and combines traditional Turkish carpentry art with modern design. Since our establishment, we have been moving forward with the mission of bringing the unique beauty and warmth of natural wood to living spaces. Every product manufactured in our workshop is the result of craftsmanship requiring hand labor and a patient production process. Especially by blending the traditional Japanese Kumiko technique with Turkish handicrafts, we create unique and original pieces. Our masters are craftsmen who understand the language of wood through years of experience, respect its natural structure, and transform every vein and texture into a work of art. We carefully select first-class domestic wood types such as walnut, oak, beech, and pine, process them through natural drying processes. This process ensures that our products are long-lasting, durable, and aesthetically flawless.",
+      "section2Title": "Our Design Philosophy: Modern Aesthetics with Traditional Mastery",
+      "p2": "As Jizayn, our design approach is based on blending valuable techniques of the past with modern aesthetics of today. Each of our products represents timeless designs that bring together functionality and beauty. Minimalist lines, natural forms, and elegant details enable us to create original pieces that harmonize with any space. Our design process begins with deeply understanding our customers' needs and preferences. With our custom design options, we turn your dream product into reality. Our quality control process is extremely meticulous; every product undergoes detailed inspections before leaving our workshop. We adopt a production approach with the highest standards, first-class materials, and carefully supervised at every stage. This way, we offer products that are not only beautiful but also durable and long-lasting.",
+      "section3Title": "Respect for Nature, Sustainable Production",
+      "p3": "The natural beauty, unique texture, and warmth of wood add peace and aesthetics to your living spaces. Every product we produce at Jizayn carries nature's unique patterns and colors. Therefore, each piece is different and special. Wooden products become even more beautiful over time, retain their character, and even increase their value. We respect this valuable material and adopt an environmentally conscious and sustainable production approach. We only work with certified wood obtained from responsible sources. Waste is minimized in our production process, and natural and harmless surface treatments are used. Instead of heavy chemical paints, we use natural oils and varnishes to allow the wood to breathe. This way, we contribute to both your health and the environment's health.",
+      "section4Title": "Our Mission and Vision",
+      "p4": "Our mission is to bring traditional woodworking to modern living spaces, adding aesthetics, warmth, and naturalness to every home and office. We aim to offer our customers not just a product, but a lifestyle and a work of art. Our vision is to become Turkey's most reliable and quality handmade wooden decoration brand, recognized in international markets, and a workshop that introduces traditional handicrafts to the world. With each product, we aim to elevate the value of Turkish craftsmanship and wooden art.",
+      "section5Title": "Our Values: Quality, Honesty, and Customer Satisfaction",
+      "p5": "Jizayn's core values are quality, honesty, customer satisfaction, and environmental consciousness. Maintaining the highest quality standards in every product, maintaining transparent and honest communication, exceeding our customers' expectations, and implementing nature-respectful production are indispensable for us. We value customer feedback and act with a continuous development and improvement mindset. With our after-sales support, easy return and exchange policies, we maximize your shopping experience. With reliable shipping, careful packaging, and fast delivery, we ensure your products reach you undamaged in the shortest time possible.",
+      "section6Title": "Why Should You Choose Jizayn?",
+      "p6": "Jizayn offers not just a product, but a story, an art, and a life philosophy. With our 100% handmade, 100% domestic, and 100% natural products, we add value to your home. Our master carpenters' experience, modern interpretation of traditional techniques, custom design options, sustainable and environmentally friendly production approach, customer satisfaction guarantee, and principles of never compromising on quality make us stand out in the industry. Jizayn products are investments that you can use for years, maintain their value, and even increase it. Each product adds aesthetics, warmth, and prestige to your home."
     }
   },
   "contact": {
@@ -171,7 +177,24 @@
         "q6": {
           "question": "Can I return or exchange?",
           "answer": "You can return/exchange within 14 days after receiving the product if it is unused and in its original packaging. Please review the terms of use for details."
-        }      }
+        },
+        "q7": {
+          "question": "What is Kumiko technique and how is it made?",
+          "answer": "Kumiko is a 400-year-old traditional Japanese woodworking technique. Thin wooden rods are joined together without using glue, only with precise cutting and interlocking technique. Each piece is cut with millimetric precision and forms geometric patterns. This process takes hours and requires great craftsmanship."
+        },
+        "q8": {
+          "question": "What type of bulb should I use?",
+          "answer": "We recommend using an E14 socket type (small socket) 2-5W LED bulb. Warm white color (2700K-3000K) is the ideal choice. Using a low-wattage LED bulb prevents the lamp from overheating and provides energy savings. LED bulb is not included in the price and must be supplied separately."
+        },
+        "q9": {
+          "question": "How durable is the lamp and what is its lifespan?",
+          "answer": "Our Kumiko lamp made of solid natural wood can be used for years with proper use and care. The wooden structure becomes even more beautiful and characteristic over time. When kept away from humid environments and regular maintenance is performed, it provides 10+ years of trouble-free use. Electrical components are CE certified."
+        },
+        "q10": {
+          "question": "Does every lamp look the same, is there color difference?",
+          "answer": "No, each lamp is unique. Because it is a handmade product and natural wood is used, each one's texture, color tones and patterns differ. This is not a defect, but a feature that makes the product even more special. The natural beauty of wood makes each lamp unique and one-of-a-kind."
+        }
+      }
     }
   },
   "home": {

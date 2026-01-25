@@ -3,10 +3,14 @@ import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { getAllProducts } from '@/data/products';
-import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, Search, Settings, Clock, UserCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, UserCheck } from 'lucide-react';
 import FeaturedCarousel from '@/components/FeaturedCarousel';
 import CustomerReviewsCarousel from '@/components/CustomerReviewsCarousel';
 import FadeIn from '@/components/FadeIn';
+import ScrollSection from '@/components/ScrollSection';
+import StaggerContainer from '@/components/StaggerContainer';
+import SectionScroller from '@/components/SectionScroller';
+import MouseScrollIndicator from '@/components/MouseScrollIndicator';
 import Footer from '@/components/Footer';
 import SectionBackgroundController from '@/components/SectionBackgroundController';
 import { BASE_URL } from '@/lib/constants';
@@ -103,7 +107,7 @@ export default async function HomePage() {
   };
 
   return (
-    <main className="relative">
+    <main className="relative scroll-smooth snap-y snap-mandatory overflow-y-auto">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
@@ -126,7 +130,7 @@ export default async function HomePage() {
       </div>
 
       {/* Hero Section Content */}
-      <section id="hero" className="relative z-10 h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <SectionScroller sectionId="hero" className="relative z-10 h-screen snap-start snap-always flex items-center justify-center overflow-hidden">
         <h1 className="sr-only">{t('hero.title')}</h1>
         {/* İçerik */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center text-white">
@@ -165,140 +169,119 @@ export default async function HomePage() {
             </Link>
           </FadeIn>
         </div>
-      </section>
+        
+        {/* Scroll Indicator */}
+        <MouseScrollIndicator />
+      </SectionScroller>
 
       {/* Öne Çıkan Ürünler */}
-      <section id="featured" className="relative z-10 min-h-screen flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700">
+      <SectionScroller sectionId="featured" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
         <div className="container mx-auto px-4 relative">
-          <FadeIn>
-            <div className="flex justify-between items-end mb-12">
-              <h2 className="text-3xl font-bold text-white">{t('featured.title')}</h2>
-              <Link href="/products" className="text-white/90 font-medium hover:text-white flex items-center gap-1 transition-colors">
+          <ScrollSection animation="slide-right">
+            <div className="flex justify-between items-end mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white">{t('featured.title')}</h2>
+              <Link href="/products" className="text-white/90 font-medium hover:text-white flex items-center gap-1 transition-colors text-sm md:text-base">
                 {t('featured.viewAll')} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </FadeIn>
+          </ScrollSection>
           
-          <FadeIn delay={200}>
+          <ScrollSection animation="scale" delay={0.2}>
             <FeaturedCarousel products={featuredProducts} locale={locale} />
-          </FadeIn>
+          </ScrollSection>
         </div>
-      </section>
+      </SectionScroller>
 
       {/* Özellikler Bölümü (Neden Jizayn) */}
-      <section id="features" className="relative z-10 min-h-screen flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700">
+      <SectionScroller sectionId="features" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
         <div className="container mx-auto px-4 relative">
-          <FadeIn>
-            <div className="text-center mb-8 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white px-2">{t('features.title')}</h2>
+          <ScrollSection animation="slide-up">
+            <div className="text-center mb-8 md:mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-white px-2">{t('features.title')}</h2>
             </div>
-          </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            <FadeIn delay={200}>
-              <Link href="/products" className="block bg-indigo-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-indigo-300/20 text-center hover:bg-indigo-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-indigo-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Palette className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.handmade.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.handmade.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400}>
-              <Link href="/products" className="block bg-green-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-green-300/20 text-center hover:bg-green-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-green-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Leaf className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.natural.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.natural.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600}>
-              <Link href="/products" className="block bg-orange-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-orange-300/20 text-center hover:bg-orange-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.design.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.design.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={200}>
-              <Link href="/products" className="block bg-blue-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-blue-300/20 text-center hover:bg-blue-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.durability.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.durability.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400}>
-              <Link href="/products" className="block bg-emerald-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-300/20 text-center hover:bg-emerald-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-emerald-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Recycle className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.sustainable.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.sustainable.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600}>
-              <Link href="/products" className="block bg-purple-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-purple-300/20 text-center hover:bg-purple-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-purple-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Search className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.details.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.details.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={200}>
-              <Link href="/products" className="block bg-cyan-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-cyan-300/20 text-center hover:bg-cyan-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-cyan-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Settings className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.functional.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.functional.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={400}>
-              <Link href="/products" className="block bg-amber-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-amber-300/20 text-center hover:bg-amber-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-amber-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <Clock className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.timeless.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.timeless.desc')}</p>
-              </Link>
-            </FadeIn>
-            <FadeIn delay={600}>
-              <Link href="/products" className="block bg-rose-500/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-rose-300/20 text-center hover:bg-rose-500/20 transition-all h-full group">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                  <UserCheck className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{t('features.custom.title')}</h3>
-                <p className="text-sm sm:text-base text-gray-200">{t('features.custom.desc')}</p>
-              </Link>
-            </FadeIn>
-          </div>
+          </ScrollSection>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6" staggerDelay={0.15}>
+            {/* El Yapımı */}
+            <Link href="/products" className="block bg-indigo-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-indigo-300/20 text-center hover:bg-indigo-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-indigo-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <Palette className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.handmade.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.handmade.desc')}</p>
+            </Link>
+            
+            {/* Doğal Malzeme */}
+            <Link href="/products" className="block bg-green-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-green-300/20 text-center hover:bg-green-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-green-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <Leaf className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.natural.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.natural.desc')}</p>
+            </Link>
+            
+            {/* Özgün Tasarım */}
+            <Link href="/products" className="block bg-orange-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-orange-300/20 text-center hover:bg-orange-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <CheckCircle className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.design.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.design.desc')}</p>
+            </Link>
+            
+            {/* Dayanıklılık */}
+            <Link href="/products" className="block bg-blue-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-blue-300/20 text-center hover:bg-blue-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <ShieldCheck className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.durability.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.durability.desc')}</p>
+            </Link>
+            
+            {/* Sürdürülebilir */}
+            <Link href="/products" className="block bg-emerald-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-emerald-300/20 text-center hover:bg-emerald-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-emerald-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <Recycle className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.sustainable.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.sustainable.desc')}</p>
+            </Link>
+            
+            {/* Kişiye Özel */}
+            <Link href="/products" className="block bg-rose-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-rose-300/20 text-center hover:bg-rose-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <UserCheck className="w-5 h-5 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.custom.title')}</h3>
+              <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.custom.desc')}</p>
+            </Link>
+          </StaggerContainer>
         </div>
-      </section>
+      </SectionScroller>
 
       {/* Müşteri Yorumları Slider */}
-      <section id="reviews" className="relative z-10 min-h-screen flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700">
+      <SectionScroller sectionId="reviews" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
         <div className="container mx-auto px-4 relative">
-          <FadeIn>
-            <div className="flex justify-between items-end mb-12">
-              <h2 className="text-3xl font-bold text-white">{t('reviews.title')}</h2>
+          <ScrollSection animation="slide-left">
+            <div className="flex justify-between items-end mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white">{t('reviews.title')}</h2>
             </div>
-          </FadeIn>
-          <FadeIn delay={200}>
+          </ScrollSection>
+          <ScrollSection animation="fade" delay={0.2}>
             <CustomerReviewsCarousel />
-          </FadeIn>
+          </ScrollSection>
         </div>
-      </section>
+      </SectionScroller>
 
-      {/* Footer Section */}
-      <section id="footer" className="relative z-10">
-        <Footer />
+      {/* Footer Section - Son bölüm, animasyonsuz */}
+      <section id="footer" className="relative z-10 snap-start snap-always bg-gradient-to-b from-transparent via-black/40 to-black/70">
+        <div className="min-h-[60vh] flex items-end">
+          <div className="w-full">
+            <Footer />
+          </div>
+        </div>
       </section>
     </main>
   );

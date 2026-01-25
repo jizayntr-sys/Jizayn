@@ -396,7 +396,11 @@ export default async function ProductDetailPage({
               </div>
             ) : (
               <div>
-                <div className="p-4 border-2 border-gray-300 rounded-lg shadow-md bg-white flex flex-row gap-2 mt-6 flex-wrap">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 mt-6 flex items-center gap-2">
+                  <span className="text-2xl">🛒</span>
+                  SATIN AL
+                </h2>
+                <div className="p-3 sm:p-4 border-2 border-indigo-300 rounded-lg shadow-lg bg-gradient-to-br from-indigo-50 to-blue-50 flex flex-row gap-2">
                   <AddToCartButton url="#" platform="Shopier" />
                   <AddToCartButton url="#" platform="Etsy" />
                   <AddToCartButton url="#" platform="Amazon" />
@@ -455,14 +459,139 @@ export default async function ProductDetailPage({
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
           <div className="order-3 lg:order-none space-y-8">
+            {/* Jizayn Farkı */}
+            <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-6 md:p-8 border-2 border-indigo-200 shadow-lg">
+              <h2 className="text-lg md:text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
+                <span className="text-2xl">🏭</span>
+                Jizayn Farkı - Neden Bizden Almalısınız?
+              </h2>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Usta Marangozlar:</strong>
+                    <span className="text-gray-700"> Deneyimli ustalar tarafından özenle üretilir</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Geleneksel Teknik:</strong>
+                    <span className="text-gray-700"> Orijinal Kumiko tekniği korunarak uygulanır</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Türk Malı:</strong>
+                    <span className="text-gray-700"> %100 yerli üretim, milli ve yerli</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">El Emeği:</strong>
+                    <span className="text-gray-700"> Seri üretim değil, her biri özel olarak yapılır</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Güvenli Kargo:</strong>
+                    <span className="text-gray-700"> Özel ambalaj ile hasar görmeden teslim</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Müşteri Memnuniyeti:</strong>
+                    <span className="text-gray-700"> Memnuniyetiniz bizim önceliğimiz</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">Değişim Hakkı:</strong>
+                    <span className="text-gray-700"> 15 gün içinde sorunsuz iade ve değişim</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
+                  <div>
+                    <strong className="text-gray-900">İletişim:</strong>
+                    <span className="text-gray-700"> WhatsApp ve telefon ile hızlı destek</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Önemli Notlar */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border-2 border-amber-200 shadow-lg">
+              <h2 className="text-lg md:text-xl font-bold text-amber-900 mb-6 flex items-center gap-2">
+                <span className="text-2xl">⚠️</span>
+                Önemli Notlar - Lütfen Okuyun
+              </h2>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">El Yapımı Ürün:</strong>
+                    <span className="text-gray-700"> Her lamba benzersizdir, küçük farklılıklar olabilir</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Doğal Ahşap:</strong>
+                    <span className="text-gray-700"> Ahşabın doğal dokusu ve renk tonlarında varyasyonlar normal ve beklenir</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Kalite Değil:</strong>
+                    <span className="text-gray-700"> Bu doğal farklılıklar ürünü daha da özel kılar - kusur değildir</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Ampul Dahil Değil:</strong>
+                    <span className="text-gray-700"> E14 duy tipi LED ampul ayrıca temin edilmelidir</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Ampul Önerisi:</strong>
+                    <span className="text-gray-700"> 2-5W sıcak beyaz LED ampul kullanın (2700K-3000K)</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Kırılgandır:</strong>
+                    <span className="text-gray-700"> Ahşap yapı hassastır, darbelere karşı dikkatli olun</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
+                  <div>
+                    <strong className="text-gray-900">Nem:</strong>
+                    <span className="text-gray-700"> Banyo, mutfak gibi yüksek nemli alanlarda kullanmayın</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
             {/* Teknik Özellikler */}
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
                 {t('reviews.specs.title')}
-              </h3>
+              </h2>
               <div className="grid grid-cols-1 gap-y-4 text-sm">
                 {productData.dimensions && (
                   <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
@@ -498,12 +627,12 @@ export default async function ProductDetailPage({
 
             {/* Kullanım ve Bakım Önerileri */}
             <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 {t('reviews.usage.title')}
-              </h3>
+              </h2>
               
               <div className="space-y-4">
                 <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
@@ -540,12 +669,12 @@ export default async function ProductDetailPage({
 
             {/* Ürün Özellikleri */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {t('reviews.features.title')}
-              </h3>
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex items-center gap-3 text-gray-700 bg-white/60 rounded-lg p-3">
                   <span className="text-green-600 text-lg">✓</span>
@@ -576,10 +705,10 @@ export default async function ProductDetailPage({
 
             {/* Kargo ve Teslimat */}
             <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="text-2xl">🚚</span>
                 {t('reviews.shipping.title')}
-              </h3>
+              </h2>
               <p className="text-gray-700 text-sm leading-relaxed">
                 {t('reviews.shipping.info')}
               </p>
@@ -596,7 +725,7 @@ export default async function ProductDetailPage({
           </h2>
           
           <div className="space-y-4">
-            {[1, 2, 3, 4, 5, 6].map((num) => (
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
               <details key={num} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-indigo-200 transition-all">
                 <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
                   <span>{t(`reviews.commonFaqs.q${num}.question`)}</span>
