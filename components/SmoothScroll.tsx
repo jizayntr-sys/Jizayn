@@ -31,14 +31,14 @@ export default function SmoothScroll() {
       const sections = document.querySelectorAll('section[id]');
       const currentScrollPos = window.scrollY + window.innerHeight / 2;
       
-      let currentSection: Element | null = null;
+      let currentSection: HTMLElement | null = null;
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
         const sectionTop = rect.top + window.scrollY;
         const sectionBottom = sectionTop + rect.height;
         
         if (currentScrollPos >= sectionTop && currentScrollPos <= sectionBottom) {
-          currentSection = section;
+          currentSection = section as HTMLElement;
         }
       });
 
@@ -46,19 +46,19 @@ export default function SmoothScroll() {
 
       // Aşağı scroll
       if (e.deltaY > 0) {
-        const nextSection = currentSection.nextElementSibling as HTMLElement;
+        const nextSection = currentSection.nextElementSibling;
         if (nextSection && nextSection.tagName === 'SECTION') {
           isScrolling = true;
-          nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          (nextSection as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
           setTimeout(() => { isScrolling = false; }, 1000);
         }
       } 
       // Yukarı scroll
       else {
-        const prevSection = currentSection.previousElementSibling as HTMLElement;
+        const prevSection = currentSection.previousElementSibling;
         if (prevSection && prevSection.tagName === 'SECTION') {
           isScrolling = true;
-          prevSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          (prevSection as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
           setTimeout(() => { isScrolling = false; }, 1000);
         }
       }
