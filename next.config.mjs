@@ -18,9 +18,15 @@ const nextConfig = {
   // Enable SWC minification
   swcMinify: true,
   
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
   // Optimize chunks
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizeCss: true, // Experimental CSS optimization
   },
   
   images: {
