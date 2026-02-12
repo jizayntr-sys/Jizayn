@@ -54,7 +54,7 @@ export default function Footer({ hideOnHome = false }: Props) {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-auto" role="contentinfo">
+    <footer className="bg-gray-900 text-gray-300 mt-auto">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 py-12 lg:py-16">
           {/* Logo and Description */}
