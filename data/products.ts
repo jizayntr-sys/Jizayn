@@ -21,7 +21,7 @@ export const products: Product[] = [
       tr: {
         slug: 'kumiko-ahsap-masa-lambasi',
         name: 'El Yapımı Kumiko Ahşap Masa Lambası',
-        description: '', // Styled sections will be in page.tsx
+        description: '400 yıllık Japon Kumiko tekniği ile tamamen el yapımı ahşap masa lambası. Yapıştırıcısız geleneksel ahşap işçiliği, geometrik desenler ve LED aydınlatma ile eşsiz bir dekorasyon ürünü. Masif maun ve çam ağacından üretilen lamba, geometrik desenlerin arasından süzülen ışıkla büyüleyici gölge oyunları yaratır.',
         images: [
           {
             url: '/images/products/Kumiko/ElyapimiKumikomasalambasi.webp',
@@ -94,7 +94,7 @@ export const products: Product[] = [
       en: {
         slug: 'kumiko-wooden-table-lamp',
         name: 'Handmade Kumiko Wooden Table Lamp',
-        description: '', // Styled sections will be in page.tsx
+        description: 'Completely handmade wooden table lamp with 400-year-old Japanese Kumiko technique. Traditional woodworking without glue, geometric patterns and LED lighting create a unique decoration piece. Made from solid mahogany and pine wood, the lamp creates mesmerizing shadow patterns with light filtering through geometric designs.',
         images: [
           {
             url: '/images/products/Kumiko/ElyapimiKumikomasalambasi.webp',
