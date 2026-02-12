@@ -466,7 +466,7 @@ export default async function ProductDetailPage({
     .slice(0, 3);
 
   return (
-    <article className="bg-white pb-20" itemScope itemType="https://schema.org/Product">
+    <article className="bg-white pb-20">
       {/* Preconnect to external domains for performance */}
       <link rel="preconnect" href="https://www.googletagmanager.com" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -479,8 +479,6 @@ export default async function ProductDetailPage({
           ) 
         }}
       />
-      <meta itemProp="name" content={productData.name} />
-      <meta itemProp="description" content={productData.description} />
 
       <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 sm:pb-8">
         {/* Breadcrumb Navigasyonu */}
@@ -506,7 +504,7 @@ export default async function ProductDetailPage({
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
           {/* 1. Galeri - Mobilde 1. sırada, Desktop'ta sol üst */}
-          <div className="order-1 lg:order-none" itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+          <div className="order-1 lg:order-none">
             <ProductGallery images={images.map((img, idx) => ({
               ...img,
               alt: img.alt || `${productData.name} - ${locale === 'tr' ? 'Görsel' : 'Image'} ${idx + 1} | ${categoryName} | Jizayn ${locale === 'tr' ? 'El Yapımı Ahşap Ürünler' : 'Handmade Wood Products'}`
