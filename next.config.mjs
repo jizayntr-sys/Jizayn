@@ -27,6 +27,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 2592000, // 30 days in seconds
     dangerouslyAllowSVG: true,
     // SVG için CSP kaldırıldı - genel CSP header'ı kullanılacak
     remotePatterns: [
@@ -115,6 +116,16 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Next.js Image Optimization - 1 ay cache
+      {
+        source: '/_next/image*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
           },
         ],
       },

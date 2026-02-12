@@ -11,7 +11,11 @@ import { generateOrganizationSchema } from '@/utils/organization-schema';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { BASE_URL } from '@/lib/constants';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
