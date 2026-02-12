@@ -86,7 +86,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">{t('info.phoneLabel')}</h3>
                   <a href={`tel:${t('info.phone')}`} className="text-gray-600 hover:text-indigo-600 transition-colors">
-                    {t('info.phone')}
+                    {t('info.phone').replace(/(\+90)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}
                   </a>
                 </div>
               </div>

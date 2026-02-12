@@ -22,7 +22,7 @@ export function generateOrganizationSchema(locale: string) {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+90-555-123-45-67',
+      telephone: '+905551234567',
       contactType: 'customer service',
       email: 'info@jizayn.com',
       availableLanguage: routing.locales
