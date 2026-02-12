@@ -237,7 +237,12 @@ export default async function ProductDetailPage({
     '@type': 'Product',
     name: productData.name,
     description: productData.description,
-    image: images.map((img) => img.url),
+    image: images.map((img) => ({
+      '@type': 'ImageObject',
+      url: img.url,
+      contentUrl: img.url,
+      caption: img.alt,
+    })),
     sku: productData.sku || product.id,
     mpn: productData.sku || product.id, // Manufacturer Part Number
     category: categoryMap[product.category] || product.category,
@@ -272,6 +277,41 @@ export default async function ProductDetailPage({
         '@type': 'Organization',
         name: 'Jizayn',
         url: BASE_URL,
+      },
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: '0',
+          currency: 'TRY',
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'TR',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 1,
+            maxValue: 3,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 2,
+            maxValue: 5,
+            unitCode: 'DAY',
+          },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'TR',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 15,
+        returnMethod: 'https://schema.org/ReturnByMail',
+        returnFees: 'https://schema.org/FreeReturn',
       },
       ...(productData.priceRange.max && productData.priceRange.max !== productData.priceRange.min && {
         priceSpecification: {
@@ -444,33 +484,24 @@ export default async function ProductDetailPage({
 
       <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 sm:pb-8">
         {/* Breadcrumb Navigasyonu */}
-        <nav className="flex items-center text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap py-2 -mx-2 px-2" aria-label="Breadcrumb" itemScope itemType="https://schema.org/BreadcrumbList">
-          <Link href="/" className="flex items-center hover:text-indigo-600 transition-colors" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+        <nav className="flex items-center text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap py-2 -mx-2 px-2" aria-label="Breadcrumb">
+          <Link href="/" className="flex items-center hover:text-indigo-600 transition-colors">
             <Home className="w-4 h-4 mr-1" />
-            <span itemProp="name">{tNav('home')}</span>
-            <meta itemProp="position" content="1" />
+            {tNav('home')}
           </Link>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
-          <Link href="/products" className="hover:text-indigo-600 transition-colors" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <span itemProp="name">{tNav('products')}</span>
-            <meta itemProp="position" content="2" />
+          <Link href="/products" className="hover:text-indigo-600 transition-colors">
+            {tNav('products')}
           </Link>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
           <a 
             href={`/${locale}${currentProductsPath}?category=${product.category}`}
             className="hover:text-indigo-600 transition-colors"
-            itemProp="itemListElement" 
-            itemScope 
-            itemType="https://schema.org/ListItem"
           >
-            <span itemProp="name">{categoryName}</span>
-            <meta itemProp="position" content="3" />
+            {categoryName}
           </a>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
-          <span className="text-gray-900 font-medium truncate" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <span itemProp="name">{productData.name}</span>
-            <meta itemProp="position" content="4" />
-          </span>
+          <span className="text-gray-900 font-medium truncate">{productData.name}</span>
         </nav>
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
