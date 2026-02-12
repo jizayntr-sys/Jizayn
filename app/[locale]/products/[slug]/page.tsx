@@ -541,7 +541,7 @@ export default async function ProductDetailPage({
             </h1>
             
             {/* SEO-Friendly Introduction */}
-            <div className="mb-6 text-gray-700 leading-relaxed text-base hidden lg:block" itemProp="description">
+            <div className="mb-6 text-gray-700 leading-relaxed text-base hidden lg:block">
               <p>
                 {locale === 'tr' 
                   ? `${productData.name}, 400 yıllık Japon Kumiko sanatı tekniği ile el emeği göz nuru üretilmiş özel bir ahşap masa lambasıdır. Geleneksel ahşap işçiliği ve modern tasarımın mükemmel birleşimi olan bu benzersiz ürün, yapıştırıcı kullanılmadan sadece hassas kesim ve geçme teknikleri ile üretilmektedir. ${categoryName} kategorisindeki bu özel ürün, evinize doğal ahşabın sıcaklığını ve Uzakdoğu estetiğini taşır.`
@@ -550,10 +550,8 @@ export default async function ProductDetailPage({
             </div>
             
             <div className="flex items-baseline gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100">
-              <p className="text-3xl sm:text-4xl font-bold text-gray-900" itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                <span itemProp="price" content={productData.priceRange.min.toString()}>{formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}</span>
-                <meta itemProp="priceCurrency" content={productData.priceRange.currency} />
-                <link itemProp="availability" href={availabilityMap[productData.availability as keyof typeof availabilityMap]} />
+              <p className="text-3xl sm:text-4xl font-bold text-gray-900">
+                {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
               </p>
             </div>
 
