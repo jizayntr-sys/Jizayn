@@ -8,7 +8,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeaderWrapper from '@/components/HeaderWrapper';
 import { generateOrganizationSchema } from '@/utils/organization-schema';
-import JsonLdBreadcrumb from '@/components/JsonLdBreadcrumb';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { BASE_URL } from '@/lib/constants';
 
@@ -137,7 +136,6 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <GoogleAnalytics gaId="G-XXXXXXXXXX" />
-          <JsonLdBreadcrumb />
           <HeaderWrapper>
           <Header />
           </HeaderWrapper>

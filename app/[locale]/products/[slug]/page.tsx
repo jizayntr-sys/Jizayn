@@ -399,32 +399,6 @@ export default async function ProductDetailPage({
     })),
   } : null;
 
-  // Organization Schema
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Jizayn',
-    url: BASE_URL,
-    logo: `${BASE_URL}/JizaynLogo.svg`,
-    description: locale === 'tr' 
-      ? 'El yapımı ahşap dekoratif ürünler ve mobilyalar. Geleneksel Kumiko sanatı ile özel tasarım ahşap ürünler.'
-      : 'Handmade wooden decorative products and furniture. Special design wood products with traditional Kumiko art.',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'TR',
-      addressLocality: 'Istanbul',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Service',
-      availableLanguage: ['Turkish', 'English'],
-    },
-    sameAs: [
-      'https://www.instagram.com/jizayn',
-      'https://www.facebook.com/jizayn',
-    ],
-  };
-
   // HowTo Schema - Bakım Önerileri için
   const howToSchema = {
     '@context': 'https://schema.org',
@@ -475,7 +449,7 @@ export default async function ProductDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ 
           __html: JSON.stringify(
-            [productSchema, breadcrumbSchema, faqSchema, organizationSchema, howToSchema].filter(Boolean)
+            [productSchema, breadcrumbSchema, faqSchema, howToSchema].filter(Boolean)
           ) 
         }}
       />
