@@ -163,7 +163,6 @@ export default async function ProductsPage({
       ? `${categoryName} ${t('categoryDescription')} ${t('title')} - Jizayn`
       : `${t('title')} ${t('description')} El yapımı ahşap dekorasyon ve mobilya ürünleri. Jizayn`,
     url: `${BASE_URL}/${locale === 'tr' ? 'tr/urunler' : 'en/products'}${category !== 'all' ? `?category=${category}` : ''}`,
-    numberOfItems: filteredProducts.length,
     inLanguage: locale,
     mainEntity: {
       '@type': 'ItemList',
