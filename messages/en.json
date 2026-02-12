@@ -253,7 +253,8 @@
     "categories": {
       "all": "All",
       "decor": "Decor",
-      "furniture": "Furniture"
+      "furniture": "Furniture",
+      "lighting": "Lighting"
     },
     "sortOptions": {
       "newest": "Newest",

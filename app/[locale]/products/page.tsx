@@ -213,11 +213,7 @@ export default async function ProductsPage({
             {category !== 'all' ? (
               <span className="text-gray-900">{categoryName}</span>
             ) : (
-              <>
-                <span className="text-indigo-700">El Yapımı Ahşap Ürünler</span>
-                <span className="text-gray-900"> - </span>
-                <span className="text-amber-600">Dekorasyon ve Mobilya</span>
-              </>
+              <span className="text-gray-900">{t('title')}</span>
             )}
           </h1>
           <p className="text-sm sm:text-base text-gray-600">

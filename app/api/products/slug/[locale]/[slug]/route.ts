@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getProductBySlug } from '@/data/products';
 
 // GET /api/products/slug/[locale]/[slug] - Locale ve slug ile ürün getir + tüm dillerdeki slug'ları döndür
 export async function GET(
@@ -9,40 +9,9 @@ export async function GET(
   try {
     const { locale, slug } = await params;
 
-    const productLocale = await prisma.productLocale.findUnique({
-      where: {
-        locale_slug: {
-          locale,
-          slug,
-        },
-      },
-      include: {
-        Product: {
-          include: {
-            Brand: true,
-            locales: {
-              select: {
-                locale: true,
-                slug: true,
-              },
-            },
-          },
-        },
-        ProductImage: {
-          orderBy: { order: 'asc' },
-        },
-        ProductReview: {
-          orderBy: { datePublished: 'desc' },
-        },
-        ProductFaq: {
-          orderBy: { order: 'asc' },
-        },
-        ProductOffer: true,
-        ProductRating: true,
-      },
-    });
+    const product = await getProductBySlug(slug, locale);
 
-    if (!productLocale) {
+    if (!product) {
       return NextResponse.json(
         { error: 'Ürün bulunamadı.' },
         { status: 404 }
@@ -50,14 +19,17 @@ export async function GET(
     }
 
     // Tüm dillerdeki slug'ları bir map olarak hazırla
-    const slugs = productLocale.Product.locales.reduce((acc, locale) => {
-      acc[locale.locale] = locale.slug;
-      return acc;
-    }, {} as Record<string, string>);
+    const slugs: Record<string, string> = {};
+    Object.keys(product.locales).forEach((loc) => {
+      const localeData = product.locales[loc as keyof typeof product.locales];
+      if (localeData?.slug) {
+        slugs[loc] = localeData.slug;
+      }
+    });
 
     return NextResponse.json({ 
-      productLocale,
-      slugs, // { tr: 'slug-tr', en: 'slug-en', ... }
+      product,
+      slugs, // { tr: 'kumiko-ahsap-masa-lambasi', en: 'kumiko-wooden-table-lamp', ... }
     }, { status: 200 });
   } catch (error) {
     console.error('Product by slug GET error:', error);

@@ -253,7 +253,8 @@
     "categories": {
       "all": "Tümü",
       "decor": "Dekorasyon",
-      "furniture": "Mobilya"
+      "furniture": "Mobilya",
+      "lighting": "Aydınlatma"
     },
     "sortOptions": {
       "newest": "En Yeniler",

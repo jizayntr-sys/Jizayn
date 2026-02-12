@@ -63,13 +63,35 @@ export async function generateMetadata({
     locale === 'tr' ? 'ahşap' : 'wooden',
     locale === 'tr' ? 'el yapımı' : 'handcrafted',
     locale === 'tr' ? 'doğal ahşap' : 'natural wood',
+    locale === 'tr' ? 'doğal ahşap ürünler' : 'natural wood products',
+    locale === 'tr' ? 'ahşap dekorasyon' : 'wood decoration',
+    locale === 'tr' ? 'ahşap masa lambası' : 'wooden table lamp',
+    locale === 'tr' ? 'kumiko sanatı' : 'kumiko art',
+    locale === 'tr' ? 'kumiko lamba' : 'kumiko lamp',
+    locale === 'tr' ? 'japon kumiko' : 'japanese kumiko',
+    locale === 'tr' ? 'el işi lamba' : 'handmade lamp',
+    locale === 'tr' ? 'dekoratif lamba' : 'decorative lamp',
+    locale === 'tr' ? 'ahşap aydınlatma' : 'wooden lighting',
+    locale === 'tr' ? 'yapıştırıcısız ahşap' : 'glue-free wood',
+    locale === 'tr' ? 'geleneksel ahşap işçiliği' : 'traditional woodworking',
+    locale === 'tr' ? 'türkiye' : 'turkey',
+    locale === 'tr' ? 'istanbul' : 'istanbul',
+    locale === 'tr' ? 'yerli üretim' : 'domestic production',
+    locale === 'tr' ? 'el emeği' : 'handcrafted',
+    locale === 'tr' ? 'özel tasarım' : 'custom design',
+    locale === 'tr' ? 'benzersiz ürün' : 'unique product',
     'Jizayn',
   ].filter(Boolean).join(', ');
 
+  // Category name for description
+  const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
+  const categoryTranslationKey = `categories.${product.category}` as any;
+  const categoryName = tProducts(categoryTranslationKey);
+
   // Enhanced description with price and key features
   const enhancedDescription = locale === 'tr'
-    ? `${productData.name}. ${productData.description?.substring(0, 120)}... El yapımı, doğal malzemelerden üretilmiş. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`
-    : `${productData.name}. ${productData.description?.substring(0, 120)}... Handmade, made from natural materials. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}. Jizayn.`;
+    ? `${productData.name} - ${categoryName} | 400 yıllık Japon Kumiko tekniği ile tamamen el yapımı ahşap masa lambası. Yapıştırıcısız geleneksel ahşap işçiliği, geometrik desenler, LED aydınlatma. ${productData.materials ? productData.materials : 'Doğal ahşap'}. Türkiye'de üretim, hızlı kargo. ✓ El emeği ✓ Benzersiz tasarım ✓ Kaliteli işçilik. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)} - Jizayn.`
+    : `${productData.name} - ${categoryName} | Completely handmade wooden table lamp with 400-year-old Japanese Kumiko technique. Traditional woodworking without glue, geometric patterns, LED lighting. ${productData.materials ? productData.materials : 'Natural wood'}. Made in Turkey, fast shipping. ✓ Handcrafted ✓ Unique design ✓ Quality workmanship. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)} - Jizayn.`;
 
   // x-default her zaman EN versiyonunu göstermeli
   const alternateLanguages: Record<string, string> = { 
@@ -77,11 +99,6 @@ export async function generateMetadata({
     'x-default': languages['en'] || `${BASE_URL}/en/products/${slug}`,
   };
 
-  // Enhanced title with category and key details for better SEO
-  const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
-  const categoryTranslationKey = `categories.${product.category}` as any;
-  const categoryName = tProducts(categoryTranslationKey);
-  
   // Extract first material for title enhancement
   const firstMaterial = productData.materials ? productData.materials.split(',')[0].trim() : '';
   
@@ -342,6 +359,66 @@ export default async function ProductDetailPage({
     })),
   } : null;
 
+  // Organization Schema
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Jizayn',
+    url: BASE_URL,
+    logo: `${BASE_URL}/JizaynLogo.svg`,
+    description: locale === 'tr' 
+      ? 'El yapımı ahşap dekoratif ürünler ve mobilyalar. Geleneksel Kumiko sanatı ile özel tasarım ahşap ürünler.'
+      : 'Handmade wooden decorative products and furniture. Special design wood products with traditional Kumiko art.',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'TR',
+      addressLocality: 'Istanbul',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      availableLanguage: ['Turkish', 'English'],
+    },
+    sameAs: [
+      'https://www.instagram.com/jizayn',
+      'https://www.facebook.com/jizayn',
+    ],
+  };
+
+  // HowTo Schema - Bakım Önerileri için
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: locale === 'tr' ? 'Ahşap Masa Lambası Bakımı' : 'Wooden Table Lamp Care',
+    description: locale === 'tr' 
+      ? 'El yapımı ahşap masa lambanızın uzun ömürlü olması için bakım önerileri'
+      : 'Care recommendations for your handmade wooden table lamp to last longer',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: locale === 'tr' ? 'Temizlik' : 'Cleaning',
+        text: locale === 'tr' 
+          ? 'Temizlik için sadece nemli bez kullanın. Sert fırçalar ahşap yüzeye zarar verebilir. Leke için hemen müdahale edin.'
+          : 'Use only a damp cloth for cleaning. Hard brushes can damage the wood surface. Address stains immediately.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: locale === 'tr' ? 'Yerleştirme' : 'Placement',
+        text: locale === 'tr'
+          ? 'Ürünü dengeli bir yüzeye yerleştirin. Isı kaynaklarından en az 1 metre uzakta tutun.'
+          : 'Place the product on a balanced surface. Keep at least 1 meter away from heat sources.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: locale === 'tr' ? 'Bakım' : 'Maintenance',
+        text: locale === 'tr'
+          ? 'Yumuşak ve kuru bir bez ile silin. Kimyasal temizleyiciler kullanmayın. Direkt güneş ışığından uzak tutun.'
+          : 'Wipe with a soft, dry cloth. Do not use chemical cleaners. Keep away from direct sunlight.',
+      },
+    ],
+    totalTime: 'PT10M',
+  };
+
   // Benzer ürünleri bul (Aynı kategorideki diğer ürünler, mevcut ürün hariç)
   const allProducts = await getAllProducts(locale);
   const similarProducts = allProducts
@@ -349,35 +426,60 @@ export default async function ProductDetailPage({
     .slice(0, 3);
 
   return (
-    <div className="bg-white pb-20">
+    <article className="bg-white pb-20" itemScope itemType="https://schema.org/Product">
+      {/* Preconnect to external domains for performance */}
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ 
           __html: JSON.stringify(
-            [productSchema, breadcrumbSchema, faqSchema].filter(Boolean)
+            [productSchema, breadcrumbSchema, faqSchema, organizationSchema, howToSchema].filter(Boolean)
           ) 
         }}
       />
+      <meta itemProp="name" content={productData.name} />
+      <meta itemProp="description" content={productData.description} />
 
       <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 sm:pb-8">
         {/* Breadcrumb Navigasyonu */}
-        <nav className="flex items-center text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap py-2 -mx-2 px-2" aria-label="Breadcrumb">
-          <Link href="/" className="flex items-center hover:text-indigo-600 transition-colors">
+        <nav className="flex items-center text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap py-2 -mx-2 px-2" aria-label="Breadcrumb" itemScope itemType="https://schema.org/BreadcrumbList">
+          <Link href="/" className="flex items-center hover:text-indigo-600 transition-colors" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
             <Home className="w-4 h-4 mr-1" />
-            {tNav('home')}
+            <span itemProp="name">{tNav('home')}</span>
+            <meta itemProp="position" content="1" />
           </Link>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
-          <Link href="/products" className="hover:text-indigo-600 transition-colors">
-            {tNav('products')}
+          <Link href="/products" className="hover:text-indigo-600 transition-colors" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <span itemProp="name">{tNav('products')}</span>
+            <meta itemProp="position" content="2" />
           </Link>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
-          <span className="text-gray-900 font-medium truncate">{productData.name}</span>
+          <a 
+            href={`/${locale}${currentProductsPath}?category=${product.category}`}
+            className="hover:text-indigo-600 transition-colors"
+            itemProp="itemListElement" 
+            itemScope 
+            itemType="https://schema.org/ListItem"
+          >
+            <span itemProp="name">{categoryName}</span>
+            <meta itemProp="position" content="3" />
+          </a>
+          <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
+          <span className="text-gray-900 font-medium truncate" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <span itemProp="name">{productData.name}</span>
+            <meta itemProp="position" content="4" />
+          </span>
         </nav>
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
           {/* 1. Galeri - Mobilde 1. sırada, Desktop'ta sol üst */}
-          <div className="order-1 lg:order-none">
-            <ProductGallery images={images} />
+          <div className="order-1 lg:order-none" itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+            <ProductGallery images={images.map((img, idx) => ({
+              ...img,
+              alt: img.alt || `${productData.name} - ${locale === 'tr' ? 'Görsel' : 'Image'} ${idx + 1} | ${categoryName} | Jizayn ${locale === 'tr' ? 'El Yapımı Ahşap Ürünler' : 'Handmade Wood Products'}`
+            }))} />
             
             {/* Satın Alma Butonları */}
             {productData.availability === 'OutOfStock' ? (
@@ -431,224 +533,241 @@ export default async function ProductDetailPage({
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-              {(() => {
-                const name = productData.name;
-                const words = name.split(' ');
-                const colors = ['text-blue-900', 'text-black', 'text-green-900', 'text-purple-900'];
-                return words.map((word, index) => (
-                  <span key={index} className={colors[index % colors.length]}>
-                    {word}{index < words.length - 1 ? ' ' : ''}
-                  </span>
-                ));
-              })()}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-gray-900">
+              {productData.name}
             </h1>
             
+            {/* SEO-Friendly Introduction */}
+            <div className="mb-6 text-gray-700 leading-relaxed text-base hidden lg:block" itemProp="description">
+              <p>
+                {locale === 'tr' 
+                  ? `${productData.name}, 400 yıllık Japon Kumiko sanatı tekniği ile el emeği göz nuru üretilmiş özel bir ahşap masa lambasıdır. Geleneksel ahşap işçiliği ve modern tasarımın mükemmel birleşimi olan bu benzersiz ürün, yapıştırıcı kullanılmadan sadece hassas kesim ve geçme teknikleri ile üretilmektedir. ${categoryName} kategorisindeki bu özel ürün, evinize doğal ahşabın sıcaklığını ve Uzakdoğu estetiğini taşır.`
+                  : `${productData.name} is a special wooden table lamp handcrafted with 400-year-old Japanese Kumiko art technique. This unique product, a perfect combination of traditional woodworking and modern design, is produced without glue, using only precise cutting and joinery techniques. This special item in the ${categoryName} category brings the warmth of natural wood and Far Eastern aesthetics to your home.`}
+              </p>
+            </div>
+            
             <div className="flex items-baseline gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100">
-              <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+              <p className="text-3xl sm:text-4xl font-bold text-gray-900" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                <span itemProp="price" content={productData.priceRange.min.toString()}>{formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}</span>
+                <meta itemProp="priceCurrency" content={productData.priceRange.currency} />
+                <link itemProp="availability" href={availabilityMap[productData.availability as keyof typeof availabilityMap]} />
               </p>
             </div>
 
-            {/* Açıklama */}
-            <div 
-              className="prose prose-sm sm:prose-base md:prose-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed max-w-none"
-              dangerouslySetInnerHTML={{ __html: productData.description }}
-            />
+            {/* Açıklama Bölümleri - Styled Sections */}
+            <div className="space-y-4 mb-8">
+              {/* Kumiko Sanatı */}
+              <div className="border-2 border-amber-400 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-5 shadow-md">
+                <h2 className="text-xl font-bold text-amber-900 mb-3">
+                  🎎 {locale === 'tr' ? 'Kumiko Sanatı Nedir ve Neden Özeldir?' : 'What is Kumiko Art and Why Special?'}
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  {locale === 'tr' 
+                    ? 'Kumiko, 17. yüzyıldan beri Japonya\'da uygulanan geleneksel bir ahşap işçiliği sanatıdır. Bu teknik, ince ahşap çubukların yapıştırıcı kullanılmadan, sadece hassas kesimleri ve geçme tekniği ile birleştirilmesiyle karmaşık geometrik desenler oluşturulmasını sağlar. Her bir ahşap parça, milimetrik hassasiyetle kesilir ve yerleştirilir.'
+                    : 'Kumiko is a traditional woodworking art practiced in Japan since the 17th century. This technique creates complex geometric patterns by joining thin wooden rods without glue, using only precise cuts and joinery. Each piece is cut and placed with millimeter precision.'}
+                </p>
+              </div>
+
+              {/* Neden Tercih Etmeli */}
+              <div className="border-2 border-blue-400 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-blue-900 mb-3">
+                  ✨ {locale === 'tr' ? 'Neden Bu Masa Lambasını Tercih Etmelisiniz?' : 'Why Choose This Table Lamp?'}
+                </h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li><strong>🎨 {locale === 'tr' ? 'Geleneksel Sanat:' : 'Traditional Art:'}</strong> {locale === 'tr' ? '400 yıllık Japon Kumiko tekniği ile tamamen el yapımı' : '400-year-old Japanese Kumiko technique, completely handmade'}</li>
+                  <li><strong>🔧 {locale === 'tr' ? 'Yapıştırıcısız Üretim:' : 'No Glue Production:'}</strong> {locale === 'tr' ? 'Tüm ahşap parçalar hassas kesim ve geçmelerle birleştirilir' : 'All wooden parts joined with precise cuts and joinery'}</li>
+                  <li><strong>💡 {locale === 'tr' ? 'Işık Sanatı:' : 'Light Art:'}</strong> {locale === 'tr' ? 'LED ışık, geometrik desenlerin arasından süzülerek büyüleyici gölge oyunları yaratır' : 'LED light creates fascinating shadow play through geometric patterns'}</li>
+                  <li><strong>🌳 {locale === 'tr' ? 'Doğal Malzeme:' : 'Natural Material:'}</strong> {locale === 'tr' ? '%100 masif doğal ahşap - maun ve çam kombinasyonu' : '100% solid natural wood - mahogany and pine combination'}</li>
+                </ul>
+              </div>
+
+              {/* Kullanım Alanları */}
+              <div className="border-2 border-purple-400 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-purple-900 mb-3">
+                  🏡 {locale === 'tr' ? 'Kullanım Alanları ve Dekorasyon Fikirleri' : 'Usage Areas and Decoration Ideas'}
+                </h3>
+                <ul className="space-y-1 text-gray-700 text-sm">
+                  <li>🛏️ <strong>{locale === 'tr' ? 'Yatak Odası:' : 'Bedroom:'}</strong> {locale === 'tr' ? 'Gece lambası olarak rahatlatıcı atmosfer' : 'As a night lamp for relaxing atmosphere'}</li>
+                  <li>🛋️ <strong>{locale === 'tr' ? 'Oturma Odası:' : 'Living Room:'}</strong> {locale === 'tr' ? 'Okuma lambası veya dekoratif aydınlatma' : 'Reading lamp or decorative lighting'}</li>
+                  <li>💼 <strong>{locale === 'tr' ? 'Çalışma Masası:' : 'Desk:'}</strong> {locale === 'tr' ? 'Modern ofis dekorasyonunda şık aksesuar' : 'Elegant accessory in modern office decoration'}</li>
+                  <li>🎁 <strong>{locale === 'tr' ? 'Özel Hediye:' : 'Special Gift:'}</strong> {locale === 'tr' ? 'Ev açılışı, yıldönümü için unutulmaz hediye' : 'Unforgettable gift for housewarming, anniversary'}</li>
+                </ul>
+              </div>
+
+              {/* Işık ve Atmosfer */}
+              <div className="border-2 border-indigo-400 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-indigo-900 mb-3">
+                  🌙 {locale === 'tr' ? 'Işık ve Atmosfer' : 'Light and Atmosphere'}
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  {locale === 'tr'
+                    ? 'Kumiko lambanın en büyük özelliği, ışık ile ahşap geometrik desenlerin yarattığı büyüleyici atmosferdir. LED ışık kaynağı, ahşap çubukların arasından geçerek duvarlara ve tavana geometrik gölge desenleri yansıtır. Özellikle gece kullanımında, bu ışık oyunu mekanınıza huzurlu ve sıcak bir ambiyans katarken, aynı zamanda okuma yapmak için yeterli ışık sağlar.'
+                    : 'The biggest feature of the Kumiko lamp is the fascinating atmosphere created by light and wooden geometric patterns. The LED light source passes through the wooden rods, reflecting geometric shadow patterns on walls and ceiling. Especially at night, this light play adds a peaceful and warm ambiance to your space while providing sufficient light for reading.'}
+                </p>
+              </div>
+
+              {/* Hediye Seçeneği */}
+              <div className="border-2 border-rose-400 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-rose-900 mb-3">
+                  🎁 {locale === 'tr' ? 'Mükemmel Hediye Seçeneği' : 'Perfect Gift Option'}
+                </h3>
+                <p className="text-gray-700 mb-2">
+                  {locale === 'tr' 
+                    ? 'El yapımı Kumiko masa lambası, özel günleriniz ve hediye ihtiyaçlarınız için unutulmaz bir seçenektir:' 
+                    : 'The handmade Kumiko table lamp is an unforgettable choice for your special occasions and gift needs:'}
+                </p>
+                <ul className="space-y-1 text-gray-700 text-sm">
+                  <li>🏠 <strong>{locale === 'tr' ? 'Ev Açılışı:' : 'Housewarming:'}</strong> {locale === 'tr' ? 'Yeni eve taşınan sevdiklerinize anlamlı hediye' : 'Meaningful gift for loved ones moving to a new home'}</li>
+                  <li>💕 <strong>{locale === 'tr' ? 'Evlilik Yıldönümü:' : 'Wedding Anniversary:'}</strong> {locale === 'tr' ? 'Çiftler için romantik ve şık hediye' : 'Romantic and elegant gift for couples'}</li>
+                  <li>🎨 <strong>{locale === 'tr' ? 'Tasarım Meraklıları:' : 'Design Enthusiasts:'}</strong> {locale === 'tr' ? 'Sanat ve tasarım seven arkadaşlarınıza' : 'For friends who love art and design'}</li>
+                </ul>
+              </div>
+
+              {/* Jizayn Farkı */}
+              <div className="border-2 border-green-400 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-green-900 mb-3">
+                  🏭 {locale === 'tr' ? 'Jizayn Farkı - Neden Bizden Almalısınız?' : 'Jizayn Difference - Why Buy From Us?'}
+                </h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li>✅ <strong>{locale === 'tr' ? 'Usta Marangozlar:' : 'Master Craftsmen:'}</strong> {locale === 'tr' ? 'Deneyimli ustalar tarafından özenle üretilir' : 'Carefully crafted by experienced masters'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'Geleneksel Teknik:' : 'Traditional Technique:'}</strong> {locale === 'tr' ? 'Orijinal Kumiko tekniği korunarak uygulanır' : 'Original Kumiko technique preserved and applied'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'Türk Malı:' : 'Turkish Made:'}</strong> {locale === 'tr' ? '%100 yerli üretim, milli ve yerli' : '100% domestic production'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'El Emeği:' : 'Handcrafted:'}</strong> {locale === 'tr' ? 'Seri üretim değil, her biri özel olarak yapılır' : 'Not mass production, each made individually'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'Güvenli Kargo:' : 'Safe Shipping:'}</strong> {locale === 'tr' ? 'Özel ambalaj ile hasar görmeden teslim' : 'Delivered without damage with special packaging'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'Müşteri Memnuniyeti:' : 'Customer Satisfaction:'}</strong> {locale === 'tr' ? 'Memnuniyetiniz bizim önceliğimiz' : 'Your satisfaction is our priority'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'Değişim Hakkı:' : 'Return Right:'}</strong> {locale === 'tr' ? '15 gün içinde sorunsuz iade ve değişim' : 'Hassle-free return and exchange within 15 days'}</li>
+                  <li>✅ <strong>{locale === 'tr' ? 'İletişim:' : 'Communication:'}</strong> {locale === 'tr' ? 'WhatsApp ve telefon ile hızlı destek' : 'Fast support via WhatsApp and phone'}</li>
+                </ul>
+              </div>
+
+              {/* Kullanım ve Bakım Önerileri */}
+              <div className="border-2 border-gray-400 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  {locale === 'tr' ? 'Kullanım ve Bakım Önerileri' : 'Usage and Care Recommendations'}
+                </h3>
+                
+                <div className="space-y-3">
+                  <div className="bg-white/60 backdrop-blur rounded-lg p-3 border border-amber-200">
+                    <h4 className="font-semibold text-gray-900 mb-1.5 flex items-center gap-2 text-sm">
+                      <span className="text-lg">🧼</span>
+                      {locale === 'tr' ? 'Temizlik' : 'Cleaning'}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed text-sm">
+                      {locale === 'tr' ? 'Temizlik için sadece nemli bez kullanın. Sert fırçalar ahşap yüzeye zarar verebilir. Leke için hemen müdahale edin. Yılda bir kez doğal yağla besleyin.' : 'Use only a damp cloth for cleaning. Hard brushes can damage the wood surface. Address stains immediately. Nourish with natural oil once a year.'}
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/60 backdrop-blur rounded-lg p-3 border border-amber-200">
+                    <h4 className="font-semibold text-gray-900 mb-1.5 flex items-center gap-2 text-sm">
+                      <span className="text-lg">🛡️</span>
+                      {locale === 'tr' ? 'Bakım' : 'Care'}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed text-sm">
+                      {locale === 'tr' ? 'Ürünlerinizin uzun ömürlü olması için düzenli bakım önemlidir. Yumuşak ve kuru bir bez ile silin. Kimyasal temizleyiciler kullanmayın. Direkt güneş ışığından uzak tutun. Aşırı neme maruz bırakmayın.' : 'Regular care is important for long-lasting products. Wipe with a soft, dry cloth. Do not use chemical cleaners. Keep away from direct sunlight. Do not expose to excessive moisture.'}
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/60 backdrop-blur rounded-lg p-3 border border-amber-200">
+                    <h4 className="font-semibold text-gray-900 mb-1.5 flex items-center gap-2 text-sm">
+                      <span className="text-lg">📍</span>
+                      {locale === 'tr' ? 'Yerleştirme' : 'Placement'}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed text-sm">
+                      {locale === 'tr' ? 'Ürünü dengeli bir yüzeye yerleştirin. Isı kaynaklarından (kalorifer, soba) en az 1 metre uzakta tutun. Ahşap, sıcaklık değişimlerine duyarlıdır. Nem oranı %40-60 arası ideal ortamdır.' : 'Place the product on a balanced surface. Keep at least 1 meter away from heat sources (radiator, stove). Wood is sensitive to temperature changes. Humidity between 40-60% is ideal.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Önemli Notlar */}
+              <div className="border-2 border-amber-400 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-5 shadow-md">
+                <h3 className="text-lg font-bold text-amber-900 mb-3 flex items-center gap-2">
+                  <span className="text-xl">⚠️</span>
+                  {locale === 'tr' ? 'Önemli Notlar - Lütfen Okuyun' : 'Important Notes - Please Read'}
+                </h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'El Yapımı Ürün:' : 'Handmade Product:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'Her lamba benzersizdir, küçük farklılıklar olabilir' : 'Each lamp is unique, small differences may occur'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Doğal Ahşap:' : 'Natural Wood:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'Ahşabın doğal dokusu ve renk tonlarında varyasyonlar normal ve beklenir' : 'Variations in natural texture and color tones of wood are normal and expected'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Kalite Değil:' : 'Not a Defect:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'Bu doğal farklılıklar ürünü daha da özel kılar - kusur değildir' : 'These natural differences make the product even more special - not a defect'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Ampul Dahil Değil:' : 'Bulb Not Included:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'E14 duy tipi LED ampul ayrıca temin edilmelidir' : 'E14 socket type LED bulb must be purchased separately'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Ampul Önerisi:' : 'Bulb Recommendation:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? '2-5W sıcak beyaz LED ampul kullanın (2700K-3000K)' : 'Use 2-5W warm white LED bulb (2700K-3000K)'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Kırılgandır:' : 'Fragile:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'Ahşap yapı hassastır, darbelere karşı dikkatli olun' : 'Wood structure is delicate, be careful against impacts'}</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold text-base mt-0.5 flex-shrink-0">📌</span>
+                    <div>
+                      <strong className="text-gray-900">{locale === 'tr' ? 'Nem:' : 'Moisture:'}</strong>
+                      <span className="text-gray-700"> {locale === 'tr' ? 'Banyo, mutfak gibi yüksek nemli alanlarda kullanmayın' : 'Do not use in high humidity areas like bathrooms and kitchens'}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
           <div className="order-3 lg:order-none space-y-8">
-            {/* Jizayn Farkı */}
-            <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-6 md:p-8 border-2 border-indigo-200 shadow-lg">
-              <h2 className="text-lg md:text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
-                <span className="text-2xl">🏭</span>
-                Jizayn Farkı - Neden Bizden Almalısınız?
-              </h2>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Usta Marangozlar:</strong>
-                    <span className="text-gray-700"> Deneyimli ustalar tarafından özenle üretilir</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Geleneksel Teknik:</strong>
-                    <span className="text-gray-700"> Orijinal Kumiko tekniği korunarak uygulanır</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Türk Malı:</strong>
-                    <span className="text-gray-700"> %100 yerli üretim, milli ve yerli</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">El Emeği:</strong>
-                    <span className="text-gray-700"> Seri üretim değil, her biri özel olarak yapılır</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Güvenli Kargo:</strong>
-                    <span className="text-gray-700"> Özel ambalaj ile hasar görmeden teslim</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Müşteri Memnuniyeti:</strong>
-                    <span className="text-gray-700"> Memnuniyetiniz bizim önceliğimiz</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">Değişim Hakkı:</strong>
-                    <span className="text-gray-700"> 15 gün içinde sorunsuz iade ve değişim</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg mt-0.5 flex-shrink-0">✅</span>
-                  <div>
-                    <strong className="text-gray-900">İletişim:</strong>
-                    <span className="text-gray-700"> WhatsApp ve telefon ile hızlı destek</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* Önemli Notlar */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border-2 border-amber-200 shadow-lg">
-              <h2 className="text-lg md:text-xl font-bold text-amber-900 mb-6 flex items-center gap-2">
-                <span className="text-2xl">⚠️</span>
-                Önemli Notlar - Lütfen Okuyun
-              </h2>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">El Yapımı Ürün:</strong>
-                    <span className="text-gray-700"> Her lamba benzersizdir, küçük farklılıklar olabilir</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Doğal Ahşap:</strong>
-                    <span className="text-gray-700"> Ahşabın doğal dokusu ve renk tonlarında varyasyonlar normal ve beklenir</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Kalite Değil:</strong>
-                    <span className="text-gray-700"> Bu doğal farklılıklar ürünü daha da özel kılar - kusur değildir</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Ampul Dahil Değil:</strong>
-                    <span className="text-gray-700"> E14 duy tipi LED ampul ayrıca temin edilmelidir</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Ampul Önerisi:</strong>
-                    <span className="text-gray-700"> 2-5W sıcak beyaz LED ampul kullanın (2700K-3000K)</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Kırılgandır:</strong>
-                    <span className="text-gray-700"> Ahşap yapı hassastır, darbelere karşı dikkatli olun</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold text-lg mt-0.5 flex-shrink-0">📌</span>
-                  <div>
-                    <strong className="text-gray-900">Nem:</strong>
-                    <span className="text-gray-700"> Banyo, mutfak gibi yüksek nemli alanlarda kullanmayın</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* Kullanım ve Bakım Önerileri */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                {t('reviews.usage.title')}
-              </h2>
-              
-              <div className="space-y-4">
-                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
-                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
-                    <span className="text-xl">🧼</span>
-                    {t('reviews.usage.cleaningTitle')}
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    {t('reviews.usage.cleaning')}
-                  </p>
-                </div>
-                
-                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
-                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
-                    <span className="text-xl">🛡️</span>
-                    {t('reviews.usage.careTitle')}
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    {t('reviews.usage.care')}
-                  </p>
-                </div>
-                
-                <div className="bg-white/60 backdrop-blur rounded-xl p-4 border border-amber-200">
-                  <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm">
-                    <span className="text-xl">📍</span>
-                    {t('reviews.usage.placementTitle')}
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    {t('reviews.usage.placement')}
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Teknik Özellikler */}
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
                 {t('reviews.specs.title')}
               </h2>
-              <div className="grid grid-cols-1 gap-y-4 text-sm">
+              <div className="grid grid-cols-1 gap-y-2 text-sm">
                 {productData.dimensions && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                  <div className="flex justify-between py-2 border-b border-gray-200 last:border-0">
                     <span className="text-gray-500 font-medium">{t('reviews.specs.dimensions')}</span>
                     <span className="text-gray-900 font-semibold">{productData.dimensions}</span>
                   </div>
                 )}
                 {productData.materials && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                  <div className="flex justify-between py-2 border-b border-gray-200 last:border-0">
                     <span className="text-gray-500 font-medium">{t('reviews.specs.materials')}</span>
                     <span className="text-gray-900 font-semibold">{productData.materials}</span>
                   </div>
                 )}
                 {productData.sku && (
-                  <div className="flex justify-between py-3 border-b border-gray-200 last:border-0">
+                  <div className="flex justify-between py-2 border-b border-gray-200 last:border-0">
                     <span className="text-gray-500 font-medium">{t('reviews.specs.sku')}</span>
                     <span className="text-gray-900 font-mono font-semibold">{productData.sku}</span>
                   </div>
@@ -656,7 +775,7 @@ export default async function ProductDetailPage({
               </div>
 
               {productData.specifications && (
-                <ul className="mt-6 space-y-3 pt-4 border-t border-gray-200">
+                <ul className="mt-4 space-y-2 pt-3 border-t border-gray-200">
                   {productData.specifications.map((spec, i) => (
                     <li key={i} className="flex items-start text-gray-600 text-sm">
                       <span className="mr-3 text-indigo-500 font-bold">•</span>
@@ -712,6 +831,48 @@ export default async function ProductDetailPage({
               <p className="text-gray-700 text-sm leading-relaxed">
                 {t('reviews.shipping.info')}
               </p>
+            </div>
+
+            {/* Paket İçeriği */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 md:p-8 border-2 border-purple-200 shadow-lg">
+              <h2 className="text-lg md:text-xl font-bold text-purple-900 mb-4 flex items-center gap-2">
+                <span className="text-2xl">📦</span>
+                Paket İçeriği
+              </h2>
+              <div className="space-y-1.5 text-sm">
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>1 adet El Yapımı Kumiko Ahşap Masa Lambası</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>E14 duy soket (lamba başlığı içinde)</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>1.5 metre şık siyah kumaş elektrik kablosu</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>Kablo üzerinde açma/kapama anahtarı</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>CE sertifikalı elektrik aksam</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>Kullanım ve bakım kılavuzu</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-green-600 text-lg flex-shrink-0">✔️</span>
+                  <span>Özel tasarım ambalaj - hediye için hazır</span>
+                </div>
+                <div className="flex items-start gap-3 text-gray-700 bg-white/60 rounded-lg p-2">
+                  <span className="text-red-600 text-lg flex-shrink-0">❌</span>
+                  <span className="font-medium">LED ampul dahil değildir (ayrıca temin edilmelidir)</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -769,17 +930,13 @@ export default async function ProductDetailPage({
         />
       </div>
 
-      {/* Alt Bölüm: Sıkça Sorulan Sorular */}
-      {productData.faq && productData.faq.length > 0 && (
-        <div className="container mx-auto px-4 mt-24">
-          <FAQ items={productData.faq} title={t('reviews.faq.title')} />
-        </div>
-      )}
-
       {/* Benzer Ürünler Bölümü */}
       {similarProducts.length > 0 && (
-        <div className="container mx-auto px-4 mt-24 pt-12 border-t border-gray-100">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t('similarProducts')}</h2>
+        <section className="container mx-auto px-4 mt-24 pt-12 border-t border-gray-100" itemScope itemType="https://schema.org/ItemList">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center" itemProp="name">
+            {t('similarProducts')} - {categoryName}
+          </h2>
+          <meta itemProp="numberOfItems" content={similarProducts.length.toString()} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {similarProducts.map((simProduct) => {
               const simProductData = simProduct.locales[locale as keyof typeof simProduct.locales];
@@ -790,15 +947,19 @@ export default async function ProductDetailPage({
                   key={simProduct.id}
                   href={{ pathname: '/products/[slug]', params: { slug: simProductData.slug } } as any}
                   className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
+                  itemProp="isRelatedTo"
+                  itemScope
+                  itemType="https://schema.org/Product"
                 >
                   <div className="relative h-64 w-full bg-gray-100 overflow-hidden">
                     {simProductData.images && simProductData.images.length > 0 ? (
                       <Image
                         src={simProductData.images[0].url}
-                        alt={simProductData.images[0].alt}
+                        alt={`${simProductData.name} - ${locale === 'tr' ? 'El yapımı ahşap ürün' : 'Handmade wood product'} | Jizayn`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px"
+                        loading="lazy"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
@@ -821,8 +982,8 @@ export default async function ProductDetailPage({
               );
             })}
           </div>
-        </div>
+        </section>
       )}
-    </div>
+    </article>
   );
 }

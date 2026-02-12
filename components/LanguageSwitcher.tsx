@@ -32,25 +32,21 @@ export default function LanguageSwitcher({ id = 'language-switcher' }: LanguageS
   const handleLanguageChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
     
-    // Ürün detay sayfası kontrolü
-    const isProductDetailPage = 
-      (pathname.startsWith('/products/') && pathname !== '/products') ||
-      (typeof window !== 'undefined' && (
-        window.location.pathname.includes('/products/') || 
-        window.location.pathname.includes('/urunler/')
-      ));
+    // Ürün detay sayfası kontrolü - pathname her dilde farklı olabilir (/products/ veya /urunler/)
+    const fullPath = typeof window !== 'undefined' ? window.location.pathname : pathname;
+    const pathParts = fullPath.split('/').filter(Boolean); // ['tr', 'urunler', 'kumiko-ahsap-masa-lambasi']
     
-    if (isProductDetailPage && typeof window !== 'undefined') {
-      // Mevcut slug'ı bul
-      const pathParts = window.location.pathname.split('/');
-      const productsIndex = pathParts.findIndex(p => p === 'products' || p === 'urunler');
+    // pathParts[0] = locale, pathParts[1] = products/urunler, pathParts[2] = slug
+    const isProductDetailPage = pathParts.length === 3 && (pathParts[1] === 'products' || pathParts[1] === 'urunler');
+    
+    if (isProductDetailPage) {
+      const currentSlug = pathParts[2];
       
-      if (productsIndex !== -1 && pathParts[productsIndex + 1]) {
-        const currentSlug = pathParts[productsIndex + 1];
-        
+      if (currentSlug) {
         try {
           // API'den ürünün tüm dillerdeki slug'larını al
           const response = await fetch(`/api/products/slug/${currentLocale}/${currentSlug}`);
+          
           if (response.ok) {
             const data = await response.json();
             const newSlug = data.slugs?.[newLocale];
@@ -65,12 +61,12 @@ export default function LanguageSwitcher({ id = 'language-switcher' }: LanguageS
         } catch (error) {
           console.error('Failed to load product slugs:', error);
         }
-        
-        // Slug bulunamadıysa veya hata olursa, ürünler sayfasına yönlendir
-        const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
-        window.location.href = `/${newLocale}${productsPath}`;
-        return;
       }
+      
+      // Slug bulunamadıysa veya hata olursa, ürünler sayfasına yönlendir
+      const productsPath = pathnames['/products'][newLocale as keyof typeof pathnames['/products']];
+      window.location.href = `/${newLocale}${productsPath}`;
+      return;
     }
     
     // Diğer sayfalar için normal yönlendirme
