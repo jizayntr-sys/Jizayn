@@ -26,7 +26,6 @@ const nextConfig = {
   // Optimize chunks
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
-    optimizeCss: true, // Experimental CSS optimization
   },
   
   images: {
