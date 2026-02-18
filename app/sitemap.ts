@@ -8,13 +8,70 @@ import { BASE_URL } from '@/lib/constants';
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Revalidate every hour
 
+function toValidDate(value?: string): Date | undefined {
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+}
+
+function getProductLastModified(product: { updatedAt?: string; createdAt?: string }): Date | undefined {
+  return toValidDate(product.updatedAt) ?? toValidDate(product.createdAt);
+}
+
+function getStaticEntries(): MetadataRoute.Sitemap {
+  const staticRoutesConfig = {
+    '/': { priority: 1.0, changeFrequency: 'daily' as const },
+    '/about': { priority: 0.5, changeFrequency: 'monthly' as const },
+    '/contact': { priority: 0.5, changeFrequency: 'monthly' as const },
+    '/products': { priority: 0.7, changeFrequency: 'weekly' as const },
+    '/privacy': { priority: 0.3, changeFrequency: 'yearly' as const },
+    '/terms': { priority: 0.3, changeFrequency: 'yearly' as const },
+    '/cookies': { priority: 0.3, changeFrequency: 'yearly' as const },
+    '/kvkk': { priority: 0.3, changeFrequency: 'yearly' as const },
+  };
+
+  return Object.entries(pathnames)
+    .filter(([path]) => !path.includes('['))
+    .flatMap(([canonicalPath, pathConfig]) => {
+      const routeConfig = staticRoutesConfig[canonicalPath as keyof typeof staticRoutesConfig] || {
+        priority: 0.5,
+        changeFrequency: 'monthly' as const,
+      };
+
+      const languages = routing.locales.reduce((acc, l) => {
+        const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[l];
+        acc[l] = `${BASE_URL}/${l}${localizedPath}`;
+        return acc;
+      }, {} as Record<string, string>);
+
+      return routing.locales.map((locale) => {
+        const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[locale];
+
+        return {
+          url: `${BASE_URL}/${locale}${localizedPath}`,
+          changeFrequency: routeConfig.changeFrequency,
+          priority: routeConfig.priority,
+          alternates: {
+            languages: {
+              'x-default': languages['en'] || `${BASE_URL}/en`,
+              ...languages,
+            },
+          },
+        };
+      });
+    });
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticEntries = getStaticEntries();
+
   try {
     // Ürün sayfaları için sitemap girişleri
     const products = await getAllProducts();
   const productEntries = products.flatMap((product) => {
     return routing.locales.map((locale) => {
       const productData = product.locales[locale as keyof typeof product.locales];
+      const productLastModified = getProductLastModified(product);
       
       // Eğer bu dilde ürün verisi veya slug yoksa sitemap'e ekleme
       if (!productData?.slug) return null;
@@ -34,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       return {
         url,
-        lastModified: new Date(), // Ürün verisinden gelen tarihi kullan, yoksa şimdiki zamanı kullan
+        ...(productLastModified ? { lastModified: productLastModified } : {}),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
         alternates: {
@@ -47,58 +104,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }).filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
-  // Statik sayfaları pathnames.ts'den dinamik olarak oluştur
-  const staticRoutesConfig = {
-    '/': { priority: 1.0, changeFrequency: 'daily' as const },
-    '/about': { priority: 0.5, changeFrequency: 'monthly' as const },
-    '/contact': { priority: 0.5, changeFrequency: 'monthly' as const },
-    '/products': { priority: 0.7, changeFrequency: 'weekly' as const },
-    '/privacy': { priority: 0.3, changeFrequency: 'yearly' as const },
-    '/terms': { priority: 0.3, changeFrequency: 'yearly' as const },
-    '/cookies': { priority: 0.3, changeFrequency: 'yearly' as const },
-    '/kvkk': { priority: 0.3, changeFrequency: 'yearly' as const },
-  };
-
-  // Her dil için ayrı entry oluştur
-  const staticEntries = Object.entries(pathnames)
-    .filter(([path]) => !path.includes('[')) // Dinamik rotaları hariç tut
-    .flatMap(([canonicalPath, pathConfig]) => {
-      const routeConfig = staticRoutesConfig[canonicalPath as keyof typeof staticRoutesConfig] || {
-        priority: 0.5,
-        changeFrequency: 'monthly' as const,
-      };
-
-      // Tüm diller için alternate linkleri oluştur
-      const languages = routing.locales.reduce((acc, l) => {
-        const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[l];
-        acc[l] = `${BASE_URL}/${l}${localizedPath}`;
-        return acc;
-      }, {} as Record<string, string>);
-
-      // Her dil için ayrı entry oluştur
-      return routing.locales.map((locale) => {
-        const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[locale];
-        
-        return {
-          url: `${BASE_URL}/${locale}${localizedPath}`,
-          lastModified: new Date(),
-          changeFrequency: routeConfig.changeFrequency,
-          priority: routeConfig.priority,
-          alternates: {
-            languages: {
-              'x-default': languages['en'] || `${BASE_URL}/en`,
-              ...languages,
-            },
-          },
-        };
-      });
-    });
-
     return [...staticEntries, ...productEntries];
   } catch (error) {
     console.error('Error generating sitemap:', error);
-    
-    // Return empty sitemap if database is unavailable during build
-    return [];
+
+    return staticEntries;
   }
 }

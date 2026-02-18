@@ -131,11 +131,10 @@ export default async function HomePage() {
 
       {/* Hero Section Content */}
       <SectionScroller sectionId="hero" className="relative z-10 h-screen snap-start snap-always flex items-center justify-center overflow-hidden">
-        <h1 className="sr-only">{t('hero.title')}</h1>
         {/* İçerik */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center text-white">
           <FadeIn>
-            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight drop-shadow-lg px-2" role="heading" aria-level={1}>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight drop-shadow-lg px-2">
               {(() => {
                 const title = t('hero.title');
                 // Kelimelere ayır, boşlukları ve noktalama işaretlerini koru
@@ -157,7 +156,7 @@ export default async function HomePage() {
                   );
                 });
               })()}
-            </div>
+            </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-10 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md px-2">
               {t('hero.subtitle')}
             </p>
@@ -176,7 +175,7 @@ export default async function HomePage() {
 
       {/* Öne Çıkan Ürünler */}
       <SectionScroller sectionId="featured" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-[length:40px_40px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-right">
             <div className="flex justify-between items-end mb-8 md:mb-12">
@@ -195,7 +194,7 @@ export default async function HomePage() {
 
       {/* Özellikler Bölümü (Neden Jizayn) */}
       <SectionScroller sectionId="features" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[length:24px_24px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-up">
             <div className="text-center mb-8 md:mb-10">
@@ -262,7 +261,7 @@ export default async function HomePage() {
 
       {/* Müşteri Yorumları Slider */}
       <SectionScroller sectionId="reviews" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[length:24px_24px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-left">
             <div className="flex justify-between items-end mb-8 md:mb-12">

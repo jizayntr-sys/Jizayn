@@ -2,9 +2,6 @@ import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
-// Force dynamic rendering to avoid database calls during build
-export const dynamic = 'force-dynamic';
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -17,6 +14,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'terms' });
   const baseUrl = 'https://www.jizayn.com';
+  const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
+  const ogLocale = localeMap[locale] || 'en_US';
+  const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
   
   const pathTr = '/kullanim-kosullari';
   const pathEn = '/terms-of-use';
@@ -39,8 +39,8 @@ export async function generateMetadata({
       title: t('title'),
       description: t('description'),
       url: `${baseUrl}/${locale}${localizedPath}`,
-      locale,
-      alternateLocale: routing.locales.filter((l) => l !== locale),
+      locale: ogLocale,
+      alternateLocale: [alternateLocale],
     },
   };
 }

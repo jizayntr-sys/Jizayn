@@ -17,6 +17,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'kvkk' });
   const baseUrl = 'https://www.jizayn.com';
+  const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
+  const ogLocale = localeMap[locale] || 'en_US';
+  const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
   
   const pathTr = '/kvkk-aydinlatma-metni';
   const pathEn = '/data-protection';
@@ -39,8 +42,8 @@ export async function generateMetadata({
       title: t('title'),
       description: t('description'),
       url: `${baseUrl}/${locale}${localizedPath}`,
-      locale,
-      alternateLocale: routing.locales.filter((l) => l !== locale),
+      locale: ogLocale,
+      alternateLocale: [alternateLocale],
     },
   };
 }

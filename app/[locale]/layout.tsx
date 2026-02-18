@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: {
         'tr': `${BASE_URL}/tr`,
         'en': `${BASE_URL}/en`,
-        'x-default': `${BASE_URL}/tr`,
+        'x-default': `${BASE_URL}/en`,
       },
     },
     openGraph: {
@@ -139,7 +139,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <GoogleAnalytics gaId="G-XXXXXXXXXX" />
+          <GoogleAnalytics gaId="G-FM8C3948TW" />
           <HeaderWrapper>
           <Header />
           </HeaderWrapper>

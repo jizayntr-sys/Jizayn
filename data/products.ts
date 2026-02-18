@@ -5,12 +5,27 @@
 
 import { Product } from '@/types/product';
 
+const DEFAULT_PRODUCT_CREATED_AT = '2025-01-01T00:00:00.000Z';
+
+function normalizeProductDates(product: Product): Product {
+  const createdAt = product.createdAt || DEFAULT_PRODUCT_CREATED_AT;
+  const updatedAt = product.updatedAt || createdAt;
+
+  return {
+    ...product,
+    createdAt,
+    updatedAt,
+  };
+}
+
 // Statik ürün verileri
-export const products: Product[] = [
+const rawProducts: Product[] = [
   {
     id: 'kumiko-lamp',
     category: 'lighting',
     tags: ['kumiko', 'wooden-lamp', 'japanese', 'handmade'],
+    createdAt: '2025-01-15T10:00:00.000Z',
+    updatedAt: '2026-02-18T09:00:00.000Z',
     brand: {
       name: 'Jizayn',
       url: 'https://jizayn.com',
@@ -167,6 +182,8 @@ export const products: Product[] = [
     }
   }
 ];
+
+export const products: Product[] = rawProducts.map(normalizeProductDates);
 
 /**
  * Tüm ürünleri getirir
