@@ -16,6 +16,10 @@ import ShareButtons from '@/components/ShareButtons';
 import AddToCartButton from '@/components/AddToCartButton';
 import { BASE_URL } from '@/lib/constants';
 
+function stripHtml(input: string): string {
+  return input.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -51,47 +55,30 @@ export async function generateMetadata({
   const ogLocale = localeMap[locale] || 'en_US';
   const alternateLocale = locale === 'tr' ? 'en_US' : 'tr_TR';
 
-  // Meta keywords oluştur (ürün adı, kategori, malzemeler)
-  const metaKeywords = [
+  // Meta keywords (Google için kritik değil ama diğer motorlar için yardımcı olabilir)
+  const metaKeywords = Array.from(new Set([
     productData.name,
     product.category,
     ...(productData.materials ? productData.materials.split(',').map(m => m.trim()) : []),
     ...(productData.metaKeywords || []),
-    'handmade',
-    'wood',
-    'decorative',
-    locale === 'tr' ? 'ahşap' : 'wooden',
-    locale === 'tr' ? 'el yapımı' : 'handcrafted',
-    locale === 'tr' ? 'doğal ahşap' : 'natural wood',
-    locale === 'tr' ? 'doğal ahşap ürünler' : 'natural wood products',
-    locale === 'tr' ? 'ahşap dekorasyon' : 'wood decoration',
-    locale === 'tr' ? 'ahşap masa lambası' : 'wooden table lamp',
-    locale === 'tr' ? 'kumiko sanatı' : 'kumiko art',
-    locale === 'tr' ? 'kumiko lamba' : 'kumiko lamp',
-    locale === 'tr' ? 'japon kumiko' : 'japanese kumiko',
-    locale === 'tr' ? 'el işi lamba' : 'handmade lamp',
-    locale === 'tr' ? 'dekoratif lamba' : 'decorative lamp',
-    locale === 'tr' ? 'ahşap aydınlatma' : 'wooden lighting',
-    locale === 'tr' ? 'yapıştırıcısız ahşap' : 'glue-free wood',
-    locale === 'tr' ? 'geleneksel ahşap işçiliği' : 'traditional woodworking',
-    locale === 'tr' ? 'türkiye' : 'turkey',
-    locale === 'tr' ? 'istanbul' : 'istanbul',
-    locale === 'tr' ? 'yerli üretim' : 'domestic production',
-    locale === 'tr' ? 'el emeği' : 'handcrafted',
-    locale === 'tr' ? 'özel tasarım' : 'custom design',
-    locale === 'tr' ? 'benzersiz ürün' : 'unique product',
+    locale === 'tr' ? 'kumiko ahşap masa lambası' : 'kumiko wooden table lamp',
+    locale === 'tr' ? 'el yapımı kumiko lamba' : 'handmade kumiko lamp',
+    locale === 'tr' ? 'japon kumiko tekniği' : 'japanese kumiko technique',
+    locale === 'tr' ? 'doğal ahşap aydınlatma' : 'natural wooden lighting',
+    locale === 'tr' ? 'dekoratif masa lambası' : 'decorative table lamp',
+    locale === 'tr' ? 'türkiye üretim' : 'made in turkey',
     'Jizayn',
-  ].filter(Boolean).join(', ');
+  ].filter(Boolean))).join(', ');
 
   // Category name for description
   const tProducts = await getTranslations({ locale, namespace: 'productsPage' });
   const categoryTranslationKey = `categories.${product.category}` as any;
   const categoryName = tProducts(categoryTranslationKey);
 
-  // Enhanced description with price and key features
+  const shortDescription = stripHtml(productData.description || '');
   const enhancedDescription = locale === 'tr'
-    ? `${productData.name} - ${categoryName} | 400 yıllık Japon Kumiko tekniği ile tamamen el yapımı ahşap masa lambası. Yapıştırıcısız geleneksel ahşap işçiliği, geometrik desenler, LED aydınlatma. ${productData.materials ? productData.materials : 'Doğal ahşap'}. Türkiye'de üretim, hızlı kargo. ✓ El emeği ✓ Benzersiz tasarım ✓ Kaliteli işçilik. Fiyat: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)} - Jizayn.`
-    : `${productData.name} - ${categoryName} | Completely handmade wooden table lamp with 400-year-old Japanese Kumiko technique. Traditional woodworking without glue, geometric patterns, LED lighting. ${productData.materials ? productData.materials : 'Natural wood'}. Made in Turkey, fast shipping. ✓ Handcrafted ✓ Unique design ✓ Quality workmanship. Price: ${formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)} - Jizayn.`;
+    ? `${productData.name}, 400 yıllık Japon Kumiko tekniği ile üretilen el yapımı ahşap masa lambasıdır. ${productData.materials ? productData.materials : 'Doğal ahşap'} malzeme, dekoratif geometrik desen ve sıcak ambiyans aydınlatması sunar. ${shortDescription}`
+    : `${productData.name} is a handmade wooden table lamp crafted with the 400-year-old Japanese Kumiko technique. It offers decorative geometric pattern details, warm ambient lighting, and premium ${productData.materials ? productData.materials : 'natural wood'} materials. ${shortDescription}`;
 
   // x-default her zaman EN versiyonunu göstermeli
   const alternateLanguages: Record<string, string> = { 
@@ -102,22 +89,22 @@ export async function generateMetadata({
   // Extract first material for title enhancement
   const firstMaterial = productData.materials ? productData.materials.split(',')[0].trim() : '';
   
-  // Build an SEO-optimized title with category and material info
+  // Build an SEO-optimized title with keyword intent
   const seoTitle = locale === 'tr'
-    ? `${productData.name} - ${categoryName}${firstMaterial ? ` | ${firstMaterial}` : ' | El Yapımı Ahşap'}`
-    : `${productData.name} - ${categoryName}${firstMaterial ? ` | ${firstMaterial}` : ' | Handmade Wood'}`;
+    ? `${productData.name} | Kumiko Ahşap Masa Lambası${firstMaterial ? ` | ${firstMaterial}` : ''}`
+    : `${productData.name} | Kumiko Wooden Table Lamp${firstMaterial ? ` | ${firstMaterial}` : ''}`;
 
   return {
-    title: seoTitle.length > 60 ? productData?.name : seoTitle, // Layout otomatik olarak "| Jizayn" ekleyecektir
-    description: enhancedDescription.substring(0, 160), // Meta açıklama için ideal uzunluk
+    title: seoTitle.length > 60 ? productData?.name : seoTitle,
+    description: enhancedDescription.substring(0, 158),
     keywords: metaKeywords,
     alternates: {
       canonical: canonicalUrl,
       languages: alternateLanguages,
     },
     openGraph: {
-      title: productData?.name,
-      description: enhancedDescription.substring(0, 200),
+      title: seoTitle.length > 70 ? productData?.name : seoTitle,
+      description: enhancedDescription.substring(0, 190),
       url: canonicalUrl,
       siteName: 'Jizayn',
       images: productData.images.map((img, index) => ({
@@ -140,8 +127,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: productData?.name,
-      description: enhancedDescription.substring(0, 200),
+      title: seoTitle.length > 70 ? productData?.name : seoTitle,
+      description: enhancedDescription.substring(0, 190),
       images: [ogImage],
       creator: '@jizayn',
       site: '@jizayn',
@@ -232,11 +219,15 @@ export default async function ProductDetailPage({
     }
   }
 
+  const schemaDescription = stripHtml(productData.description || '').slice(0, 500);
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${productUrl}#product`,
     name: productData.name,
-    description: productData.description,
+    description: schemaDescription,
+    mainEntityOfPage: productUrl,
     image: images.map((img) => ({
       '@type': 'ImageObject',
       url: img.url,
@@ -257,6 +248,7 @@ export default async function ProductDetailPage({
       name: product.brand.name,
       url: product.brand.url,
     },
+    inLanguage: locale,
     ...(depth && height && width && {
       depth,
       height,
@@ -385,11 +377,32 @@ export default async function ProductDetailPage({
     ],
   };
 
-  // FAQ Schema (eğer FAQ varsa)
-  const faqSchema = productData.faq && productData.faq.length > 0 ? {
+  const translatedCommonFaq = Array.from({ length: 10 }, (_, index) => {
+    const number = index + 1;
+    return {
+      question: t(`reviews.commonFaqs.q${number}.question`),
+      answer: t(`reviews.commonFaqs.q${number}.answer`),
+    };
+  });
+
+  const combinedFaq = [
+    ...(productData.faq || []).map((item) => ({ question: item.question, answer: item.answer })),
+    ...translatedCommonFaq,
+  ];
+
+  const uniqueFaq = Array.from(
+    new Map(
+      combinedFaq
+        .filter((item) => item.question && item.answer)
+        .map((item) => [item.question.trim().toLowerCase(), item])
+    ).values()
+  );
+
+  // FAQ Schema
+  const faqSchema = uniqueFaq.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: productData.faq.map((faq) => ({
+    mainEntity: uniqueFaq.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -476,7 +489,7 @@ export default async function ProductDetailPage({
           <span className="text-gray-900 font-medium truncate">{productData.name}</span>
         </nav>
 
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-x-20 lg:gap-y-6">
           {/* 1. Galeri - Mobilde 1. sırada, Desktop'ta sol üst */}
           <div className="order-1 lg:order-none">
             <ProductGallery images={images.map((img, idx) => ({
@@ -745,7 +758,7 @@ export default async function ProductDetailPage({
           </div>
 
           {/* 3. Teknik Detaylar - Mobilde 3. sırada, Desktop'ta sol alt */}
-          <div className="order-3 lg:order-none space-y-8">
+          <div className="order-3 lg:order-none space-y-8 lg:-mt-20">
             {/* Teknik Özellikler */}
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-300 shadow-md">
               <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">

@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
-import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { routing } from '@/i18n/routing';
@@ -19,7 +19,6 @@ const inter = Inter({
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'common' });
 
   const localeMap: Record<string, string> = { tr: 'tr_TR', en: 'en_US' };
   const ogLocale = localeMap[locale] || 'tr_TR';

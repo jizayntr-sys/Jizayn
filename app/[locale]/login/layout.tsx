@@ -1,9 +1,7 @@
-import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'common' });
 
   const title = locale === 'tr' ? 'Yönetici Girişi' : 'Admin Login';
   const description = locale === 'tr' 
