@@ -530,9 +530,8 @@ const rawProducts: Product[] = [
         gtin: undefined,
         availability: 'InStock',
         priceRange: {
-          // TODO: Gerçek fiyat ile güncelleyin
-          min: 1500,
-          max: 1500,
+          min: 8000,
+          max: 8000,
           currency: 'TRY'
         },
         // TODO: Gerçek Shopier ürün linki ile değiştirin
@@ -694,10 +693,9 @@ const rawProducts: Product[] = [
         gtin: undefined,
         availability: 'InStock',
         priceRange: {
-          // TODO: Gerçek fiyat ile güncelleyin
-          min: 1500,
-          max: 1500,
-          currency: 'TRY'
+          min: 175,
+          max: 175,
+          currency: 'USD'
         },
         // TODO: Gerçek Shopier ürün linki ile değiştirin
         shopierUrl: 'https://www.shopier.com/jizayn',
