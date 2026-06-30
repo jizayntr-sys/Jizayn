@@ -23,6 +23,11 @@
 - Yerelde localhost canonical istenirse `.env.local` içine `NEXT_PUBLIC_BASE_URL=http://localhost:3001` eklenip sunucu yeniden başlatılmalı.
 - Build: `npm run build`, analiz: `npm run analyze`.
 
+## Git / GitHub (Windows)
+- Repo: `jizayntr-sys/Jizayn`, branch `main`, remote `git@github-jizayn:jizayntr-sys/Jizayn.git`
+- **Push zorunluluğu:** Cursor'dan push etmeden önce `$env:GIT_SSH_COMMAND = 'C:/Windows/System32/OpenSSH/ssh.exe'` (Git for Windows SSH Jizayn anahtarını bulamaz).
+- Detaylı prosedür: **`memory-bank/git-workflow.md`**
+
 ## SEO/teknik altyapı dosyaları
 - `app/layout.tsx` (root metadata), `app/[locale]/layout.tsx` (locale metadata + Organization JSON-LD + GA).
 - `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts` (→ `/manifest.webmanifest`).

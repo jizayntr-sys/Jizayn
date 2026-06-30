@@ -2,6 +2,11 @@
 
 Son güncelleme: 2026-06-23
 
+## GitHub push notu (Cursor)
+Push başarısız olursa sebep: Git for Windows SSH ≠ Windows OpenSSH. Çözüm:
+`$env:GIT_SSH_COMMAND = 'C:/Windows/System32/OpenSSH/ssh.exe'` sonra `git push origin main`.
+Tam prosedür: **`memory-bank/git-workflow.md`**
+
 ## ⏸️ ERTELENEN: Avrupa & Amerika SEO planı
 Kullanıcı kararı (2026-06-23): Uluslararası SEO adımları planlandı ama **atölyenin yeri
 belli olunca** uygulanacak (gerçek NAP/adres gerektiriyor). Tam yol haritası:
