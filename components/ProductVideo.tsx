@@ -6,9 +6,11 @@ import Image from 'next/image';
 
 interface ProductVideoProps {
   video: string;
+  poster?: string;
+  title?: string;
 }
 
-export default function ProductVideo({ video }: ProductVideoProps) {
+export default function ProductVideo({ video, poster, title }: ProductVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const getEmbedUrl = () => {
@@ -40,22 +42,33 @@ export default function ProductVideo({ video }: ProductVideoProps) {
           className="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          title="Ürün Videosu"
+          title={title || 'Ürün Videosu'}
         />
       </div>
     );
   }
 
   return (
-    <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden group cursor-pointer">
-      <div
-        className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors"
-        onClick={() => setIsPlaying(true)}
-      >
+    <button
+      type="button"
+      onClick={() => setIsPlaying(true)}
+      aria-label={title || 'Videoyu oynat'}
+      className="relative aspect-video w-full bg-gray-200 rounded-lg overflow-hidden group cursor-pointer block"
+    >
+      {poster && (
+        <Image
+          src={poster}
+          alt={title || 'Ürün videosu önizleme'}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      )}
+      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
         <div className="bg-white/90 rounded-full p-4 group-hover:scale-110 transition-transform">
           <Play className="w-12 h-12 text-indigo-600 fill-indigo-600" />
         </div>
       </div>
-    </div>
+    </button>
   );
 }

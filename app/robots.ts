@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
         '/admin/',
         '/*/admin/', // Dil önekli admin yolları için (örn: /en/admin)
         '/private/',
+        '/editor/',
+        '/*/editor/', // Dil önekli editör yolları için (örn: /tr/editor)
         '/login/',
         '/*/login/', // Dil önekli login yolları için
         '/account/',

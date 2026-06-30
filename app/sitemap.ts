@@ -8,6 +8,14 @@ import { BASE_URL } from '@/lib/constants';
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Revalidate every hour
 
+function buildLocalizedUrl(locale: string, localizedPath: string): string {
+  if (localizedPath === '/') {
+    return `${BASE_URL}/${locale}`;
+  }
+
+  return `${BASE_URL}/${locale}${localizedPath}`;
+}
+
 function toValidDate(value?: string): Date | undefined {
   if (!value) return undefined;
   const parsed = new Date(value);
@@ -40,7 +48,7 @@ function getStaticEntries(): MetadataRoute.Sitemap {
 
       const languages = routing.locales.reduce((acc, l) => {
         const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[l];
-        acc[l] = `${BASE_URL}/${l}${localizedPath}`;
+        acc[l] = buildLocalizedUrl(l, localizedPath);
         return acc;
       }, {} as Record<string, string>);
 
@@ -48,7 +56,7 @@ function getStaticEntries(): MetadataRoute.Sitemap {
         const localizedPath = typeof pathConfig === 'string' ? pathConfig : (pathConfig as any)[locale];
 
         return {
-          url: `${BASE_URL}/${locale}${localizedPath}`,
+          url: buildLocalizedUrl(locale, localizedPath),
           changeFrequency: routeConfig.changeFrequency,
           priority: routeConfig.priority,
           alternates: {

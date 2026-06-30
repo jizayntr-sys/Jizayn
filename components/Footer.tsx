@@ -117,7 +117,7 @@ export default function Footer({ hideOnHome = false }: Props) {
 
         {/* Copyright Bar */}
         <div className="border-t border-gray-800 py-6 flex flex-col sm:flex-row items-center justify-between">
-          <p className="text-sm text-amber-400 text-center sm:text-left">{t('copyright')}</p>
+          <p className="text-sm text-amber-400 text-center sm:text-left">{t('copyright', { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>

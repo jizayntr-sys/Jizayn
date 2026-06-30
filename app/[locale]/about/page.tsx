@@ -18,6 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     'x-default': `${BASE_URL}/en${pathnames['/about'].en}`,
   };
 
+  const heroImage = '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-ayna-onunde-konsol-ustunde.webp';
+
   return {
     title: t('title'),
     description: t('subtitle'),
@@ -33,8 +35,35 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: ogLocale,
       alternateLocale: [alternateLocale],
       type: 'website',
+      images: [`${BASE_URL}${heroImage}`],
     },
   };
+}
+
+const aboutImages = [
+  { src: '/JizaynAtolye.webp', altKey: 'image1Alt' as const },
+  { src: '/images/products/Kumiko/kumiko-ahsap-lamba-ust-panel-detayi.webp', altKey: 'image2Alt' as const },
+  { src: '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-salon-sehpa-ustunde.webp', altKey: 'image3Alt' as const },
+  { src: '/images/products/Kumiko/kumiko-ahsap-masa-lambasi-antre-konsol-ustunde.webp', altKey: 'image4Alt' as const },
+];
+
+const heroImage = '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-ayna-onunde-konsol-ustunde.webp';
+const missionImage = '/images/products/Kumiko/kumiko-ahsap-masa-lambasi-onden-gorunum-isikli.webp';
+const ctaImage = '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-komodin-ustunde-gece.webp';
+
+function AboutImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="group relative aspect-[4/5] md:aspect-[3/4] rounded-2xl overflow-hidden shadow-xl ring-1 ring-stone-200/70 bg-stone-100">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-900/25 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -42,87 +71,109 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const t = await getTranslations({ locale, namespace: 'about' });
 
   return (
-    <div className="bg-white">
+    <div className="bg-stone-50">
       {/* Header Section */}
-      <div className="bg-gray-900 pt-28 pb-20 text-center text-white">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">{t('subtitle')}</p>
+      <div className="relative bg-stone-900 pt-28 pb-24 md:pb-28 text-center text-white overflow-hidden min-h-[420px] flex items-center">
+        <Image
+          src={heroImage}
+          alt={t('content.imageHeroAlt')}
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/50 to-stone-900/80" />
+        <div className="container mx-auto px-4 relative z-10">
+          <p className="text-amber-400/90 text-sm uppercase tracking-[0.2em] mb-4 font-medium">Jizayn</p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5 drop-shadow-lg">{t('title')}</h1>
+          <p className="text-lg md:text-xl text-stone-200 max-w-2xl mx-auto leading-relaxed">{t('subtitle')}</p>
         </div>
       </div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 md:py-20">
         {/* Section 1: Jizayn'ın Hikayesi */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
-             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-               <span className="text-6xl">🏗️</span>
-             </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-20 md:mb-24">
+          <AboutImage src={aboutImages[0].src} alt={t(`content.${aboutImages[0].altKey}`)} />
           <div className="space-y-6">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section1Title')}</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">{t('content.p1')}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-5">{t('content.section1Title')}</h2>
+              <p className="text-lg text-stone-600 leading-relaxed">{t('content.p1')}</p>
             </div>
           </div>
         </div>
 
         {/* Section 2: Tasarım Felsefesi */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-20 md:mb-24">
           <div className="space-y-6 order-2 md:order-1">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section2Title')}</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">{t('content.p2')}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-5">{t('content.section2Title')}</h2>
+              <p className="text-lg text-stone-600 leading-relaxed">{t('content.p2')}</p>
             </div>
           </div>
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-indigo-100 to-blue-100">
-             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-               <span className="text-6xl">🎨</span>
-             </div>
+          <div className="order-1 md:order-2">
+            <AboutImage src={aboutImages[1].src} alt={t(`content.${aboutImages[1].altKey}`)} />
           </div>
         </div>
 
         {/* Section 3: Sürdürülebilirlik */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-green-100 to-emerald-100">
-             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-               <span className="text-6xl">🌳</span>
-             </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-20 md:mb-24">
+          <AboutImage src={aboutImages[2].src} alt={t(`content.${aboutImages[2].altKey}`)} />
           <div className="space-y-6">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section3Title')}</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">{t('content.p3')}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-5">{t('content.section3Title')}</h2>
+              <p className="text-lg text-stone-600 leading-relaxed">{t('content.p3')}</p>
             </div>
           </div>
         </div>
 
         {/* Section 4: Misyon & Vizyon */}
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 md:p-12 mb-16 shadow-lg">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">{t('content.section4Title')}</h2>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto text-center">{t('content.p4')}</p>
+        <div className="relative rounded-2xl overflow-hidden mb-20 md:mb-24 shadow-lg">
+          <div className="absolute inset-0">
+            <Image
+              src={missionImage}
+              alt={t('content.imageDetailAlt')}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-stone-900/75" />
+          </div>
+          <div className="relative z-10 p-8 md:p-14 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('content.section4Title')}</h2>
+            <p className="text-lg leading-relaxed max-w-4xl mx-auto text-stone-100">{t('content.p4')}</p>
+          </div>
         </div>
 
         {/* Section 5: Değerlerimiz */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-20 md:mb-24">
           <div className="space-y-6 order-2 md:order-1">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('content.section5Title')}</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">{t('content.p5')}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-5">{t('content.section5Title')}</h2>
+              <p className="text-lg text-stone-600 leading-relaxed">{t('content.p5')}</p>
             </div>
           </div>
-          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg order-1 md:order-2 bg-gradient-to-br from-rose-100 to-pink-100">
-             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-               <span className="text-6xl">⭐</span>
-             </div>
+          <div className="order-1 md:order-2">
+            <AboutImage src={aboutImages[3].src} alt={t(`content.${aboutImages[3].altKey}`)} />
           </div>
         </div>
 
         {/* Section 6: Neden Jizayn */}
-        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
-          <h2 className="text-3xl font-bold mb-6 text-center">{t('content.section6Title')}</h2>
-          <p className="text-lg leading-relaxed max-w-4xl mx-auto text-center opacity-95">{t('content.p6')}</p>
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="absolute inset-0">
+            <Image
+              src={ctaImage}
+              alt={t('content.imageCtaAlt')}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-900/85 to-stone-900/90" />
+          </div>
+          <div className="relative z-10 p-8 md:p-14 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">{t('content.section6Title')}</h2>
+            <p className="text-lg leading-relaxed max-w-4xl mx-auto text-center text-stone-100">{t('content.p6')}</p>
+          </div>
         </div>
       </div>
     </div>

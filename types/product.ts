@@ -28,12 +28,33 @@ export interface FaqItem {
   answer: string;
 }
 
+export interface ProductContentSection {
+  title: string;
+  body?: string;
+  items?: string[];
+}
+
+export interface ProductPackageItem {
+  text: string;
+  included?: boolean; // varsayılan true; false ise "dahil değil" olarak gösterilir
+}
+
+export interface ProductImportantNote {
+  title: string;
+  text: string;
+}
+
 export interface ProductLocaleData {
   slug: string;
   name: string;
   description: string;
   images: ProductImage[];
   video?: string;
+  // Ürün detay gövdesi için esnek, ürüne özel içerik (yoksa ilgili bölüm gizlenir)
+  intro?: string;
+  contentSections?: ProductContentSection[];
+  packageContents?: ProductPackageItem[];
+  importantNotes?: ProductImportantNote[];
   dimensions: string;
   materials: string;
   specifications: string[];
@@ -45,6 +66,8 @@ export interface ProductLocaleData {
     max: number;
     currency: string;
   };
+  shopierUrl?: string;
+  shopierOffer?: ProductOffer;
   amazonUrl?: string;
   amazonOffer?: ProductOffer;
   etsyUrl?: string;

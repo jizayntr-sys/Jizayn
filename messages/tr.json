@@ -28,7 +28,7 @@
       "success": "Bültenimize başarıyla abone oldunuz!"
     },
     "followUs": "Bizi Takip Edin",
-    "copyright": "© 2024 Jizayn. Tüm hakları saklıdır."
+    "copyright": "© {year} Jizayn. Tüm hakları saklıdır."
   },
   "about": {
     "title": "Hakkımızda - El Yapımı Ahşap Dekorasyon Atölyesi",
@@ -45,7 +45,14 @@
       "section5Title": "Değerlerimiz: Kalite, Dürüstlük ve Müşteri Memnuniyeti",
       "p5": "Jizayn'ın temel değerleri, kalite, dürüstlük, müşteri memnuniyeti ve çevreye duyarlılıktır. Her ürünümüzde en yüksek kalite standartlarını korumak, şeffaf ve dürüst bir iletişim sürdürmek, müşterilerimizin beklentilerini aşmak ve doğaya saygılı bir üretim gerçekleştirmek bizim için vazgeçilmezdir. Müşteri geri bildirimlerine önem veriyor, sürekli gelişim ve iyileştirme anlayışıyla hareket ediyoruz. Satış sonrası destek, kolay iade ve değişim politikalarımızla, alışveriş deneyiminizi en üst düzeye çıkarıyoruz. Güvenilir kargo, özenli paketleme ve hızlı teslimat ile ürünlerinizin size hasar görmeden, en kısa sürede ulaşmasını sağlıyoruz.",
       "section6Title": "Neden Jizayn'ı Tercih Etmelisiniz?",
-      "p6": "Jizayn, sadece bir ürün değil, bir hikaye, bir sanat ve bir yaşam felsefesi sunar. %100 el yapımı, %100 yerli ve %100 doğal ürünlerimizle evinize değer katıyoruz. Usta marangozlarımızın deneyimi, geleneksel tekniklerin modern yorumu, kişiye özel tasarım seçenekleri, sürdürülebilir ve çevre dostu üretim anlayışımız, müşteri memnuniyeti garantimiz ve kaliteden ödün vermeme prensiplerimizle sektörde fark yaratıyoruz. Jizayn ürünleri, yıllar boyunca kullanabileceğiniz, değerini koruyan ve hatta artıran yatırımlardır. Her ürün, evinize estetik, sıcaklık ve prestij katar."
+      "p6": "Jizayn, sadece bir ürün değil, bir hikaye, bir sanat ve bir yaşam felsefesi sunar. %100 el yapımı, %100 yerli ve %100 doğal ürünlerimizle evinize değer katıyoruz. Usta marangozlarımızın deneyimi, geleneksel tekniklerin modern yorumu, kişiye özel tasarım seçenekleri, sürdürülebilir ve çevre dostu üretim anlayışımız, müşteri memnuniyeti garantimiz ve kaliteden ödün vermeme prensiplerimizle sektörde fark yaratıyoruz. Jizayn ürünleri, yıllar boyunca kullanabileceğiniz, değerini koruyan ve hatta artıran yatırımlardır. Her ürün, evinize estetik, sıcaklık ve prestij katar.",
+      "image1Alt": "Jizayn ahşap atölyesi - el yapımı üretim tezgahı",
+      "image2Alt": "Kumiko lamba üst panel detayı - geleneksel geçme tekniği",
+      "image3Alt": "Kumiko Akari masa lambası - salon sehpası üzerinde doğal ışık",
+      "image4Alt": "Kumiko masa lambası - antre konsol üzerinde dekoratif aydınlatma",
+      "imageHeroAlt": "Kumiko Akari masa lambası - ayna önünde altın saat ışığı",
+      "imageDetailAlt": "Kumiko ahşap masa lambası - önden ışıklı görünüm",
+      "imageCtaAlt": "Kumiko Akari gece lambası - komodin üzerinde sıcak ışık"
     }
   },
   "contact": {
@@ -199,7 +206,7 @@
   },
   "home": {
     "hero": {
-      "title": "Doğal Ahşap, Eşsiz Tasarım",
+      "title": "Doğal Ahşap, Eşsiz Tasarımlar",
       "subtitle": "Evinizin havasını değiştirecek el yapımı dekoratif ahşap ürünler. Doğal malzemelerle üretilen özel tasarım mobilya ve aksesuarları Jizayn'da keşfedin.",
       "cta": "Ürünleri Keşfet",
       "imageAlt": "Jizayn Ahşap Atölyesi - El Yapımı Doğal Ahşap Üretim Tezgahı"

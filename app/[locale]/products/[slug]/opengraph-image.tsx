@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { getProductBySlug } from '@/data/products';
+import { formatLocalizedPrice } from '@/utils/currency';
 
 // Note: Edge runtime removed due to Prisma/PostgreSQL dependency
 // Node.js runtime is required for database access
@@ -113,7 +114,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               boxShadow: '0 4px 20px rgba(79, 70, 229, 0.5)',
             }}
           >
-            {productData.priceRange.min} {productData.priceRange.currency}
+            {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
           </div>
         </div>
 

@@ -2,7 +2,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { getAllProducts } from '@/data/products';
 import Image from 'next/image';
-import { formatPrice } from '@/utils/currency';
+import { formatLocalizedPrice } from '@/utils/currency';
 
 // Rastgele ürün seçmek için yardımcı fonksiyon
 function getRandomItems<T>(arr: T[], n: number): T[] {
@@ -65,7 +65,7 @@ export default async function NotFound() {
                     </h3>
                     <div className="flex items-center justify-between mt-2">
                       <span className="text-lg font-bold text-gray-900">
-                        {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+                        {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
                       </span>
                       <span className="text-sm text-indigo-700 font-medium group-hover:underline">İncele &rarr;</span>
                     </div>

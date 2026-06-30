@@ -63,17 +63,17 @@ export default function ProductFilters() {
   };
 
   return (
-    <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-white rounded-lg shadow-sm border border-gray-100 space-y-4 relative">
+    <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-white rounded-2xl shadow-sm border border-stone-200 space-y-4 relative">
       {isPending && (
-        <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center rounded-lg">
-          <Loader2 className="w-6 h-6 animate-spin text-indigo-600" />
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center rounded-2xl">
+          <Loader2 className="w-6 h-6 animate-spin text-amber-600" />
         </div>
       )}
       {/* Categories */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-        <span className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('filter')}:</span>
+        <span className="font-medium text-stone-700 whitespace-nowrap text-sm sm:text-base">{t('filter')}:</span>
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {['all', 'decor', 'furniture'].map((cat) => (
+          {['all', 'lighting', 'decor', 'furniture'].map((cat) => (
             <button
               key={cat}
               id={`filter-category-${cat}`}
@@ -82,8 +82,8 @@ export default function ProductFilters() {
               onClick={() => handleCategoryChange(cat)}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
                 currentCategory === cat
-                  ? 'bg-indigo-700 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-amber-600 text-white shadow-sm'
+                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
               }`}
             >
               {t(`categories.${cat}` as any)}
@@ -95,7 +95,7 @@ export default function ProductFilters() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Price Range */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2">
-          <label htmlFor="filter-min-price" className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('priceRange.label')}:</label>
+          <label htmlFor="filter-min-price" className="font-medium text-stone-700 whitespace-nowrap text-sm sm:text-base">{t('priceRange.label')}:</label>
           <div className="flex items-center gap-2 flex-1">
           <input
             type="number"
@@ -105,7 +105,7 @@ export default function ProductFilters() {
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
             placeholder={t('priceRange.min')}
-            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+            className="border border-stone-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 w-full"
             aria-label={t('priceRange.min')}
           />
           <span className="text-gray-500 text-sm">-</span>
@@ -117,7 +117,7 @@ export default function ProductFilters() {
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
             placeholder={t('priceRange.max')}
-            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+            className="border border-stone-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 w-full"
             aria-label={t('priceRange.max')}
           />
           <button 
@@ -125,7 +125,7 @@ export default function ProductFilters() {
             name="applyFilter"
             type="button"
             onClick={handlePriceFilter} 
-            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-indigo-700 whitespace-nowrap flex-shrink-0"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-amber-700 whitespace-nowrap flex-shrink-0"
           >
             {t('priceRange.apply')}
           </button>
@@ -134,13 +134,13 @@ export default function ProductFilters() {
 
         {/* Sort */}
         <div className="flex items-center gap-2 justify-start md:justify-end">
-          <label htmlFor="sort" className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">{t('sort')}:</label>
+          <label htmlFor="sort" className="font-medium text-stone-700 whitespace-nowrap text-sm sm:text-base">{t('sort')}:</label>
           <select
             id="sort"
             name="sort"
             value={currentSort}
             onChange={handleSortChange}
-            className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white w-full md:w-auto"
+            className="border border-stone-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white w-full md:w-auto"
           >
             <option value="newest">{t('sortOptions.newest')}</option>
             <option value="priceAsc">{t('sortOptions.priceAsc')}</option>

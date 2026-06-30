@@ -14,6 +14,7 @@ import MouseScrollIndicator from '@/components/MouseScrollIndicator';
 import Footer from '@/components/Footer';
 import SectionBackgroundController from '@/components/SectionBackgroundController';
 import { BASE_URL } from '@/lib/constants';
+import HomepageEditorOverride from '@/components/editor/HomepageEditorOverride';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -107,6 +108,7 @@ export default async function HomePage() {
   };
 
   return (
+    <HomepageEditorOverride>
     <main className="relative scroll-smooth snap-y snap-mandatory overflow-y-auto">
       <script
         type="application/ld+json"
@@ -283,5 +285,6 @@ export default async function HomePage() {
         </div>
       </section>
     </main>
+    </HomepageEditorOverride>
   );
 }

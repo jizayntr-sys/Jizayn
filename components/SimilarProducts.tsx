@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { getAllProducts } from '@/data/products';
-import { formatPrice } from '@/utils/currency';
+import { formatLocalizedPrice } from '@/utils/currency';
 import { getTranslations } from 'next-intl/server';
 import { ArrowRight } from 'lucide-react';
 
@@ -68,7 +68,7 @@ export default async function SimilarProducts({ category, currentProductId, loca
                   </div>
                   <div className="flex items-center justify-between pt-4 border-t border-gray-50">
                     <span className="text-xl font-bold text-gray-900">
-                      {formatPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+                      {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
                     </span>
                     <span className="flex items-center gap-2 text-sm font-semibold text-indigo-600 group-hover:text-indigo-700 transition-colors">
                       {t('viewProduct') || 'İncele'}

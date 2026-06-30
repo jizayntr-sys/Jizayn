@@ -103,7 +103,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       shortcut: '/favicon.ico',
       apple: '/apple-touch-icon.png',
     },
-    manifest: '/site.webmanifest',
+    manifest: '/manifest.webmanifest',
   };
 }
 
