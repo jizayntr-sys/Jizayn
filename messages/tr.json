@@ -208,7 +208,10 @@
     "hero": {
       "title": "Doğal Ahşap, Eşsiz Tasarımlar",
       "subtitle": "Evinizin havasını değiştirecek el yapımı dekoratif ahşap ürünler. Doğal malzemelerle üretilen özel tasarım mobilya ve aksesuarları Jizayn'da keşfedin.",
+      "customBadge": "İsteğe Bağlı Özel Üretim",
+      "customBadgeHint": "Hayalinizdeki ahşap ürünü birlikte tasarlayıp üretiyoruz",
       "cta": "Ürünleri Keşfet",
+      "customCta": "Özel Üretim Talebi",
       "imageAlt": "Jizayn Ahşap Atölyesi - El Yapımı Doğal Ahşap Üretim Tezgahı"
     },
     "featured": {
@@ -225,7 +228,7 @@
       "details": { "title": "Detaylara Özen", "desc": "Her köşe, her yüzey titizlikle düşünülür." },
       "functional": { "title": "Fonksiyonel Tasarım", "desc": "Estetik kadar kullanım kolaylığı da ön planda." },
       "timeless": { "title": "Zamansız Stil", "desc": "Trendlerden bağımsız, her döneme uyumlu." },
-      "custom": { "title": "Kişiye Özel Üretim", "desc": "İhtiyaca ve mekâna göre özel çözümler." }
+      "custom": { "title": "İsteğe Bağlı Üretim", "desc": "Ölçü, renk ve modele göre size özel ahşap ürün yapımı." }
     },
     "reviews": {
       "title": "Müşterilerimiz Ne Diyor?"

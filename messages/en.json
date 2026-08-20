@@ -208,7 +208,10 @@
     "hero": {
       "title": "Natural Wood, Unique Design",
       "subtitle": "Handmade decorative products that will change the atmosphere of your home.",
+      "customBadge": "Custom Made on Request",
+      "customBadgeHint": "We design and craft the wooden piece you envision",
       "cta": "Discover Products",
+      "customCta": "Request Custom Order",
       "imageAlt": "Jizayn Wood Workshop - Handmade Natural Wood Production Bench"
     },
     "featured": {
@@ -225,7 +228,7 @@
       "details": { "title": "Attention to Detail", "desc": "Every corner, every surface is meticulously considered." },
       "functional": { "title": "Functional Design", "desc": "Ease of use is as important as aesthetics." },
       "timeless": { "title": "Timeless Style", "desc": "Independent of trends, compatible with every era." },
-      "custom": { "title": "Custom Production", "desc": "Special solutions according to needs and space." }
+      "custom": { "title": "Made to Order", "desc": "Custom wooden products tailored to your size, color and design." }
     },
     "reviews": {
       "title": "What Our Customers Say"

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { getAllProducts } from '@/data/products';
-import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, UserCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle, Leaf, Palette, ShieldCheck, Recycle, Hammer } from 'lucide-react';
 import FeaturedCarousel from '@/components/FeaturedCarousel';
 import CustomerReviewsCarousel from '@/components/CustomerReviewsCarousel';
 import FadeIn from '@/components/FadeIn';
@@ -136,6 +136,10 @@ export default async function HomePage() {
         {/* İçerik */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center text-white">
           <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-5 sm:mb-6 rounded-full bg-amber-500/20 border border-amber-400/40 backdrop-blur-sm text-amber-100 text-sm sm:text-base font-medium shadow-lg">
+              <Hammer className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 flex-shrink-0" aria-hidden="true" />
+              <span>{t('hero.customBadge')}</span>
+            </div>
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight drop-shadow-lg px-2">
               {(() => {
                 const title = t('hero.title');
@@ -159,15 +163,27 @@ export default async function HomePage() {
                 });
               })()}
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-10 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md px-2">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 max-w-2xl mx-auto text-gray-100 leading-relaxed drop-shadow-md px-2">
               {t('hero.subtitle')}
             </p>
+            <p className="text-sm sm:text-base mb-6 sm:mb-8 max-w-xl mx-auto text-amber-100/90 drop-shadow-md px-2">
+              {t('hero.customBadgeHint')}
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Link
               href="/products"
               className="inline-block bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
             >
               {t('hero.cta')}
             </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-transparent text-white border-2 border-white/80 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition-all hover:scale-105 shadow-xl"
+            >
+              <Hammer className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              {t('hero.customCta')}
+            </Link>
+            </div>
           </FadeIn>
         </div>
         
@@ -249,10 +265,10 @@ export default async function HomePage() {
               <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.sustainable.desc')}</p>
             </Link>
             
-            {/* Kişiye Özel */}
-            <Link href="/products" className="block bg-rose-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-rose-300/20 text-center hover:bg-rose-500/20 transition-all h-full group">
-              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-rose-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                <UserCheck className="w-5 h-5 sm:w-7 sm:h-7" />
+            {/* İsteğe Bağlı Üretim */}
+            <Link href="/contact" className="block bg-amber-500/10 backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-amber-300/30 text-center hover:bg-amber-500/20 transition-all h-full group">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4 group-hover:scale-125 group-hover:bg-white group-hover:text-amber-600 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+                <Hammer className="w-5 h-5 sm:w-7 sm:h-7" />
               </div>
               <h3 className="text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{t('features.custom.title')}</h3>
               <p className="text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed">{t('features.custom.desc')}</p>

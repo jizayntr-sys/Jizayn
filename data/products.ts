@@ -723,6 +723,342 @@ const rawProducts: Product[] = [
         reviews: []
       }
     }
+  },
+  {
+    id: 'phoenix-wall-art',
+    category: 'decor',
+    tags: ['wall-art', 'phoenix', 'wood-sculpture', 'handmade', 'home-decor', '3d-art'],
+    createdAt: '2026-06-30T10:00:00.000Z',
+    updatedAt: '2026-06-30T10:00:00.000Z',
+    brand: {
+      name: 'Jizayn',
+      url: 'https://www.jizayn.com',
+      logo: 'https://www.jizayn.com/JizaynLogo.svg'
+    },
+    isFeatured: true,
+    sortOrder: 3,
+    locales: {
+      tr: {
+        slug: 'el-yapimi-anka-kusu-ahsap-duvar-sanati',
+        name: 'El Yapımı Anka Kuşu Ahşap Duvar Sanatı',
+        description: 'Katmanlı ahşap parçalardan elde üretilen, 90×95 cm boyutlarında etkileyici Anka Kuşu duvar dekoru. Doğal ahşap dokusu ile teal, turuncu ve ceviz tonlarının bir araya geldiği 3D duvar heykeli; oturma odası, antre ve ofis için modern dekoratif ahşap sanat eseri.',
+        images: [
+          {
+            url: '/images/products/DuvarSanat/a_clean_well_lit_studio_style_image_of_a_decorati_3_batch_3.webp',
+            alt: 'El Yapımı Anka Kuşu Ahşap Duvar Sanatı - Duvara Monte Görünüm',
+            pinterestDescription: 'Katmanlı ahşap Anka Kuşu duvar heykeli duvar montaj görünümü'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_warm_moody_interior_architectural_scene_a_mode_6_batch_6.webp',
+            alt: 'Anka Kuşu Ahşap Duvar Sanatı - Sıcak Atmosferli İç Mekân',
+            pinterestDescription: 'Anka Kuşu ahşap duvar heykeli sıcak atmosferli modern iç mekânda'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_modern_minimalist_interior_scene_with_a_2_batch_2.webp',
+            alt: 'Anka Kuşu Duvar Sanatı - Modern Minimalist İç Mekân',
+            pinterestDescription: 'Anka Kuşu ahşap duvar sanatı modern minimalist oturma odasında'
+          },
+          {
+            url: '/images/products/DuvarSanat/interior_dining_room_scene_with_warm_natural_sunli_7_batch_7.webp',
+            alt: 'Anka Kuşu Duvar Sanatı - Yemek Odası Dekorasyonu',
+            pinterestDescription: 'Anka Kuşu duvar sanatı doğal ışıklı yemek odasında'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_airy_minimalist_scandinavian_modern_liv_4_batch_4.webp',
+            alt: 'Anka Kuşu Ahşap Duvar Sanatı - İskandinav Tarzı Salon',
+            pinterestDescription: 'Phoenix ahşap duvar dekoru İskandinav tarzı aydınlık salonda'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_cozy_well_lit_home_office_interior_scene_warm_5_batch_5.webp',
+            alt: 'Anka Kuşu Duvar Dekoru - Ev Ofisi İç Mekânı',
+            pinterestDescription: 'El yapımı Anka Kuşu duvar sanatı ev ofisinde dekoratif aksan'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_cozy_interior_scene_in_warm_natural_ligh_8_batch_8.webp',
+            alt: 'Anka Kuşu Ahşap Duvar Sanatı - Doğal Işıklı Oturma Odası',
+            pinterestDescription: 'Phoenix ahşap duvar dekoru doğal ışıklı oturma odası ortamında'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_clean_white_studio_graphic_product_image_with_a_1_batch_1.webp',
+            alt: 'El Yapımı Anka Kuşu Ahşap Duvar Sanatı - 90×95 cm Ölçülü Ürün Görseli',
+            pinterestDescription: 'El yapımı Anka Kuşu ahşap duvar sanatı 90x95 cm boyutlarında'
+          }
+        ],
+        video: undefined,
+        intro: 'El Yapımı Anka Kuşu Ahşap Duvar Sanatı, yeniden doğuşu ve zarafeti simgeleyen mitolojik Anka Kuşu formunda tasarlanmış, katmanlı ahşap parçalardan üretilen özel bir duvar heykelidir. 90 cm genişlik, 95 cm yükseklik ve 3,5 cm derinlik ölçüleriyle geniş duvarlarda güçlü bir dekoratif odak noktası oluşturur. Doğal ahşap dokusu; teal, turuncu ve ceviz tonlarıyla birleşerek modern ve sanatsal bir görünüm sunar.',
+        contentSections: [
+          {
+            title: 'Anka Kuşu Sembolizmi ve Tasarım',
+            body: 'Anka Kuşu, antik mitolojide yeniden doğuş, güç ve zarafetin simgesidir. Bu duvar sanatında kanatları yukarı açılmış dinamik bir Anka Kuşu silüeti, geometrik ahşap tüy katmanlarıyla üç boyutlu bir heykel estetiğine dönüştürülmüştür. Her parça özenle kesilip katmanlanarak derinlik ve hareket hissi yaratır.',
+          },
+          {
+            title: 'Neden Bu Duvar Sanatını Tercih Etmelisiniz?',
+            items: [
+              'El Yapımı 3D Heykel: Katmanlı ahşap parçalarla derinlik kazanan duvar dekoru',
+              'Etkileyici Boyut: 90×95 cm — geniş duvarlarda güçlü dekoratif odak noktası',
+              'Renkli Ahşap Kontrastı: Doğal ahşap, teal, turuncu ve ceviz tonları',
+              'Duvara Hazır: Montaj için uygun, ince profil (3,5 cm derinlik)',
+            ],
+          },
+          {
+            title: 'Kullanım Alanları ve Dekorasyon Fikirleri',
+            items: [
+              'Oturma Odası: Sofa arkasında statement duvar parçası',
+              'Antre & Koridor: Giriş alanında etkileyici karşılama dekoru',
+              'Ev Ofisi: Yaratıcı ve ilham verici çalışma alanı aksanı',
+              'Yemek Odası: Sıcak ahşap tonlarıyla uyumlu duvar sanatı',
+            ],
+          },
+          {
+            title: 'Mekân ve Atmosfer',
+            body: 'Anka Kuşu duvar sanatı, minimal ve modern iç mekânlarda doğal ahşabın sıcaklığını sanatsal bir ifadeyle birleştirir. Gün ışığında ahşap dokuları ve renk katmanları belirginleşir; akşam aydınlatmasıyla gölge oyunları derinlik katar. Japandi, modern rustik ve çağdaş dekorasyon stilleriyle uyumludur.',
+          },
+          {
+            title: 'Mükemmel Hediye Seçeneği',
+            body: 'El yapımı Anka Kuşu duvar sanatı, özel günler için anlamlı ve kalıcı bir hediyedir:',
+            items: [
+              'Ev Açılışı: Yeni eve taşınan sevdiklerinize sanatsal hediye',
+              'Ofis Açılışı: Prestijli ve özgün ofis dekorasyonu',
+              'Sanat & Tasarım Sevenler: El yapımı ahşap heykel koleksiyonu',
+            ],
+          },
+          {
+            title: 'Jizayn Farkı',
+            items: [
+              'Usta İşçilik: Deneyimli marangozlar tarafından elde üretilir',
+              'Özgün Tasarım: Jizayn atölyesine özel Anka Kuşu formu',
+              'Türk Malı: %100 yerli el emeği',
+              'Kaliteli Malzeme: Seçilmiş masif ve renkli ahşap katmanlar',
+            ],
+          },
+          {
+            title: 'Montaj ve Bakım Önerileri',
+            items: [
+              'Montaj: Duvara vida veya askı aparatı ile sabitlenmelidir (aparat dahil değildir)',
+              'Temizlik: Kuru veya hafif nemli yumuşak bez ile silin',
+              'Konum: Direkt güneş ışığından ve yüksek nemli alanlardan uzak tutun',
+              'Dikkat: Kırılgan ahşap parçalar — montaj sırasında dikkatli taşıyın',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1 adet El Yapımı Anka Kuşu Ahşap Duvar Sanatı' },
+          { text: 'Özel koruyucu ambalaj' },
+          { text: 'Montaj kılavuzu' },
+          { text: 'Duvar montaj aparatı dahil değildir', included: false },
+        ],
+        importantNotes: [
+          { title: 'El Yapımı Ürün:', text: 'Her parça benzersizdir, ahşap tonlarında küçük doğal farklılıklar olabilir' },
+          { title: 'Doğal Ahşap:', text: 'Renk ve doku varyasyonları doğal ahşabın karakteristik özelliğidir' },
+          { title: 'Montaj:', text: 'Duvara sabitleme kullanıcı tarafından yapılmalıdır; vida/askı aparatı dahil değildir' },
+          { title: 'Boyut:', text: '90×95 cm geniş duvarlar için idealdir; küçük alanlarda orantıyı kontrol edin' },
+          { title: 'Kırılgan:', text: 'Katmanlı ahşap yapı hassastır, taşıma ve montajda dikkatli olun' },
+        ],
+        dimensions: '90 x 95 x 3.5 cm (G x Y x D)',
+        materials: 'Masif ahşap katmanlar — doğal, teal, turuncu ve ceviz tonlu ahşap',
+        specifications: [
+          '3D katmanlı ahşap heykel',
+          'El yapımı montaj',
+          'Duvar montajına uygun',
+          '90×95 cm dekoratif boyut',
+        ],
+        sku: 'JIZAYN-PHOENIX-WALL-01',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 4000,
+          max: 4000,
+          currency: 'TRY'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'El Yapımı Anka Kuşu Ahşap Duvar Sanatı 90×95 cm | Jizayn',
+        metaDescription: 'Katmanlı ahşaptan el yapımı Anka Kuşu duvar sanatı. 90×95 cm, 3D heykel formu, teal ve turuncu ahşap tonları. Oturma odası, antre ve ofis için modern duvar dekoru.',
+        metaKeywords: ['anka kuşu duvar sanatı', 'ahşap duvar dekoru', 'el yapımı duvar heykeli', 'phoenix wall art', '3d ahşap tablo', 'duvar dekorasyonu', 'Jizayn'],
+        faq: [
+          {
+            question: 'Montaj aparatı dahil mi?',
+            answer: 'Hayır, duvar montaj aparatı (vida/askı) dahil değildir. Ürün duvara sabitlenebilir yapıdadır; montaj kullanıcı tarafından yapılmalıdır.'
+          },
+          {
+            question: 'Hangi odalarda kullanılabilir?',
+            answer: 'Oturma odası, antre, yemek odası, ev ofisi ve geniş duvarlı tüm iç mekânlarda dekoratif duvar sanatı olarak kullanılabilir.'
+          },
+          {
+            question: 'Nasıl temizlenir?',
+            answer: 'Kuru veya hafif nemli yumuşak bez ile silin. Kimyasal temizleyici ve aşındırıcı bez kullanmayın.'
+          },
+          {
+            question: 'Boyutlar nedir?',
+            answer: 'Genişlik 90 cm, yükseklik 95 cm, derinlik 3,5 cm\'dir. Montaj öncesi duvar alanınızı ölçmenizi öneririz.'
+          }
+        ],
+        reviews: []
+      },
+      en: {
+        slug: 'handmade-phoenix-wooden-wall-art',
+        name: 'Handmade Phoenix Wooden Wall Art',
+        description: 'Striking phoenix wall decor handcrafted from layered wood panels, measuring 90×95 cm. A 3D wooden wall sculpture combining natural grain with teal, orange and walnut tones — modern decorative wood art for living rooms, entryways and offices.',
+        images: [
+          {
+            url: '/images/products/DuvarSanat/a_clean_well_lit_studio_style_image_of_a_decorati_3_batch_3.webp',
+            alt: 'Handmade Phoenix Wooden Wall Art - Wall-Mounted View',
+            pinterestDescription: 'Layered wood phoenix wall sculpture mounted on wall'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_warm_moody_interior_architectural_scene_a_mode_6_batch_6.webp',
+            alt: 'Phoenix Wooden Wall Art - Warm Moody Interior',
+            pinterestDescription: 'Phoenix wood wall sculpture in warm modern interior'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_modern_minimalist_interior_scene_with_a_2_batch_2.webp',
+            alt: 'Phoenix Wall Art - Modern Minimalist Interior',
+            pinterestDescription: 'Phoenix wooden wall art in modern minimalist living room'
+          },
+          {
+            url: '/images/products/DuvarSanat/interior_dining_room_scene_with_warm_natural_sunli_7_batch_7.webp',
+            alt: 'Phoenix Wall Art - Dining Room Decoration',
+            pinterestDescription: 'Phoenix wall art in naturally lit dining room'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_airy_minimalist_scandinavian_modern_liv_4_batch_4.webp',
+            alt: 'Phoenix Wooden Wall Art - Scandinavian Style Living Room',
+            pinterestDescription: 'Phoenix wood wall decor in bright Scandinavian living room'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_cozy_well_lit_home_office_interior_scene_warm_5_batch_5.webp',
+            alt: 'Phoenix Wall Decor - Home Office Interior',
+            pinterestDescription: 'Handmade phoenix wall art as home office accent'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_bright_cozy_interior_scene_in_warm_natural_ligh_8_batch_8.webp',
+            alt: 'Phoenix Wooden Wall Art - Natural Light Living Room',
+            pinterestDescription: 'Phoenix wooden wall decor in cozy living room with natural light'
+          },
+          {
+            url: '/images/products/DuvarSanat/a_clean_white_studio_graphic_product_image_with_a_1_batch_1.webp',
+            alt: 'Handmade Phoenix Wooden Wall Art - 90×95 cm Product Image with Dimensions',
+            pinterestDescription: 'Handmade phoenix wooden wall art 90x95 cm dimensions'
+          }
+        ],
+        video: undefined,
+        intro: 'The Handmade Phoenix Wooden Wall Art is a unique wall sculpture crafted from layered wood panels in the form of the mythical phoenix — a symbol of rebirth and grace. At 90 cm wide, 95 cm tall and 3.5 cm deep, it creates a powerful decorative focal point on large walls. Natural wood grain combined with teal, orange and walnut tones delivers a modern, artistic statement piece.',
+        contentSections: [
+          {
+            title: 'Phoenix Symbolism and Design',
+            body: 'The phoenix is an ancient symbol of rebirth, strength and elegance. This wall art transforms a dynamic phoenix silhouette with wings spread upward into a three-dimensional sculpture through geometric layered wood feathers. Each piece is carefully cut and stacked to create depth and movement.',
+          },
+          {
+            title: 'Why Choose This Wall Art?',
+            items: [
+              'Handmade 3D Sculpture: Layered wood panels creating depth and dimension',
+              'Statement Size: 90×95 cm — a bold focal point for large walls',
+              'Colored Wood Contrast: Natural wood with teal, orange and walnut tones',
+              'Wall-Ready: Slim 3.5 cm profile suitable for wall mounting',
+            ],
+          },
+          {
+            title: 'Usage Areas and Decoration Ideas',
+            items: [
+              'Living Room: Statement piece behind the sofa',
+              'Entryway & Hallway: Impressive welcome decor',
+              'Home Office: Creative and inspiring workspace accent',
+              'Dining Room: Warm wood tones complementing dining spaces',
+            ],
+          },
+          {
+            title: 'Space and Atmosphere',
+            body: 'The phoenix wall art blends the warmth of natural wood with artistic expression in minimal and modern interiors. Daylight highlights wood textures and color layers; evening lighting adds shadow depth. Compatible with Japandi, modern rustic and contemporary decor styles.',
+          },
+          {
+            title: 'Perfect Gift Option',
+            body: 'Handmade phoenix wall art is a meaningful and lasting gift for special occasions:',
+            items: [
+              'Housewarming: Artistic gift for loved ones moving to a new home',
+              'Office Opening: Prestigious and unique office decoration',
+              'Art & Design Enthusiasts: Handmade wooden sculpture collection',
+            ],
+          },
+          {
+            title: 'The Jizayn Difference',
+            items: [
+              'Master Craftsmanship: Handcrafted by experienced woodworkers',
+              'Original Design: Exclusive phoenix form from Jizayn workshop',
+              'Turkish Made: 100% domestic hand labor',
+              'Quality Materials: Selected solid and colored wood layers',
+            ],
+          },
+          {
+            title: 'Mounting and Care Recommendations',
+            items: [
+              'Mounting: Secure to wall with screws or hanging hardware (hardware not included)',
+              'Cleaning: Wipe with a dry or slightly damp soft cloth',
+              'Placement: Keep away from direct sunlight and high-humidity areas',
+              'Caution: Fragile wood layers — handle carefully during mounting',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1× Handmade Phoenix Wooden Wall Art' },
+          { text: 'Protective packaging' },
+          { text: 'Mounting guide' },
+          { text: 'Wall mounting hardware not included', included: false },
+        ],
+        importantNotes: [
+          { title: 'Handmade Product:', text: 'Each piece is unique; small natural variations in wood tone may occur' },
+          { title: 'Natural Wood:', text: 'Color and texture variations are characteristic of natural wood' },
+          { title: 'Mounting:', text: 'Wall fastening must be done by the user; screws/hooks not included' },
+          { title: 'Size:', text: '90×95 cm ideal for large walls; check proportions for smaller spaces' },
+          { title: 'Fragile:', text: 'Layered wood structure is delicate — handle with care during transport and mounting' },
+        ],
+        dimensions: '90 x 95 x 3.5 cm (W x H x D)',
+        materials: 'Solid wood layers — natural, teal, orange and walnut toned wood',
+        specifications: [
+          '3D layered wood sculpture',
+          'Hand-assembled',
+          'Wall-mount ready',
+          '90×95 cm decorative size',
+        ],
+        sku: 'JIZAYN-PHOENIX-WALL-01',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 80,
+          max: 80,
+          currency: 'USD'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'Handmade Phoenix Wooden Wall Art 90×95 cm | Jizayn',
+        metaDescription: 'Handmade phoenix wall art from layered wood. 90×95 cm 3D sculpture with teal and orange wood tones. Modern wall decor for living room, entryway and office.',
+        metaKeywords: ['phoenix wall art', 'wooden wall decor', 'handmade wall sculpture', '3d wood art', 'home decor', 'wall hanging', 'Jizayn'],
+        faq: [
+          {
+            question: 'Is mounting hardware included?',
+            answer: 'No, wall mounting hardware (screws/hooks) is not included. The piece is ready to be secured to the wall; mounting must be done by the user.'
+          },
+          {
+            question: 'Which rooms is it suitable for?',
+            answer: 'Living room, entryway, dining room, home office and any interior space with a large wall surface.'
+          },
+          {
+            question: 'How to clean?',
+            answer: 'Wipe with a dry or slightly damp soft cloth. Do not use chemical cleaners or abrasive cloths.'
+          },
+          {
+            question: 'What are the dimensions?',
+            answer: 'Width 90 cm, height 95 cm, depth 3.5 cm. We recommend measuring your wall space before mounting.'
+          }
+        ],
+        reviews: []
+      }
+    }
   }
 ];
 
