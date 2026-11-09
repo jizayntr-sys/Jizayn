@@ -29,6 +29,14 @@ kayıt → DE/FR dil ekle → blog/içerik → backlink/Pinterest → pazaryeri 
 - [x] Video altyapısı (ProductVideo + VideoObject JSON-LD) kuruldu.
 - [x] Ürün detay gövdesi veriye taşındı (Kumiko sabiti kalktı).
 
+## GSC bulguları (2026-11-09, denetim)
+- Dizine eklenmeyen 15 sayfa: Soft 404 (3→1), Yönlendirmeli sayfa (3, normal), Tarandı-eklenmedi
+  (9, çoğu yasal sayfa; normal), Kopya (0).
+- **Soft 404 düzeltildi**: `app/[locale]/products/page.tsx` — boş/geçersiz filtre sonuçları
+  (`?category=Akcesuar` gibi) artık `noindex` + self-canonical. Geçerli `/products` indekslenebilir.
+  Not: filtre menüsü `lighting` sunuyor ama ürün yok → o da artık noindex ile güvende.
+- Kullanıcı GSC'de yapmalı: Soft 404 satırında "Doğrulamayı Başlat" + yeni ürün için URL denetleme → "Dizine eklenmesini iste".
+
 ## Bilinen riskler
 - Statik ürün verisi: yeni ürün eklerken tüm locale + meta alanları elle doldurulmalı.
 - Yeni ürün eklenirken ürün detay gövdesi yanlışlıkla "Kumiko masa lambası" diliyle görünebilir (gövde içeriği henüz dinamik değil).
