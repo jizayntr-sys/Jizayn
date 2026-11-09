@@ -47,6 +47,24 @@ const nextConfig = {
     ],
   },
 
+  // Eski ürün slug'larını yeni (kısaltılmış) slug'lara kalıcı yönlendir.
+  // Slug değişikliği sonrası eski URL'ler noindex'li "bulunamadı" sayfası döndürüyordu
+  // (GSC: "Tarandı - dizine eklenmemiş"). 301/308 ile yeni URL'ye taşıyoruz.
+  async redirects() {
+    return [
+      {
+        source: '/tr/urunler/el-yapimi-kumiko-ahsap-masa-lambasi',
+        destination: '/tr/urunler/kumiko-ahsap-masa-lambasi',
+        permanent: true,
+      },
+      {
+        source: '/en/products/handmade-kumiko-wooden-table-lamp',
+        destination: '/en/products/kumiko-wooden-table-lamp',
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     const securityHeaders = [
       {
