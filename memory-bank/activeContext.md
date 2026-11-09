@@ -32,6 +32,22 @@ Hedef netleşti: **satış yok**, ürün vitrini + dış pazaryeri linkleri (Sho
 2. **Video altyapısı kuruldu**: `components/ProductVideo.tsx` poster+title alacak şekilde iyileştirildi; ürün detaya FAQ öncesi "Yapım/Tanıtım Videosu" bölümü + `VideoObject` JSON-LD eklendi (yalnızca `productData.video` doluysa). Veride `video` hâlâ undefined → YouTube/Vimeo linki eklenince otomatik görünür.
 3. **Ürün gövdesi veriye taşındı**: `types/product.ts`'e `intro`, `contentSections[]`, `packageContents[]`, `importantNotes[]` eklendi. Kumiko içeriği `data/products.ts`'e (tr+en) taşındı. Ürün sayfası bu alanlardan render ediyor; alan yoksa bölüm gizlenir. Sabit "Kumiko" gövde metni kalktı. (Doğrulandı: /tr/urunler/... 200.)
 
+## Oturum 3 — SEO denetimi + şema düzeltmeleri (2026-11-09)
+Kod + canlı site (www.jizayn.com) SEO denetimi yapıldı. Temel güçlü. Yapılanlar:
+1. **HowTo şeması genelleştirildi** (`app/[locale]/products/[slug]/page.tsx`): eskiden tüm
+   ürünlere "Ahşap Masa Lambası Bakımı" basıyordu (anka kuşu duvar sanatı için yanlış). Artık
+   jenerik "El Yapımı Ahşap Ürün Bakımı" (temizlik/koruma/bakım) + ürüne özel `careGuide`
+   alanı (opsiyonel). `types/product.ts`'e `ProductCareGuide`/`CareGuideStep` + `careGuide?` eklendi.
+2. **Organization şeması** sahte NAP'tan arındırıldı (`utils/organization-schema.ts`): placeholder
+   adres/telefon/e-posta kaldırıldı; name/url/logo/sameAs + `knowsLanguage` kaldı. `sameAs` sosyal
+   linklere dokunulmadı (gerçek olabilir; 200 dönüyor ama login-wall nedeniyle kesin değil).
+3. **Deploy açığı kapatıldı**: yerel `main` origin'in 2 commit önündeydi; 3. ürün (anka kuşu duvar
+   sanatı) canlıda yoktu/sitemap'te eksikti. Push edildi (`0edd364..5593493`), Vercel deploy tetiklendi.
+
+Denetimde tespit edilen, kullanıcı aksiyonu bekleyen diğer maddeler: gerçek NAP, ürüne özel Shopier
+linkleri, gerçek yorumlar (yıldız için), About sayfası placeholder, blog/DE-FR (roadmap).
+Not: Search Console/GA MCP `mcp_auth` sonrası bile Unauthorized → canlı GSC verisi çekilemedi.
+
 ## Açık konular / kullanıcı kararı bekleyen
 - `data/products.ts` içindeki `shopierUrl` **gerçek linkle** doldurulmalı.
 - `utils/organization-schema.ts` **placeholder** veriler içeriyor: adres `'Atölye Adresi'`, telefon `+905551234567`, e-posta `info@jizayn.com` → gerçek bilgilerle güncellenmeli.

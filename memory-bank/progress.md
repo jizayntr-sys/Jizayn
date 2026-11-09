@@ -13,9 +13,10 @@ Detaylı plan: **`memory-bank/seo-roadmap.md`**. Özet: Organization NAP düzelt
 kayıt → DE/FR dil ekle → blog/içerik → backlink/Pinterest → pazaryeri (Etsy/Amazon) SEO.
 
 ## Yapılacak / iyileştirme
-- [ ] `shopierUrl` gerçek linklerle doldur (şu an placeholder).
+- [ ] `shopierUrl` gerçek linklerle doldur (şu an placeholder; 3 üründe de jenerik `shopier.com/jizayn`).
 - [ ] Ürün `video` alanına gerçek YouTube/Vimeo linki ekle (bölüm otomatik görünür).
-- [ ] `organization-schema.ts` placeholder adres/telefon/e-posta güncelle.
+- [ ] `organization-schema.ts`: placeholder adres/telefon/e-posta **kaldırıldı** (2026-11-09). Gerçek NAP netleşince yorumlu bloktan geri eklenecek.
+- [ ] Ürünlerde `reviews` boş → yıldız zengin sonucu yok. Gerçek yorum topla.
 - [ ] `/about` sayfasını gerçek görseller/metin/videolarla güçlendir (şu an emoji placeholder).
 - [ ] `public/images/products/Woody/` görselleri var ama veri yok — Woody ürünü `data/products.ts`'e eklenmeli (artık `intro/contentSections/packageContents/importantNotes` ile temiz eklenir).
 - [ ] (Opsiyonel) Ana sayfa/Hakkımızda'ya "Atölye / Yapım Videoları" bölümü.
