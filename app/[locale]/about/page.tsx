@@ -42,13 +42,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const aboutImages = [
   { src: '/JizaynAtolye-v2.webp', altKey: 'image1Alt' as const },
-  { src: '/images/products/Kumiko/kumiko-ahsap-lamba-ust-panel-detayi.webp', altKey: 'image2Alt' as const },
+  { src: '/images/about/jizayn-kumiko-el-detay.webp', altKey: 'image2Alt' as const },
   { src: '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-salon-sehpa-ustunde.webp', altKey: 'image3Alt' as const },
   { src: '/images/products/Kumiko/kumiko-ahsap-masa-lambasi-antre-konsol-ustunde.webp', altKey: 'image4Alt' as const },
 ];
 
 const heroImage = '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-ayna-onunde-konsol-ustunde.webp';
-const missionImage = '/images/products/Kumiko/kumiko-ahsap-masa-lambasi-onden-gorunum-isikli.webp';
+const founderImage = '/images/about/jizayn-usta-calisirken.webp';
+const missionImage = '/images/about/jizayn-atolye-genis.webp';
 const ctaImage = '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-komodin-ustunde-gece.webp';
 
 function AboutImage({ src, alt }: { src: string; alt: string }) {
@@ -69,6 +70,7 @@ function AboutImage({ src, alt }: { src: string; alt: string }) {
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'about' });
+  const facts = t.raw('content.facts') as { label: string; value: string }[];
 
   return (
     <div className="bg-stone-50">
@@ -90,8 +92,40 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       </div>
 
+      {/* Facts Strip */}
+      <div className="border-b border-stone-200 bg-white">
+        <div className="container mx-auto px-4">
+          <dl className="grid grid-cols-2 md:grid-cols-4">
+            {facts.map((f, i) => (
+              <div
+                key={i}
+                className="px-4 py-6 md:py-7 text-center border-stone-200 [&:nth-child(odd)]:border-r md:[&:not(:first-child)]:border-l md:[&:nth-child(odd)]:border-r-0 [&:nth-child(n+3)]:border-t md:[&:nth-child(n+3)]:border-t-0"
+              >
+                <dt className="text-xs uppercase tracking-wider text-stone-500 mb-1">{f.label}</dt>
+                <dd className="text-lg md:text-xl font-semibold text-stone-900">{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16 md:py-20">
+        {/* Founder / Usta */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center mb-20 md:mb-24">
+          <div className="md:col-span-2">
+            <AboutImage src={founderImage} alt={t('content.imageFounderAlt')} />
+          </div>
+          <div className="md:col-span-3 space-y-5">
+            <p className="text-amber-700 text-sm uppercase tracking-[0.15em] font-medium">{t('content.founderRole')}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900">{t('content.founderName')}</h2>
+            <blockquote className="text-xl md:text-2xl font-medium text-stone-800 leading-snug border-l-4 border-amber-500 pl-4">
+              “{t('content.founderQuote')}”
+            </blockquote>
+            <p className="text-lg text-stone-600 leading-relaxed">{t('content.founderStory')}</p>
+          </div>
+        </div>
+
         {/* Section 1: Jizayn'ın Hikayesi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-20 md:mb-24">
           <AboutImage src={aboutImages[0].src} alt={t(`content.${aboutImages[0].altKey}`)} />
@@ -132,7 +166,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="absolute inset-0">
             <Image
               src={missionImage}
-              alt={t('content.imageDetailAlt')}
+              alt={t('content.imageWorkshopWideAlt')}
               fill
               className="object-cover"
               sizes="100vw"

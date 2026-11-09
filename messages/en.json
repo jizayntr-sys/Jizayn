@@ -32,26 +32,49 @@
   },
   "about": {
     "title": "About - Handmade Wooden Decoration Workshop",
-    "subtitle": "Handmade wooden decoration and furniture crafted from natural materials. Traditional craftsmanship meets contemporary design.",
+    "subtitle": "Handmade Kumiko lighting and decor crafted from solid natural wood, without nails or glue. Traditional craftsmanship, contemporary design.",
     "content": {
-      "section1Title": "Jizayn's Story: Wooden Artistry from Tradition to Future",
-      "p1": "Jizayn is a workshop that started with a passion for woodworking and combines traditional Turkish carpentry art with modern design. Since our establishment, we have been moving forward with the mission of bringing the unique beauty and warmth of natural wood to living spaces. Every product manufactured in our workshop is the result of craftsmanship requiring hand labor and a patient production process. Especially by blending the traditional Japanese Kumiko technique with Turkish handicrafts, we create unique and original pieces. Our masters are craftsmen who understand the language of wood through years of experience, respect its natural structure, and transform every vein and texture into a work of art. We carefully select first-class domestic wood types such as walnut, oak, beech, and pine, process them through natural drying processes. This process ensures that our products are long-lasting, durable, and aesthetically flawless.",
-      "section2Title": "Our Design Philosophy: Modern Aesthetics with Traditional Mastery",
-      "p2": "As Jizayn, our design approach is based on blending valuable techniques of the past with modern aesthetics of today. Each of our products represents timeless designs that bring together functionality and beauty. Minimalist lines, natural forms, and elegant details enable us to create original pieces that harmonize with any space. Our design process begins with deeply understanding our customers' needs and preferences. With our custom design options, we turn your dream product into reality. Our quality control process is extremely meticulous; every product undergoes detailed inspections before leaving our workshop. We adopt a production approach with the highest standards, first-class materials, and carefully supervised at every stage. This way, we offer products that are not only beautiful but also durable and long-lasting.",
-      "section3Title": "Respect for Nature, Sustainable Production",
-      "p3": "The natural beauty, unique texture, and warmth of wood add peace and aesthetics to your living spaces. Every product we produce at Jizayn carries nature's unique patterns and colors. Therefore, each piece is different and special. Wooden products become even more beautiful over time, retain their character, and even increase their value. We respect this valuable material and adopt an environmentally conscious and sustainable production approach. We only work with certified wood obtained from responsible sources. Waste is minimized in our production process, and natural and harmless surface treatments are used. Instead of heavy chemical paints, we use natural oils and varnishes to allow the wood to breathe. This way, we contribute to both your health and the environment's health.",
-      "section4Title": "Our Mission and Vision",
-      "p4": "Our mission is to bring traditional woodworking to modern living spaces, adding aesthetics, warmth, and naturalness to every home and office. We aim to offer our customers not just a product, but a lifestyle and a work of art. Our vision is to become Turkey's most reliable and quality handmade wooden decoration brand, recognized in international markets, and a workshop that introduces traditional handicrafts to the world. With each product, we aim to elevate the value of Turkish craftsmanship and wooden art.",
-      "section5Title": "Our Values: Quality, Honesty, and Customer Satisfaction",
-      "p5": "Jizayn's core values are quality, honesty, customer satisfaction, and environmental consciousness. Maintaining the highest quality standards in every product, maintaining transparent and honest communication, exceeding our customers' expectations, and implementing nature-respectful production are indispensable for us. We value customer feedback and act with a continuous development and improvement mindset. With our after-sales support, easy return and exchange policies, we maximize your shopping experience. With reliable shipping, careful packaging, and fast delivery, we ensure your products reach you undamaged in the shortest time possible.",
-      "section6Title": "Why Should You Choose Jizayn?",
-      "p6": "Jizayn offers not just a product, but a story, an art, and a life philosophy. With our 100% handmade, 100% domestic, and 100% natural products, we add value to your home. Our master carpenters' experience, modern interpretation of traditional techniques, custom design options, sustainable and environmentally friendly production approach, customer satisfaction guarantee, and principles of never compromising on quality make us stand out in the industry. Jizayn products are investments that you can use for years, maintain their value, and even increase it. Each product adds aesthetics, warmth, and prestige to your home.",
-      "image1Alt": "Jizayn wood workshop - handmade production bench",
-      "image2Alt": "Kumiko lamp top panel detail - traditional joinery",
+      "founderName": "Mehmet Demir",
+      "founderRole": "Founder & Master Woodworker",
+      "founderQuote": "Every time I join a Kumiko piece without a single nail or drop of glue, I still feel the same excitement as day one.",
+      "founderStory": "Hi, I’m Mehmet. I started Jizayn in 2017 in a small workshop in İzmir, with a single bench and a handful of hand tools. The hours I spent at my grandfather’s carpentry bench as a child were the beginning of my love for this craft. After years as a furniture maker, I discovered the Japanese Kumiko technique and became obsessed with joining wood through patience rather than nails. Today I make every lamp with my own hands, measuring and cutting each piece one by one. Behind every piece I sell there is a name: mine.",
+      "facts": [
+        {
+          "label": "Founded",
+          "value": "2017"
+        },
+        {
+          "label": "Workshop",
+          "value": "İzmir"
+        },
+        {
+          "label": "Material",
+          "value": "Solid walnut & oak"
+        },
+        {
+          "label": "Production",
+          "value": "100% handmade"
+        }
+      ],
+      "section1Title": "Our Story: Born at a Grandfather’s Bench",
+      "p1": "Jizayn began in 2017 in a small İzmir workshop, with a single bench and plenty of hand tools. Our inspiration is the traditional Japanese Kumiko technique: the art of joining wood using only precise interlocking joints, no glue and no nails. We make every piece from solid wood such as walnut and oak, measuring and cutting it by hand. We don’t mass-produce; a single lamp is completed patiently over several days.",
+      "section2Title": "How We Make It",
+      "p2": "Every piece starts with choosing the wood. We inspect naturally dried solid walnut and oak one board at a time and sort it by grain. Then we cut hundreds of small slats at precise angles and join them with Kumiko joinery — without a single nail or drop of glue. For the surface we use natural oils and varnish instead of harsh chemicals, so the wood keeps breathing. Before anything leaves the workshop, we hold it up to the light and check it piece by piece.",
+      "section3Title": "Natural and Sustainable",
+      "p3": "Every piece of wood we work with has its own unique grain, so no two products are exactly alike. We source solid wood from responsible suppliers and reduce waste by using offcuts for small parts and prototypes. Cared for properly, wood doesn’t wear out over the years; it gains patina and grows more beautiful.",
+      "section4Title": "What We Believe",
+      "p4": "The value of a product is measured by the honesty of the work behind it. We tell you openly what we use, how we make it, and how long a piece takes. Our goal isn’t to become a big factory; it’s to stay a trustworthy workshop that remembers every customer’s name and order.",
+      "section5Title": "Our Promise",
+      "p5": "When your order is ready, we share a photo with you. We pack it carefully and ship it securely. If anything goes wrong — damage in transit or a detail that isn’t what you expected — just write to us and we’ll solve it together. Behind every lamp there is a real name and a real number you can reach.",
+      "section6Title": "Why Jizayn?",
+      "p6": "Because what you get isn’t just a lamp; it’s a single, original piece someone spent days making by hand. We can work to custom sizes and designs. There’s always a real person you can reach with your questions. And years later, you’ll still know exactly who made it.",
+      "image1Alt": "Master assembling a Kumiko lamp panel at the Jizayn workshop",
+      "image2Alt": "Craftsman hands joining Kumiko pieces without glue - close up",
       "image3Alt": "Kumiko Akari table lamp on living room coffee table in natural light",
       "image4Alt": "Kumiko table lamp on entryway console - decorative lighting",
       "imageHeroAlt": "Kumiko Akari table lamp in golden hour light before mirror",
-      "imageDetailAlt": "Kumiko wooden table lamp - front lit view",
+      "imageFounderAlt": "Jizayn founder and master woodworker making a Kumiko lamp in the workshop",
+      "imageWorkshopWideAlt": "Jizayn wood workshop - hand tools, solid timber and a half finished Kumiko panel",
       "imageCtaAlt": "Kumiko Akari night lamp on nightstand with warm glow"
     }
   },
@@ -87,7 +110,6 @@
     "buyWith": "Buy with",
     "buyOnShopier": "Buy on Shopier",
     "buyOnEtsy": "View on Etsy",
-    "buyOnAmazon": "View on Amazon",
     "buyOnAmazon": "View on Amazon",
     "whatsappOrder": "Order via WhatsApp",
     "stockNotification": {
@@ -136,7 +158,8 @@
         "title": "Technical Specifications",
         "dimensions": "Dimensions",
         "materials": "Materials",
-        "sku": "SKU"      },
+        "sku": "SKU"
+      },
       "usage": {
         "title": "Usage and Care Instructions",
         "cleaningTitle": "Cleaning",
@@ -220,15 +243,42 @@
     },
     "features": {
       "title": "Why Jizayn?",
-      "handmade": { "title": "Handmade", "desc": "Each product is carefully shaped by master hands." },
-      "natural": { "title": "Natural Material", "desc": "Only the highest quality natural woods are used." },
-      "design": { "title": "Special Design", "desc": "Unique and modern designs." },
-      "durability": { "title": "Durability", "desc": "Retains its form and strength for many years." },
-      "sustainable": { "title": "Sustainable Production", "desc": "Nature-respecting, conscious production approach." },
-      "details": { "title": "Attention to Detail", "desc": "Every corner, every surface is meticulously considered." },
-      "functional": { "title": "Functional Design", "desc": "Ease of use is as important as aesthetics." },
-      "timeless": { "title": "Timeless Style", "desc": "Independent of trends, compatible with every era." },
-      "custom": { "title": "Made to Order", "desc": "Custom wooden products tailored to your size, color and design." }
+      "handmade": {
+        "title": "Handmade",
+        "desc": "Each product is carefully shaped by master hands."
+      },
+      "natural": {
+        "title": "Natural Material",
+        "desc": "Only the highest quality natural woods are used."
+      },
+      "design": {
+        "title": "Special Design",
+        "desc": "Unique and modern designs."
+      },
+      "durability": {
+        "title": "Durability",
+        "desc": "Retains its form and strength for many years."
+      },
+      "sustainable": {
+        "title": "Sustainable Production",
+        "desc": "Nature-respecting, conscious production approach."
+      },
+      "details": {
+        "title": "Attention to Detail",
+        "desc": "Every corner, every surface is meticulously considered."
+      },
+      "functional": {
+        "title": "Functional Design",
+        "desc": "Ease of use is as important as aesthetics."
+      },
+      "timeless": {
+        "title": "Timeless Style",
+        "desc": "Independent of trends, compatible with every era."
+      },
+      "custom": {
+        "title": "Made to Order",
+        "desc": "Custom wooden products tailored to your size, color and design."
+      }
     },
     "reviews": {
       "title": "What Our Customers Say"
