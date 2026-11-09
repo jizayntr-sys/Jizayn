@@ -13,7 +13,6 @@ export default function ProductFilters() {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  const currentCategory = searchParams.get('category') || 'all';
   const currentSort = searchParams.get('sort') || 'newest';
   const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
@@ -23,18 +22,6 @@ export default function ProductFilters() {
     setMinPrice(searchParams.get('minPrice') || '');
     setMaxPrice(searchParams.get('maxPrice') || '');
   }, [searchParams]);
-
-  const handleCategoryChange = (category: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (category === 'all') {
-      params.delete('category');
-    } else {
-      params.set('category', category);
-    }
-    startTransition(() => {
-      router.push(`${pathname}?${params.toString()}` as any, { scroll: false });
-    });
-  };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
@@ -69,29 +56,6 @@ export default function ProductFilters() {
           <Loader2 className="w-6 h-6 animate-spin text-amber-600" />
         </div>
       )}
-      {/* Categories */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-        <span className="font-medium text-stone-700 whitespace-nowrap text-sm sm:text-base">{t('filter')}:</span>
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {['all', 'lighting', 'decor', 'furniture'].map((cat) => (
-            <button
-              key={cat}
-              id={`filter-category-${cat}`}
-              name="category"
-              type="button"
-              onClick={() => handleCategoryChange(cat)}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
-                currentCategory === cat
-                  ? 'bg-amber-600 text-white shadow-sm'
-                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-              }`}
-            >
-              {t(`categories.${cat}` as any)}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Price Range */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2">

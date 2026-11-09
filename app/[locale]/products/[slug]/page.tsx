@@ -326,12 +326,6 @@ export default async function ProductDetailPage({
       {
         '@type': 'ListItem',
         position: 3,
-        name: categoryName,
-        item: `${BASE_URL}/${locale}${currentProductsPath}?category=${product.category}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
         name: productData.name,
         item: productUrl,
       },
@@ -477,13 +471,6 @@ export default async function ProductDetailPage({
           <Link href="/products" className="hover:text-amber-700 transition-colors">
             {tNav('products')}
           </Link>
-          <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
-          <a 
-            href={`/${locale}${currentProductsPath}?category=${product.category}`}
-            className="hover:text-amber-700 transition-colors"
-          >
-            {categoryName}
-          </a>
           <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0 text-gray-300" />
           <span className="text-gray-900 font-medium truncate">{productData.name}</span>
         </nav>
