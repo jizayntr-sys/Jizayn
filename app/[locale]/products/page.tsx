@@ -327,10 +327,6 @@ export default async function ProductsPage({
               const productData = product.locales[locale as keyof typeof product.locales];
               if (!productData) return null;
 
-              const categoryBadge = ['lighting', 'decor', 'furniture'].includes(product.category)
-                ? t(`categories.${product.category}` as any)
-                : null;
-
               return (
                 <Link
                   key={product.id}
@@ -351,11 +347,6 @@ export default async function ProductsPage({
                       <div className="absolute inset-0 flex items-center justify-center bg-stone-100">
                         <span className="text-stone-400 text-sm">{locale === 'tr' ? 'Görsel Yok' : 'No Image'}</span>
                       </div>
-                    )}
-                    {categoryBadge && (
-                      <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-700 text-xs font-medium px-3 py-1 rounded-full shadow-sm">
-                        {categoryBadge}
-                      </span>
                     )}
                   </div>
 
