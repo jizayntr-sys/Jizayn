@@ -12,20 +12,11 @@ export function generateOrganizationSchema(locale: string) {
       'https://www.facebook.com/jizayn',
       'https://www.pinterest.com/jizayn'
     ],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Atölye Adresi', // Gerçek adresinizle güncelleyin
-      addressLocality: 'Istanbul',
-      addressRegion: 'Istanbul',
-      postalCode: '34000',
-      addressCountry: 'TR'
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+905551234567',
-      contactType: 'customer service',
-      email: 'info@jizayn.com',
-      availableLanguage: routing.locales
-    }
+    knowsLanguage: routing.locales,
+    // NOT: Gerçek NAP (adres/telefon/e-posta) bilgisi netleşince aşağıdaki alanlar
+    // eklenmeli. Sahte/placeholder adres & telefon güven sinyaline zarar verdiği için
+    // doğrulanmamış bilgiyle doldurulmuyor.
+    // address: { '@type': 'PostalAddress', streetAddress, addressLocality, addressRegion, postalCode, addressCountry: 'TR' },
+    // contactPoint: { '@type': 'ContactPoint', telephone, contactType: 'customer service', email, availableLanguage: routing.locales },
   };
 }

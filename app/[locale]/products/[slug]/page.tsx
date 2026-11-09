@@ -374,36 +374,52 @@ export default async function ProductDetailPage({
   } : null;
 
   // HowTo Schema - Bakım Önerileri için
+  // Tüm el yapımı ahşap ürünler (lamba, duvar sanatı vb.) için geçerli; ürüne özel
+  // bir bakım rehberi varsa (productData.careGuide) ondan beslenir, yoksa jenerik
+  // ahşap bakımı adımları kullanılır. Böylece lamba olmayan ürünlere "masa lambası
+  // bakımı" gibi uyumsuz yapısal veri basılmaz.
+  const genericCareSteps = [
+    {
+      '@type': 'HowToStep',
+      name: locale === 'tr' ? 'Temizlik' : 'Cleaning',
+      text: locale === 'tr'
+        ? 'Tozu yumuşak, kuru bir bezle alın. Gerektiğinde hafif nemli bez kullanın; sert fırça veya aşındırıcı süngerlerden kaçının. Lekeye hemen müdahale edin.'
+        : 'Dust with a soft, dry cloth. When needed use a slightly damp cloth; avoid hard brushes or abrasive sponges. Address stains immediately.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: locale === 'tr' ? 'Koruma' : 'Protection',
+      text: locale === 'tr'
+        ? 'Doğrudan güneş ışığından, aşırı nemden ve ısı kaynaklarından uzak tutun. Bu koşullar ahşabın renginde ve yapısında zamanla değişime yol açabilir.'
+        : 'Keep away from direct sunlight, excessive humidity and heat sources, which can alter the wood\u2019s color and structure over time.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: locale === 'tr' ? 'Bakım' : 'Maintenance',
+      text: locale === 'tr'
+        ? 'Kimyasal temizleyiciler ve cilalar kullanmayın. Yüzeyi düzenli olarak yumuşak bezle silerek doğal dokusunu koruyun.'
+        : 'Do not use chemical cleaners or polishes. Wipe the surface regularly with a soft cloth to preserve its natural texture.',
+    },
+  ];
+
+  const careSteps = productData.careGuide?.steps?.length
+    ? productData.careGuide.steps.map((s) => ({
+        '@type': 'HowToStep',
+        name: s.name,
+        text: s.text,
+      }))
+    : genericCareSteps;
+
   const howToSchema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: locale === 'tr' ? 'Ahşap Masa Lambası Bakımı' : 'Wooden Table Lamp Care',
-    description: locale === 'tr' 
-      ? 'El yapımı ahşap masa lambanızın uzun ömürlü olması için bakım önerileri'
-      : 'Care recommendations for your handmade wooden table lamp to last longer',
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: locale === 'tr' ? 'Temizlik' : 'Cleaning',
-        text: locale === 'tr' 
-          ? 'Temizlik için sadece nemli bez kullanın. Sert fırçalar ahşap yüzeye zarar verebilir. Leke için hemen müdahale edin.'
-          : 'Use only a damp cloth for cleaning. Hard brushes can damage the wood surface. Address stains immediately.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: locale === 'tr' ? 'Yerleştirme' : 'Placement',
-        text: locale === 'tr'
-          ? 'Ürünü dengeli bir yüzeye yerleştirin. Isı kaynaklarından en az 1 metre uzakta tutun.'
-          : 'Place the product on a balanced surface. Keep at least 1 meter away from heat sources.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: locale === 'tr' ? 'Bakım' : 'Maintenance',
-        text: locale === 'tr'
-          ? 'Yumuşak ve kuru bir bez ile silin. Kimyasal temizleyiciler kullanmayın. Direkt güneş ışığından uzak tutun.'
-          : 'Wipe with a soft, dry cloth. Do not use chemical cleaners. Keep away from direct sunlight.',
-      },
-    ],
+    name: productData.careGuide?.name
+      || (locale === 'tr' ? 'El Yapımı Ahşap Ürün Bakımı' : 'Handmade Wooden Product Care'),
+    description: productData.careGuide?.description
+      || (locale === 'tr'
+        ? 'El yapımı ahşap ürününüzün uzun ömürlü olması için bakım önerileri'
+        : 'Care recommendations to keep your handmade wooden product in great condition'),
+    step: careSteps,
     totalTime: 'PT10M',
   };
 

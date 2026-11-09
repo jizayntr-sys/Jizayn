@@ -44,6 +44,19 @@ export interface ProductImportantNote {
   text: string;
 }
 
+export interface CareGuideStep {
+  name: string;
+  text: string;
+}
+
+// Ürüne özel bakım rehberi (HowTo yapısal verisi için). Verilmezse ürün detay
+// sayfası tüm ahşap ürünler için geçerli jenerik bakım adımlarını kullanır.
+export interface ProductCareGuide {
+  name?: string;
+  description?: string;
+  steps?: CareGuideStep[];
+}
+
 export interface ProductLocaleData {
   slug: string;
   name: string;
@@ -55,6 +68,7 @@ export interface ProductLocaleData {
   contentSections?: ProductContentSection[];
   packageContents?: ProductPackageItem[];
   importantNotes?: ProductImportantNote[];
+  careGuide?: ProductCareGuide;
   dimensions: string;
   materials: string;
   specifications: string[];
