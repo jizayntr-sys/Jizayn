@@ -36,6 +36,12 @@ kayıt → DE/FR dil ekle → blog/içerik → backlink/Pinterest → pazaryeri 
   (`?category=Akcesuar` gibi) artık `noindex` + self-canonical. Geçerli `/products` indekslenebilir.
   Not: filtre menüsü `lighting` sunuyor ama ürün yok → o da artık noindex ile güvende.
 - Kullanıcı GSC'de yapmalı: Soft 404 satırında "Doğrulamayı Başlat" + yeni ürün için URL denetleme → "Dizine eklenmesini iste".
+- **Tarandı-eklenmedi (12)**: çoğu yasal+about sayfası (normal). İçinde Kumiko lambasının 2 ESKİ slug'ı
+  vardı (`el-yapimi-kumiko-ahsap-masa-lambasi`, `handmade-kumiko-wooden-table-lamp`) → `next.config.mjs`
+  `redirects()` ile yeni slug'a 308 kalıcı yönlendirme eklendi (doğrulandı). Bir font .woff2 zaten 404.
+- Bilinen davranış: ürün route'unda `loading.tsx` (streaming) olduğu için var olmayan slug 404 yerine
+  200 (noindex'li not-found) döner — pratik zarar yok çünkü noindex. İstenirse ileride generateStaticParams
+  + dynamicParams=false ile gerçek 404'e çevrilebilir (i18n/stream yapısı test edilerek).
 
 ## Bilinen riskler
 - Statik ürün verisi: yeni ürün eklerken tüm locale + meta alanları elle doldurulmalı.
