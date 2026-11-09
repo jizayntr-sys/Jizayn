@@ -60,12 +60,44 @@ export async function generateMetadata({
     'x-default': `${BASE_URL}/en/products`,
   };
 
+  // Boş/geçersiz filtre sonuçlarını dizine ekletme (soft 404 önleme).
+  // "?category=Akcesuar" gibi ürünü olmayan filtre sayfaları Google tarafından
+  // boş sayfa (soft 404) sayılıyordu. Sonuç boşsa noindex + self-canonical veriyoruz
+  // (noindex ile farklı canonical'ın çakışmaması için canonical kendine döner).
+  const metaSearch = typeof resolvedSearchParams.search === 'string'
+    ? resolvedSearchParams.search.toLocaleLowerCase(locale) : '';
+  const metaMinPrice = Number(resolvedSearchParams.minPrice) || 0;
+  const metaMaxPrice = Number(resolvedSearchParams.maxPrice) || Infinity;
+  const hasActiveFilter = category !== 'all' || !!metaSearch || metaMinPrice > 0 || metaMaxPrice !== Infinity;
+
+  let metaMatchCount = 0;
+  try {
+    const metaProducts = await getAllProducts(locale);
+    metaMatchCount = metaProducts.filter((p) => {
+      const d = p.locales[locale as keyof typeof p.locales];
+      if (!d) return false;
+      if (d.priceRange.min < metaMinPrice || d.priceRange.min > metaMaxPrice) return false;
+      if (category !== 'all' && p.category !== category) return false;
+      if (metaSearch && !(d.name.toLocaleLowerCase(locale).includes(metaSearch)
+        || d.description.toLocaleLowerCase(locale).includes(metaSearch))) return false;
+      return true;
+    }).length;
+  } catch {
+    metaMatchCount = 0;
+  }
+
+  const isEmptyFilteredView = hasActiveFilter && metaMatchCount === 0;
+  const selfCanonical = category !== 'all'
+    ? `${languages[locale]}?category=${encodeURIComponent(category)}`
+    : languages[locale];
+
   return {
     title: pageTitle,
     description: pageDescription,
     keywords,
+    ...(isEmptyFilteredView && { robots: { index: false, follow: true } }),
     alternates: {
-      canonical: languages[locale],
+      canonical: isEmptyFilteredView ? selfCanonical : languages[locale],
       languages: alternateLanguages,
     },
     openGraph: {
@@ -220,10 +252,12 @@ export default async function ProductsPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-      />
+      {filteredProducts.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        />
+      )}
 
       {/* Markalı Hero Şeridi */}
       <section className="relative isolate overflow-hidden">
