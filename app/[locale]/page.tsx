@@ -109,7 +109,7 @@ export default async function HomePage() {
 
   return (
     <HomepageEditorOverride>
-    <main className="relative scroll-smooth snap-y snap-mandatory overflow-y-auto">
+    <main className="relative scroll-smooth md:snap-y md:snap-mandatory overflow-y-auto">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
@@ -132,7 +132,7 @@ export default async function HomePage() {
       </div>
 
       {/* Hero Section Content */}
-      <SectionScroller sectionId="hero" className="relative z-10 h-screen snap-start snap-always flex items-center justify-center overflow-hidden">
+      <SectionScroller sectionId="hero" className="relative z-10 min-h-[100svh] md:snap-start md:snap-always flex items-center justify-center overflow-hidden py-24 md:py-0">
         {/* İçerik */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center text-white">
           <FadeIn>
@@ -192,7 +192,7 @@ export default async function HomePage() {
       </SectionScroller>
 
       {/* Öne Çıkan Ürünler */}
-      <SectionScroller sectionId="featured" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
+      <SectionScroller sectionId="featured" className="relative z-10 min-h-screen md:h-screen md:snap-start md:snap-always flex items-center justify-center bg-amber-950/30 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-[length:40px_40px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-right">
@@ -211,7 +211,7 @@ export default async function HomePage() {
       </SectionScroller>
 
       {/* Özellikler Bölümü (Neden Jizayn) */}
-      <SectionScroller sectionId="features" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
+      <SectionScroller sectionId="features" className="relative z-10 min-h-screen md:h-screen md:snap-start md:snap-always flex items-center justify-center bg-stone-900/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[length:24px_24px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-up">
@@ -278,7 +278,7 @@ export default async function HomePage() {
       </SectionScroller>
 
       {/* Müşteri Yorumları Slider */}
-      <SectionScroller sectionId="reviews" className="relative z-10 min-h-screen md:h-screen snap-start snap-always flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
+      <SectionScroller sectionId="reviews" className="relative z-10 min-h-screen md:h-screen md:snap-start md:snap-always flex items-center justify-center bg-emerald-950/40 backdrop-blur-sm transition-colors duration-700 py-12 md:py-0">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[length:24px_24px]"></div>
         <div className="container mx-auto px-4 relative">
           <ScrollSection animation="slide-left">
@@ -293,7 +293,7 @@ export default async function HomePage() {
       </SectionScroller>
 
       {/* Footer Section - Son bölüm, animasyonsuz */}
-      <section id="footer" className="relative z-10 snap-start snap-always bg-gradient-to-b from-transparent via-black/40 to-black/70">
+      <section id="footer" className="relative z-10 md:snap-start md:snap-always bg-gradient-to-b from-transparent via-black/40 to-black/70">
         <div className="min-h-[60vh] flex items-end">
           <div className="w-full">
             <Footer />

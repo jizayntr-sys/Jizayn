@@ -91,7 +91,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden p-2 rounded-full transition-all duration-300 ${
+              className={`md:hidden p-2.5 rounded-full transition-all duration-300 ${
                 isHomePage && !isScrolled 
                   ? 'text-white hover:bg-white/10' 
                   : 'text-gray-600 hover:text-indigo-700 hover:bg-gray-100'
