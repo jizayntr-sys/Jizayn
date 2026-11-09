@@ -48,6 +48,13 @@ Denetimde tespit edilen, kullanıcı aksiyonu bekleyen diğer maddeler: gerçek 
 linkleri, gerçek yorumlar (yıldız için), About sayfası placeholder, blog/DE-FR (roadmap).
 Not: Search Console/GA MCP `mcp_auth` sonrası bile Unauthorized → canlı GSC verisi çekilemedi.
 
+## Kategori kaldırıldı (2026-11-09, kullanıcı kararı)
+Kategori **filtre UI'ı** (ProductFilters butonları) ve ürün **breadcrumb'ındaki kategori seviyesi**
+(ekran + BreadcrumbList şema) kaldırıldı. Sebep: az ürün + boş kategoriler (lighting) soft 404
+üretiyordu. `product.category` alanı VERİDE KALDI — Google Shopping feed (`google_product_category`)
+ve "benzer ürünler" için gerekli, görünür kategori URL'si üretmiyor → SEO'ya zarar yok.
+Ürünler sayfasında hâlâ fiyat + sıralama filtresi var. Ana sayfa arka planı `JizaynAtolye-v2.webp`.
+
 ## Açık konular / kullanıcı kararı bekleyen
 - `data/products.ts` içindeki `shopierUrl` **gerçek linkle** doldurulmalı.
 - `utils/organization-schema.ts` **placeholder** veriler içeriyor: adres `'Atölye Adresi'`, telefon `+905551234567`, e-posta `info@jizayn.com` → gerçek bilgilerle güncellenmeli.
