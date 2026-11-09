@@ -10,6 +10,6 @@ El yapımı ahşap ürünleri (özellikle Kumiko lambaları) çevrimiçi tanıtm
 - Stokta yoksa e-posta ile stok bildirimi formu gösterilir.
 
 ## UX hedefleri
-- Modern, animasyonlu ana sayfa (tam ekran snap-scroll bölümler, sabit atölye arka planı `JizaynAtolye.webp`).
+- Modern, animasyonlu ana sayfa (tam ekran snap-scroll bölümler, sabit atölye arka planı `JizaynAtolye-v2.webp` (cache-bust için yeni ad)).
 - Mobil öncelikli, hızlı (next/image avif/webp, agresif cache).
 - Güçlü SEO: sosyal paylaşımda doğru OG/Twitter kartları, rich results.

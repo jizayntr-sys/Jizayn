@@ -110,7 +110,7 @@ export async function generateMetadata({
       alternateLocale: [alternateLocale],
       images: [
         {
-          url: `${BASE_URL}/JizaynAtolye.webp`,
+          url: `${BASE_URL}/JizaynAtolye-v2.webp`,
           width: 1200,
           height: 630,
           alt: category !== 'all' ? `${categoryName} - Jizayn` : 'Jizayn Ürünler',
@@ -121,7 +121,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: pageTitle,
       description: pageDescription,
-      images: [`${BASE_URL}/JizaynAtolye.webp`],
+      images: [`${BASE_URL}/JizaynAtolye-v2.webp`],
       creator: '@jizayn',
       site: '@jizayn',
     },
@@ -263,7 +263,7 @@ export default async function ProductsPage({
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/JizaynAtolye.webp"
+            src="/JizaynAtolye-v2.webp"
             alt=""
             fill
             className="object-cover"

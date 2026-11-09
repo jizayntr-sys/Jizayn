@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const aboutImages = [
-  { src: '/JizaynAtolye.webp', altKey: 'image1Alt' as const },
+  { src: '/JizaynAtolye-v2.webp', altKey: 'image1Alt' as const },
   { src: '/images/products/Kumiko/kumiko-ahsap-lamba-ust-panel-detayi.webp', altKey: 'image2Alt' as const },
   { src: '/images/products/KumikoAkari/kumiko-ahsap-masa-lambasi-salon-sehpa-ustunde.webp', altKey: 'image3Alt' as const },
   { src: '/images/products/Kumiko/kumiko-ahsap-masa-lambasi-antre-konsol-ustunde.webp', altKey: 'image4Alt' as const },

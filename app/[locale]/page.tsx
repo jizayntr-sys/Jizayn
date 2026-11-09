@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Jizayn',
       images: [
         {
-          url: `${BASE_URL}/JizaynAtolye.webp`,
+          url: `${BASE_URL}/JizaynAtolye-v2.webp`,
           width: 1200,
           height: 630,
           alt: locale === 'tr' ? 'Jizayn El Yapımı Ahşap Ürünler Atölyesi' : 'Jizayn Handmade Wood Products Workshop',
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: t('title'),
       description,
-      images: [`${BASE_URL}/JizaynAtolye.webp`],
+      images: [`${BASE_URL}/JizaynAtolye-v2.webp`],
       creator: '@jizayn',
       site: '@jizayn',
     },
@@ -120,7 +120,7 @@ export default async function HomePage() {
       {/* Global Fixed Background (Tüm sayfa için sabit arka plan) */}
       <div className="fixed inset-0 -z-20">
            <Image
-             src="/JizaynAtolye.webp"
+             src="/JizaynAtolye-v2.webp"
              alt={t('hero.imageAlt')}
              fill
              className="object-cover brightness-[0.6]"
