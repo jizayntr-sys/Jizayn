@@ -1065,7 +1065,7 @@ const rawProducts: Product[] = [
     category: 'furniture',
     tags: ['coffee-table', 'oak', 'spruce', 'solid-wood', 'drawers', 'handmade', 'living-room'],
     createdAt: '2026-11-24T10:00:00.000Z',
-    updatedAt: '2026-11-24T10:00:00.000Z',
+    updatedAt: '2026-11-24T12:00:00.000Z',
     brand: {
       name: 'Jizayn',
       url: 'https://www.jizayn.com',
@@ -1080,44 +1080,44 @@ const rawProducts: Product[] = [
         description: 'Altı çekmeceli, altında çıtalı raflı el yapımı masif ahşap orta sehpa. 100 x 70 x 50 cm. Meşe 40.000 TL, ladin 30.000 TL. Oturma odasında kitap, sepet ve günlük eşya için hem tabla hem gizli çekmece hem açık raf sunar.',
         images: [
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-yan-aci.webp',
-            alt: 'Jizayn el yapımı çekmeceli masif ahşap orta sehpa - yan açı',
-            pinterestDescription: 'Jizayn altı çekmeceli masif ahşap orta sehpa yan açı görünümü'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-yan-aci.webp',
+            alt: 'Jizayn orta sehpa - yan açı, altı çekmeceli masif ahşap',
+            pinterestDescription: 'Jizayn çekmeceli orta sehpa yan açı oturma odası'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-onden.webp',
-            alt: 'Jizayn çekmeceli ahşap orta sehpa - önden görünüm',
-            pinterestDescription: 'Jizayn masif ahşap orta sehpa önden, kapalı çekmeceler ve alt çıtalı raf'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-onden.webp',
+            alt: 'Jizayn orta sehpa - önden görünüm, kapalı çekmeceler',
+            pinterestDescription: 'Jizayn masif ahşap orta sehpa önden kapalı çekmeceler'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-ust-gorunum.webp',
-            alt: 'Jizayn masif ahşap orta sehpa - üst tabla ve damar dokusu',
-            pinterestDescription: 'Jizayn masif ahşap orta sehpa üst tabla damar dokusu'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-alcak-aci.webp',
+            alt: 'Jizayn orta sehpa - alçak açı tabla ve kulplar',
+            pinterestDescription: 'Jizayn orta sehpa alçak açı damar ve kulp detayı'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-cekmece-acik.webp',
-            alt: 'Jizayn ahşap orta sehpa - açık çekmeceler',
-            pinterestDescription: 'Jizayn çekmeceleri açık masif ahşap orta sehpa aydınlık oturma odasında'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-cekmece-acik.webp',
+            alt: 'Jizayn orta sehpa - açık çekmeceler',
+            pinterestDescription: 'Jizayn orta sehpa çekmeceleri açık depolama'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-somine.webp',
-            alt: 'Jizayn çekmeceli orta sehpa - şömine karşısı oturma odası',
-            pinterestDescription: 'Jizayn masif ahşap orta sehpa şömineli oturma odasında'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-sepetli.webp',
+            alt: 'Jizayn orta sehpa - alt rafta sepet ve battaniye',
+            pinterestDescription: 'Jizayn orta sehpa alt çıtalı raf sepetli düzen'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-yesil-duvar.webp',
-            alt: 'Jizayn ahşap orta sehpa - yeşil duvarlı salon',
-            pinterestDescription: 'Jizayn el yapımı ahşap orta sehpa yeşil lambrili salonda'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-kulp-detay.webp',
+            alt: 'Jizayn orta sehpa - kulp ve ahşap damar yakın detay',
+            pinterestDescription: 'Jizayn orta sehpa yuvarlak kulp ve damar yakın plan'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-oturma-odasi.webp',
-            alt: 'Jizayn masif ahşap orta sehpa - oturma odası düzeni',
-            pinterestDescription: 'Jizayn çekmeceli masif ahşap orta sehpa bej koltuklu oturma odasında'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-kullanim.webp',
+            alt: 'Jizayn orta sehpa - kitap ve fincanla kullanım',
+            pinterestDescription: 'Jizayn orta sehpa günlük kullanım oturma odası'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-akdeniz-salon.webp',
-            alt: 'Jizayn çekmeceli orta sehpa - Akdeniz tarzı salon',
-            pinterestDescription: 'Jizayn masif ahşap orta sehpa taş duvarlı Akdeniz tarzı salonda'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-gunes-golge.webp',
+            alt: 'Jizayn orta sehpa - pencere ışığı ve gölge',
+            pinterestDescription: 'Jizayn orta sehpa güneş ışığında gölge oyunlu'
           }
         ],
         video: undefined,
@@ -1233,44 +1233,44 @@ const rawProducts: Product[] = [
         description: 'Handmade solid wood coffee table with six drawers and a slatted lower shelf. 100 x 70 x 50 cm. Spruce from $857, oak $1,143 (30,000 and 40,000 TRY on Shopier). A living-room table with a clear top, closed storage and an open shelf.',
         images: [
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-yan-aci.webp',
-            alt: 'Jizayn handmade solid wood drawer coffee table - three-quarter view',
-            pinterestDescription: 'Jizayn six-drawer solid wood coffee table, three-quarter view'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-yan-aci.webp',
+            alt: 'Jizayn coffee table - three-quarter view, six drawers',
+            pinterestDescription: 'Jizayn drawer coffee table three-quarter living room view'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-onden.webp',
-            alt: 'Jizayn solid wood coffee table - front view',
-            pinterestDescription: 'Jizayn solid wood coffee table front view with closed drawers and slatted shelf'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-onden.webp',
+            alt: 'Jizayn coffee table - front view, closed drawers',
+            pinterestDescription: 'Jizayn solid wood coffee table front with closed drawers'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-ust-gorunum.webp',
-            alt: 'Jizayn solid wood coffee table - top and grain',
-            pinterestDescription: 'Jizayn solid wood coffee table top showing wood grain'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-alcak-aci.webp',
+            alt: 'Jizayn coffee table - low angle top and knobs',
+            pinterestDescription: 'Jizayn coffee table low angle grain and knobs'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-cekmece-acik.webp',
-            alt: 'Jizayn wood coffee table - drawers open',
-            pinterestDescription: 'Jizayn solid wood coffee table with drawers open in a bright living room'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-cekmece-acik.webp',
+            alt: 'Jizayn coffee table - drawers open',
+            pinterestDescription: 'Jizayn coffee table with drawers open for storage'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-somine.webp',
-            alt: 'Jizayn drawer coffee table - living room by the fireplace',
-            pinterestDescription: 'Jizayn solid wood coffee table in a living room with a fireplace'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-sepetli.webp',
+            alt: 'Jizayn coffee table - basket and blanket on lower shelf',
+            pinterestDescription: 'Jizayn coffee table slatted shelf with basket and throw'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-yesil-duvar.webp',
-            alt: 'Jizayn wood coffee table - sage green living room',
-            pinterestDescription: 'Jizayn handmade wood coffee table against a sage paneled wall'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-kulp-detay.webp',
+            alt: 'Jizayn coffee table - knob and wood grain close-up',
+            pinterestDescription: 'Jizayn coffee table round knob and grain detail'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-oturma-odasi.webp',
-            alt: 'Jizayn solid wood coffee table - living room setting',
-            pinterestDescription: 'Jizayn drawer coffee table in a beige living room'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-kullanim.webp',
+            alt: 'Jizayn coffee table - books and mug in use',
+            pinterestDescription: 'Jizayn coffee table everyday living room use'
           },
           {
-            url: '/images/products/MeseSehpa/jizayn-mese-sehpa-akdeniz-salon.webp',
-            alt: 'Jizayn drawer coffee table - Mediterranean living room',
-            pinterestDescription: 'Jizayn solid wood coffee table in a Mediterranean living room'
+            url: '/images/products/MeseSehpa/jizayn-orta-sehpa-gunes-golge.webp',
+            alt: 'Jizayn coffee table - window light and shadows',
+            pinterestDescription: 'Jizayn coffee table in sunlight with window shadows'
           }
         ],
         video: undefined,
