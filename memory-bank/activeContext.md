@@ -16,11 +16,12 @@ kayıt → (C) DE/FR dil ekle → (D) blog/içerik → (E) backlink/Pinterest �
 ## Bu oturumda yapılanlar (2026-11-24)
 **Meşe sehpa eklendi** (`id: oak-coffee-table`).
 - Kaynak: `public/uploads/products/Meşe Sehpa/` (8 PNG + not: 1 m / 70 cm / 50 cm, meşe 40.000 TL, ladin 30.000 TL).
-- Görseller WebP: `public/images/products/MeseSehpa/`.
+- Görseller WebP: `public/images/products/MeseSehpa/jizayn-mese-sehpa-*.webp` (+ alt’ta Jizayn).
 - TR slug: `el-yapimi-cekmece-masif-ahsap-orta-sehpa`. EN slug: `handmade-solid-wood-drawer-coffee-table`.
 - Fiyat aralığı: TR 30.000–40.000 TRY. EN, sitedeki sabit kurla (1 USD = 35 TRY) 857–1.143 USD.
 - `formatLocalizedPriceRange` eklendi; min ≠ max ise kart ve detayda aralık görünür.
 - Shopier hâlâ jenerik `https://www.shopier.com/jizayn`.
+- **SSS düzeltmesi**: accordion artık `productData.faq` + ortak q1–q6; lamba/Kumiko q7–q10 yalnız `category === 'lighting'`.
 
 ## Önceki oturumda yapılanlar
 1. **Teknik + SEO denetimi** yapıldı (genel altyapı güçlü).

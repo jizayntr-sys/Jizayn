@@ -332,13 +332,18 @@ export default async function ProductDetailPage({
     ],
   };
 
-  const translatedCommonFaq = Array.from({ length: 10 }, (_, index) => {
-    const number = index + 1;
-    return {
-      question: t(`reviews.commonFaqs.q${number}.question`),
-      answer: t(`reviews.commonFaqs.q${number}.answer`),
-    };
-  });
+  // q1–q6: tüm ürünler. q7–q10: lamba/Kumiko — yalnızca lighting.
+  const universalCommonFaqNumbers = [1, 2, 3, 4, 5, 6];
+  const lightingCommonFaqNumbers = [7, 8, 9, 10];
+  const commonFaqNumbers =
+    product.category === 'lighting'
+      ? [...universalCommonFaqNumbers, ...lightingCommonFaqNumbers]
+      : universalCommonFaqNumbers;
+
+  const translatedCommonFaq = commonFaqNumbers.map((number) => ({
+    question: t(`reviews.commonFaqs.q${number}.question`),
+    answer: t(`reviews.commonFaqs.q${number}.answer`),
+  }));
 
   const combinedFaq = [
     ...(productData.faq || []).map((item) => ({ question: item.question, answer: item.answer })),
@@ -791,14 +796,9 @@ export default async function ProductDetailPage({
                 </Link>
               </div>
 
-              {/* Sağ: accordion */}
+              {/* Sağ: accordion — ürüne özel SSS + ilgili ortaklar */}
               <div className="lg:col-span-2">
-                <ProductFaq
-                  items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
-                    question: t(`reviews.commonFaqs.q${num}.question`),
-                    answer: t(`reviews.commonFaqs.q${num}.answer`),
-                  }))}
-                />
+                <ProductFaq items={uniqueFaq} />
               </div>
             </div>
           </div>
