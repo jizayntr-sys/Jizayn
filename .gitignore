@@ -29,6 +29,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Ham ürün kaynakları (site WebP klasörlerini kullanır: MeseSehpa/, Kutuphane/)
+/public/images/products/Meşe Sehpa/
+/public/images/products/Kütüphane/
+/public/uploads/products/
+
 # typescript
 *.tsbuildinfo
 /lib/generated/prisma
