@@ -7,7 +7,7 @@ import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { pathnames } from '@/i18n/pathnames';
 import { getProductBySlug, getAllProducts } from '@/data/products';
-import { formatLocalizedPrice, getLocalizedPriceParts } from '@/utils/currency';
+import { formatLocalizedPriceRange, getLocalizedPriceParts } from '@/utils/currency';
 import StockNotificationForm from '@/components/StockNotificationForm';
 import ProductGallery from '@/components/ProductGallery';
 import ProductVideo from '@/components/ProductVideo';
@@ -507,7 +507,7 @@ export default async function ProductDetailPage({
                 <div className="p-4 sm:p-5 border border-stone-200 rounded-2xl shadow-sm bg-stone-50">
                   <div className="flex items-baseline gap-2 mb-4">
                     <span className="text-2xl sm:text-3xl font-bold text-stone-900">
-                      {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+                      {formatLocalizedPriceRange(productData.priceRange.min, productData.priceRange.max, productData.priceRange.currency, locale)}
                     </span>
                   </div>
                   <div className="flex flex-row gap-2">
@@ -875,7 +875,7 @@ export default async function ProductDetailPage({
                     </h3>
                     <div className="flex items-center justify-between mt-2">
                       <span className="text-lg font-bold text-gray-900">
-                        {formatLocalizedPrice(simProductData.priceRange.min, simProductData.priceRange.currency, locale)}
+                        {formatLocalizedPriceRange(simProductData.priceRange.min, simProductData.priceRange.max, simProductData.priceRange.currency, locale)}
                       </span>
                       <span className="text-sm text-amber-700 font-medium group-hover:underline">{tProducts('viewProduct')} &rarr;</span>
                     </div>

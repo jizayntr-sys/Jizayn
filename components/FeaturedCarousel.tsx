@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { formatLocalizedPrice } from '@/utils/currency';
+import { formatLocalizedPriceRange } from '@/utils/currency';
 import { Product } from '@/types/product';
 
 type Props = {
@@ -84,7 +84,7 @@ export default function FeaturedCarousel({ products, locale }: Props) {
                 </h3>
                 <div className="mt-4">
                   <span className="text-lg font-bold text-white">
-                    {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+                    {formatLocalizedPriceRange(productData.priceRange.min, productData.priceRange.max, productData.priceRange.currency, locale)}
                   </span>
                 </div>
               </div>

@@ -136,6 +136,19 @@ export function formatLocalizedPrice(amount: number, baseCurrency: string, local
   return formatPrice(converted, target, locale);
 }
 
+/** min ve max farklıysa "30.000 TL – 40.000 TL" biçiminde gösterir. */
+export function formatLocalizedPriceRange(
+  min: number,
+  max: number | undefined,
+  baseCurrency: string,
+  locale: string
+): string {
+  const minLabel = formatLocalizedPrice(min, baseCurrency, locale);
+  if (max == null || max === min) return minLabel;
+  const maxLabel = formatLocalizedPrice(max, baseCurrency, locale);
+  return `${minLabel} – ${maxLabel}`;
+}
+
 /**
  * Yapılandırılmış veri (JSON-LD / Open Graph) için locale'e uygun
  * sayısal fiyat + para birimi döndürür. Ekranda gösterilenle tutarlı olur.

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { getAllProducts } from '@/data/products';
-import { formatLocalizedPrice } from '@/utils/currency';
+import { formatLocalizedPriceRange } from '@/utils/currency';
 import { getTranslations } from 'next-intl/server';
 import ProductFilters from '@/components/ProductFilters';
 import FadeIn from '@/components/FadeIn';
@@ -359,7 +359,7 @@ export default async function ProductsPage({
                     </p>
                     <div className="flex items-center justify-between pt-4 border-t border-stone-100">
                       <span className="text-lg font-bold text-stone-900">
-                        {formatLocalizedPrice(productData.priceRange.min, productData.priceRange.currency, locale)}
+                        {formatLocalizedPriceRange(productData.priceRange.min, productData.priceRange.max, productData.priceRange.currency, locale)}
                       </span>
                       <span className="inline-flex items-center gap-1 text-sm font-medium text-amber-700 group-hover:gap-2 transition-all">
                         {t('viewProduct')} <ArrowRight className="w-4 h-4" />

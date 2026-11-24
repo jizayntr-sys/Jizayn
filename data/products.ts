@@ -1059,6 +1059,328 @@ const rawProducts: Product[] = [
         reviews: []
       }
     }
+  },
+  {
+    id: 'oak-coffee-table',
+    category: 'furniture',
+    tags: ['coffee-table', 'oak', 'spruce', 'solid-wood', 'drawers', 'handmade', 'living-room'],
+    createdAt: '2026-11-24T10:00:00.000Z',
+    updatedAt: '2026-11-24T10:00:00.000Z',
+    brand: {
+      name: 'Jizayn',
+      url: 'https://www.jizayn.com',
+      logo: 'https://www.jizayn.com/JizaynLogo.svg'
+    },
+    isFeatured: true,
+    sortOrder: 4,
+    locales: {
+      tr: {
+        slug: 'el-yapimi-cekmece-masif-ahsap-orta-sehpa',
+        name: 'El Yapımı Çekmeceli Masif Ahşap Orta Sehpa',
+        description: 'Altı çekmeceli, altında çıtalı raflı el yapımı masif ahşap orta sehpa. 100 x 70 x 50 cm. Meşe 40.000 TL, ladin 30.000 TL. Oturma odasında kitap, sepet ve günlük eşya için hem tabla hem gizli çekmece hem açık raf sunar.',
+        images: [
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-yan-aci.webp',
+            alt: 'El Yapımı Çekmeceli Masif Ahşap Orta Sehpa - Yan Açı',
+            pinterestDescription: 'Altı çekmeceli masif ahşap orta sehpa yan açı görünümü'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-onden.webp',
+            alt: 'Çekmeceli Ahşap Orta Sehpa - Önden Görünüm',
+            pinterestDescription: 'Masif ahşap orta sehpa önden, kapalı çekmeceler ve alt çıtalı raf'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-ust-gorunum.webp',
+            alt: 'Masif Ahşap Orta Sehpa - Üst Tabla ve Doku',
+            pinterestDescription: 'Masif ahşap orta sehpa üst tabla damar dokusu'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-cekmece-acik.webp',
+            alt: 'Ahşap Orta Sehpa - Açık Çekmeceler',
+            pinterestDescription: 'Çekmeceleri açık masif ahşap orta sehpa aydınlık oturma odasında'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-somine.webp',
+            alt: 'Çekmeceli Orta Sehpa - Şömine Karşısı Oturma Odası',
+            pinterestDescription: 'Masif ahşap orta sehpa şömineli oturma odasında'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-yesil-duvar.webp',
+            alt: 'Ahşap Orta Sehpa - Yeşil Duvarlı Salon',
+            pinterestDescription: 'El yapımı ahşap orta sehpa yeşil lambrili salonda'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-oturma-odasi.webp',
+            alt: 'Masif Ahşap Orta Sehpa - Oturma Odası Düzeni',
+            pinterestDescription: 'Çekmeceli masif ahşap orta sehpa bej koltuklu oturma odasında'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-akdeniz-salon.webp',
+            alt: 'Çekmeceli Orta Sehpa - Akdeniz Tarzı Salon',
+            pinterestDescription: 'Masif ahşap orta sehpa taş duvarlı Akdeniz tarzı salonda'
+          }
+        ],
+        video: undefined,
+        intro: 'El Yapımı Çekmeceli Masif Ahşap Orta Sehpa, oturma odasının ortasında hem tabla hem depolama isteyenler için üretilmiş bir sehpadır. Uzun yüzde altı çekmece, altında çıtalı açık raf vardır. Aynı model iki ağaçtan yapılır: meşe 40.000 TL, ladin 30.000 TL. Ölçü 100 x 70 x 50 cm.',
+        contentSections: [
+          {
+            title: 'Tasarım',
+            body: 'Dikdörtgen tabla, ön yüzde eşit bölünmüş altı çekmece ve siyah yuvarlak kulplar. Çekmecelerin altında, sepet, kitap ve örtü için çıtalı bir alt raf durur. Düz tabla servis, kitap ve vazo için geniş bir yüzey bırakır.',
+          },
+          {
+            title: 'Ağaç Seçenekleri ve Fiyat',
+            items: [
+              'Meşe: 40.000 TL',
+              'Ladin: 30.000 TL',
+              'İki seçenek de aynı ölçü ve aynı çekmeceli formdadır',
+              'Masif ahşapta damar ve ton farkı her parçada değişir',
+            ],
+          },
+          {
+            title: 'Kullanım',
+            items: [
+              'Oturma odası: koltuk karşısında orta sehpa',
+              'Çekmeceler: kumanda, not defteri ve küçük eşya',
+              'Alt raf: sepet, kitap, battaniye',
+              'Tabla: vazo, tepsi ve kitap',
+            ],
+          },
+          {
+            title: 'Jizayn Farkı',
+            items: [
+              'Atölyede el yapımı',
+              'Masif meşe veya masif ladin',
+              'Türk malı',
+              'Seri üretim kalıbı değil, atölye işçiliği',
+            ],
+          },
+          {
+            title: 'Kullanım ve Bakım',
+            items: [
+              'Temizlik: kuru veya hafif nemli yumuşak bez. Kimyasal ve aşındırıcı bez kullanmayın.',
+              'Sıvı ve ısı: bardak ve sıcak servis için altlık kullanın. Döküleni bekletmeden silin.',
+              'Konum: direkt güneş ve ısı kaynağından uzak tutun. Yılda bir kez uygun ahşap bakım ürünü ile besleyin.',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1 adet el yapımı çekmeceli masif ahşap orta sehpa' },
+          { text: '6 çekmece, gövde ile birlikte' },
+          { text: 'Alt çıtalı raf' },
+        ],
+        importantNotes: [
+          { title: 'İki fiyat:', text: 'Ladin 30.000 TL, meşe 40.000 TL. Siparişte ağaç seçilir.' },
+          { title: 'El yapımı:', text: 'Damar ve renk tonu her parçada biraz değişir. Bu fark kusur değildir.' },
+          { title: 'Ölçü:', text: '100 x 70 x 50 cm (uzunluk x genişlik x yükseklik). Yerleştirmeden önce alanı ölçün.' },
+          { title: 'Doğal ahşap:', text: 'Mevsimle çok hafif çalışabilir. Aşırı kuru veya ıslak ortamda bırakmayın.' },
+        ],
+        careGuide: {
+          name: 'Masif Ahşap Orta Sehpa Bakımı',
+          description: 'Meşe veya ladin orta sehpanın yüzeyini ve çekmecelerini korumak için temel bakım.',
+          steps: [
+            { name: 'Günlük silme', text: 'Kuru veya hafif nemli yumuşak bir bezle silin. Sert sünger ve kimyasal temizleyici kullanmayın.' },
+            { name: 'Sıvı ve ısı', text: 'Bardak ve sıcak tabak için altlık kullanın. Dökülen sıvıyı bekletmeden kurulayın.' },
+            { name: 'Besleme', text: 'Direkt güneşten uzak tutun. Yılda bir kez ahşaba uygun bakım yağı veya bakım ürünü uygulayın.' },
+          ],
+        },
+        dimensions: '100 x 70 x 50 cm (uzunluk x genişlik x yükseklik)',
+        materials: 'Masif meşe veya masif ladin',
+        specifications: [
+          '6 çekmece',
+          'Alt çıtalı raf',
+          'El yapımı masif ahşap',
+          '100 x 70 x 50 cm',
+        ],
+        sku: 'JIZAYN-SEHPA-001',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 30000,
+          max: 40000,
+          currency: 'TRY'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'El Yapımı Çekmeceli Masif Ahşap Orta Sehpa 100 cm | Jizayn',
+        metaDescription: 'Altı çekmeceli, alt raflı el yapımı masif ahşap orta sehpa. 100 x 70 x 50 cm. Meşe 40.000 TL, ladin 30.000 TL. Oturma odası için Jizayn.',
+        metaKeywords: ['meşe sehpa', 'orta sehpa', 'çekmeceli sehpa', 'masif ahşap sehpa', 'ladin sehpa', 'el yapımı sehpa', 'Jizayn'],
+        faq: [
+          {
+            question: 'Meşe ve ladin fiyatı nedir?',
+            answer: 'Aynı modelde meşe 40.000 TL, ladin 30.000 TL. Siparişte ağaç seçilir.'
+          },
+          {
+            question: 'Ölçüleri nedir?',
+            answer: 'Uzunluk 100 cm, genişlik 70 cm, yükseklik 50 cm.'
+          },
+          {
+            question: 'Kaç çekmece var?',
+            answer: 'Uzun yüzde altı çekmece ve altında çıtalı bir açık raf vardır.'
+          },
+          {
+            question: 'Nasıl temizlenir?',
+            answer: 'Kuru veya hafif nemli yumuşak bezle silin. Kimyasal temizleyici kullanmayın. Bardak ve sıcak servis için altlık kullanın.'
+          }
+        ],
+        reviews: []
+      },
+      en: {
+        slug: 'handmade-solid-wood-drawer-coffee-table',
+        name: 'Handmade Solid Wood Drawer Coffee Table',
+        description: 'Handmade solid wood coffee table with six drawers and a slatted lower shelf. 100 x 70 x 50 cm. Spruce from $857, oak $1,143 (30,000 and 40,000 TRY on Shopier). A living-room table with a clear top, closed storage and an open shelf.',
+        images: [
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-yan-aci.webp',
+            alt: 'Handmade Solid Wood Drawer Coffee Table - Three-Quarter View',
+            pinterestDescription: 'Six-drawer solid wood coffee table, three-quarter view'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-onden.webp',
+            alt: 'Solid Wood Coffee Table - Front View',
+            pinterestDescription: 'Solid wood coffee table front view with closed drawers and slatted shelf'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-ust-gorunum.webp',
+            alt: 'Solid Wood Coffee Table - Top and Grain',
+            pinterestDescription: 'Solid wood coffee table top showing wood grain'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-cekmece-acik.webp',
+            alt: 'Wood Coffee Table - Drawers Open',
+            pinterestDescription: 'Solid wood coffee table with drawers open in a bright living room'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-somine.webp',
+            alt: 'Drawer Coffee Table - Living Room by the Fireplace',
+            pinterestDescription: 'Solid wood coffee table in a living room with a fireplace'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-yesil-duvar.webp',
+            alt: 'Wood Coffee Table - Sage Green Living Room',
+            pinterestDescription: 'Handmade wood coffee table against a sage paneled wall'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-oturma-odasi.webp',
+            alt: 'Solid Wood Coffee Table - Living Room Setting',
+            pinterestDescription: 'Drawer coffee table in a beige living room'
+          },
+          {
+            url: '/images/products/MeseSehpa/mese-sehpa-akdeniz-salon.webp',
+            alt: 'Drawer Coffee Table - Mediterranean Living Room',
+            pinterestDescription: 'Solid wood coffee table in a Mediterranean living room'
+          }
+        ],
+        video: undefined,
+        intro: 'The Handmade Solid Wood Drawer Coffee Table is built for a living room that needs both a clear top and storage. Six drawers run along the long side, with a slatted shelf underneath. The same form is made in two woods: spruce at $857 (30,000 TRY) and oak at $1,143 (40,000 TRY). Size is 100 x 70 x 50 cm.',
+        contentSections: [
+          {
+            title: 'Design',
+            body: 'A rectangular top, six equal drawers on the long face and round black knobs. Below the drawers, a slatted shelf holds baskets, books and throws. The top stays open for a tray, a vase or a stack of books.',
+          },
+          {
+            title: 'Wood Options and Price',
+            items: [
+              'Spruce: $857 (30,000 TRY on Shopier)',
+              'Oak: $1,143 (40,000 TRY on Shopier)',
+              'Both options share the same size and the same six-drawer form',
+              'Grain and tone vary from piece to piece in solid wood',
+            ],
+          },
+          {
+            title: 'Use',
+            items: [
+              'Living room: coffee table in front of the sofa',
+              'Drawers: remotes, notebooks and small items',
+              'Lower shelf: baskets, books, blankets',
+              'Top: vase, tray and books',
+            ],
+          },
+          {
+            title: 'The Jizayn Difference',
+            items: [
+              'Handmade in the workshop',
+              'Solid oak or solid spruce',
+              'Made in Turkey',
+              'Workshop work, not a factory mould',
+            ],
+          },
+          {
+            title: 'Use and Care',
+            items: [
+              'Cleaning: dry or slightly damp soft cloth. No chemicals or abrasive pads.',
+              'Liquid and heat: use coasters and trivets. Wipe spills immediately.',
+              'Placement: keep out of direct sun and away from heat. Feed once a year with a wood-safe finish.',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1 handmade solid wood coffee table with drawers' },
+          { text: '6 drawers, fitted in the body' },
+          { text: 'Slatted lower shelf' },
+        ],
+        importantNotes: [
+          { title: 'Two prices:', text: 'Spruce $857 (30,000 TRY), oak $1,143 (40,000 TRY). The wood is chosen when you order. Shopier charges in Turkish lira.' },
+          { title: 'Handmade:', text: 'Grain and colour shift slightly from piece to piece. That variation is not a defect.' },
+          { title: 'Size:', text: '100 x 70 x 50 cm (length x width x height). Measure the spot before you place it.' },
+          { title: 'Solid wood:', text: 'It can move slightly with the seasons. Do not leave it in a very dry or very damp room.' },
+        ],
+        careGuide: {
+          name: 'Solid Wood Coffee Table Care',
+          description: 'Basic care for an oak or spruce coffee table, the top and the drawers.',
+          steps: [
+            { name: 'Daily wipe', text: 'Wipe with a dry or slightly damp soft cloth. Do not use harsh sponges or chemical cleaners.' },
+            { name: 'Liquid and heat', text: 'Use coasters and trivets. Dry spills right away.' },
+            { name: 'Feeding', text: 'Keep it out of direct sun. Once a year, apply a finish made for wood furniture.' },
+          ],
+        },
+        dimensions: '100 x 70 x 50 cm (length x width x height)',
+        materials: 'Solid oak or solid spruce',
+        specifications: [
+          '6 drawers',
+          'Slatted lower shelf',
+          'Handmade solid wood',
+          '100 x 70 x 50 cm',
+        ],
+        sku: 'JIZAYN-SEHPA-001',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 857,
+          max: 1143,
+          currency: 'USD'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'Handmade Solid Wood Drawer Coffee Table 100 cm | Jizayn',
+        metaDescription: 'Handmade solid wood coffee table with six drawers and a lower shelf. 100 x 70 x 50 cm. Spruce from $857, oak $1,143. Made by Jizayn.',
+        metaKeywords: ['oak coffee table', 'solid wood coffee table', 'drawer coffee table', 'spruce coffee table', 'handmade coffee table', 'living room table', 'Jizayn'],
+        faq: [
+          {
+            question: 'What do oak and spruce cost?',
+            answer: 'Spruce is $857 and oak is $1,143. On Shopier those prices are 30,000 TRY and 40,000 TRY. You choose the wood when you order.'
+          },
+          {
+            question: 'What are the dimensions?',
+            answer: 'Length 100 cm, width 70 cm, height 50 cm.'
+          },
+          {
+            question: 'How many drawers?',
+            answer: 'Six drawers on the long side, plus a slatted open shelf underneath.'
+          },
+          {
+            question: 'How do I clean it?',
+            answer: 'Wipe with a dry or slightly damp soft cloth. Do not use chemical cleaners. Use coasters and trivets.'
+          }
+        ],
+        reviews: []
+      }
+    }
   }
 ];
 

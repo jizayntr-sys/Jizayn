@@ -1,6 +1,6 @@
 # Active Context — Jizayn
 
-Son güncelleme: 2026-06-23
+Son güncelleme: 2026-11-24
 
 ## GitHub push notu (Cursor)
 Push başarısız olursa sebep: Git for Windows SSH ≠ Windows OpenSSH. Çözüm:
@@ -13,7 +13,16 @@ belli olunca** uygulanacak (gerçek NAP/adres gerektiriyor). Tam yol haritası:
 **`memory-bank/seo-roadmap.md`**. Sıra: (A) Organization NAP düzelt → (B) GSC/Bing/Merchant
 kayıt → (C) DE/FR dil ekle → (D) blog/içerik → (E) backlink/Pinterest → (F) pazaryeri SEO.
 
-## Bu oturumda yapılanlar
+## Bu oturumda yapılanlar (2026-11-24)
+**Meşe sehpa eklendi** (`id: oak-coffee-table`).
+- Kaynak: `public/uploads/products/Meşe Sehpa/` (8 PNG + not: 1 m / 70 cm / 50 cm, meşe 40.000 TL, ladin 30.000 TL).
+- Görseller WebP: `public/images/products/MeseSehpa/`.
+- TR slug: `el-yapimi-cekmece-masif-ahsap-orta-sehpa`. EN slug: `handmade-solid-wood-drawer-coffee-table`.
+- Fiyat aralığı: TR 30.000–40.000 TRY. EN, sitedeki sabit kurla (1 USD = 35 TRY) 857–1.143 USD.
+- `formatLocalizedPriceRange` eklendi; min ≠ max ise kart ve detayda aralık görünür.
+- Shopier hâlâ jenerik `https://www.shopier.com/jizayn`.
+
+## Önceki oturumda yapılanlar
 1. **Teknik + SEO denetimi** yapıldı (genel altyapı güçlü).
 2. **Shopier entegrasyonu**:
    - `types/product.ts`'e `shopierUrl` + `shopierOffer` eklendi.

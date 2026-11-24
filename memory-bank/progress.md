@@ -1,6 +1,7 @@
 # Progress — Jizayn
 
 ## Çalışan
+- Çekmeceli masif ahşap orta sehpa vitrinde (TR/EN). Meşe 40.000 TL, ladin 30.000 TL. Ölçü 100×70×50 cm.
 - Çok dilli (TR/EN) site, lokalize URL'ler, hreflang/canonical.
 - Sitemap, robots, manifest, Google Shopping feed.
 - Ürün detay: Product/Breadcrumb/FAQ/HowTo JSON-LD.
