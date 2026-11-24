@@ -22,6 +22,7 @@ kayıt → (C) DE/FR dil ekle → (D) blog/içerik → (E) backlink/Pinterest �
 - `formatLocalizedPriceRange` eklendi; min ≠ max ise kart ve detayda aralık görünür.
 - Shopier hâlâ jenerik `https://www.shopier.com/jizayn`.
 - **SSS düzeltmesi**: accordion artık `productData.faq` + ortak q1–q6; lamba/Kumiko q7–q10 yalnız `category === 'lighting'`.
+- **Kütüphane eklendi** (`id: solid-wood-library`): 200×230 cm, alt 50 / üst 35 cm derinlik, masif ladin + kavak kontraplak arka, ~6 hafta, 130.000 TL kargo+KDV hariç. Görseller `public/images/products/Kutuphane/jizayn-kutuphane-*.webp` (atölye fotoğrafı ana).
 
 ## Önceki oturumda yapılanlar
 1. **Teknik + SEO denetimi** yapıldı (genel altyapı güçlü).

@@ -2,6 +2,7 @@
 
 ## Çalışan
 - Çekmeceli masif ahşap orta sehpa vitrinde (TR/EN). Meşe 40.000 TL, ladin 30.000 TL. Ölçü 100×70×50 cm.
+- Masif ladin kütüphane vitrinde (TR/EN). 200×230 cm, 130.000 TL kargo+KDV hariç, yapım ~6 hafta.
 - Çok dilli (TR/EN) site, lokalize URL'ler, hreflang/canonical.
 - Sitemap, robots, manifest, Google Shopping feed.
 - Ürün detay: Product/Breadcrumb/FAQ/HowTo JSON-LD.

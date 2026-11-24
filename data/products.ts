@@ -1381,6 +1381,368 @@ const rawProducts: Product[] = [
         reviews: []
       }
     }
+  },
+  {
+    id: 'solid-wood-library',
+    category: 'furniture',
+    tags: ['library', 'bookcase', 'cabinet', 'spruce', 'solid-wood', 'handmade', 'living-room'],
+    createdAt: '2026-11-24T12:00:00.000Z',
+    updatedAt: '2026-11-24T12:00:00.000Z',
+    brand: {
+      name: 'Jizayn',
+      url: 'https://www.jizayn.com',
+      logo: 'https://www.jizayn.com/JizaynLogo.svg'
+    },
+    isFeatured: true,
+    sortOrder: 5,
+    locales: {
+      tr: {
+        slug: 'el-yapimi-masif-ahsap-kutuphane',
+        name: 'El Yapımı Masif Ahşap Kütüphane',
+        description: 'İki gövdeli el yapımı masif ladin kütüphane. Üstte açık raflar, altta iki çekmece ve panjurlu kapaklı dolap. 200 cm en, 230 cm yükseklik, alt derinlik 50 cm, üst derinlik 35 cm. Arka panel kavak kontraplak. Yapım süresi yaklaşık 6 hafta. Fiyat 130.000 TL (kargo ve KDV hariç).',
+        images: [
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-atolye.webp',
+            alt: 'Jizayn el yapımı masif ahşap kütüphane - atölyede ham görünüm',
+            pinterestDescription: 'Jizayn masif ladin kütüphane atölyede üretim sonrası'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-kitapli.webp',
+            alt: 'Jizayn masif ahşap kütüphane - kitaplı dolu raflar',
+            pinterestDescription: 'Jizayn çift gövdeli kütüphane kitap ve dekorla dolu'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-salon.webp',
+            alt: 'Jizayn ahşap kütüphane - aydınlık oturma odası',
+            pinterestDescription: 'Jizayn masif ahşap kütüphane pencere kenarı salonda'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-kapak-acik.webp',
+            alt: 'Jizayn kütüphane - alt panjurlu kapak açık',
+            pinterestDescription: 'Jizayn kütüphane alt dolap kapağı açık iç raf'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-yakin.webp',
+            alt: 'Jizayn masif ahşap kütüphane - yakın detay',
+            pinterestDescription: 'Jizayn kütüphane taç silme ve flütlü dikme detayı'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-ortam.webp',
+            alt: 'Jizayn ahşap kütüphane - salon ortamı',
+            pinterestDescription: 'Jizayn kütüphane klasik salon düzeninde'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-yan.webp',
+            alt: 'Jizayn masif ahşap kütüphane - yan açı',
+            pinterestDescription: 'Jizayn çift gövdeli kütüphane yan üç çeyrek açı'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-ceviz-olculu.webp',
+            alt: 'Jizayn ahşap kütüphane - koyu tonlu görünüm',
+            pinterestDescription: 'Jizayn kütüphane koyu ahşap tonunda ölçü bağlamlı görünüm'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-ceviz-pencere.webp',
+            alt: 'Jizayn masif ahşap kütüphane - pencere ışığında',
+            pinterestDescription: 'Jizayn kütüphane doğal pencere ışığında yan görünüm'
+          }
+        ],
+        video: undefined,
+        intro: 'El Yapımı Masif Ahşap Kütüphane, salon veya çalışma odası için üretilmiş çift gövdeli bir kitaplık-dolap birimidir. Üst bölümde açık raflar, altta iki çekmece ve panjurlu kapaklı dolap vardır. Gövde masif ladin, arka panel kavak kontraplaktır. Ölçü: 200 cm en, 230 cm yükseklik, alt derinlik 50 cm, üst derinlik 35 cm. Atölyede yapım süresi yaklaşık 6 haftadır.',
+        contentSections: [
+          {
+            title: 'Tasarım',
+            body: 'İki dikey gövde yan yana durur. Üstte taç silmeli açık raflar, yanlarda flütlü dikmeler vardır. Alt kaide gövdeden biraz daha derindir: iki çekmece ve dört panjurlu kapak. Kapaklar açılınca alt depolama görünür.',
+          },
+          {
+            title: 'Malzeme ve Üretim',
+            items: [
+              'Gövde: masif ladin',
+              'Arka panel: kavak kontraplak',
+              'Atölyede el işçiliği',
+              'Yapım süresi: yaklaşık 6 hafta',
+            ],
+          },
+          {
+            title: 'Ölçüler',
+            items: [
+              'En: 200 cm',
+              'Yükseklik: 230 cm',
+              'Alt derinlik: 50 cm',
+              'Üst derinlik: 35 cm',
+            ],
+          },
+          {
+            title: 'Kullanım',
+            items: [
+              'Salon: kitap ve dekor için duvar kütüphanesi',
+              'Çalışma odası: dosya, kutu ve kitap',
+              'Alt dolap: görünmesini istemediğiniz eşya',
+              'Çekmeceler: küçük aksesuar ve evrak',
+            ],
+          },
+          {
+            title: 'Jizayn Farkı',
+            items: [
+              'Atölyede siparişe göre üretilir',
+              'Seri üretim kalıbı değil, yerli el emeği',
+              'Büyük ölçü: 200 x 230 cm duvar odağı',
+              'Türk malı',
+            ],
+          },
+          {
+            title: 'Kullanım ve Bakım',
+            items: [
+              'Temizlik: kuru veya hafif nemli yumuşak bez. Kimyasal kullanmayın.',
+              'Yük: raflara aşırı ağır yığmayın; ağırlığı dengeli dağıtın.',
+              'Konum: direkt güneş ve nemden uzak tutun. Duvara sabitlemeyi öneririz.',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1 adet el yapımı masif ahşap kütüphane (üst + alt gövde)' },
+          { text: '2 çekmece ve panjurlu kapaklı alt dolap' },
+          { text: 'Montaj / sabitleme aparatı dahil değildir', included: false },
+        ],
+        importantNotes: [
+          { title: 'Fiyat:', text: '130.000 TL — kargo ve KDV hariçtir. Güncel toplam için iletişime geçin.' },
+          { title: 'Yapım süresi:', text: 'Sipariş sonrası yaklaşık 6 hafta.' },
+          { title: 'Malzeme:', text: 'Gövde masif ladin, arka panel kavak kontraplak.' },
+          { title: 'Görseller:', text: 'Atölye fotoğrafı gerçek üründür. Ortam görselleri tasarımı farklı ahşap tonlarında gösterir; sipariş ladin gövdeye göredir.' },
+          { title: 'El yapımı:', text: 'Damar ve ton farkı normaldir.' },
+          { title: 'Montaj:', text: 'Büyük ve ağırdır; taşıma ve duvara sabitleme kullanıcıya aittir.' },
+        ],
+        careGuide: {
+          name: 'Masif Ahşap Kütüphane Bakımı',
+          description: 'Ladin gövdeli kütüphanenin yüzey ve raf bakımı.',
+          steps: [
+            { name: 'Toz alma', text: 'Kuru veya hafif nemli yumuşak bezle silin. Aşındırıcı bez ve kimyasal kullanmayın.' },
+            { name: 'Raf yükü', text: 'Ağır kitapları alt raflara yakın ve dengeli yerleştirin. Tek noktaya aşırı yük binmesin.' },
+            { name: 'Konum', text: 'Direkt güneş, kalorifer yanı ve nemli alanlardan uzak tutun. Devrilme riskine karşı sabitleyin.' },
+          ],
+        },
+        dimensions: '200 x 230 cm (en x yükseklik); alt derinlik 50 cm, üst derinlik 35 cm',
+        materials: 'Masif ladin gövde, kavak kontraplak arka panel',
+        specifications: [
+          'Çift gövdeli kütüphane',
+          'Üst açık raflar + alt panjurlu dolap',
+          '2 çekmece',
+          'Yapım süresi ~6 hafta',
+        ],
+        sku: 'JIZAYN-KUTUPHANE-001',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 130000,
+          max: 130000,
+          currency: 'TRY'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'El Yapımı Masif Ahşap Kütüphane 200×230 cm | Jizayn',
+        metaDescription: 'Masif ladin el yapımı kütüphane. 200 cm en, 230 cm yükseklik, alt 50 cm / üst 35 cm derinlik. İki çekmece, panjurlu alt dolap. Yapım ~6 hafta. 130.000 TL kargo ve KDV hariç.',
+        metaKeywords: ['ahşap kütüphane', 'masif kütüphane', 'el yapımı kitaplık', 'ladin kütüphane', 'dolaplı kitaplık', 'Jizayn'],
+        faq: [
+          {
+            question: 'Fiyata kargo ve KDV dahil mi?',
+            answer: 'Hayır. Listelenen 130.000 TL kargo ve KDV hariçtir. Toplam tutar için sipariş öncesi teyit alın.'
+          },
+          {
+            question: 'Hangi ağaçtan yapılıyor?',
+            answer: 'Gövde masif ladindir. Arka panel kavak kontraplaktır.'
+          },
+          {
+            question: 'Ölçüleri nedir?',
+            answer: 'En 200 cm, yükseklik 230 cm, alt derinlik 50 cm, üst derinlik 35 cm.'
+          },
+          {
+            question: 'Ne kadar sürede hazır olur?',
+            answer: 'Sipariş sonrası yapım süresi yaklaşık 6 haftadır.'
+          },
+          {
+            question: 'Montaj dahil mi?',
+            answer: 'Hayır. Ürün büyük ve ağırdır; taşıma ve duvara sabitleme kullanıcıya aittir. Sabitleme aparatı dahil değildir.'
+          }
+        ],
+        reviews: []
+      },
+      en: {
+        slug: 'handmade-solid-wood-library-bookcase',
+        name: 'Handmade Solid Wood Library Bookcase',
+        description: 'Handmade two-bay solid spruce library. Open upper shelves, two drawers and louvered cupboard doors below. 200 cm wide, 230 cm high, lower depth 50 cm, upper depth 35 cm. Poplar plywood back. About 6 weeks to build. Price 130,000 TRY excluding shipping and VAT.',
+        images: [
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-atolye.webp',
+            alt: 'Jizayn handmade solid wood library - workshop view',
+            pinterestDescription: 'Jizayn solid spruce library in the workshop after build'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-kitapli.webp',
+            alt: 'Jizayn solid wood library - shelves with books',
+            pinterestDescription: 'Jizayn two-bay library filled with books and decor'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-salon.webp',
+            alt: 'Jizayn wood library - bright living room',
+            pinterestDescription: 'Jizayn solid wood library by a living-room window'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-kapak-acik.webp',
+            alt: 'Jizayn library - lower louvered door open',
+            pinterestDescription: 'Jizayn library lower cupboard door open showing shelf'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-yakin.webp',
+            alt: 'Jizayn solid wood library - close detail',
+            pinterestDescription: 'Jizayn library crown molding and fluted pilaster detail'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-ortam.webp',
+            alt: 'Jizayn wood library - living room setting',
+            pinterestDescription: 'Jizayn library in a classic living room'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-mese-yan.webp',
+            alt: 'Jizayn solid wood library - three-quarter view',
+            pinterestDescription: 'Jizayn two-bay library three-quarter angle'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-ceviz-olculu.webp',
+            alt: 'Jizayn wood library - darker tone view',
+            pinterestDescription: 'Jizayn library in a darker wood tone'
+          },
+          {
+            url: '/images/products/Kutuphane/jizayn-kutuphane-ceviz-pencere.webp',
+            alt: 'Jizayn solid wood library - by the window',
+            pinterestDescription: 'Jizayn library in natural window light'
+          }
+        ],
+        video: undefined,
+        intro: 'The Handmade Solid Wood Library Bookcase is a two-bay bookcase-cabinet for a living room or study. Open shelves above, two drawers and louvered cupboard doors below. The body is solid spruce; the back is poplar plywood. Size: 200 cm wide, 230 cm high, lower depth 50 cm, upper depth 35 cm. Workshop build time is about 6 weeks.',
+        contentSections: [
+          {
+            title: 'Design',
+            body: 'Two vertical bays stand side by side. Above: open shelves with crown molding and fluted pilasters. Below: a deeper base with two drawers and four louvered doors. Open a door and the lower storage is clear.',
+          },
+          {
+            title: 'Material and Build',
+            items: [
+              'Body: solid spruce',
+              'Back panel: poplar plywood',
+              'Handmade in the workshop',
+              'Build time: about 6 weeks',
+            ],
+          },
+          {
+            title: 'Dimensions',
+            items: [
+              'Width: 200 cm',
+              'Height: 230 cm',
+              'Lower depth: 50 cm',
+              'Upper depth: 35 cm',
+            ],
+          },
+          {
+            title: 'Use',
+            items: [
+              'Living room: wall library for books and decor',
+              'Study: files, boxes and books',
+              'Lower cupboard: items you want out of sight',
+              'Drawers: small accessories and papers',
+            ],
+          },
+          {
+            title: 'The Jizayn Difference',
+            items: [
+              'Built to order in the workshop',
+              'Domestic handwork, not a factory mould',
+              'Large scale: 200 x 230 cm wall presence',
+              'Made in Turkey',
+            ],
+          },
+          {
+            title: 'Use and Care',
+            items: [
+              'Cleaning: dry or slightly damp soft cloth. No chemicals.',
+              'Load: do not stack extreme weight on one shelf; spread the load.',
+              'Placement: keep out of direct sun and damp rooms. Wall anchoring is recommended.',
+            ],
+          },
+        ],
+        packageContents: [
+          { text: '1 handmade solid wood library (upper + lower body)' },
+          { text: '2 drawers and louvered lower cupboard' },
+          { text: 'Mounting / anchoring hardware not included', included: false },
+        ],
+        importantNotes: [
+          { title: 'Price:', text: '130,000 TRY — shipping and VAT not included. Confirm the total before you order.' },
+          { title: 'Build time:', text: 'About 6 weeks after order.' },
+          { title: 'Material:', text: 'Solid spruce body, poplar plywood back.' },
+          { title: 'Images:', text: 'The workshop photo is the real piece. Lifestyle shots show the design in other wood tones; the ordered body is spruce.' },
+          { title: 'Handmade:', text: 'Grain and tone variation is normal.' },
+          { title: 'Mounting:', text: 'It is large and heavy; transport and wall anchoring are the buyer’s responsibility.' },
+        ],
+        careGuide: {
+          name: 'Solid Wood Library Care',
+          description: 'Basic care for a spruce-bodied library bookcase.',
+          steps: [
+            { name: 'Dusting', text: 'Wipe with a dry or slightly damp soft cloth. No abrasive pads or chemicals.' },
+            { name: 'Shelf load', text: 'Put heavier books lower and spread the weight. Avoid one overloaded point.' },
+            { name: 'Placement', text: 'Keep away from direct sun, radiators and damp rooms. Anchor it against tipping.' },
+          ],
+        },
+        dimensions: '200 x 230 cm (W x H); lower depth 50 cm, upper depth 35 cm',
+        materials: 'Solid spruce body, poplar plywood back panel',
+        specifications: [
+          'Two-bay library',
+          'Open upper shelves + louvered lower cupboard',
+          '2 drawers',
+          'Build time ~6 weeks',
+        ],
+        sku: 'JIZAYN-KUTUPHANE-001',
+        gtin: undefined,
+        availability: 'InStock',
+        priceRange: {
+          min: 3714,
+          max: 3714,
+          currency: 'USD'
+        },
+        shopierUrl: 'https://www.shopier.com/jizayn',
+        amazonUrl: undefined,
+        amazonOffer: undefined,
+        etsyUrl: undefined,
+        etsyOffer: undefined,
+        metaTitle: 'Handmade Solid Wood Library Bookcase 200×230 cm | Jizayn',
+        metaDescription: 'Handmade solid spruce library. 200 cm wide, 230 cm high, lower depth 50 cm / upper 35 cm. Two drawers, louvered cupboard. About 6 weeks to build. 130,000 TRY excl. shipping and VAT.',
+        metaKeywords: ['wood library', 'solid wood bookcase', 'handmade bookcase', 'spruce library', 'cabinet bookcase', 'Jizayn'],
+        faq: [
+          {
+            question: 'Does the price include shipping and VAT?',
+            answer: 'No. The listed 130,000 TRY excludes shipping and VAT. Confirm the total before you order.'
+          },
+          {
+            question: 'What wood is it made from?',
+            answer: 'The body is solid spruce. The back panel is poplar plywood.'
+          },
+          {
+            question: 'What are the dimensions?',
+            answer: 'Width 200 cm, height 230 cm, lower depth 50 cm, upper depth 35 cm.'
+          },
+          {
+            question: 'How long does it take?',
+            answer: 'Build time after order is about 6 weeks.'
+          },
+          {
+            question: 'Is mounting included?',
+            answer: 'No. The piece is large and heavy; transport and wall anchoring are the buyer’s responsibility. Anchoring hardware is not included.'
+          }
+        ],
+        reviews: []
+      }
+    }
   }
 ];
 
